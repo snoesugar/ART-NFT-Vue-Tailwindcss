@@ -1,0 +1,13 @@
+@import 'tailwindcss';
+
+@theme {
+  /* 定義一組名稱叫 sans 的全域字體（Tailwind 預設字體） */
+  /* 順序非常重要：英文字體一定要放在中文字體前面！ */
+  --font-sans: 'Squada One', 'Noto Sans TC', sans-serif;
+
+  /* 2. 在這裡自訂你的品牌顏色變數 */
+  --color-primary-bg: #f0f0f0;
+  --color-primary: #e6553b;
+  --color-secondary: #808080;
+  --color-border: #00000029;
+}
