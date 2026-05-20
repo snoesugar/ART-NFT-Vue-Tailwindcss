@@ -5,9 +5,25 @@
   /* 順序非常重要：英文字體一定要放在中文字體前面！ */
   --font-sans: 'Squada One', 'Noto Sans TC', sans-serif;
 
+  --font-display: 'Noto Sans TC', sans-serif;
+
   /* 2. 在這裡自訂你的品牌顏色變數 */
   --color-primary-bg: #f0f0f0;
   --color-primary: #e6553b;
   --color-secondary: #808080;
   --color-border: #00000029;
+
+  /* 🛠️ 自訂斷點寬度 */
+  --breakpoint-sm: 40rem; /* 640px */
+  --breakpoint-md: 48rem; /* 768px -> 這是預設，可以不寫，有需要再改 */
+  --breakpoint-lg: 64rem; /* 1024px */
+  --breakpoint-xl: 80rem; /* 1280px -> 原本預設 1280px */
+  --breakpoint-2xl: 90rem; /* 1440px -> 想要在大螢幕上限縮滿版寬度 */
+}
+
+@utility container {
+  max-width: 1440px; /* 全域強制限制最大寬度，不再被 2xl 撐太大 */
+
+  /* 如果希望全站的 container 都自動左右置中，也可以直接寫在這裡 */
+  margin-inline: auto;
 }
