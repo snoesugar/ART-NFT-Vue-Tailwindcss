@@ -4,8 +4,8 @@
   /* 定義一組名稱叫 sans 的全域字體（Tailwind 預設字體） */
   /* 順序非常重要：英文字體一定要放在中文字體前面！ */
   --font-sans: 'Squada One', 'Noto Sans TC', sans-serif;
-
   --font-display: 'Noto Sans TC', sans-serif;
+  --font-paytone: 'Paytone One', sans-serif;
 
   /* 2. 在這裡自訂你的品牌顏色變數 */
   --color-primary-bg: #f0f0f0;
@@ -26,4 +26,13 @@
 
   /* 如果希望全站的 container 都自動左右置中，也可以直接寫在這裡 */
   margin-inline: auto;
+}
+
+/* 放進全域 CSS 檔案中 */
+html,
+body,
+body * {
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M4 2l16 12.23-6.4 1.15 4.4 7.62-3.46 2-4.4-7.62-6.14 4.62z' fill='%23000000' stroke='%23ffffff' stroke-width='1.5'/%3E%3C/svg%3E"),
+    default !important;
 }
