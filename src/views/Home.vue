@@ -17,7 +17,7 @@
             </div>
           </div>
         </div>
-        <div class="flex flex-row border border-black h-[340px] w-full bg-white">
+        <div class="flex flex-row border border-black h-85 w-full bg-white">
           <div class="flex-1 p-6">
             <div class="flex flex-col justify-between h-full">
               <div class="mt-4">
