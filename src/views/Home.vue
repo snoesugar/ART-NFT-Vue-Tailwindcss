@@ -439,23 +439,27 @@
         </div>
 
         <!-- Artwork -->
-        <div class="flex flex-row items-end border-b border-black pb-4">
-          <h2 class="text-5xl font-black mr-4 leading-none">Artwork</h2>
-          <span class="text-xl font-bold leading-none">最新藝術品</span>
-          <Button class="ml-auto -mb-4" :isPrimaryBg="true" :hasBorder="false">MORE</Button>
+        <div class="flex flex-row items-end border-b border-black pb-2 md:pb-4">
+          <h2 class="text-3xl md:text-5xl mr-4 leading-none">Artwork</h2>
+          <span class="text-xl font-bold leading-none hidden md:block">最新藝術品</span>
+          <Button class="ml-auto -mb-2 md:-mb-4" :isPrimaryBg="true" :hasBorder="false"
+            >MORE</Button
+          >
         </div>
-        <div class="pt-12 pb-20">
-          <div class="columns-1 md:columns-2 lg:columns-4 gap-6">
+        <div class="pt-6 md:pt-12 pb-10 md:pb-20">
+          <div class="columns-2 md:columns-4 gap-x-6 gap-6">
             <div
               v-for="item in artworks"
               :key="item.id"
               class="break-inside-avoid mb-6 cursor-pointer"
             >
-              <div class="relative bg-white p-4 border border-gray-200 shadow-sm overflow-hidden">
+              <div
+                class="relative bg-white p-2 md:p-4 border border-gray-200 shadow-sm overflow-hidden"
+              >
                 <img
                   :src="item.imgUrl"
                   :alt="item.title"
-                  class="w-full min-h-63.5 h-auto object-cover"
+                  class="w-full min-h-34.75 md:min-h-63.5 h-auto object-cover"
                 />
 
                 <div
@@ -478,7 +482,7 @@
                 </div>
               </div>
 
-              <div class="mt-4 border-b border-black font-bold pb-4">
+              <div class="mt-2 md:mt-4 md:border-b border-black md:font-bold pb-2 md:pb-4">
                 {{ item.title }}
               </div>
             </div>
