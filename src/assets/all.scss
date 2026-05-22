@@ -11,9 +11,19 @@ body * {
 
 /* 1. 預設狀態（左右兩邊非置中的卡片）：縮小、黑白、微透明、隱藏文字 */
 .artist-slide .card-wrapper {
-  transform: scale(0.48); /* 縮小到 48% */
-  filter: grayscale(100%); /* 變成完美黑白 */
-  transition: all 0.5s ease-in-out; /* 平滑過渡動畫 */
+  transform: scale(1);
+  filter: grayscale(100%);
+  transition: all 0.5s ease-in-out;
+
+  /* 📱 這裡只在手機版（md以下）限制高度為 232px */
+  @media (max-width: 767px) {
+    height: 232px;
+  }
+
+  /* 💻 這裡是你原本的桌機版（md以上）設定，高度完全不干涉，就跟之前一模一樣 */
+  @media (min-width: 768px) {
+    transform: scale(0.48);
+  }
 }
 
 /* 隱藏非主卡片的文字資訊 */
@@ -26,10 +36,18 @@ body * {
 /* 2. 啟動狀態（中間被置中的那張卡片）：還原彩色、1:1 原尺寸、顯示文字 */
 .artist-slide.swiper-slide-active .card-wrapper {
   transform: scale(1);
-  width: 636px;
-  filter: grayscale(0%); /* 恢復漂亮色彩 */
-  opacity: 1; /* 100% 不透明 */
-  margin-left: -115px; /* 微調位置讓它稍微往上 */
+  width: 100%; /* 📱 手機版寬度 100% */
+  filter: grayscale(0%);
+  opacity: 1;
+  margin-left: 0; /* 📱 手機版置中，不需要往左偏移 */
+}
+
+/* 桌面版：md 以上（螢幕寬度 >= 768px）的樣式 */
+@media (min-width: 768px) {
+  .artist-slide.swiper-slide-active .card-wrapper {
+    width: 636px; /* 💻 桌機版恢復固定寬度 */
+    margin-left: -115px; /* 💻 桌機版恢復特殊偏移 */
+  }
 }
 
 /* 顯示主卡片的文字資訊 */
