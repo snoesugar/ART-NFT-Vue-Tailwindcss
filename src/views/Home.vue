@@ -353,6 +353,31 @@
           </div>
         </div>
       </div>
+
+      <!-- Join us -->
+      <div class="border-b pb-2">
+        <div class="flex flex-col items-center text-center pb-10 border-b-4">
+          <h2 class="text-5xl mb-4">Join Us</h2>
+          <p class="text-xl font-bold mb-6">創建並出售你的藝術品</p>
+        </div>
+      </div>
+      <div class="py-20 px-8">
+        <div class="grid grid-cols-4 gap-x-6 max-w-7xl mx-auto">
+          <div v-for="step in steps" :key="step.id" class="flex flex-col items-center text-center">
+            <div class="text-primary text-5xl mb-4">
+              <i :class="step.icon"></i>
+            </div>
+
+            <h3 class="text-lg font-bold text-black font-display mb-6 tracking-wider">
+              {{ step.title }}
+            </h3>
+
+            <p class="font-display leading-relaxed whitespace-pre-line">
+              {{ step.description }}
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -466,6 +491,34 @@ const artworks = ref([
     price: 200,
     description: '不是心碎的聲音，\n是期待再次被摔碎的鈍痛。',
     imgUrl: new URL('/art27.jpg', import.meta.url).href,
+  },
+])
+
+// 把圖片中的資料結構化，這邊圖標先用 FontAwesome 代替，你可以換成你專案的 Icon
+const steps = ref([
+  {
+    id: 1,
+    icon: 'fa-solid fa-wallet',
+    title: '設置你的錢包',
+    description: '設置好您選擇的錢包後\n點擊右上角的錢包圖標進行連接',
+  },
+  {
+    id: 2,
+    icon: 'fa-solid fa-pen-ruler',
+    title: '創建您的主頁',
+    description: '註冊成為會員，編輯您的資料\n讓大家了解你',
+  },
+  {
+    id: 3,
+    icon: 'fa-solid fa-icons',
+    title: '添加你的 NFT',
+    description: '上傳你的作品\n添加標題和描述',
+  },
+  {
+    id: 4,
+    icon: 'fa-solid fa-tags',
+    title: '列出它們出售',
+    description: '選擇出售 NFT 的方式\n並設定價格，等待有緣人',
   },
 ])
 </script>
