@@ -328,9 +328,9 @@
               />
 
               <div
-                class="absolute inset-0 bg-black/70 opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-between p-6 m-4"
+                class="absolute inset-0 bg-black/70 opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-between p-4 m-4"
               >
-                <div class="border border-white p-6 h-full flex flex-col">
+                <div class="border border-white p-4 h-full flex flex-col">
                   <div class="text-white">
                     <p class="mb-4 whitespace-pre-line">
                       {{ item.description }}
