@@ -1,0 +1,56 @@
+/* 放進全域 CSS 檔案中 */
+html,
+body,
+body * {
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M4 2l16 12.23-6.4 1.15 4.4 7.62-3.46 2-4.4-7.62-6.14 4.62z' fill='%23000000' stroke='%23ffffff' stroke-width='1.5'/%3E%3C/svg%3E"),
+    default !important;
+}
+
+/* ==================== Swiper 特效核心 ==================== */
+
+/* 1. 預設狀態（左右兩邊非置中的卡片）：縮小、黑白、微透明、隱藏文字 */
+.artist-slide .card-wrapper {
+  transform: scale(0.48); /* 縮小到 48% */
+  filter: grayscale(100%); /* 變成完美黑白 */
+  transition: all 0.5s ease-in-out; /* 平滑過渡動畫 */
+}
+
+/* 隱藏非主卡片的文字資訊 */
+.artist-slide .card-info {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+/* 2. 啟動狀態（中間被置中的那張卡片）：還原彩色、1:1 原尺寸、顯示文字 */
+.artist-slide.swiper-slide-active .card-wrapper {
+  transform: scale(1);
+  width: 636px;
+  filter: grayscale(0%); /* 恢復漂亮色彩 */
+  opacity: 1; /* 100% 不透明 */
+  margin-left: -115px; /* 微調位置讓它稍微往上 */
+}
+
+/* 顯示主卡片的文字資訊 */
+.artist-slide.swiper-slide-active .card-info {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease 0.2s; /* 稍微延遲一小會等卡片放大後再淡入文字 */
+}
+
+/* 3. 自訂分頁器（Pagination）圓點樣式 */
+.artist-swiper .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: #000;
+  opacity: 1;
+  border-radius: 0px; /* 改為俐落的方形或微調 */
+  transition: all 0.3s ease;
+}
+
+.artist-swiper .swiper-pagination-bullet-active {
+  width: 24px; /* 啟動時變長條型，完美符合設計稿 */
+  background: var(--color-primary); /* 橘紅色橘點 */
+  opacity: 1;
+}

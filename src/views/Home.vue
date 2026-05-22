@@ -267,10 +267,103 @@
         <span class="text-xl font-bold leading-none">熱門藝術家</span>
         <Button class="ml-auto -mb-4" :isPrimaryBg="true" :hasBorder="false">MORE</Button>
       </div>
+      <div class="pt-12 pb-20 w-full">
+        <swiper
+          v-if="artists.length"
+          :modules="modules"
+          :slides-per-view="3"
+          :space-between="24"
+          :centered-slides="true"
+          :loop="true"
+          :autoplay="{ delay: 4000, disableOnInteraction: false }"
+          :pagination="{ clickable: true }"
+          class="artist-swiper pb-14!"
+        >
+          <swiper-slide v-for="item in artists" :key="item.id" class="artist-slide">
+            <div class="card-wrapper relative w-full h-109.75 bg-white">
+              <div class="overflow-hidden w-full h-full">
+                <img
+                  :src="item.img"
+                  class="card-img w-full h-full object-cover"
+                  :alt="`${item.firstName} ${item.lastName}`"
+                />
+              </div>
+
+              <div class="card-info absolute inset-0 p-6 flex flex-col justify-between z-10">
+                <h2 class="text-white text-7xl font-paytone tracking-wide drop-shadow-md">
+                  {{ item.firstName }}<br />
+                  {{ item.lastName }}
+                </h2>
+                <div class="flex flex-col md:flex-row justify-between items-end gap-4 mt-auto">
+                  <p class="bg-white/85 p-6 max-w-xs font-medium">
+                    {{ item.desc }}
+                  </p>
+
+                  <Button class="ml-auto mt-auto"></Button>
+                </div>
+              </div>
+            </div>
+          </swiper-slide>
+        </swiper>
+      </div>
+
+      <!-- Artwork -->
+      <div class="flex flex-row items-end border-b border-black pb-4">
+        <h2 class="text-5xl font-black mr-4 leading-none">Artwork</h2>
+        <span class="text-xl font-bold leading-none">最新藝術品</span>
+        <Button class="ml-auto -mb-4" :isPrimaryBg="true" :hasBorder="false">MORE</Button>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import Button from '@/components/Button.vue'
+
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Autoplay, Pagination } from 'swiper/modules'
+
+// 引入 Swiper 核心與所需模組的 CSS
+import 'swiper/css'
+import 'swiper/css/pagination'
+
+const modules = [Autoplay, Pagination]
+
+const artists = [
+  {
+    id: 1,
+    firstName: 'Antony',
+    lastName: 'Wu',
+    img: new URL('/artist01.jpg', import.meta.url).href,
+    desc: '深受東方寫意影響，擅長將山水宏觀景象轉化為當代的抽象線條。',
+  },
+  {
+    id: 2,
+    firstName: 'Michael',
+    lastName: 'Chang',
+    img: new URL('/artist02.jpg', import.meta.url).href,
+    desc: '捕捉日常窗前的飛鳥與光影，作品散發細細品味生活片刻的純粹與快樂。',
+  },
+  {
+    id: 3,
+    firstName: 'Joanne',
+    lastName: 'Lin',
+    img: new URL('/artist03.jpg', import.meta.url).href,
+    desc: '著迷於海洋的奧秘與深度，透過層層堆疊的冷色調反映對自然的敬畏。',
+  },
+  {
+    id: 4,
+    firstName: 'Elena',
+    lastName: 'Kao',
+    img: new URL('/artist04.jpg', import.meta.url).href,
+    desc: '以鮮豔大膽的街頭色彩，將都市建築與植物和諧共生的樣貌注入畫布。',
+  },
+  {
+    id: 5,
+    firstName: 'Marcus',
+    lastName: 'Wang',
+    img: new URL('/artist05.jpg', import.meta.url).href,
+    desc: '專注於微觀視角，將花草的局部紋理與細胞結構轉譯為超現實的魔幻風格。',
+  },
+]
 </script>
