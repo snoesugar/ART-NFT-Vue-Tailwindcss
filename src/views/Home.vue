@@ -447,7 +447,7 @@
           >
         </div>
         <div class="pt-6 md:pt-12 pb-10 md:pb-20">
-          <div class="columns-2 md:columns-4 gap-x-6 gap-6">
+          <div class="columns-2 md:columns-4 gap-6">
             <div
               v-for="item in artworks"
               :key="item.id"
@@ -491,13 +491,13 @@
 
         <!-- Join us -->
         <div class="border-b pb-2">
-          <div class="flex flex-col items-center text-center pb-10 border-b-4">
-            <h2 class="text-5xl mb-4">Join Us</h2>
-            <p class="text-xl font-bold mb-6">創建並出售你的藝術品</p>
+          <div class="flex flex-col items-center text-center pb-8 md:pb-10 border-b-4">
+            <h2 class="text-3xl md:text-5xl mb-4">Join Us</h2>
+            <p class="text-xl font-bold md:mb-6">創建並出售你的藝術品</p>
           </div>
         </div>
-        <div class="py-20 px-8">
-          <div class="grid grid-cols-4 gap-x-6 max-w-7xl mx-auto">
+        <div class="py-12 md:py-20 md:px-8">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-y-12 md:gap-x-6 max-w-7xl mx-auto">
             <div
               v-for="step in steps"
               :key="step.id"
