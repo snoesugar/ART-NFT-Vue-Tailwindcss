@@ -25,10 +25,10 @@
             >
           </li>
           <li class="flex items-stretch border-l border-black">
-            <a
-              href="#"
+            <router-link
+              to="/capitalization"
               class="text-black font-black hover:text-primary transition px-10 h-full flex items-center"
-              >市值</a
+              >市值</router-link
             >
           </li>
           <li class="flex items-stretch border-l border-black">
@@ -195,32 +195,32 @@ const wallets = [
   {
     id: 'MetaMask',
     name: 'MetaMask',
-    icon: 'https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg',
+    icon: new URL('/connect01.png', import.meta.url).href,
   },
   {
     id: 'Coinbase Wallet',
     name: 'Coinbase Wallet',
-    icon: 'https://avatars.githubusercontent.com/u/18060234?s=280&v=4',
+    icon: new URL('/connect02.png', import.meta.url).href,
   },
   {
     id: 'WalletConnect',
     name: 'WalletConnect',
-    icon: 'https://www.nuget.org/profiles/WalletConnect/avatar?imageSize=512',
+    icon: new URL('/connect03.png', import.meta.url).href,
   },
   {
     id: 'Phantom',
     name: 'Phantom',
-    icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkjnGt1pvNFJOGlxKfQXK5BEaJgfhE1_9GRg&s',
+    icon: new URL('/connect04.png', import.meta.url).href,
   },
   {
     id: 'Glow',
     name: 'Glow',
-    icon: 'https://cdn.prod.website-files.com/66e480f0e9eccea9c231ce92/6898019b9ff6dc57f7c56c76_Glow%20logo.png',
+    icon: new URL('/connect05.png', import.meta.url).href,
   },
   {
     id: 'Fortmatic',
     name: 'Fortmatic',
-    icon: 'data:image/png;base64,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',
+    icon: new URL('/connect06.png', import.meta.url).href,
   },
 ]
 </script>
