@@ -1,6 +1,6 @@
 <template>
   <div class="bg-primary-bg">
-    <div class="container mx-auto">
+    <div class="container md:px-8 mx-auto">
       <div class="flex flex-col md:pt-10 pb-10 md:pb-20">
         <div class="flex flex-col md:flex-row border border-black bg-white">
           <div class="basis-1/2 md:basis-2/3">
@@ -488,34 +488,29 @@
             </div>
           </div>
         </div>
-
-        <!-- Join us -->
-        <div class="border-b pb-2">
-          <div class="flex flex-col items-center text-center pb-8 md:pb-10 border-b-4">
-            <h2 class="text-3xl md:text-5xl mb-4">Join Us</h2>
-            <p class="text-xl font-bold md:mb-6">創建並出售你的藝術品</p>
+      </div>
+    </div>
+    <!-- Join us -->
+    <div class="border-b pb-2">
+      <div class="flex flex-col items-center text-center pb-8 md:pb-10 border-b-4">
+        <h2 class="text-3xl md:text-5xl mb-4">Join Us</h2>
+        <p class="text-xl font-bold md:mb-6">創建並出售你的藝術品</p>
+      </div>
+    </div>
+    <div class="py-12 md:py-20 md:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-y-12 md:gap-x-6 max-w-7xl mx-auto">
+        <div v-for="step in steps" :key="step.id" class="flex flex-col items-center text-center">
+          <div class="text-primary text-5xl mb-4">
+            <i :class="step.icon"></i>
           </div>
-        </div>
-        <div class="py-12 md:py-20 md:px-8">
-          <div class="grid grid-cols-1 md:grid-cols-4 gap-y-12 md:gap-x-6 max-w-7xl mx-auto">
-            <div
-              v-for="step in steps"
-              :key="step.id"
-              class="flex flex-col items-center text-center"
-            >
-              <div class="text-primary text-5xl mb-4">
-                <i :class="step.icon"></i>
-              </div>
 
-              <h3 class="text-lg font-bold text-black font-display mb-6 tracking-wider">
-                {{ step.title }}
-              </h3>
+          <h3 class="text-lg font-bold text-black font-display mb-6 tracking-wider">
+            {{ step.title }}
+          </h3>
 
-              <p class="font-display leading-relaxed whitespace-pre-line">
-                {{ step.description }}
-              </p>
-            </div>
-          </div>
+          <p class="font-display leading-relaxed whitespace-pre-line">
+            {{ step.description }}
+          </p>
         </div>
       </div>
     </div>

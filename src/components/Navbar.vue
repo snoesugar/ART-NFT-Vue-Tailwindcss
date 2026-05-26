@@ -2,9 +2,9 @@
   <nav class="border-b border-black bg-primary-bg sticky top-0 z-50 h-16 md:h-24">
     <div class="container mx-auto flex justify-between items-stretch h-full">
       <template v-if="!isSearchOpen">
-        <a href="/" class="flex items-center border-black py-4 md:py-8">
+        <router-link to="/" class="flex items-center border-black py-4 md:py-8">
           <img src="/logo.svg" class="px-3 md:px-8 h-4.5 md:h-8 w-auto object-contain" alt="logo" />
-        </a>
+        </router-link>
 
         <ul class="hidden md:flex flex-1 justify-end items-stretch">
           <li class="flex items-stretch border-l border-black">
@@ -18,10 +18,10 @@
             </div>
           </li>
           <li class="flex items-stretch border-l border-black">
-            <a
-              href="#"
+            <router-link
+              to="/explore"
               class="text-black font-bold hover:text-primary transition px-10 h-full flex items-center"
-              >探索</a
+              >探索</router-link
             >
           </li>
           <li class="flex items-stretch border-l border-black">
@@ -132,10 +132,8 @@
               v-for="wallet in wallets"
               :key="wallet.id"
               @click="selectedWallet = wallet.id"
-              class="flex items-center justify-between p-3 border-2 transition-all"
-              :class="
-                selectedWallet === wallet.id ? 'border-primary border-2' : 'border-black bg-white'
-              "
+              class="flex items-center justify-between p-3 bg-white transition-all"
+              :class="selectedWallet === wallet.id ? 'ring-2 ring-primary' : 'ring-1 ring-black'"
             >
               <div class="flex items-center gap-4">
                 <img :src="wallet.icon" class="w-6 h-6 object-contain" :alt="wallet.name" />
