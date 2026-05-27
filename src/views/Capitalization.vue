@@ -86,7 +86,7 @@
         >
           <div
             @click="item.isOpen = !item.isOpen"
-            class="flex items-center relative cursor-pointer select-none min-h-[80px]"
+            class="flex items-center relative cursor-pointer select-none min-h-20"
           >
             <div
               class="font-paytone w-10 text-center text-2xl border-r border-black self-stretch flex items-center justify-center"

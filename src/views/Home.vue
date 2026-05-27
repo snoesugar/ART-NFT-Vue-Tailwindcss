@@ -375,70 +375,73 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <!-- Artist-->
+    <div class="container">
+      <div class="flex flex-row items-end border-b border-black pb-2 md:pb-4">
+        <h2 class="text-3xl md:text-5xl mr-4 leading-none">Artist</h2>
+        <span class="text-xl font-bold leading-none hidden md:block">熱門藝術家</span>
+        <Button class="ml-auto -mb-2 md:-mb-4" :isPrimaryBg="true" :hasBorder="false">MORE</Button>
+      </div>
+      <div class="pt-6 md:pt-12 pb-10 md:pb-20 w-full">
+        <swiper
+          v-if="artists.length"
+          :modules="modules"
+          :breakpoints="{
+            0: {
+              slidesPerView: 1,
+            },
+            768: {
+              slidesPerView: 3,
+            },
+          }"
+          :space-between="24"
+          :centered-slides="true"
+          :centered-slides-bounds="true"
+          :loop="true"
+          :autoplay="{ delay: 4000, disableOnInteraction: false }"
+          :pagination="{ clickable: true }"
+          class="artist-swiper pb-40! md:pb-14!"
+        >
+          <swiper-slide v-for="item in artists" :key="item.id" class="artist-slide">
+            <div class="card-wrapper relative w-full h-109.75 bg-white">
+              <div class="overflow-hidden w-full h-full">
+                <img
+                  :src="item.img"
+                  class="card-img w-full h-full object-cover"
+                  :alt="`${item.firstName} ${item.lastName}`"
+                />
+              </div>
 
-        <!-- Artist-->
-        <div class="flex flex-row items-end border-b border-black pb-2 md:pb-4">
-          <h2 class="text-3xl md:text-5xl mr-4 leading-none">Artist</h2>
-          <span class="text-xl font-bold leading-none hidden md:block">熱門藝術家</span>
-          <Button class="ml-auto -mb-2 md:-mb-4" :isPrimaryBg="true" :hasBorder="false"
-            >MORE</Button
-          >
-        </div>
-        <div class="pt-6 md:pt-12 pb-10 md:pb-20 w-full">
-          <swiper
-            v-if="artists.length"
-            :modules="modules"
-            :breakpoints="{
-              0: {
-                slidesPerView: 1,
-              },
-              768: {
-                slidesPerView: 3,
-              },
-            }"
-            :space-between="24"
-            :centered-slides="true"
-            :loop="true"
-            :autoplay="{ delay: 4000, disableOnInteraction: false }"
-            :pagination="{ clickable: true }"
-            class="artist-swiper pb-40! md:pb-14!"
-          >
-            <swiper-slide v-for="item in artists" :key="item.id" class="artist-slide">
-              <div class="card-wrapper relative w-full h-109.75 bg-white">
-                <div class="overflow-hidden w-full h-full">
-                  <img
-                    :src="item.img"
-                    class="card-img w-full h-full object-cover"
-                    :alt="`${item.firstName} ${item.lastName}`"
-                  />
-                </div>
-
-                <div class="card-info absolute inset-0 p-6 flex flex-col justify-between z-10">
-                  <h2
-                    class="text-white text-2xl md:text-7xl font-paytone tracking-wide drop-shadow-md"
-                  >
-                    {{ item.firstName }}<br />
-                    {{ item.lastName }}
-                  </h2>
-                  <div class="flex flex-col md:flex-row justify-between items-end gap-4 mt-auto">
-                    <p class="hidden md:block bg-white/85 p-6 max-w-xs font-medium">
-                      {{ item.desc }}
-                    </p>
-
-                    <Button class="ml-auto mt-auto"></Button>
-                  </div>
-                </div>
-                <div class="block md:hidden">
-                  <p class="bg-white/85 p-6 mt-4">
+              <div class="card-info absolute inset-0 p-6 flex flex-col justify-between z-10">
+                <h2
+                  class="text-white text-2xl md:text-7xl font-paytone tracking-wide drop-shadow-md"
+                >
+                  {{ item.firstName }}<br />
+                  {{ item.lastName }}
+                </h2>
+                <div class="flex flex-col md:flex-row justify-between items-end gap-4 mt-auto">
+                  <p class="hidden md:block bg-white/85 p-6 max-w-xs font-medium">
                     {{ item.desc }}
                   </p>
+
+                  <Button to="/artistIntroduction" class="ml-auto mt-auto"></Button>
                 </div>
               </div>
-            </swiper-slide>
-          </swiper>
-        </div>
-
-        <!-- Artwork -->
+              <div class="block md:hidden">
+                <p class="bg-white/85 p-6 mt-4">
+                  {{ item.desc }}
+                </p>
+              </div>
+            </div>
+          </swiper-slide>
+        </swiper>
+      </div>
+    </div>
+    <!-- Artwork -->
+    <div class="container md:px-8 mx-auto">
+      <div class="px-3 md:px-0">
         <div class="flex flex-row items-end border-b border-black pb-2 md:pb-4">
           <h2 class="text-3xl md:text-5xl mr-4 leading-none">Artwork</h2>
           <span class="text-xl font-bold leading-none hidden md:block">最新藝術品</span>
@@ -657,3 +660,71 @@ const steps = ref([
   },
 ])
 </script>
+
+<style scoped>
+/* ==================== Swiper 特效核心 ==================== */
+.artist-slide .card-wrapper {
+  transform: scale(1);
+  filter: grayscale(100%);
+  transition: all 0.5s ease-in-out;
+
+  /* 📱 手機版限制高度 */
+  @media (max-width: 767px) {
+    height: 232px;
+  }
+
+  /* 💻 桌機版未 active 時縮小 */
+  @media (min-width: 768px) {
+    transform: scale(0.48);
+  }
+}
+
+/* 隱藏非主卡片的文字資訊 */
+.artist-slide .card-info {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+/* 2. 啟動狀態（中間被置中的那張卡片） */
+.artist-slide.swiper-slide-active .card-wrapper {
+  filter: grayscale(0%);
+  /* 註：scale(1)、width: 100%、opacity: 1 都在這裡被拔除了，因為預設已具備 */
+}
+
+/* 顯示主卡片的文字資訊 */
+.artist-slide.swiper-slide-active .card-info {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease 0.2s;
+}
+
+/* Swiper 結構樣式優化 */
+:deep(.artist-swiper .swiper-wrapper) {
+  align-items: stretch;
+}
+
+:deep(.artist-swiper .swiper-slide) {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* 直接在這裡統一卡片預設寬度為 100% */
+:deep(.artist-swiper .swiper-slide .card-wrapper) {
+  width: 100%;
+}
+
+/* 💻 桌機版 Active 卡片排版 */
+@media (min-width: 768px) {
+  :deep(.artist-swiper .swiper-slide-active .card-wrapper) {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 636px;
+    max-width: 636px;
+    transform: translateX(-50%) scale(1); /* 💡 注意：桌機版 active 時要還原成放大狀態，加在 transform 內最安全 */
+    z-index: 20;
+  }
+}
+</style>

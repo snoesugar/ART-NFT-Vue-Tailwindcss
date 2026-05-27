@@ -26,37 +26,6 @@ body * {
   }
 }
 
-/* 隱藏非主卡片的文字資訊 */
-.artist-slide .card-info {
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-}
-
-/* 2. 啟動狀態（中間被置中的那張卡片）：還原彩色、1:1 原尺寸、顯示文字 */
-.artist-slide.swiper-slide-active .card-wrapper {
-  transform: scale(1);
-  width: 100%; /* 📱 手機版寬度 100% */
-  filter: grayscale(0%);
-  opacity: 1;
-  margin-left: 0; /* 📱 手機版置中，不需要往左偏移 */
-}
-
-/* 桌面版：md 以上（螢幕寬度 >= 768px）的樣式 */
-@media (min-width: 768px) {
-  .artist-slide.swiper-slide-active .card-wrapper {
-    width: 636px; /* 💻 桌機版恢復固定寬度 */
-    margin-left: -115px; /* 💻 桌機版恢復特殊偏移 */
-  }
-}
-
-/* 顯示主卡片的文字資訊 */
-.artist-slide.swiper-slide-active .card-info {
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.5s ease 0.2s; /* 稍微延遲一小會等卡片放大後再淡入文字 */
-}
-
 /* 3. 自訂分頁器（Pagination）圓點樣式 */
 .artist-swiper .swiper-pagination-bullet {
   width: 8px;

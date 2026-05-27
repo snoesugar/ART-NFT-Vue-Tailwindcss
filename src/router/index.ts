@@ -19,6 +19,10 @@ const router = createRouter({
           path: '/capitalization',
           component: () => import('../views/Capitalization.vue'),
         },
+        {
+          path: '/artistIntroduction',
+          component: () => import('../views/ArtistIntroduction.vue'),
+        },
       ],
     },
   ],

@@ -1,5 +1,7 @@
 <template>
-  <button
+  <component
+    :is="to ? 'RouterLink' : 'button'"
+    :to="to"
     class="group relative flex items-center justify-center w-fit px-12 py-2 text-center tracking-wider transition-colors duration-300 ease-in-out"
     :class="[
       hasBorder
@@ -22,12 +24,14 @@
     <div
       class="absolute bottom-0 right-0 h-0 w-0 border-8 border-l-transparent border-t-transparent border-b-primary border-r-primary group-hover:border-b-black group-hover:border-r-black transition-colors duration-300 ease-in-out"
     ></div>
-  </button>
+  </component>
 </template>
 
 <script setup lang="ts">
+import type { RouteLocationRaw } from 'vue-router'
 // 定義精簡後的 Props
 interface Props {
+  to?: RouteLocationRaw // 新增 to 屬性，支援字串或物件路徑
   hasBorder?: boolean // 是否有外框 (預設 true)
   isPrimaryBg?: boolean // 平常狀態是否為 primary 橘底 (預設 false，即白底)
 }
