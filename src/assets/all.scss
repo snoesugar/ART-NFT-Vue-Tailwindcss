@@ -7,25 +7,6 @@ body * {
     default !important;
 }
 
-/* ==================== Swiper 特效核心 ==================== */
-
-/* 1. 預設狀態（左右兩邊非置中的卡片）：縮小、黑白、微透明、隱藏文字 */
-.artist-slide .card-wrapper {
-  transform: scale(1);
-  filter: grayscale(100%);
-  transition: all 0.5s ease-in-out;
-
-  /* 📱 這裡只在手機版（md以下）限制高度為 232px */
-  @media (max-width: 767px) {
-    height: 232px;
-  }
-
-  /* 💻 這裡是你原本的桌機版（md以上）設定，高度完全不干涉，就跟之前一模一樣 */
-  @media (min-width: 768px) {
-    transform: scale(0.48);
-  }
-}
-
 /* 3. 自訂分頁器（Pagination）圓點樣式 */
 .artist-swiper .swiper-pagination-bullet {
   width: 8px;
