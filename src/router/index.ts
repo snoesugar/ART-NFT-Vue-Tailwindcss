@@ -23,6 +23,10 @@ const router = createRouter({
           path: '/artistIntroduction',
           component: () => import('../views/ArtistIntroduction.vue'),
         },
+        {
+          path: '/filter',
+          component: () => import('../views/Filter.vue'),
+        },
       ],
     },
   ],

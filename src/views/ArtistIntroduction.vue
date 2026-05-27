@@ -88,7 +88,7 @@
             >Art Works</span
           >
           <span
-            class="ml-3 font-bold text-xl hidden md:blcok"
+            class="ml-3 font-bold text-xl hidden md:block"
             :class="activeTab === 'art' ? 'text-black' : 'text-secondary'"
             >系列作品</span
           >
@@ -109,7 +109,7 @@
             >Collection</span
           >
           <span
-            class="ml-3 font-bold text-xl hidden md:blcok"
+            class="ml-3 font-bold text-xl hidden md:block"
             :class="activeTab === 'collection' ? 'text-black' : 'text-secondary'"
             >收藏品</span
           >
@@ -216,7 +216,7 @@
                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
-                  <Button></Button>
+                  <Button to="/filter"></Button>
                 </div>
               </div>
 
