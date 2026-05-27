@@ -1,8 +1,8 @@
 <template>
   <div class="bg-primary-bg min-h-screen text-black">
     <!-- 藝術家介紹 -->
-    <div class="container mx-auto px-8 pt-10 pb-20">
-      <div class="flex flex-col md:flex-row gap-6 mx-auto items-stretch">
+    <div class="container mx-auto px-3 md:px-8 pt-6 md:pt-10 pb-10 md:pb-20">
+      <div class="flex flex-col md:flex-row gap-4 md:gap-6 mx-auto items-stretch">
         <div
           class="flex-1 flex flex-col sm:flex-row border border-black bg-white overflow-hidden shadow-sm"
         >
@@ -16,9 +16,9 @@
 
           <div class="p-4 md:p-6 flex-1 flex flex-col justify-between">
             <div>
-              <div class="flex justify-between items-center mb-4">
-                <h2 class="text-5xl">Michael</h2>
-                <div class="flex gap-2 text-lg">
+              <div class="flex justify-between items-center mb-2 md:mb-4">
+                <h2 class="text-3xl md:text-5xl">Michael</h2>
+                <div class="flex gap-2 md:text-lg">
                   <i class="fab fa-discord cursor-pointer hover:opacity-70"></i>
                   <i class="fab fa-facebook cursor-pointer hover:opacity-70"></i>
                   <i class="fas fa-globe cursor-pointer hover:opacity-70"></i>
@@ -70,23 +70,25 @@
       </div>
     </div>
     <!-- 藝術家作品 -->
-    <div class="container mx-auto px-8">
+    <div class="container mx-auto px-3 md:px-8">
       <!-- 按鈕 -->
       <div class="relative flex items-end border-b border-black">
         <button
           @click="activeTab = 'art'"
-          class="flex items-baseline px-12 py-4 focus:outline-none"
+          class="flex items-baseline px-4 md:px-12 py-4 focus:outline-none"
           :class="[
             activeTab === 'art'
               ? 'bg-primary-bg border-x border-t border-black relative -mb-px rounded-t' // Active Styles
               : 'text-secondary hover:text-black', // Inactive Styles
           ]"
         >
-          <span class="text-5xl" :class="activeTab === 'art' ? 'text-black' : 'text-secondary'"
+          <span
+            class="text-3xl md:text-5xl"
+            :class="activeTab === 'art' ? 'text-black' : 'text-secondary'"
             >Art Works</span
           >
           <span
-            class="ml-3 font-bold text-xl"
+            class="ml-3 font-bold text-xl hidden md:blcok"
             :class="activeTab === 'art' ? 'text-black' : 'text-secondary'"
             >系列作品</span
           >
@@ -94,7 +96,7 @@
 
         <button
           @click="activeTab = 'collection'"
-          class="flex items-baseline px-12 py-4 focus:outline-none"
+          class="flex items-baseline px-4 md:px-12 py-4 focus:outline-none"
           :class="[
             activeTab === 'collection'
               ? 'bg-primary-bg border-x border-t border-black relative -mb-px rounded-t' // Active Styles
@@ -102,28 +104,31 @@
           ]"
         >
           <span
-            class="text-5xl"
+            class="text-3xl md:text-5xl"
             :class="activeTab === 'collection' ? 'text-black' : 'text-secondary'"
             >Collection</span
           >
           <span
-            class="ml-3 font-bold text-xl"
+            class="ml-3 font-bold text-xl hidden md:blcok"
             :class="activeTab === 'collection' ? 'text-black' : 'text-secondary'"
             >收藏品</span
           >
         </button>
       </div>
 
+      <!-- 藝術家 -->
       <div v-if="activeTab === 'art'">
-        <div class="pt-10 pb-20">
-          <div class="flex flex-col gap-10">
+        <div class="pt-6 md:pt-10 pb-10 md:pb-20">
+          <div class="flex flex-col gap-4 md:gap-10">
             <div class="relative flex flex-col">
-              <div class="relative bg-white border border-black px-28 pt-12 pb-58 z-10">
+              <div
+                class="relative bg-white border border-black px-4 md:px-28 pt-8 md:pt-12 pb-8 md:pb-58 z-10"
+              >
                 <div class="absolute top-0 left-0 w-6 h-6 bg-black clip-triangle-tl"></div>
                 <div class="absolute top-0 right-0 w-6 h-6 bg-black clip-triangle-tr"></div>
 
                 <div
-                  class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6"
+                  class="flex flex-col md:flex-row justify-between items-center md:items-end gap-4 md:gap-6"
                 >
                   <div class="max-w-190">
                     <h2 class="text-2xl font-bold mb-4">追求者送我的花</h2>
@@ -131,13 +136,22 @@
                       我又沒有特別喜歡花，為什麼不給我現金就好，擺在那也不知道要幹嘛，只好畫起來看有沒有人要買，阿不然如果真的喜歡我，把這些都買回去八。
                     </p>
                   </div>
+                  <div
+                    class="blcok md:hidden border-10 bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
+                  >
+                    <img
+                      src="../../public/the-new-york-public-library-vBejyCBXZBY-unsplash.jpg"
+                      alt="Flower 1"
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
                   <Button></Button>
                 </div>
               </div>
 
-              <div class="grid grid-cols-2 md:grid-cols-4 gap-4 px-4 md:px-28 -mt-8 md:-mt-45 z-20">
+              <div class="hidden md:grid grid-cols-4 gap-4 px-4 md:px-28 -mt-8 md:-mt-45 z-20">
                 <div
-                  class="border-[6px] md:border-10 border-black bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
+                  class="border-10 bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
                 >
                   <img
                     src="../../public/the-new-york-public-library-vBejyCBXZBY-unsplash.jpg"
@@ -147,7 +161,7 @@
                 </div>
 
                 <div
-                  class="border-[6px] md:border-10 border-black bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
+                  class="border-10 bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
                 >
                   <img
                     src="../../public/art30.jpg"
@@ -157,7 +171,7 @@
                 </div>
 
                 <div
-                  class="border-[6px] md:border-10 border-black bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
+                  class="border-10 bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
                 >
                   <img
                     src="../../public/art14.jpg"
@@ -167,7 +181,7 @@
                 </div>
 
                 <div
-                  class="border-[6px] md:border-10 border-black bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
+                  class="border-10 bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
                 >
                   <img
                     src="../../public/art29.jpg"
@@ -178,12 +192,14 @@
               </div>
             </div>
             <div class="relative flex flex-col">
-              <div class="relative bg-white border border-black px-28 pt-12 pb-58 z-10">
+              <div
+                class="relative bg-white border border-black px-4 md:px-28 pt-8 md:pt-12 pb-8 md:pb-58 z-10"
+              >
                 <div class="absolute top-0 left-0 w-6 h-6 bg-black clip-triangle-tl"></div>
                 <div class="absolute top-0 right-0 w-6 h-6 bg-black clip-triangle-tr"></div>
 
                 <div
-                  class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6"
+                  class="flex flex-col md:flex-row justify-between items-center md:items-end gap-4 md:gap-6"
                 >
                   <div class="max-w-190">
                     <h2 class="text-2xl font-bold mb-4">我家窗前的鳥</h2>
@@ -191,13 +207,22 @@
                       家門前每天都有不同的小鳥，大多數的小鳥都有特殊能力，特殊能力是什麼我就不說了，希望大家能從作品感受到小鳥的快樂。
                     </p>
                   </div>
+                  <div
+                    class="blcok md:hidden border-10 bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
+                  >
+                    <img
+                      src="../../public/art27.jpg"
+                      alt="Flower 1"
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
                   <Button></Button>
                 </div>
               </div>
 
-              <div class="grid grid-cols-2 md:grid-cols-4 gap-4 px-4 md:px-28 -mt-8 md:-mt-45 z-20">
+              <div class="hidden md:grid grid-cols-4 gap-4 px-4 md:px-28 -mt-8 md:-mt-45 z-20">
                 <div
-                  class="border-[6px] md:border-10 border-black bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
+                  class="border-10 bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
                 >
                   <img
                     src="../../public/art27.jpg"
@@ -207,7 +232,7 @@
                 </div>
 
                 <div
-                  class="border-[6px] md:border-10 border-black bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
+                  class="border-10 bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
                 >
                   <img
                     src="../../public/art20.jpg"
@@ -217,7 +242,7 @@
                 </div>
 
                 <div
-                  class="border-[6px] md:border-10 border-black bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
+                  class="border-10 bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
                 >
                   <img
                     src="../../public/art26.jpg"
@@ -227,7 +252,7 @@
                 </div>
 
                 <div
-                  class="border-[6px] md:border-10 border-black bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
+                  class="border-10 bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
                 >
                   <img
                     src="../../public/art22.jpg"
