@@ -39,6 +39,11 @@ ART NFT 是一個以「硬派黑邊線條感」與「新潮流美學」打造的
 - **組件化設計**：將全站的核心操作按鈕抽象化封裝為 `Button.vue` 組件，透過 `props` 控制背景色屬性（如 `:isPrimaryBg`）與邊框顯示（如 `:hasBorder`），達成高複用性。
 - **Tailwind 自訂擴充**：在組件中大量運用微調後的原子化 class（如 `h-93.5`、`gap-6.25`、`pb-40!`），確保設計稿的精細度能 100% 還原。
 
+### 5. 自動化整合與持續部署 (CI/CD Pipeline)
+
+- **GitHub Actions 自動化工作流**：撰寫 `deploy.yml` 配置持續整合與部署流程。每當代碼推送到遠端分支時，自動觸發基於 `ubuntu-latest` 環境的虛擬機流水線。
+- **無感構建與部署 (Build & Deploy)**：工作流中嚴格限定環境（Node.js 20、啟用 `npm ci` 快取加速），自動執行強型別檢查與生產環境打包 (`npm run build`)。編譯完成後，透過 `actions/upload-pages-artifact` 零時差將 `./dist` 靜態資源發布至 GitHub Pages，落實標準的敏捷開發流程。
+
 ---
 
 ## 🚀 技術棧 (Tech Stack)
@@ -49,3 +54,4 @@ ART NFT 是一個以「硬派黑邊線條感」與「新潮流美學」打造的
 - **Styling:** Tailwind CSS, Custom CSS / Scoped CSS
 - **Utility Libraries:** Swiper Vue (Autoplay, Pagination), Font Awesome 6
 - **Code Quality:** ESLint / Prettier
+- **CI/CD / Deployment:** GitHub Actions (Automated Workflows) / GitHub Pages
