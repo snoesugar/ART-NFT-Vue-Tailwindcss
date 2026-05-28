@@ -1,23 +1,66 @@
 <!doctype html>
-<html lang="">
+<html lang="zh-Hant-TW">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" href="/public/NFT-logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+
+    <!-- 網站基本標題與 SEO -->
+    <title>ART NFT | 數位藝術交換與市價排行榜平台</title>
+    <meta
+      name="description"
+      content="創建並出售您的數位藝術品。探索最新的 NFT 創作、即時市價排行榜，並與熱門藝術家一同開啟當代抽象與超現實的魔幻美學體驗。"
+    />
+    <meta
+      name="keywords"
+      content="NFT, 數位藝術, 區塊鏈藝術, 市價排行榜, 藝術家, 虛擬通貨, 以太坊, 藝術拍賣"
+    />
+    <meta name="author" content="ART NFT 藝術團隊" />
+
+    <!-- Open Graph (FB / LINE / Discord 社群分享卡片) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://snoesugar.github.io/ART-NFT-Vue-Tailwindcss/" />
+    <meta property="og:title" content="ART NFT | 數位藝術交換與市價排行榜平台" />
+    <meta
+      property="og:description"
+      content="創建並出售您的數位藝術品。探索最新的 NFT 創作、即時市價排行榜，並與熱門藝術家一同開啟當代抽象與超現實的魔幻美學體驗。"
+    />
+    <meta
+      property="og:image"
+      content="https://snoesugar.github.io/ART-NFT-Vue-Tailwindcss/public/art01.jpg"
+    />
+    <meta property="og:locale" content="zh_TW" />
+
+    <!-- Twitter 卡片 -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ART NFT | 數位藝術交換與市價排行榜平台" />
+    <meta
+      name="twitter:description"
+      content="創建並出售您的數位藝術品。立即探索熱門藝術家的最新 NFT 創作。"
+    />
+    <meta
+      name="twitter:image"
+      content="https://snoesugar.github.io/ART-NFT-Vue-Tailwindcss/public/art01.jpg"
+    />
+
+    <!-- 行動裝置瀏覽器頂部工具列顏色 (可依專案主色自行調整) -->
+    <meta name="theme-color" content="#e6553b" />
+
+    <!-- Google Fonts 預連線優化 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- 載入 NFT 專案所需字體：Noto Sans TC (內文)、Squada One、Paytone One (排行數字與藝術家名字) -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Squada+One&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Squada+One&family=Paytone+One&display=swap"
       rel="stylesheet"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Paytone+One&display=swap"
-      rel="stylesheet"
-    />
+
+    <!-- FontAwesome 圖標庫（支援以太幣符號 fa-ethereum 與步驟圖標） -->
     <script src="https://kit.fontawesome.com/0c5c183e2c.js" crossorigin="anonymous"></script>
   </head>
   <body>
+    <!-- 保持原 Vue 專案的掛載點 -->
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
