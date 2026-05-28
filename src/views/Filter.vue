@@ -403,9 +403,340 @@
           </div>
         </div>
       </div>
-      <button class="block md:hidden fixed bottom-4 right-1/2 translate-x-1/2">
+      <!-- 1. 觸發按鈕（畫面上固定的「篩選條件2」按鈕） -->
+      <button
+        @click="isOpenFilter = true"
+        class="block md:hidden fixed bottom-4 right-1/2 translate-x-1/2 z-40"
+      >
         <div class="bg-black text-white px-12 py-2">篩選條件2</div>
       </button>
+      <!-- 3. 左側滑出的篩選選單（Drawer） -->
+      <div
+        class="fixed top-0 right-0 h-full w-full bg-white shadow-xl z-50 transform transition-transform duration-300 ease-in-out md:hidden flex flex-col"
+        :class="isOpenFilter ? 'translate-x-0' : 'translate-x-full'"
+      >
+        <!-- 標題與關閉按鈕 -->
+        <div class="flex justify-between items-center px-3 py-4 border-b border-secondary">
+          <span class="text-xl text-center w-full">篩選條件</span>
+          <button @click="isOpenFilter = false" class="text-lg font-bold">✕</button>
+        </div>
+
+        <!-- 選單內容區（可滾動） -->
+        <div class="flex-1 overflow-y-auto p-4 space-y-6">
+          <div class="bg-white font-display flex flex-col select-none">
+            <!-- 網路 -->
+            <div class="border-b border-secondary">
+              <button
+                @click="isOpenInternet = !isOpenInternet"
+                class="flex w-full justify-between items-center font-bold px-6 py-4 focus:outline-none"
+              >
+                <span>網路</span>
+                <i
+                  class="fa-solid fa-angle-down transition-transform duration-300"
+                  :class="{ 'rotate-180': isOpenInternet }"
+                ></i>
+              </button>
+              <div v-show="isOpenInternet" class="px-6 pb-6 -mt-1">
+                <div class="flex flex-col gap-2">
+                  <label class="flex justify-between items-center cursor-pointer group">
+                    <span class="group-hover:text-gray-600">以太坊</span>
+                    <input
+                      type="checkbox"
+                      value="ethereum"
+                      v-model="selectedNetworks"
+                      class="w-4 h-4 accent-black cursor-pointer"
+                    />
+                  </label>
+                  <label class="flex justify-between items-center cursor-pointer group">
+                    <span class="group-hover:text-gray-600">BNB 智能鏈</span>
+                    <input
+                      type="checkbox"
+                      value="bsc"
+                      v-model="selectedNetworks"
+                      class="w-4 h-4 accent-black cursor-pointer"
+                    />
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- 狀態 -->
+            <div class="border-b border-secondary">
+              <button
+                @click="isOpenState = !isOpenState"
+                class="flex w-full justify-between items-center font-bold px-6 py-4 focus:outline-none"
+              >
+                <span>狀態</span>
+                <i
+                  class="fa-solid fa-angle-down transition-transform duration-300"
+                  :class="{ 'rotate-180': isOpenState }"
+                ></i>
+              </button>
+
+              <div v-show="isOpenState" class="px-6 pb-6 -mt-1">
+                <div class="flex flex-col gap-2">
+                  <label class="flex justify-between items-center cursor-pointer group">
+                    <span class="group-hover:text-gray-600">僅展示</span>
+                    <input
+                      type="checkbox"
+                      value="showingOnly"
+                      v-model="selectedState"
+                      class="w-4 h-4 accent-black cursor-pointer"
+                    />
+                  </label>
+                  <label class="flex justify-between items-center cursor-pointer group">
+                    <span class="group-hover:text-gray-600">拍賣中</span>
+                    <input
+                      type="checkbox"
+                      value="auction"
+                      v-model="selectedState"
+                      class="w-4 h-4 accent-black cursor-pointer"
+                    />
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- 價格 -->
+            <div class="border-b border-secondary">
+              <button
+                @click="isOpenPrice = !isOpenPrice"
+                class="flex w-full justify-between items-center font-bold px-6 py-4 focus:outline-none"
+              >
+                <span>價格</span>
+                <i
+                  class="fa-solid fa-angle-down transition-transform duration-300"
+                  :class="{ 'rotate-180': isOpenPrice }"
+                ></i>
+              </button>
+
+              <div v-show="isOpenPrice" class="px-6 pb-6 -mt-1">
+                <div class="flex items-center gap-2 h-10">
+                  <div class="relative min-w-18.5 h-full">
+                    <select
+                      v-model="priceCurrency"
+                      class="w-full h-full bg-white border border-secondary rounded-none pl-2 pr-6 appearance-none focus:outline-none cursor-pointer"
+                    >
+                      <option value="ETH">ETH</option>
+                      <option value="WETH">WETH</option>
+                    </select>
+                    <i
+                      class="fa-solid fa-angle-down text-xs absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"
+                    ></i>
+                  </div>
+
+                  <input
+                    type="number"
+                    placeholder="最小"
+                    v-model="priceMin"
+                    class="w-full h-full border border-secondary rounded-none px-2 text-center focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  />
+
+                  <span class="text-black flex items-center">─</span>
+
+                  <input
+                    type="number"
+                    placeholder="最大"
+                    v-model="priceMax"
+                    class="w-full h-full border border-secondary rounded-none px-2 text-center focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- 屬性 -->
+            <div class="flex flex-col select-none">
+              <div class="font-bold text-secondary px-6 pt-5 pb-2">屬性</div>
+
+              <div>
+                <button
+                  @click="isOpenBreed = !isOpenBreed"
+                  class="flex w-full justify-between items-center font-bold px-6 pt-4 pb-2 focus:outline-none"
+                >
+                  <span>品種</span>
+                  <i
+                    class="fa-solid fa-angle-down transition-transform duration-300"
+                    :class="{ 'rotate-180': isOpenBreed }"
+                  ></i>
+                </button>
+                <div v-show="isOpenBreed" class="px-6 pb-4">
+                  <div class="flex flex-col gap-2">
+                    <label class="flex justify-between items-center cursor-pointer group">
+                      <span class="group-hover:text-gray-600">八哥</span>
+                      <input
+                        type="checkbox"
+                        value="八哥"
+                        v-model="selectedBreeds"
+                        class="w-4 h-4 accent-black cursor-pointer"
+                      />
+                    </label>
+                    <label class="flex justify-between items-center cursor-pointer group">
+                      <span class="group-hover:text-gray-600">虎皮鸚鵡</span>
+                      <input
+                        type="checkbox"
+                        value="虎皮鸚鵡"
+                        v-model="selectedBreeds"
+                        class="w-4 h-4 accent-black cursor-pointer"
+                      />
+                    </label>
+                    <label class="flex justify-between items-center cursor-pointer group">
+                      <span class="group-hover:text-gray-600">太平洋鳥</span>
+                      <input
+                        type="checkbox"
+                        value="太平洋鳥"
+                        v-model="selectedBreeds"
+                        class="w-4 h-4 accent-black cursor-pointer"
+                      />
+                    </label>
+                    <label class="flex justify-between items-center cursor-pointer group">
+                      <span class="group-hover:text-gray-600">畫眉鳥</span>
+                      <input
+                        type="checkbox"
+                        value="畫眉鳥"
+                        v-model="selectedBreeds"
+                        class="w-4 h-4 accent-black cursor-pointer"
+                      />
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <button
+                  @click="isOpenBirdCount = !isOpenBirdCount"
+                  class="flex w-full justify-between items-center font-bold px-6 py-3 focus:outline-none"
+                >
+                  <span>鳥的數量</span>
+                  <i
+                    class="fa-solid fa-angle-down transition-transform duration-300"
+                    :class="{ 'rotate-180': isOpenBirdCount }"
+                  ></i>
+                </button>
+                <div v-show="isOpenBirdCount" class="px-6 pb-4">
+                  <div class="flex flex-col gap-2">
+                    <label class="flex justify-between items-center cursor-pointer group">
+                      <span class="group-hover:text-gray-600">單隻</span>
+                      <input
+                        type="checkbox"
+                        value="1"
+                        v-model="selectedBirdCounts"
+                        class="w-4 h-4 accent-black cursor-pointer"
+                      />
+                    </label>
+                    <label class="flex justify-between items-center cursor-pointer group">
+                      <span class="group-hover:text-gray-600">兩隻</span>
+                      <input
+                        type="checkbox"
+                        value="2"
+                        v-model="selectedBirdCounts"
+                        class="w-4 h-4 accent-black cursor-pointer"
+                      />
+                    </label>
+                    <label class="flex justify-between items-center cursor-pointer group">
+                      <span class="group-hover:text-gray-600">三隻以上</span>
+                      <input
+                        type="checkbox"
+                        value="3+"
+                        v-model="selectedBirdCounts"
+                        class="w-4 h-4 accent-black cursor-pointer"
+                      />
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <button
+                  @click="isOpenHasPlants = !isOpenHasPlants"
+                  class="flex w-full justify-between items-center font-bold px-6 py-3 focus:outline-none"
+                >
+                  <span>是否有花草</span>
+                  <i
+                    class="fa-solid fa-angle-down transition-transform duration-300"
+                    :class="{ 'rotate-180': isOpenHasPlants }"
+                  ></i>
+                </button>
+                <div v-show="isOpenHasPlants" class="px-6 pb-4">
+                  <div class="flex flex-col gap-2">
+                    <label class="flex justify-between items-center cursor-pointer group">
+                      <span class="group-hover:text-gray-600">有花草</span>
+                      <input
+                        type="checkbox"
+                        value="yes"
+                        v-model="selectedHasPlants"
+                        class="w-4 h-4 accent-black cursor-pointer"
+                      />
+                    </label>
+                    <label class="flex justify-between items-center cursor-pointer group">
+                      <span class="group-hover:text-gray-600">純鳥類無花草</span>
+                      <input
+                        type="checkbox"
+                        value="no"
+                        v-model="selectedHasPlants"
+                        class="w-4 h-4 accent-black cursor-pointer"
+                      />
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pb-4">
+                <button
+                  @click="isOpenBirdColor = !isOpenBirdColor"
+                  class="flex w-full justify-between items-center font-bold px-6 py-3 focus:outline-none"
+                >
+                  <span>鳥的顏色</span>
+                  <i
+                    class="fa-solid fa-angle-down transition-transform duration-300"
+                    :class="{ 'rotate-180': isOpenBirdColor }"
+                  ></i>
+                </button>
+                <div v-show="isOpenBirdColor" class="px-6 pb-4">
+                  <div class="flex flex-col gap-2">
+                    <label class="flex justify-between items-center cursor-pointer group">
+                      <span class="group-hover:text-gray-600">彩色 / 斑斕</span>
+                      <input
+                        type="checkbox"
+                        value="colorful"
+                        v-model="selectedColors"
+                        class="w-4 h-4 accent-black cursor-pointer"
+                      />
+                    </label>
+                    <label class="flex justify-between items-center cursor-pointer group">
+                      <span class="group-hover:text-gray-600">單色 / 純白</span>
+                      <input
+                        type="checkbox"
+                        value="monochrome"
+                        v-model="selectedColors"
+                        class="w-4 h-4 accent-black cursor-pointer"
+                      />
+                    </label>
+                    <label class="flex justify-between items-center cursor-pointer group">
+                      <span class="group-hover:text-gray-600">藍綠色系</span>
+                      <input
+                        type="checkbox"
+                        value="blue-green"
+                        v-model="selectedColors"
+                        class="w-4 h-4 accent-black cursor-pointer"
+                      />
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 底部確認按鈕 -->
+        <div class="border">
+          <button
+            @click="isOpenFilter = false"
+            class="w-full bg-primary text-lg text-white py-3 text-center"
+          >
+            確認
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -467,6 +798,7 @@ const isOpenBreed = ref(true)
 const isOpenBirdCount = ref(false)
 const isOpenHasPlants = ref(false)
 const isOpenBirdColor = ref(false)
+const isOpenFilter = ref(false)
 
 // 資料綁定變數
 const selectedNetworks = ref<string[]>([])
