@@ -48,7 +48,7 @@
                   家門前每天都有不同的小鳥，大多數的小鳥都有特殊能力，特殊能力是什麼我就不說了，希望大家能從作品感受到小鳥的快樂。
                 </p>
               </div>
-              <Button class="self-end md:mt-auto"></Button>
+              <Button to="/artworkIntroduction" class="self-end md:mt-auto"></Button>
             </div>
 
             <div class="w-full md:w-85 h-full md:h-full shrink-0">
@@ -62,7 +62,11 @@
         <div class="flex flex-row items-end border-b border-black pb-2 md:pb-4">
           <h2 class="text-3xl md:text-5xl font-black mr-4 leading-none">Ranking</h2>
           <span class="text-xl font-bold leading-none hidden md:block">市價排行榜</span>
-          <Button class="ml-auto -mb-2 md:-mb-4" :isPrimaryBg="true" :hasBorder="false"
+          <Button
+            to="/capitalization"
+            class="ml-auto -mb-2 md:-mb-4"
+            :isPrimaryBg="true"
+            :hasBorder="false"
             >MORE</Button
           >
         </div>

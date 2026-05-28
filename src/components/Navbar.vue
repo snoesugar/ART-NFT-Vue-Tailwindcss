@@ -83,11 +83,21 @@
     "
   >
     <div class="flex flex-col items-center pb-6 px-3 text-lg text-center">
-      <a href="#" class="w-full py-6 text-black font-bold hover:text-primary transition"> 探索 </a>
+      <router-link
+        to="/explore"
+        class="w-full py-6 text-black font-bold hover:text-primary transition"
+      >
+        探索
+      </router-link>
 
       <hr class="w-full border-black" />
 
-      <a href="#" class="w-full py-6 text-black font-black hover:text-primary transition"> 市值 </a>
+      <router-link
+        to="/capitalization"
+        class="w-full py-6 text-black font-black hover:text-primary transition"
+      >
+        市值
+      </router-link>
 
       <div class="w-full border border-black">
         <button

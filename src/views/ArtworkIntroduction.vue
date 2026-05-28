@@ -1,16 +1,20 @@
 <template>
   <div class="bg-primary-bg">
-    <div class="container px-8 pt-10 pb-4">
+    <div class="container px-3 md:px-8 pt-6 md:pt-10 pb-4">
       <!-- 藝術品介紹 -->
-      <div class="flex flex-row gap-6">
+      <div class="flex flex-col md:flex-row gap-6">
         <div class="basis-1/2">
-          <img class="w-full h-136.5 object-cover" src="../../public/art21.jpg" alt="art21" />
+          <img
+            class="w-full h-72 md:h-136.5 object-cover"
+            src="../../public/art21.jpg"
+            alt="art21"
+          />
         </div>
         <div class="basis-1/2">
-          <div class="bg-white border h-full">
-            <div class="py-10 px-10 border-b">
-              <div class="flex flex-row justify-between gap-6 mb-4">
-                <h1 class="text-5xl fond-bold">兩情相悅</h1>
+          <div class="bg-white h-full">
+            <div class="p-4 md:p-10 border-b">
+              <div class="flex flex-col-reverse md:flex-row justify-between gap-2 md:gap-6 mb-4">
+                <h1 class="text-3xl md:text-5xl fond-bold">兩情相悅</h1>
                 <div class="flex flex-row items-center gap-2">
                   <img
                     class="w-8 h-8 object-cover rounded-full"
@@ -34,7 +38,7 @@
                 <button class="bg-primary text-white px-12 py-2 border border-black">出價</button>
               </div>
             </div>
-            <ul class="font-display py-10 px-10 space-y-4">
+            <ul class="font-display p-4 md:p-10 space-y-4">
               <li>3/14情人節外面剛好有兩隻鳥，也在過情人節。</li>
               <li>
                 而且其中一隻竟然有梳油頭，不知道是不是有用定型液，他們感情真好，出門還會特別打扮，看著看著不禁思考，我怎麼會變這樣？
@@ -51,7 +55,7 @@
           <div class="bg-white border break-inside-avoid inline-block w-full mb-6">
             <button
               @click="isOpenProperty = !isOpenProperty"
-              class="flex w-full justify-between items-center font-bold p-6 focus:outline-none"
+              class="flex w-full justify-between items-center font-bold p-4 md:p-6 focus:outline-none"
             >
               <span>屬性</span>
               <i
@@ -64,7 +68,7 @@
               :class="isOpenProperty ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'"
             >
               <div class="overflow-hidden min-h-0">
-                <div class="px-6 py-6 border-t border-primary-bg">
+                <div class="px-4 md:px-6 py-6 border-t">
                   <div class="flex flex-col gap-2">
                     <div class="flex justify-between items-center pb-2 border-b border-primary-bg">
                       <span>品種</span><span class="text-secondary">青藍金剛鸚鵡</span>
@@ -85,7 +89,7 @@
           <div class="bg-white border break-inside-avoid inline-block w-full mb-6">
             <button
               @click="isOpenData = !isOpenData"
-              class="flex w-full justify-between items-center font-bold p-6 focus:outline-none"
+              class="flex w-full justify-between items-center font-bold p-4 md:p-6 focus:outline-none"
             >
               <span>基本資訊</span>
               <i
@@ -98,7 +102,7 @@
               :class="isOpenData ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'"
             >
               <div class="overflow-hidden min-h-0">
-                <div class="px-6 py-6 border-t border-primary-bg">
+                <div class="px-4 md:px-6 py-6 border-t">
                   <div class="flex flex-col gap-2">
                     <div class="flex justify-between items-center pb-2 border-b border-primary-bg">
                       <span>擁有者</span><span class="text-secondary">0xa543x…1283</span>
@@ -119,7 +123,7 @@
           <div class="bg-white border break-inside-avoid inline-block w-full mb-6">
             <button
               @click="isOpenPrice = !isOpenPrice"
-              class="flex w-full justify-between items-center font-bold p-6 focus:outline-none"
+              class="flex w-full justify-between items-center font-bold p-4 md:p-6 focus:outline-none"
             >
               <span>出價</span>
               <i
@@ -133,9 +137,11 @@
               :class="isOpenPrice ? 'grid-rows-[1fr] border-t' : 'grid-rows-[0fr]'"
             >
               <div class="overflow-hidden min-h-0">
-                <div class="px-6 py-6">
+                <div class="px-4 md:px-6 py-6">
                   <div class="flex flex-col gap-2">
-                    <div class="flex flex-row items-center bg-primary-bg text-sm px-4 py-2 gap-4">
+                    <div
+                      class="flex flex-row items-center bg-primary-bg text-center md:text-start text-sm px-4 py-2 gap-4"
+                    >
                       <p class="basis-1/2">價格</p>
                       <p class="basis-1/2">期限</p>
                     </div>
@@ -153,7 +159,9 @@
                           <span>0.044Eth</span>
                         </div>
                       </div>
-                      <p class="basis-1/2 text-secondary font-display">3個月後</p>
+                      <p class="basis-1/2 text-secondary font-display text-end md:text-start">
+                        3個月後
+                      </p>
                     </div>
                     <div
                       class="flex flex-row items-center px-4 pb-2 gap-4 border-b border-primary-bg"
@@ -169,7 +177,9 @@
                           <span>0.054Eth</span>
                         </div>
                       </div>
-                      <p class="basis-1/2 text-secondary font-display">1個月後</p>
+                      <p class="basis-1/2 text-secondary font-display text-end md:text-start">
+                        1個月後
+                      </p>
                     </div>
                     <div class="flex flex-row items-center px-4 pb-2 gap-4">
                       <div class="basis-1/2">
@@ -183,7 +193,9 @@
                           <span>0.054Eth</span>
                         </div>
                       </div>
-                      <p class="basis-1/2 text-secondary font-display">2個月後</p>
+                      <p class="basis-1/2 text-secondary font-display text-end md:text-start">
+                        2個月後
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -195,7 +207,7 @@
           <div class="bg-white border break-inside-avoid inline-block w-full mb-6">
             <button
               @click="isOpenTrade = !isOpenTrade"
-              class="flex w-full justify-between items-center font-bold p-6 focus:outline-none"
+              class="flex w-full justify-between items-center font-bold p-4 md:p-6 focus:outline-none"
             >
               <span>交易歷史</span>
               <i
@@ -209,45 +221,49 @@
               :class="isOpenTrade ? 'grid-rows-[1fr] border-t' : 'grid-rows-[0fr]'"
             >
               <div class="overflow-hidden min-h-0">
-                <div class="px-6 py-6">
-                  <div class="flex flex-col gap-2">
+                <div class="px-4 md:px-6 py-6">
+                  <div class="flex flex-col gap-2 text-center md:text-start">
                     <div class="flex flex-row items-center bg-primary-bg px-4 py-2 gap-4">
-                      <p class="basis-1/7">事件</p>
-                      <p class="basis-1/7">價格</p>
-                      <p class="basis-3/7">從</p>
-                      <p class="basis-2/7">時間</p>
+                      <p class="basis-1/5 md:basis-1/7">事件</p>
+                      <p class="basis-1/5 md:basis-1/7">價格</p>
+                      <p class="basis-1/5 md:basis-3/7">從</p>
+                      <p class="basis-2/5 md:basis-2/7">時間</p>
                     </div>
                     <div
                       class="flex flex-row items-center px-4 pb-2 gap-4 border-b border-primary-bg"
                     >
-                      <p class="basis-1/7">上架</p>
-                      <p class="basis-1/7 font-display">2nb</p>
-                      <div class="basis-3/7">
-                        <div class="flex flex-row items-center gap-2">
+                      <p class="basis-1/5 md:basis-1/7">上架</p>
+                      <p class="basis-1/5 md:basis-1/7 font-display">2nb</p>
+                      <div class="basis-1/5 md:basis-3/7">
+                        <div
+                          class="flex flex-row justify-center md:justify-start items-center gap-2"
+                        >
                           <img
                             class="w-6 h-6 object-cover rounded-full"
                             src="../../public/artist02.jpg"
                             alt="artist02"
                           />
-                          <span>Antony WU</span>
+                          <span class="hidden md:block">Antony WU</span>
                         </div>
                       </div>
-                      <p class="basis-2/7 text-secondary font-display">14小時前</p>
+                      <p class="basis-2/5 md:basis-2/7 text-secondary font-display">14小時前</p>
                     </div>
                     <div class="flex flex-row items-center px-4 gap-4">
-                      <p class="basis-1/7">出價</p>
-                      <p class="basis-1/7 font-display">2nb</p>
-                      <div class="basis-3/7">
-                        <div class="flex flex-row items-center gap-2">
+                      <p class="basis-1/5 md:basis-1/7">出價</p>
+                      <p class="basis-1/5 md:basis-1/7 font-display">2nb</p>
+                      <div class="basis-1/5 md:basis-3/7">
+                        <div
+                          class="flex flex-row justify-center md:justify-start items-center gap-2"
+                        >
                           <img
                             class="w-6 h-6 object-cover rounded-full"
                             src="../../public/artist01.jpg"
                             alt="artist01"
                           />
-                          <span>Antony WU</span>
+                          <span class="hidden md:block">Antony WU</span>
                         </div>
                       </div>
-                      <p class="basis-2/7 text-secondary font-display">2天前</p>
+                      <p class="basis-2/5 md:basis-2/7 text-secondary font-display">2天前</p>
                     </div>
                   </div>
                 </div>
@@ -257,19 +273,20 @@
         </div>
       </div>
     </div>
-    <div class="container px-8">
+    <!-- other -->
+    <div class="container px-4 md:px-8">
       <div class="flex flex-row items-end border-b border-black pb-2 md:pb-4">
         <h2 class="text-3xl md:text-5xl mr-4 leading-none">Other</h2>
         <span class="text-xl font-bold leading-none hidden md:block">其餘作品</span>
         <Button class="ml-auto -mb-2 md:-mb-4" :isPrimaryBg="true" :hasBorder="false">MORE</Button>
       </div>
-      <div class="pt-10 pb-20">
+      <div class="pt-6 md:pt-10 pb-10 md:pb-20">
         <swiper
           v-if="artworks.length"
           :modules="modules"
           :breakpoints="{
             0: {
-              slidesPerView: 1,
+              slidesPerView: 2,
             },
             768: {
               slidesPerView: 4,
@@ -279,14 +296,18 @@
           :loop="true"
           :autoplay="{ delay: 4000, disableOnInteraction: false }"
           :pagination="{ clickable: true }"
-          class="artist-swiper pb-40! md:pb-14!"
+          class="artist-swiper pb-4! md:pb-14!"
         >
           <swiper-slide v-for="item in artworks" :key="item.id">
             <div class="mb-6 cursor-pointer">
               <div
                 class="relative bg-white p-2 md:p-6 border border-gray-200 shadow-sm overflow-hidden"
               >
-                <img :src="item.imgUrl" :alt="item.title" class="w-full h-81.75 object-cover" />
+                <img
+                  :src="item.imgUrl"
+                  :alt="item.title"
+                  class="w-full h-41 md:h-81.75 object-cover"
+                />
 
                 <div
                   class="absolute inset-0 bg-black/70 opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-between p-4 m-4"
