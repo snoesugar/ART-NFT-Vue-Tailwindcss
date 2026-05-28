@@ -532,6 +532,9 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { artworksData } from '@/data/artworks'
+import { stepsData } from '@/data/steps'
+import { artistsData } from '@/data/artists'
 import Button from '@/components/Button.vue'
 
 import { Swiper, SwiperSlide } from 'swiper/vue'
@@ -541,134 +544,11 @@ import { Autoplay, Pagination } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
 
+const artworks = ref(artworksData)
+const steps = ref(stepsData)
+const artists = ref(artistsData)
+
 const modules = [Autoplay, Pagination]
-
-const artists = [
-  {
-    id: 1,
-    firstName: 'Antony',
-    lastName: 'Wu',
-    img: new URL('/artist01.jpg', import.meta.url).href,
-    desc: '深受東方寫意影響，擅長將山水宏觀景象轉化為當代的抽象線條。',
-  },
-  {
-    id: 2,
-    firstName: 'Michael',
-    lastName: 'Chang',
-    img: new URL('/artist02.jpg', import.meta.url).href,
-    desc: '捕捉日常窗前的飛鳥與光影，作品散發細細品味生活片刻的純粹與快樂。',
-  },
-  {
-    id: 3,
-    firstName: 'Joanne',
-    lastName: 'Lin',
-    img: new URL('/artist03.jpg', import.meta.url).href,
-    desc: '著迷於海洋的奧秘與深度，透過層層堆疊的冷色調反映對自然的敬畏。',
-  },
-  {
-    id: 4,
-    firstName: 'Elena',
-    lastName: 'Kao',
-    img: new URL('/artist04.jpg', import.meta.url).href,
-    desc: '以鮮豔大膽的街頭色彩，將都市建築與植物和諧共生的樣貌注入畫布。',
-  },
-  {
-    id: 5,
-    firstName: 'Marcus',
-    lastName: 'Wang',
-    img: new URL('/artist05.jpg', import.meta.url).href,
-    desc: '專注於微觀視角，將花草的局部紋理與細胞結構轉譯為超現實的魔幻風格。',
-  },
-]
-
-// 模擬資料，故意給予不同的圖片高度或比例
-const artworks = ref([
-  {
-    id: 1,
-    title: '區塊戀-他的私生活',
-    price: 300,
-    description: '唯一想擁有的人，\n唯一不可以擁有的。',
-    imgUrl: new URL('/art09.jpg', import.meta.url).href,
-  },
-  {
-    id: 2,
-    title: '不哭不哭眼淚是珍珠',
-    price: 200,
-    description: '如果悲傷可以變現，\n我早已是這座城市最富有的人。',
-    imgUrl: new URL('/art12.jpg', import.meta.url).href,
-  },
-  {
-    id: 3,
-    title: '夏娃的醜聞',
-    price: 300,
-    description: '禁果不是她摘的，\n但罪名往往留給最美的人。',
-    imgUrl: new URL('/art10.jpg', import.meta.url).href,
-  },
-  {
-    id: 4,
-    title: '十分鐘就到',
-    price: 200,
-    description: '這句話跟「下次約吃飯」一樣，\n都是當代最大的謊言。',
-    imgUrl: new URL('/art03.jpg', import.meta.url).href,
-  },
-  {
-    id: 5,
-    title: '藍色啤酒海',
-    price: 150,
-    description: '把憂鬱倒進杯子裡，\n今晚我們在泡沫裡滅頂。',
-    imgUrl: new URL('/art02.jpg', import.meta.url).href,
-  },
-  {
-    id: 6,
-    title: '我這樣有美嗎',
-    price: 200,
-    description: '在被世界觀看之前，\n我早就對鏡子彩排了無數次。',
-    imgUrl: new URL('/art04.jpg', import.meta.url).href,
-  },
-  {
-    id: 7,
-    title: '沒有人愛我',
-    price: 500,
-    description: '孤獨是神話，\n也是現代靈魂唯一的奢侈品。',
-    imgUrl: new URL('/art11.jpg', import.meta.url).href,
-  },
-
-  {
-    id: 8,
-    title: '我真的受傷了',
-    price: 200,
-    description: '不是心碎的聲音，\n是期待再次被摔碎的鈍痛。',
-    imgUrl: new URL('/art27.jpg', import.meta.url).href,
-  },
-])
-
-// 把圖片中的資料結構化，這邊圖標先用 FontAwesome 代替，你可以換成你專案的 Icon
-const steps = ref([
-  {
-    id: 1,
-    icon: 'fa-solid fa-wallet',
-    title: '設置你的錢包',
-    description: '設置好您選擇的錢包後\n點擊右上角的錢包圖標進行連接',
-  },
-  {
-    id: 2,
-    icon: 'fa-solid fa-pen-ruler',
-    title: '創建您的主頁',
-    description: '註冊成為會員，編輯您的資料\n讓大家了解你',
-  },
-  {
-    id: 3,
-    icon: 'fa-solid fa-icons',
-    title: '添加你的 NFT',
-    description: '上傳你的作品\n添加標題和描述',
-  },
-  {
-    id: 4,
-    icon: 'fa-solid fa-tags',
-    title: '列出它們出售',
-    description: '選擇出售 NFT 的方式\n並設定價格，等待有緣人',
-  },
-])
 </script>
 
 <style scoped>

@@ -362,7 +362,7 @@
           <div class="pt-6 md:pt-10 pb-10 md:pb-20">
             <div class="columns-2 md:columns-3 gap-6">
               <div
-                v-for="item in artworks"
+                v-for="item in ArtworkBird"
                 :key="item.id"
                 class="break-inside-avoid mb-6 cursor-pointer"
               >
@@ -743,51 +743,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { artworksBirdData } from '@/data/artworks'
 import Button from '@/components/Button.vue'
-const artworks = ref([
-  {
-    id: 1,
-    title: '區塊戀-他的私生活',
-    price: 300,
-    description: '唯一想擁有的人，\n唯一不可以擁有的。',
-    imgUrl: new URL('/art20.jpg', import.meta.url).href,
-  },
-  {
-    id: 2,
-    title: '與你分享的快樂勝過獨自擁有',
-    price: 200,
-    description: '如果悲傷可以變現，\n我早已是這座城市最富有的人。',
-    imgUrl: new URL('/art23.jpg', import.meta.url).href,
-  },
-  {
-    id: 3,
-    title: '兩情相悅',
-    price: 300,
-    description: '禁果不是她摘的，\n但罪名往往留給最美的人。',
-    imgUrl: new URL('/art21.jpg', import.meta.url).href,
-  },
-  {
-    id: 4,
-    title: '會唱metal的鳥',
-    price: 200,
-    description: '這句話跟「下次約吃飯」一樣，\n都是當代最大的謊言。',
-    imgUrl: new URL('/art24.jpg', import.meta.url).href,
-  },
-  {
-    id: 5,
-    title: '群聚的小鳥們',
-    price: 150,
-    description: '把憂鬱倒進杯子裡，\n今晚我們在泡沫裡滅頂。',
-    imgUrl: new URL('/art22.jpg', import.meta.url).href,
-  },
-  {
-    id: 6,
-    title: '一大一小兩個恰恰好',
-    price: 200,
-    description: '在被世界觀看之前，\n我早就對鏡子彩排了無數次。',
-    imgUrl: new URL('/art25.jpg', import.meta.url).href,
-  },
-])
+
+const ArtworkBird = ref(artworksBirdData)
 
 // 控制各個風琴下拉選單的開關（按照設計圖：前四個預設打開，後三個預設關閉）
 const isOpenInternet = ref(true)

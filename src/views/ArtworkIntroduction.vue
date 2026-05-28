@@ -298,7 +298,7 @@
           :pagination="{ clickable: true }"
           class="artist-swiper pb-4! md:pb-14!"
         >
-          <swiper-slide v-for="item in artworks" :key="item.id">
+          <swiper-slide v-for="item in artworksBird" :key="item.id">
             <div class="mb-6 cursor-pointer">
               <div
                 class="relative bg-white p-2 md:p-6 border border-gray-200 shadow-sm overflow-hidden"
@@ -342,6 +342,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { artworksBirdData } from '@/data/artworks'
 import Button from '@/components/Button.vue'
 
 import { Swiper, SwiperSlide } from 'swiper/vue'
@@ -350,6 +351,8 @@ import { Autoplay, Pagination } from 'swiper/modules'
 // 引入 Swiper 核心與所需模組的 CSS
 import 'swiper/css'
 import 'swiper/css/pagination'
+
+const artworksBird = ref(artworksBirdData)
 
 const modules = [Autoplay, Pagination]
 
