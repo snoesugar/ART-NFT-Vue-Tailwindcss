@@ -390,7 +390,7 @@
                         </div>
                       </div>
 
-                      <Button class="mt-auto ml-auto" />
+                      <Button to="/artworkIntroduction" class="mt-auto ml-auto" />
                     </div>
                   </div>
                 </div>
