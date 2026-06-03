@@ -1,0 +1,442 @@
+{
+  "artists": [
+    {
+      "id": "qtwvbe",
+      "firstName": "Antony",
+      "lastName": "Wu",
+      "walletAddress": "0x1ab234...77cd",
+      "img": "artist01.jpg",
+      "desc": "深受東方寫意影響，擅長將山水宏觀景象轉化為當代的抽象線條。",
+      "description": "Antony 自幼浸淫於傳統水墨與古典哲學之中，對東方美學中的「留白」與「氣韻」有著深刻體悟。他打破了傳統具象山水的框架，將巍峨的宏觀意象抽離、凝練成當代的抽象線條。在他的畫布上，運筆如同呼吸般自然流淌，不僅僅是描繪自然風景，更是試圖在喧囂的現代社會中，為觀者建構一處安頓心靈、靜謐深遠的精神山水。",
+      "marketStats": {
+        "status": "販售中",
+        "itemCount": 88,
+        "floorPrice": {
+          "value": 1.2,
+          "currency": "ETH"
+        },
+        "volume7d": {
+          "value": 14.5,
+          "currency": "ETH"
+        },
+        "volume30d": {
+          "value": 42.8,
+          "currency": "ETH"
+        }
+      }
+    },
+    {
+      "id": "mxpkzr",
+      "firstName": "Michael",
+      "lastName": "Chang",
+      "walletAddress": "0x3ya666...88ef",
+      "img": "artist02.jpg",
+      "desc": "捕捉日常窗前的飛鳥與光影，作品散發細細品味生活片刻的純粹與快樂。",
+      "description": "Michael自小在山林長大，能夠與花草樹木大自然進行靈體溝通，創作題材常見大山、大水、花草與樹木，從日常生活出發，擁有個⼈獨樹⼀格的創作風格，作品觸及靈魂深處、探索未知宇宙，透過與大自然的溝通，探討著存在的本質。​",
+      "marketStats": {
+        "status": "販售中",
+        "itemCount": 168,
+        "floorPrice": {
+          "value": 0.6,
+          "currency": "ETH"
+        },
+        "volume7d": {
+          "value": 8.8,
+          "currency": "ETH"
+        },
+        "volume30d": {
+          "value": 23.1,
+          "currency": "ETH"
+        }
+      }
+    },
+    {
+      "id": "fndjws",
+      "firstName": "Joanne",
+      "lastName": "Lin",
+      "walletAddress": "0x5fe888...99ab",
+      "img": "artist03.jpg",
+      "desc": "著迷於海洋的奧秘與深度，透過層層堆疊的冷色調反映對自然的敬畏。",
+      "description": "Joanne 成長於沿海小鎮，海洋的潮汐與深不可測的未知是她永恆的靈感泉源。她長年透過潛水與海浪對話，著迷於光線在水面下被吞噬、轉化的神祕過程。她擅長運用低彩度電色調與複合媒材，在畫布上進行無數次的顏料層層堆疊，重現深海特有的壓迫感與寧靜。作品不只記錄了海洋的廣袤，更是一幅幅反映人類在宏大自然面前，由衷產生敬畏與謙卑的心靈肖像。",
+      "marketStats": {
+        "status": "販售中",
+        "itemCount": 120,
+        "floorPrice": {
+          "value": 0.85,
+          "currency": "ETH"
+        },
+        "volume7d": {
+          "value": 11.2,
+          "currency": "ETH"
+        },
+        "volume30d": {
+          "value": 31.4,
+          "currency": "ETH"
+        }
+      }
+    },
+    {
+      "id": "ylvgca",
+      "firstName": "Elena",
+      "lastName": "Kao",
+      "walletAddress": "0x7bc444...11de",
+      "img": "artist04.jpg",
+      "desc": "以鮮豔大膽的街頭色彩，將都市建築與植物和諧共生的樣貌注入畫布。",
+      "description": "身為土生土長的都市觀察者，Elena 對於水泥叢林與自然生態之間的張力充滿好奇。她走訪全球各大城市的街頭，採集鐵窗花、塗鴉與夾縫中求生的野草意象。她打破了「城市等於冰冷」的刻板印象，以極具衝擊力且飽和的大膽色塊，揉合塗鴉藝術的率性線條，將幾何建築與有機植物完美縫合。她的創作是一場當代都市的視覺實驗，展現了生命力在現代文明中和諧共生的繽紛可能。",
+      "marketStats": {
+        "status": "販售中",
+        "itemCount": 200,
+        "floorPrice": {
+          "value": 0.45,
+          "currency": "ETH"
+        },
+        "volume7d": {
+          "value": 9.6,
+          "currency": "ETH"
+        },
+        "volume30d": {
+          "value": 28.3,
+          "currency": "ETH"
+        }
+      }
+    },
+    {
+      "id": "kphuqx",
+      "firstName": "Marcus",
+      "lastName": "Wang",
+      "walletAddress": "0x9ed111...55ff",
+      "img": "artist05.jpg",
+      "desc": "專注於微觀視角，將花草的局部紋理與細胞結構轉譯為超現實的魔幻風格。",
+      "description": "Marcus 擁有科學與藝術的雙重背景，習慣透過顯微鏡的視角來凝視世界。對他而言，一片葉子的脈絡或一朵花瓣的細胞結構，都隱藏著一個完整的宇宙。他擅長將微觀的生物紋理放大、解構，並注入充滿想像力的超現實魔幻色彩。作品打破了宏觀與微觀的界線，帶領觀者抽離日常感官，進入一個虛實交錯、充滿異樣張力的微觀異世界，探討著生命最原始且神祕的構成密碼。",
+      "marketStats": {
+        "status": "販售中",
+        "itemCount": 60,
+        "floorPrice": {
+          "value": 1.75,
+          "currency": "ETH"
+        },
+        "volume7d": {
+          "value": 15.8,
+          "currency": "ETH"
+        },
+        "volume30d": {
+          "value": 50.2,
+          "currency": "ETH"
+        }
+      }
+    }
+  ],
+  "artworks": [
+    {
+      "id": "1",
+      "artistId": "mxpkzr",
+      "title": "區塊戀-他的私生活",
+      "price": 300,
+      "description": "唯一想擁有的人，\n唯一不可以擁有的。",
+      "imgUrl": "art09.jpg",
+      "categories": ["general", "all"]
+    },
+    {
+      "id": "2",
+      "artistId": "mxpkzr",
+      "title": "不哭不哭眼淚是珍珠",
+      "price": 200,
+      "description": "如果悲傷可以變現，\n我早已是這座城市最富有的人。",
+      "imgUrl": "art12.jpg",
+      "categories": ["general", "all"]
+    },
+    {
+      "id": "3",
+      "artistId": "mxpkzr",
+      "title": "夏娃的醜聞",
+      "price": 300,
+      "description": "禁果不是她摘的，\n但罪名往往留給最美的人。",
+      "imgUrl": "art10.jpg",
+      "categories": ["general", "all"]
+    },
+    {
+      "id": "4",
+      "artistId": "mxpkzr",
+      "title": "十分鐘就到",
+      "price": 200,
+      "description": "這句話跟「下次約吃飯」一樣，\n都是當代最大的謊言。",
+      "imgUrl": "art03.jpg",
+      "categories": ["general", "all"]
+    },
+    {
+      "id": "5",
+      "artistId": "mxpkzr",
+      "title": "藍色啤酒海",
+      "price": 150,
+      "description": "把憂鬱倒進杯子裡，\n今晚我們在泡沫裡滅頂。",
+      "imgUrl": "art02.jpg",
+      "categories": ["general", "all"]
+    },
+    {
+      "id": "6",
+      "artistId": "mxpkzr",
+      "title": "我這樣有美嗎",
+      "price": 200,
+      "description": "在被世界觀看之前，\n我早就對鏡子彩排了無數次。",
+      "imgUrl": "art04.jpg",
+      "categories": ["general", "all"]
+    },
+    {
+      "id": "7",
+      "artistId": "mxpkzr",
+      "title": "沒有人愛我",
+      "price": 500,
+      "description": "孤獨是神話，\n也是現代靈魂唯一的奢侈品。",
+      "imgUrl": "art11.jpg",
+      "categories": ["general", "all"]
+    },
+    {
+      "id": "8",
+      "artistId": "mxpkzr",
+      "title": "我真的受傷了",
+      "price": 200,
+      "description": "不是心碎的聲音，\n值到期待再次被摔碎的鈍痛。",
+      "imgUrl": "art27.jpg",
+      "categories": ["general", "all"]
+    },
+    {
+      "id": "9",
+      "artistId": "qtwvbe",
+      "title": "與你分享的快樂勝過獨自擁有",
+      "price": 200,
+      "description": "如果悲傷可以變現，\n我早已是這座城市最富有的人。",
+      "imgUrl": "art23.jpg",
+      "categories": ["bird"]
+    },
+    {
+      "id": "10",
+      "artistId": "qtwvbe",
+      "title": "兩情相悅",
+      "price": 300,
+      "description": "禁果不是她摘的，\n但罪名往往留給最美的人。",
+      "imgUrl": "art21.jpg",
+      "categories": ["bird"]
+    },
+    {
+      "id": "11",
+      "artistId": "qtwvbe",
+      "title": "會唱metal的鳥",
+      "price": 200,
+      "description": "這句話跟「下次約吃飯」一樣，\n都是當代最大的謊言。",
+      "imgUrl": "art24.jpg",
+      "categories": ["bird"]
+    },
+    {
+      "id": "12",
+      "artistId": "fndjws",
+      "title": "群聚的小鳥們",
+      "price": 150,
+      "description": "把憂鬱倒進杯子裡，\n今晚我們在泡沫裡滅頂。",
+      "imgUrl": "art22.jpg",
+      "categories": ["bird"]
+    },
+    {
+      "id": "13",
+      "artistId": "fndjws",
+      "title": "一大一小兩個恰恰好",
+      "price": 200,
+      "description": "在被世界觀看之前，\n我早就對鏡子彩排了無數次。",
+      "imgUrl": "art25.jpg",
+      "categories": ["bird"]
+    },
+    {
+      "id": "14",
+      "artistId": "ylvgca",
+      "title": "野小孩——叫你不要玩那個",
+      "price": 300,
+      "description": "聽話的小孩得到了乖巧，\n野小孩得到了整個世界。",
+      "imgUrl": "art19.jpg",
+      "categories": ["all"]
+    },
+    {
+      "id": "15",
+      "artistId": "ylvgca",
+      "title": "柔美的細胞小將",
+      "price": 200,
+      "description": "體內的理性細胞早就全數陣亡，\n現在掌管大腦的是「想太多」和「算了」。",
+      "imgUrl": "art16.jpg",
+      "categories": ["all"]
+    },
+    {
+      "id": "16",
+      "artistId": "kphuqx",
+      "title": "心如止水——今天吃素",
+      "price": 200,
+      "description": "嘴上說著一切隨緣，\n心裡其實是誰也看不上眼。",
+      "imgUrl": "art15.jpg",
+      "categories": ["all"]
+    },
+    {
+      "id": "17",
+      "artistId": "kphuqx",
+      "title": "每當夏天我吹著溫暖的風",
+      "price": 200,
+      "description": "明知道那陣風吹完就走，\n我還是把襯衫扣子多解開了兩顆。",
+      "imgUrl": "art06.jpg",
+      "categories": ["all"]
+    }
+  ],
+  "markets": [
+    {
+      "id": "1",
+      "name": "追求者送我的花",
+      "imgUrl": "/art29.jpg",
+      "marketCap": "1,774.19",
+      "change24h": 220.49,
+      "change7d": -2.43,
+      "floorPrice": "2.90",
+      "hasIcon": true,
+      "owners": "32.1K",
+      "totalSupply": "1000",
+      "isOpen": false
+    },
+    {
+      "id": "2",
+      "name": "夏天的時候",
+      "imgUrl": "/art06.jpg",
+      "marketCap": "1,524.89",
+      "change24h": 80.49,
+      "change7d": -2.43,
+      "floorPrice": "90.23",
+      "hasIcon": false,
+      "owners": "32.1K",
+      "totalSupply": "1000",
+      "isOpen": false
+    },
+    {
+      "id": "3",
+      "name": "海洋波度",
+      "imgUrl": "/art02.jpg",
+      "marketCap": "1,400.59",
+      "change24h": -3.92,
+      "change7d": -13.43,
+      "floorPrice": "2.90",
+      "hasIcon": true,
+      "owners": "32.1K",
+      "totalSupply": "1000",
+      "isOpen": false
+    },
+    {
+      "id": "4",
+      "name": "賴床真的很不好",
+      "imgUrl": "/art03.jpg",
+      "marketCap": "1,224.88",
+      "change24h": -9.23,
+      "change7d": -20.43,
+      "floorPrice": "2.90",
+      "hasIcon": true,
+      "owners": "32.1K",
+      "totalSupply": "1000",
+      "isOpen": true
+    },
+    {
+      "id": "5",
+      "name": "瞳孔:流動的脈絡",
+      "imgUrl": "/art01.jpg",
+      "marketCap": "1,021.09",
+      "change24h": 83.49,
+      "change7d": -1.43,
+      "floorPrice": "2.90",
+      "hasIcon": true,
+      "owners": "32.1K",
+      "totalSupply": "1000",
+      "isOpen": false
+    },
+    {
+      "id": "6",
+      "name": "哭泣的時候",
+      "imgUrl": "/art12.jpg",
+      "marketCap": "921.42",
+      "change24h": -9.43,
+      "change7d": 183.49,
+      "floorPrice": "2.90",
+      "hasIcon": true,
+      "owners": "32.1K",
+      "totalSupply": "1000",
+      "isOpen": false
+    },
+    {
+      "id": "7",
+      "name": "破碎的菠蘿麵包",
+      "imgUrl": "/art14.jpg",
+      "marketCap": "888.88",
+      "change24h": 20.49,
+      "change7d": -0.43,
+      "floorPrice": "2.90",
+      "hasIcon": true,
+      "owners": "32.1K",
+      "totalSupply": "1000",
+      "isOpen": false
+    },
+    {
+      "id": "8",
+      "name": "人生中的貓咪們",
+      "imgUrl": "/art08.jpg",
+      "marketCap": "770.23",
+      "change24h": 23.49,
+      "change7d": 30.23,
+      "floorPrice": "2.90",
+      "hasIcon": true,
+      "owners": "32.1K",
+      "totalSupply": "1000",
+      "isOpen": false
+    },
+    {
+      "id": "9",
+      "name": "髒兮兮的家",
+      "imgUrl": "/art28.jpg",
+      "marketCap": "502.31",
+      "change24h": 13.49,
+      "change7d": 50.23,
+      "floorPrice": "2.90",
+      "hasIcon": true,
+      "owners": "32.1K",
+      "totalSupply": "1000",
+      "isOpen": false
+    },
+    {
+      "id": "10",
+      "name": "細胞小將",
+      "imgUrl": "/art16.jpg",
+      "marketCap": "420.20",
+      "change24h": 54.49,
+      "change7d": -12.43,
+      "floorPrice": "2.90",
+      "hasIcon": true,
+      "owners": "32.1K",
+      "totalSupply": "1000",
+      "isOpen": false
+    }
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "icon": "fa-solid fa-wallet",
+      "title": "設置你的錢包",
+      "description": "設置好您選擇的錢包後\n點擊右上角的錢包圖標進行連接"
+    },
+    {
+      "id": "2",
+      "icon": "fa-solid fa-pen-ruler",
+      "title": "創建您的主頁",
+      "description": "註冊成為會員，編輯您的資料\n讓大家了解你"
+    },
+    {
+      "id": "3",
+      "icon": "fa-solid fa-icons",
+      "title": "添加你的 NFT",
+      "description": "上傳你的作品\n添加標題和描述"
+    },
+    {
+      "id": "4",
+      "icon": "fa-solid fa-tags",
+      "title": "列出它們出售",
+      "description": "選擇出售 NFT 的方式\n並設定價格，等待有緣人"
+    }
+  ]
+}

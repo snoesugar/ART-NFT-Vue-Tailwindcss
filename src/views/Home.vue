@@ -435,7 +435,7 @@
                       {{ item.desc }}
                     </p>
 
-                    <Button to="/artistIntroduction" class="ml-auto mt-auto"></Button>
+                    <Button :to="`/artistIntroduction/${item.id}`" class="ml-auto mt-auto"></Button>
                   </div>
                 </div>
                 <div class="block md:hidden">
@@ -531,24 +531,36 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue' // 💡 引入 onMounted
 import { artworksData } from '@/data/artworks'
 import { stepsData } from '@/data/steps'
-import { artistsData } from '@/data/artists'
 import Button from '@/components/Button.vue'
+// 💡 1. 引入你寫好的 artistApi 和型別
+import { artistApi, type Artist } from '@/api/artist'
 
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Pagination } from 'swiper/modules'
 
-// 引入 Swiper 核心與所需模組的 CSS
 import 'swiper/css'
 import 'swiper/css/pagination'
 
 const artworks = ref(artworksData)
 const steps = ref(stepsData)
-const artists = ref(artistsData)
+
+// 💡 2. 初始化把 artists 改成空陣列，並定義型別
+const artists = ref<Artist[]>([])
 
 const modules = [Autoplay, Pagination]
+
+// 💡 3. 組件掛載時，打 API 撈取真正的 db.json 資料
+onMounted(async () => {
+  try {
+    const data = await artistApi.getAll()
+    artists.value = data // 這樣首頁就能拿到最新、有英文字串 id 的資料了！
+  } catch (error) {
+    console.error('首頁獲取藝術家失敗:', error)
+  }
+})
 </script>
 
 <style scoped>

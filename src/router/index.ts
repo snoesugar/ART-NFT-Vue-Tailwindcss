@@ -20,8 +20,9 @@ const router = createRouter({
           component: () => import('../views/Capitalization.vue'),
         },
         {
-          path: '/artistIntroduction',
-          component: () => import('../views/ArtistIntroduction.vue'),
+          path: '/artistIntroduction/:id',
+          name: 'ArtistIntroduction',
+          component: () => import('@/views/ArtistIntroduction.vue'),
         },
         {
           path: '/filter',

@@ -1,27 +1,31 @@
 <template>
   <div class="bg-primary-bg">
-    <div class="container px-3 md:px-8 pt-6 md:pt-10 pb-4">
+    <!-- 💡 加上 v-if 確保作品與藝術家資料都從 API 載入完成才渲染 -->
+    <div v-if="currentArtwork && currentArtist" class="container px-3 md:px-8 pt-6 md:pt-10 pb-4">
       <!-- 藝術品介紹 -->
       <div class="flex flex-col md:flex-row gap-6">
         <div class="basis-1/2">
+          <!-- 💡 圖片改吃 API 動態網址 -->
           <img
             class="w-full h-72 md:h-136.5 object-cover"
-            src="../../public/art21.jpg"
-            alt="art21"
+            :src="currentArtwork.imgUrl"
+            :alt="currentArtwork.title"
           />
         </div>
         <div class="basis-1/2">
           <div class="bg-white h-full">
             <div class="p-4 md:p-10 border-b">
               <div class="flex flex-col-reverse md:flex-row justify-between gap-2 md:gap-6 mb-4">
-                <h1 class="text-3xl md:text-5xl fond-bold">兩情相悅</h1>
+                <!-- 💡 標題改吃動態資料 -->
+                <h1 class="text-3xl md:text-5xl font-bold">{{ currentArtwork.title }}</h1>
                 <div class="flex flex-row items-center gap-2">
+                  <!-- 💡 創作者大頭貼與名字動態化 -->
                   <img
                     class="w-8 h-8 object-cover rounded-full"
-                    src="../../public/artist01.jpg"
-                    alt="artist01"
+                    :src="currentArtist.img"
+                    :alt="currentArtist.firstName"
                   />
-                  <p>Michael</p>
+                  <p>{{ currentArtist.firstName }}</p>
                 </div>
               </div>
               <p class="text-secondary text-sm mb-2">最高出價</p>
@@ -38,16 +42,16 @@
                 <button class="bg-primary text-white px-12 py-2 border border-black">出價</button>
               </div>
             </div>
-            <ul class="font-display p-4 md:p-10 space-y-4">
-              <li>3/14情人節外面剛好有兩隻鳥，也在過情人節。</li>
-              <li>
-                而且其中一隻竟然有梳油頭，不知道是不是有用定型液，他們感情真好，出門還會特別打扮，看著看著不禁思考，我怎麼會變這樣？
-              </li>
-              <li>好羨慕啊，我也要有這樣兩情相悅的另一半。</li>
-            </ul>
+            <!-- 💡 敘述改吃動態資料，並用 whitespace-pre-line 處理換行 -->
+            <div
+              class="font-display p-4 md:p-10 space-y-4 whitespace-pre-line text-base leading-relaxed"
+            >
+              {{ currentArtwork.description }}
+            </div>
           </div>
         </div>
       </div>
+
       <!-- 藝術品資料 -->
       <div class="pt-6">
         <div class="md:columns-2 gap-6 space-y-6 [column-fill:balance]">
@@ -70,14 +74,22 @@
               <div class="overflow-hidden min-h-0">
                 <div class="px-4 md:px-6 py-6 border-t">
                   <div class="flex flex-col gap-2">
+                    <!-- 💡 屬性分類動態讀取 (若 API 含有 categories 陣列則渲染，否則顯示預設) -->
                     <div class="flex justify-between items-center pb-2 border-b border-primary-bg">
-                      <span>品種</span><span class="text-secondary">青藍金剛鸚鵡</span>
+                      <span>品種</span>
+                      <span class="text-secondary">{{
+                        currentArtwork.categories?.[0] || '青藍金剛鸚鵡'
+                      }}</span>
                     </div>
                     <div class="flex justify-between items-center pb-2 border-b border-primary-bg">
-                      <span>鳥的數量</span><span class="text-secondary font-display">2隻</span>
+                      <span>鳥的數量</span>
+                      <span class="text-secondary font-display">2隻</span>
                     </div>
                     <div class="flex justify-between items-center">
-                      <span>鳥的顏色</span><span class="text-secondary">藍色</span>
+                      <span>鳥的顏色</span>
+                      <span class="text-secondary">{{
+                        currentArtwork.categories?.[1] || '藍色'
+                      }}</span>
                     </div>
                   </div>
                 </div>
@@ -85,7 +97,7 @@
             </div>
           </div>
 
-          <!-- 基本機訊 -->
+          <!-- 基本資訊 -->
           <div class="bg-white border break-inside-avoid inline-block w-full mb-6">
             <button
               @click="isOpenData = !isOpenData"
@@ -108,7 +120,8 @@
                       <span>擁有者</span><span class="text-secondary">0xa543x…1283</span>
                     </div>
                     <div class="flex justify-between items-center pb-2 border-b border-primary-bg">
-                      <span>代幣ID</span><span class="text-secondary font-display">#1234</span>
+                      <span>代幣ID</span
+                      ><span class="text-secondary font-display">#{{ currentArtwork.id }}</span>
                     </div>
                     <div class="flex justify-between items-center">
                       <span>合約地址</span><span class="text-secondary">青藍金剛鸚鵡</span>
@@ -119,7 +132,7 @@
             </div>
           </div>
 
-          <!-- 出價 -->
+          <!-- 出價歷史 (維持原樣) -->
           <div class="bg-white border break-inside-avoid inline-block w-full mb-6">
             <button
               @click="isOpenPrice = !isOpenPrice"
@@ -131,7 +144,6 @@
                 :class="{ 'rotate-180': isOpenPrice }"
               ></i>
             </button>
-
             <div
               class="grid transition-[grid-template-rows] duration-300 ease-in-out"
               :class="isOpenPrice ? 'grid-rows-[1fr] border-t' : 'grid-rows-[0fr]'"
@@ -163,47 +175,13 @@
                         3個月後
                       </p>
                     </div>
-                    <div
-                      class="flex flex-row items-center px-4 pb-2 gap-4 border-b border-primary-bg"
-                    >
-                      <div class="basis-1/2">
-                        <div class="flex flex-row items-center gap-2">
-                          <img
-                            class="w-8 h-8 object-cover rounded-full"
-                            src="../../public/user02.jpg"
-                            alt=""
-                          />
-                          <i class="fa-solid fa-arrow-right"></i>
-                          <span>0.054Eth</span>
-                        </div>
-                      </div>
-                      <p class="basis-1/2 text-secondary font-display text-end md:text-start">
-                        1個月後
-                      </p>
-                    </div>
-                    <div class="flex flex-row items-center px-4 pb-2 gap-4">
-                      <div class="basis-1/2">
-                        <div class="flex flex-row items-center gap-2">
-                          <img
-                            class="w-8 h-8 object-cover rounded-full"
-                            src="../../public/user03.jpg"
-                            alt=""
-                          />
-                          <i class="fa-solid fa-arrow-right"></i>
-                          <span>0.054Eth</span>
-                        </div>
-                      </div>
-                      <p class="basis-1/2 text-secondary font-display text-end md:text-start">
-                        2個月後
-                      </p>
-                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- 交易歷史 -->
+          <!-- 交易歷史 (維持原樣) -->
           <div class="bg-white border break-inside-avoid inline-block w-full mb-6">
             <button
               @click="isOpenTrade = !isOpenTrade"
@@ -215,7 +193,6 @@
                 :class="{ 'rotate-180': isOpenTrade }"
               ></i>
             </button>
-
             <div
               class="grid transition-[grid-template-rows] duration-300 ease-in-out"
               :class="isOpenTrade ? 'grid-rows-[1fr] border-t' : 'grid-rows-[0fr]'"
@@ -248,23 +225,6 @@
                       </div>
                       <p class="basis-2/5 md:basis-2/7 text-secondary font-display">14小時前</p>
                     </div>
-                    <div class="flex flex-row items-center px-4 gap-4">
-                      <p class="basis-1/5 md:basis-1/7">出價</p>
-                      <p class="basis-1/5 md:basis-1/7 font-display">2nb</p>
-                      <div class="basis-1/5 md:basis-3/7">
-                        <div
-                          class="flex flex-row justify-center md:justify-start items-center gap-2"
-                        >
-                          <img
-                            class="w-6 h-6 object-cover rounded-full"
-                            src="../../public/artist01.jpg"
-                            alt="artist01"
-                          />
-                          <span class="hidden md:block">Antony WU</span>
-                        </div>
-                      </div>
-                      <p class="basis-2/5 md:basis-2/7 text-secondary font-display">2天前</p>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -273,7 +233,13 @@
         </div>
       </div>
     </div>
-    <!-- other -->
+
+    <!-- 💡 資料讀取中的優雅 Skeleton -->
+    <div v-else class="text-center py-20 bg-white">
+      <p class="text-secondary animate-bounce text-lg">載入藝術品星系中...</p>
+    </div>
+
+    <!-- other 其餘作品區 -->
     <div class="container px-4 md:px-8">
       <div class="flex flex-row items-end border-b border-black pb-2 md:pb-4">
         <h2 class="text-3xl md:text-5xl mr-4 leading-none">Other</h2>
@@ -281,24 +247,21 @@
         <Button class="ml-auto -mb-2 md:-mb-4" :isPrimaryBg="true" :hasBorder="false">MORE</Button>
       </div>
       <div class="pt-6 md:pt-10 pb-10 md:pb-20">
+        <!-- 💡 輪播資料改吃動態篩選後的 otherArtworks -->
         <swiper
-          v-if="artworks.length"
+          v-if="otherArtworks.length"
           :modules="modules"
           :breakpoints="{
-            0: {
-              slidesPerView: 2,
-            },
-            768: {
-              slidesPerView: 4,
-            },
+            0: { slidesPerView: 2 },
+            768: { slidesPerView: 4 },
           }"
           :space-between="24"
-          :loop="true"
+          :loop="otherArtworks.length >= 4"
           :autoplay="{ delay: 4000, disableOnInteraction: false }"
           :pagination="{ clickable: true }"
           class="artist-swiper pb-4! md:pb-14!"
         >
-          <swiper-slide v-for="item in artworksBird" :key="item.id">
+          <swiper-slide v-for="item in otherArtworks" :key="item.id">
             <div class="mb-6 cursor-pointer">
               <div
                 class="relative bg-white p-2 md:p-6 border border-gray-200 shadow-sm overflow-hidden"
@@ -308,27 +271,23 @@
                   :alt="item.title"
                   class="w-full h-41 md:h-81.75 object-cover"
                 />
-
                 <div
                   class="absolute inset-0 bg-black/70 opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-between p-4 m-4"
                 >
                   <div class="border border-white p-4 h-full flex flex-col">
                     <div class="text-white">
-                      <p class="mb-4 whitespace-pre-line">
+                      <p class="mb-4 whitespace-pre-line text-sm leading-snug">
                         {{ item.description }}
                       </p>
-
                       <div class="flex gap-2">
                         <i class="fa-brands fa-ethereum"></i>
                         {{ item.price }}
                       </div>
                     </div>
-
                     <Button to="/artworkIntroduction" class="mt-auto ml-auto" />
                   </div>
                 </div>
               </div>
-
               <div class="mt-2 md:mt-4 md:border-b border-black md:font-bold pb-2 md:pb-4">
                 {{ item.title }}
               </div>
@@ -341,68 +300,67 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { artworksBirdData } from '@/data/artworks'
+import { ref, onMounted } from 'vue'
+import { artistApi, type Artist } from '@/api/artist'
+import { artworkApi, type Artwork } from '@/api/artwork'
 import Button from '@/components/Button.vue'
 
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Pagination } from 'swiper/modules'
 
-// 引入 Swiper 核心與所需模組的 CSS
 import 'swiper/css'
 import 'swiper/css/pagination'
 
-const artworksBird = ref(artworksBirdData)
-
 const modules = [Autoplay, Pagination]
 
+// 折疊面板狀態
 const isOpenProperty = ref(true)
 const isOpenPrice = ref(true)
 const isOpenData = ref(true)
 const isOpenTrade = ref(true)
 
-const artworks = ref([
-  {
-    id: 1,
-    title: '區塊戀-他的私生活',
-    price: 300,
-    description: '唯一想擁有的人，\n唯一不可以擁有的。',
-    imgUrl: new URL('/art20.jpg', import.meta.url).href,
-  },
-  {
-    id: 2,
-    title: '與你分享的快樂勝過獨自擁有',
-    price: 200,
-    description: '如果悲傷可以變現，\n我早已是這座城市最富有的人。',
-    imgUrl: new URL('/art23.jpg', import.meta.url).href,
-  },
-  {
-    id: 3,
-    title: '兩情相悅',
-    price: 300,
-    description: '禁果不是她摘的，\n但罪名往往留給最美的人。',
-    imgUrl: new URL('/art21.jpg', import.meta.url).href,
-  },
-  {
-    id: 4,
-    title: '會唱metal的鳥',
-    price: 200,
-    description: '這句話跟「下次約吃飯」一樣，\n都是當代最大的謊言。',
-    imgUrl: new URL('/art24.jpg', import.meta.url).href,
-  },
-  {
-    id: 5,
-    title: '群聚的小鳥們',
-    price: 150,
-    description: '把憂鬱倒進杯子裡，\n今晚我們在泡沫裡滅頂。',
-    imgUrl: new URL('/art22.jpg', import.meta.url).href,
-  },
-  {
-    id: 6,
-    title: '一大一小兩個恰恰好',
-    price: 200,
-    description: '在被世界觀看之前，\n我早就對鏡子彩排了無數次。',
-    imgUrl: new URL('/art25.jpg', import.meta.url).href,
-  },
-])
+// 響應式資料狀態
+const currentArtwork = ref<Artwork | undefined>(undefined)
+const currentArtist = ref<Artist | undefined>(undefined)
+const otherArtworks = ref<Artwork[]>([])
+
+onMounted(async () => {
+  try {
+    // 1. 同步獲取所有作品資料
+    const artworksData = await artworkApi.getAll()
+    console.log('1. 後端回傳的所有作品清單:', artworksData)
+
+    // 💡 防呆調整：如果陣列有資料，就直接抓第一件作品當作當前主角
+    if (artworksData && artworksData.length > 0) {
+      currentArtwork.value = artworksData[0] // 拿資料庫第一件（例如："區塊戀-他的私生活"）
+
+      // 💡 剩下的作品（第 2 件到最後一件）全部塞給底下的「其餘作品」Swiper 輪播
+      otherArtworks.value = artworksData.slice(1)
+    } else {
+      console.warn('警告：資料庫中沒有任何藝術品資料！')
+    }
+
+    // 2. 同步獲取所有藝術家資料
+    const artistsData = await artistApi.getAll()
+    console.log('2. 後端回傳的所有藝術家清單:', artistsData)
+
+    // 💡 尋找創作者 Michael
+    const targetArtist = artistsData.find(a => a.firstName === 'Michael')
+    if (targetArtist) {
+      currentArtist.value = targetArtist
+    } else if (artistsData && artistsData.length > 0) {
+      // 備用防呆：如果找不到 Michael，就先抓第一個藝術家頂替，避免畫面卡死
+      currentArtist.value = artistsData[0]
+    }
+
+    // 3. 最終檢查確認狀態
+    console.log('3. 最終檢查狀態:', {
+      currentArtwork: currentArtwork.value,
+      currentArtist: currentArtist.value,
+      otherArtworksCount: otherArtworks.value.length,
+    })
+  } catch (error) {
+    console.error('資料載入失敗，請檢查 JSON Server 是否啟動（Port 3003）：', error)
+  }
+})
 </script>
