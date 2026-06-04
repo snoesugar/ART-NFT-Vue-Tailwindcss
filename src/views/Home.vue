@@ -3,8 +3,24 @@
     <div class="container md:px-8 mx-auto">
       <div class="flex flex-col md:pt-10 pb-10 md:pb-20">
         <div class="flex flex-col md:flex-row border border-black bg-white">
-          <div class="basis-1/2 md:basis-2/3">
-            <img src="../../public/art01.jpg" class="w-full h-full object-cover" alt="art01" />
+          <div class="flex basis-1/2 md:basis-2/3">
+            <div
+              class="w-24 bg-black text-white hidden md:flex flex-col gap-4 items-center p-6 justify-start shrink-0"
+            >
+              <span class="text-5xl rotate-[-270deg] origin-center my-20 whitespace-nowrap">
+                Recommend
+              </span>
+
+              <span
+                class="text-xl tracking-[0.3em] [writing-mode:vertical-rl] text-orientation-upright font-blod"
+              >
+                推薦系列
+              </span>
+            </div>
+
+            <div class="relative flex-1">
+              <img src="../../public/art01.jpg" class="w-full h-full object-cover" alt="art01" />
+            </div>
           </div>
           <div class="basis-1/2 md:basis-1/3 px-3 py-8 md:p-6">
             <div class="flex flex-col justify-center h-full">
@@ -462,7 +478,7 @@
         <div class="pt-6 md:pt-12 pb-10 md:pb-20">
           <div class="columns-2 md:columns-4 gap-6">
             <div
-              v-for="item in artworks"
+              v-for="item in displayedArtworks"
               :key="item.id"
               class="break-inside-avoid mb-6 cursor-pointer"
             >
@@ -531,12 +547,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue' // 💡 引入 onMounted
-import { artworksData } from '@/data/artworks'
-import { stepsData } from '@/data/steps'
+import { ref, onMounted, computed } from 'vue'
 import Button from '@/components/Button.vue'
 // 💡 1. 引入你寫好的 artistApi 和型別
 import { artistApi, type Artist } from '@/api/artist'
+import { artworkApi, type Artwork } from '@/api/artwork'
+import { stepApi, type Step } from '@/api/steps'
 
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Pagination } from 'swiper/modules'
@@ -544,21 +560,42 @@ import { Autoplay, Pagination } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
 
-const artworks = ref(artworksData)
-const steps = ref(stepsData)
-
 // 💡 2. 初始化把 artists 改成空陣列，並定義型別
 const artists = ref<Artist[]>([])
+const artworks = ref<Artwork[]>([])
+const steps = ref<Step[]>([])
 
 const modules = [Autoplay, Pagination]
 
-// 💡 3. 組件掛載時，打 API 撈取真正的 db.json 資料
+// 2. 新增一個 computed，只取出前 8 筆資料
+const displayedArtworks = computed(() => {
+  return artworks.value.slice(0, 8)
+})
+
 onMounted(async () => {
+  // 1. 獲取藝術家資料
   try {
     const data = await artistApi.getAll()
-    artists.value = data // 這樣首頁就能拿到最新、有英文字串 id 的資料了！
+    artists.value = data
   } catch (error) {
     console.error('首頁獲取藝術家失敗:', error)
+  }
+
+  // 2. 獲取藝術品資料
+  try {
+    const data = await artworkApi.getAll()
+    artworks.value = data
+  } catch (error) {
+    console.error('首頁獲取藝術品失敗:', error)
+  }
+
+  // 3. 獲取步驟流程資料 (配合做法 A 的優化)
+  try {
+    const data = await stepApi.getAll()
+    // 加上 .data 取出 Axios 響應內真正的 json-server 資料
+    steps.value = data
+  } catch (error) {
+    console.error('首頁獲取步驟失敗:', error)
   }
 })
 </script>

@@ -2,11 +2,7 @@
   <div class="bg-primary-bg">
     <div class="container px-3 md:px-8 pt-6 md:pt-12 pb-10 md:pb-20">
       <div class="columns-2 md:columns-4 gap-6">
-        <div
-          v-for="item in ArtworkAll"
-          :key="item.id"
-          class="break-inside-avoid mb-6 cursor-pointer"
-        >
+        <div v-for="item in artworks" :key="item.id" class="break-inside-avoid mb-6 cursor-pointer">
           <div
             class="relative bg-white p-2 md:p-4 border border-gray-200 shadow-sm overflow-hidden"
           >
@@ -46,9 +42,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { ArtworkAllData } from '@/data/artworks'
+import { ref, onMounted } from 'vue'
+import { artworkApi, type Artwork } from '@/api/artwork'
 import Button from '@/components/Button.vue'
 
-const ArtworkAll = ref(ArtworkAllData)
+const artworks = ref<Artwork[]>([])
+
+onMounted(async () => {
+  try {
+    const data = await artworkApi.getAll()
+    artworks.value = data
+  } catch (error) {
+    console.error('首頁獲取藝術品失敗:', error)
+  }
+})
 </script>
