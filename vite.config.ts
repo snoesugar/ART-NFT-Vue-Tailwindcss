@@ -12,7 +12,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     // 💡 優先吃環境變數的設定，如果沒有設定，就用你原本的 '/ART-NFT-Vue-Tailwindcss/' 當作預備方案
-    base: env.VITE_BASE_URL || '/ART-NFT-Vue-Tailwindcss/',
+    base: process.env.NODE_ENV === 'production' ? '/ART-NFT-Vue-Tailwindcss/' : '/',
 
     plugins: [
       vue(),
