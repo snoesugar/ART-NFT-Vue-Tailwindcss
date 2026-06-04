@@ -20,7 +20,7 @@
           </thead>
           <tbody>
             <tr
-              v-for="(item, index) in capitalization"
+              v-for="(item, index) in topTenArtworks"
               :key="index"
               class="border-t border-x border-black bg-white hover:bg-gray-50 transition-colors"
             >
@@ -33,45 +33,45 @@
                   <img
                     :src="item.imgUrl"
                     class="w-12 h-12 rounded-full object-cover"
-                    :alt="item.name"
+                    :alt="item.title"
                   />
-                  <span class="font-bold">{{ item.name }}</span>
+                  <span class="font-bold">{{ item.title }}</span>
                 </div>
               </td>
 
               <td class="py-4 px-4 text-right">
                 <span class="inline-flex items-center gap-1">
-                  <i class="fa-brands fa-ethereum mr-2"></i> {{ item.marketCap }}
+                  <i class="fa-brands fa-ethereum mr-2"></i> {{ item.markets?.marketCap }}
                 </span>
               </td>
 
               <td
                 class="py-4 px-4 text-right"
-                :class="item.change24h >= 0 ? 'text-[#53C139]' : 'text-[#E6553B]'"
+                :class="item.markets?.change24h >= 0 ? 'text-[#53C139]' : 'text-[#E6553B]'"
               >
-                {{ item.change24h >= 0 ? '+' : '' }}{{ item.change24h }}%
+                {{ item.markets?.change24h >= 0 ? '+' : '' }}{{ item.markets?.change24h }}%
               </td>
 
               <td
                 class="py-4 px-4 text-right"
-                :class="item.change7d >= 0 ? 'text-[#53C139]' : 'text-[#E6553B]'"
+                :class="item.markets?.change7d >= 0 ? 'text-[#53C139]' : 'text-[#E6553B]'"
               >
-                {{ item.change7d >= 0 ? '+' : '' }}{{ item.change7d }}%
+                {{ item.markets?.change7d >= 0 ? '+' : '' }}{{ item.markets?.change7d }}%
               </td>
 
               <td class="py-4 px-4 text-right">
                 <span class="inline-flex items-center gap-1">
-                  <i v-if="item.hasIcon" class="fa-brands fa-ethereum mr-2"></i>
-                  {{ item.floorPrice }}
+                  <i v-if="item.markets?.hasIcon" class="fa-brands fa-ethereum mr-2"></i>
+                  {{ item.markets?.floorPrice }}
                 </span>
               </td>
 
               <td class="py-4 px-4 text-right">
-                {{ item.owners }}
+                {{ item.markets?.owners }}
               </td>
 
               <td class="py-4 px-6 text-right">
-                {{ item.totalSupply }}
+                {{ item.markets?.totalSupply }}
               </td>
             </tr>
           </tbody>
@@ -80,12 +80,12 @@
       <!-- 手機板 -->
       <div class="block md:hidden border-b border-black">
         <div
-          v-for="(item, index) in capitalizationData"
+          v-for="(item, index) in topTenArtworks"
           :key="'mobile-' + index"
           class="border-t border-x border-black bg-white"
         >
           <div
-            @click="item.isOpen = !item.isOpen"
+            @click="item.markets.isOpen = !item.markets.isOpen"
             class="flex items-center relative cursor-pointer select-none min-h-20"
           >
             <div
@@ -98,52 +98,52 @@
               <img
                 :src="item.imgUrl"
                 class="w-12 h-12 rounded-full object-cover"
-                :alt="item.name"
+                :alt="item.title"
               />
-              <span class="font-bold text-sm line-clamp-1">{{ item.name }}</span>
+              <span class="font-bold text-sm line-clamp-1">{{ item.title }}</span>
             </div>
 
             <div class="absolute right-4 top-1/2 -translate-y-1/2 text-xl text-right pr-2">
-              <i class="fa-brands fa-ethereum mr-2"></i> {{ item.marketCap }}
+              <i class="fa-brands fa-ethereum mr-2"></i> {{ item.markets?.marketCap }}
             </div>
 
             <div
               class="absolute bottom-0 right-0 w-8 h-8 flex items-end justify-end text-white transition-colors overflow-hidden"
-              :class="item.isOpen ? 'bg-primary' : 'bg-black'"
+              :class="item.markets.isOpen ? 'bg-primary' : 'bg-black'"
               style="clip-path: polygon(100% 0, 0 100%, 100% 100%)"
             >
               <i
                 class="fa-solid text-[10px] absolute right-1 bottom-1"
-                :class="item.isOpen ? 'fa-minus' : 'fa-plus'"
+                :class="item.markets.isOpen ? 'fa-minus' : 'fa-plus'"
               ></i>
             </div>
           </div>
 
           <!-- 下拉式資訊 -->
-          <div v-show="item.isOpen" class="border-t bg-white p-4 transition-all">
+          <div v-show="item.markets.isOpen" class="border-t bg-white p-4 transition-all">
             <div class="grid grid-cols-3 gap-2 text-center mb-4">
               <div>
                 <div class="font-display text-sm mb-2">24h%</div>
                 <div
                   class="text-xl"
-                  :class="item.change24h >= 0 ? 'text-[#53C139]' : 'text-[#E6553B]'"
+                  :class="item.markets?.change24h >= 0 ? 'text-[#53C139]' : 'text-[#E6553B]'"
                 >
-                  {{ item.change24h >= 0 ? '+' : '' }}{{ item.change24h }}%
+                  {{ item.markets?.change24h >= 0 ? '+' : '' }}{{ item.markets?.change24h }}%
                 </div>
               </div>
               <div>
                 <div class="font-display text-sm mb-2">7d%</div>
                 <div
                   class="text-xl"
-                  :class="item.change7d >= 0 ? 'text-[#53C139]' : 'text-[#E6553B]'"
+                  :class="item.markets?.change7d >= 0 ? 'text-[#53C139]' : 'text-[#E6553B]'"
                 >
-                  {{ item.change7d >= 0 ? '+' : '' }}{{ item.change7d }}%
+                  {{ item.markets?.change7d >= 0 ? '+' : '' }}{{ item.markets?.change7d }}%
                 </div>
               </div>
               <div>
                 <div class="font-display text-sm mb-2">地板價</div>
                 <div class="text-xl">
-                  <i class="fa-brands fa-ethereum mr-2"></i> {{ item.floorPrice }}
+                  <i class="fa-brands fa-ethereum mr-2"></i> {{ item.markets?.floorPrice }}
                 </div>
               </div>
             </div>
@@ -151,11 +151,11 @@
             <div class="grid grid-cols-2 gap-2 text-center">
               <div>
                 <div class="font-display text-sm mb-2">擁有者</div>
-                <div class="text-xl">{{ item.owners }}</div>
+                <div class="text-xl">{{ item.markets?.owners }}</div>
               </div>
               <div>
                 <div class="font-display text-sm mb-2">作品數量</div>
-                <div class="text-xl">{{ item.totalSupply }}</div>
+                <div class="text-xl">{{ item.markets?.totalSupply }}</div>
               </div>
             </div>
           </div>
@@ -166,8 +166,36 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { capitalizationData } from '@/data/capitalization'
+import { ref, onMounted, computed } from 'vue'
+import { artworkApi, type Artwork } from '@/api/artwork'
 
-const capitalization = ref(capitalizationData)
+const artworks = ref<Artwork[]>([])
+
+// 2. 新增一個 computed，只切出前 10 筆資料 🌟
+const topTenArtworks = computed(() => {
+  return artworks.value.slice(0, 10)
+})
+
+onMounted(async () => {
+  try {
+    const data = await artworkApi.getAll()
+
+    // 在寫入前，幫每個項目做預設值防禦，確保 markets 絕對不是 undefined
+    artworks.value = data.map(item => ({
+      ...item,
+      markets: item.markets || {
+        marketCap: '0',
+        change24h: 0,
+        change7d: 0,
+        floorPrice: '0',
+        hasIcon: false,
+        owners: '0',
+        totalSupply: '0',
+        isOpen: false, // 預設關閉狀態
+      },
+    }))
+  } catch (error) {
+    console.error('首頁獲取藝術品失敗:', error)
+  }
+})
 </script>

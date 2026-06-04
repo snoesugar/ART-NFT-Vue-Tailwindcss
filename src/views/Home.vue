@@ -2,7 +2,12 @@
   <div class="bg-primary-bg">
     <div class="container md:px-8 mx-auto">
       <div class="flex flex-col md:pt-10 pb-10 md:pb-20">
-        <div class="flex flex-col md:flex-row border border-black bg-white">
+        <!-- 推薦系列 -->
+        <div
+          v-for="artwork in rankingArtworks1st"
+          :key="artwork.id"
+          class="flex flex-col md:flex-row border border-black bg-white"
+        >
           <div class="flex basis-1/2 md:basis-2/3">
             <div
               class="w-24 bg-black text-white hidden md:flex flex-col gap-4 items-center p-6 justify-start shrink-0"
@@ -12,63 +17,62 @@
               </span>
 
               <span
-                class="text-xl tracking-[0.3em] [writing-mode:vertical-rl] text-orientation-upright font-blod"
+                class="text-xl tracking-[0.3em] [writing-mode:vertical-rl] text-orientation-upright font-bold"
               >
                 推薦系列
               </span>
             </div>
 
             <div class="relative flex-1">
-              <img src="../../public/art01.jpg" class="w-full h-full object-cover" alt="art01" />
+              <img :src="artwork.imgUrl" class="w-full h-full object-cover" :alt="artwork.title" />
             </div>
           </div>
+
           <div class="basis-1/2 md:basis-1/3 px-3 py-8 md:p-6">
             <div class="flex flex-col justify-center h-full">
-              <span class="text-lg mb-2 md:mt-14">Kemus Wu</span>
-              <p class="text-2xl md:text-5xl font-bold mb-6">瞳孔:流動的脈絡</p>
+              <span class="text-lg mb-2 md:mt-14">
+                {{
+                  artists.find(a => a.id === artwork.artistId)?.firstName
+                    ? `${artists.find(a => a.id === artwork.artistId)?.firstName} ${artists.find(a => a.id === artwork.artistId)?.lastName}`
+                    : artwork.artistId
+                }}
+              </span>
+              <p class="text-2xl md:text-5xl font-bold mb-6">{{ artwork.title }}</p>
+
               <p class="mb-6 md:mb-0">
-                眼睛，總是吸引著我們的注意力，看、被看，也許眼睛裡有著從另一個世界看我們的世界。
+                {{ artwork.description }}
               </p>
-              <Button class="self-end mt-auto"></Button>
+
+              <Button to="/artworkIntroduction/${artwork.id}" class="self-end mt-auto"></Button>
             </div>
           </div>
         </div>
+        <!-- 下面兩個 -->
         <div
           class="flex flex-col md:flex-row border border-t-0 border-black w-full bg-white md:h-85"
         >
           <div
+            v-for="artwork in rankingArtworks2to3"
+            :key="artwork.id"
             class="flex flex-col-reverse md:flex-row flex-1 border-b border-black md:border-b-0 md:border-r"
           >
             <div class="flex-1 px-3 py-8 md:p-6 flex flex-col justify-between h-full md:min-h-0">
               <div class="mt-0 md:mt-4">
-                <span class="text-lg font-medium block mb-2">Joanne</span>
-                <p class="text-3xl font-bold mb-6">海洋波度</p>
+                <span class="text-lg font-medium block mb-2">{{
+                  artists.find(a => a.id === artwork.artistId)?.firstName
+                    ? `${artists.find(a => a.id === artwork.artistId)?.firstName} ${artists.find(a => a.id === artwork.artistId)?.lastName}`
+                    : artwork.artistId
+                }}</span>
+                <p class="text-3xl font-bold mb-6">{{ artwork.title }}</p>
                 <p class="mb-6 md:mb-0">
-                  海洋的奧秘向我們揭示了深不可測的一面，它的深度——反映了我們的恐懼、同時也吸引著我們。
+                  {{ artwork.description }}
                 </p>
               </div>
               <Button class="self-end md:mt-auto"></Button>
             </div>
 
             <div class="w-full md:w-85 h-full shrink-0 border-t border-black md:border-t-0">
-              <img src="../../public/art02.jpg" class="w-full h-full object-cover" alt="art02" />
-            </div>
-          </div>
-
-          <div class="flex flex-col-reverse md:flex-row flex-1">
-            <div class="flex-1 px-3 py-8 md:p-6 flex flex-col justify-between h-full md:min-h-0">
-              <div class="mt-0 md:mt-4">
-                <span class="text-lg font-medium block mb-2">Michael</span>
-                <p class="text-3xl font-bold mb-6">我家窗前的鳥</p>
-                <p class="mb-6 md:mb-0">
-                  家門前每天都有不同的小鳥，大多數的小鳥都有特殊能力，特殊能力是什麼我就不說了，希望大家能從作品感受到小鳥的快樂。
-                </p>
-              </div>
-              <Button to="/artworkIntroduction" class="self-end md:mt-auto"></Button>
-            </div>
-
-            <div class="w-full md:w-85 h-full md:h-full shrink-0">
-              <img src="../../public/art21.jpg" class="w-full h-full object-cover" alt="art21" />
+              <img :src="artwork.imgUrl" class="w-full h-full object-cover" :alt="artwork.title" />
             </div>
           </div>
         </div>
@@ -90,19 +94,23 @@
           <!-- 電腦版 -->
           <div class="hidden md:block">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6.25 items-start">
-              <!-- 第一名 -->
-              <div class="border border-black bg-white flex flex-col relative">
+              <!-- 前三名 -->
+              <div
+                v-for="artwork in rankingArtworks1to3"
+                :key="artwork.id"
+                class="border border-black bg-white flex flex-col relative"
+              >
                 <div
                   class="absolute top-0 left-0 z-20 bg-white border-b border-r border-black px-4 py-2 text-xl aspect-square font-paytone"
                 >
-                  1
+                  {{ enhancedArtworks.indexOf(artwork) + 1 }}
                 </div>
 
                 <div class="relative h-93.5 w-full overflow-hidden shrink-0">
                   <img
-                    src="../../public/art04.jpg"
+                    :src="artwork.imgUrl"
                     class="w-full h-full object-cover border-b"
-                    alt="art04"
+                    :alt="artwork.title"
                   />
                   <div
                     class="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
@@ -113,78 +121,18 @@
 
                 <div class="flex-1 flex flex-col divide-y divide-black justify-between bg-white">
                   <div class="p-4">
-                    <p class="text-xl font-bold">散步遇到的女人</p>
+                    <p class="text-xl font-bold">{{ artwork.title }}</p>
                   </div>
                   <div class="px-4 py-2 flex flex-row justify-between items-center bg-white">
-                    <p>Zoe Jiang</p>
-                    <div class="flex items-center gap-2 font-bold">
-                      <i class="fa-brands fa-ethereum"></i> <span>300</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- 第二名 -->
-              <div class="border border-black bg-white flex flex-col relative">
-                <div
-                  class="absolute top-0 left-0 z-20 bg-white border-b border-r border-black px-4 py-2 text-xl aspect-square font-paytone"
-                >
-                  2
-                </div>
-
-                <div class="relative h-93.5 w-full overflow-hidden shrink-0">
-                  <img
-                    src="../../public/art05.jpg"
-                    class="w-full h-full object-cover border-b"
-                    alt="art05"
-                  />
-                  <div
-                    class="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                  >
-                    <Button class="ml-auto mt-auto"></Button>
-                  </div>
-                </div>
-
-                <div class="flex-1 flex flex-col divide-y divide-black justify-between bg-white">
-                  <div class="p-4">
-                    <p class="text-xl font-bold">爆炸頭的母親</p>
-                  </div>
-                  <div class="px-4 py-2 flex flex-row justify-between items-center bg-white">
-                    <p>Yui</p>
-                    <div class="flex items-center gap-2 font-bold">
-                      <i class="fa-brands fa-ethereum"></i> <span>300</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- 第三名 -->
-              <div class="border border-black bg-white flex flex-col relative">
-                <div
-                  class="absolute top-0 left-0 z-20 bg-white border-b border-r border-black px-4 py-2 text-xl aspect-square font-paytone"
-                >
-                  3
-                </div>
-
-                <div class="relative h-93.5 w-full overflow-hidden shrink-0">
-                  <img
-                    src="../../public/art06.jpg"
-                    class="w-full h-full object-cover border-b"
-                    alt="art06"
-                  />
-                  <div
-                    class="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                  >
-                    <Button class="ml-auto mt-auto"></Button>
-                  </div>
-                </div>
-
-                <div class="flex-1 flex flex-col divide-y divide-black justify-between bg-white">
-                  <div class="p-4">
-                    <p class="text-xl font-bold">夏天的時候</p>
-                  </div>
-                  <div class="px-4 py-2 flex flex-row justify-between items-center bg-white">
-                    <p>Bug Lin</p>
-                    <div class="flex items-center gap-2 font-bold">
-                      <i class="fa-brands fa-ethereum"></i> <span>300</span>
+                    <p>
+                      {{
+                        artists.find(a => a.id === artwork.artistId)
+                          ? `${artists.find(a => a.id === artwork.artistId)?.firstName} ${artists.find(a => a.id === artwork.artistId)?.lastName}`
+                          : artwork.artistId
+                      }}
+                    </p>
+                    <div class="flex items-center gap-2">
+                      <i class="fa-brands fa-ethereum"></i> <span>{{ artwork.price }}</span>
                     </div>
                   </div>
                 </div>
@@ -193,15 +141,23 @@
           </div>
           <!-- 手機板 -->
           <div class="flex flex-col gap-6.25 md:hidden">
-            <!-- 第一名 -->
-            <div class="border border-black bg-white flex flex-row h-22.5 relative">
+            <!-- 前三名 -->
+            <div
+              v-for="artwork in rankingArtworks1to3"
+              :key="artwork.id"
+              class="border border-black bg-white flex flex-row h-22.5 relative"
+            >
               <div
                 class="bg-white border-r border-black h-full w-9.5 flex items-center justify-center px-2 md:px-4 py-6 text-2xl font-paytone"
               >
-                1
+                {{ enhancedArtworks.indexOf(artwork) + 1 }}
               </div>
               <div class="relative w-21.75 h-full shrink-0 border-r border-black group">
-                <img src="../../public/art04.jpg" class="w-full h-full object-cover" alt="art04" />
+                <img
+                  :src="artwork.imgUrl"
+                  class="w-full h-full object-cover"
+                  :alt="artwork.title"
+                />
                 <div
                   class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
                 >
@@ -213,96 +169,44 @@
               </div>
               <div class="flex-1 flex flex-col divide-y divide-black h-full">
                 <div class="p-4 flex-1 flex items-center">
-                  <p class="text-lg font-bold leading-none">散步遇到的女人</p>
+                  <p class="text-lg font-bold leading-none">{{ artwork.title }}</p>
                 </div>
                 <div
                   class="px-4 py-2 leading-none flex flex-row justify-between items-center bg-white"
                 >
-                  <p>Zoe Jiang</p>
+                  <p>
+                    {{
+                      artists.find(a => a.id === artwork.artistId)
+                        ? `${artists.find(a => a.id === artwork.artistId)?.firstName} ${artists.find(a => a.id === artwork.artistId)?.lastName}`
+                        : artwork.artistId
+                    }}
+                  </p>
                   <div class="flex items-center gap-2">
                     <i class="fa-brands fa-ethereum"></i>
-                    <span>300</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- 第二名 -->
-            <div class="border border-black bg-white flex flex-row h-22.5 relative">
-              <div
-                class="bg-white border-r border-black h-full w-9.5 flex items-center justify-center px-2 md:px-4 py-6 text-2xl font-paytone"
-              >
-                2
-              </div>
-              <div class="relative w-21.75 h-full shrink-0 border-r border-black group">
-                <img src="../../public/art05.jpg" class="w-full h-full object-cover" alt="art05" />
-                <div
-                  class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                >
-                  <span class="text-white text-lg font-black tracking-tighter">MORE</span>
-                  <div
-                    class="absolute bottom-0 right-0 h-0 w-0 border-8 border-l-transparent border-t-transparent border-b-primary border-r-primary group-hover:border-b-primary group-hover:border-r-primary transition-colors duration-300 ease-in-out"
-                  ></div>
-                </div>
-              </div>
-              <div class="flex-1 flex flex-col divide-y divide-black h-full">
-                <div class="p-4 flex-1 flex items-center">
-                  <p class="text-lg font-bold leading-none">爆炸頭的母親</p>
-                </div>
-                <div
-                  class="px-4 py-2 leading-none flex flex-row justify-between items-center bg-white"
-                >
-                  <p>Yui</p>
-                  <div class="flex items-center gap-2">
-                    <i class="fa-brands fa-ethereum"></i>
-                    <span>300</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- 第三名 -->
-            <div class="border border-black bg-white flex flex-row h-22.5 relative">
-              <div
-                class="bg-white border-r border-black h-full w-9.5 flex items-center justify-center px-2 md:px-4 py-6 text-2xl font-paytone"
-              >
-                3
-              </div>
-              <div class="relative w-21.75 h-full shrink-0 border-r border-black group">
-                <img src="../../public/art06.jpg" class="w-full h-full object-cover" alt="art06" />
-                <div
-                  class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                >
-                  <span class="text-white text-lg font-black tracking-tighter">MORE</span>
-                  <div
-                    class="absolute bottom-0 right-0 h-0 w-0 border-8 border-l-transparent border-t-transparent border-b-primary border-r-primary group-hover:border-b-primary group-hover:border-r-primary transition-colors duration-300 ease-in-out"
-                  ></div>
-                </div>
-              </div>
-              <div class="flex-1 flex flex-col divide-y divide-black h-full">
-                <div class="p-4 flex-1 flex items-center">
-                  <p class="text-lg font-bold leading-none">夏天的時候</p>
-                </div>
-                <div
-                  class="px-4 py-2 leading-none flex flex-row justify-between items-center bg-white"
-                >
-                  <p>Bug Lin</p>
-                  <div class="flex items-center gap-2">
-                    <i class="fa-brands fa-ethereum"></i>
-                    <span>300</span>
+                    <span>{{ artwork.price }}</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6.25 items-start mt-6.25">
-            <!-- 第四名 -->
-            <div class="border border-black bg-white flex flex-row h-22.5 relative">
+            <!-- 第四~第六名 -->
+            <div
+              v-for="artwork in rankingArtworks4to6"
+              :key="artwork.id"
+              class="border border-black bg-white flex flex-row h-22.5 relative"
+            >
               <div
                 class="bg-white w-9.5 border-r border-black h-full flex items-center justify-center px-2 md:px-4 py-6 text-2xl font-paytone"
               >
-                4
+                {{ enhancedArtworks.indexOf(artwork) + 1 }}
               </div>
               <div class="relative w-21.75 h-full shrink-0 border-r border-black group">
-                <img src="../../public/art13.jpg" class="w-full h-full object-cover" alt="art13" />
+                <img
+                  :src="artwork.imgUrl"
+                  class="w-full h-full object-cover"
+                  :alt="artwork.title"
+                />
                 <div
                   class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
                 >
@@ -314,81 +218,21 @@
               </div>
               <div class="flex-1 flex flex-col divide-y divide-black h-full">
                 <div class="p-4 flex-1 flex items-center">
-                  <p class="text-lg font-bold leading-none">追求者送我的花</p>
+                  <p class="text-lg font-bold leading-none">{{ artwork.title }}</p>
                 </div>
                 <div
                   class="px-4 py-2 leading-none flex flex-row justify-between items-center bg-white"
                 >
-                  <p>Michael</p>
+                  <p>
+                    {{
+                      artists.find(a => a.id === artwork.artistId)
+                        ? `${artists.find(a => a.id === artwork.artistId)?.firstName} ${artists.find(a => a.id === artwork.artistId)?.lastName}`
+                        : artwork.artistId
+                    }}
+                  </p>
                   <div class="flex items-center gap-2">
                     <i class="fa-brands fa-ethereum"></i>
-                    <span>300</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- 第五名 -->
-            <div class="border border-black bg-white flex flex-row h-22.5 relative">
-              <div
-                class="bg-white border-r border-black h-full w-9.5 flex items-center justify-center px-2 md:px-4 py-6 text-2xl font-paytone"
-              >
-                5
-              </div>
-              <div class="relative w-21.75 h-full shrink-0 border-r border-black group">
-                <img src="../../public/art07.jpg" class="w-full h-full object-cover" alt="art07" />
-                <div
-                  class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                >
-                  <span class="text-white text-lg font-black tracking-tighter">MORE</span>
-                  <div
-                    class="absolute bottom-0 right-0 h-0 w-0 border-8 border-l-transparent border-t-transparent border-b-primary border-r-primary group-hover:border-b-primary group-hover:border-r-primary transition-colors duration-300 ease-in-out"
-                  ></div>
-                </div>
-              </div>
-              <div class="flex-1 flex flex-col divide-y divide-black h-full">
-                <div class="p-4 flex-1 flex items-center">
-                  <p class="text-lg font-bold leading-none">今天釣到的魚</p>
-                </div>
-                <div
-                  class="px-4 py-2 leading-none flex flex-row justify-between items-center bg-white"
-                >
-                  <p>Wei JJ</p>
-                  <div class="flex items-center gap-2">
-                    <i class="fa-brands fa-ethereum"></i>
-                    <span>300</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- 第六名 -->
-            <div class="border border-black bg-white flex flex-row h-22.5 relative">
-              <div
-                class="bg-white border-r border-black h-full w-9.5 flex items-center justify-center px-2 md:px-4 py-6 text-2xl font-paytone"
-              >
-                6
-              </div>
-              <div class="relative w-21.75 h-full shrink-0 border-r border-black group">
-                <img src="../../public/art08.jpg" class="w-full h-full object-cover" alt="art08" />
-                <div
-                  class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                >
-                  <span class="text-white text-lg font-black tracking-tighter">MORE</span>
-                  <div
-                    class="absolute bottom-0 right-0 h-0 w-0 border-8 border-l-transparent border-t-transparent border-b-primary border-r-primary group-hover:border-b-primary group-hover:border-r-primary transition-colors duration-300 ease-in-out"
-                  ></div>
-                </div>
-              </div>
-              <div class="flex-1 flex flex-col divide-y divide-black h-full">
-                <div class="p-4 flex-1 flex items-center">
-                  <p class="text-lg font-bold leading-none">人生中的貓咪們</p>
-                </div>
-                <div
-                  class="px-4 py-2 leading-none flex flex-row justify-between items-center bg-white"
-                >
-                  <p>Even Lai</p>
-                  <div class="flex items-center gap-2">
-                    <i class="fa-brands fa-ethereum"></i>
-                    <span>300</span>
+                    <span>{{ artwork.price }}</span>
                   </div>
                 </div>
               </div>
@@ -478,7 +322,7 @@
         <div class="pt-6 md:pt-12 pb-10 md:pb-20">
           <div class="columns-2 md:columns-4 gap-6">
             <div
-              v-for="item in displayedArtworks"
+              v-for="item in displayedArtworks1to8"
               :key="item.id"
               class="break-inside-avoid mb-6 cursor-pointer"
             >
@@ -548,11 +392,10 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import Button from '@/components/Button.vue'
-// 💡 1. 引入你寫好的 artistApi 和型別
 import { artistApi, type Artist } from '@/api/artist'
 import { artworkApi, type Artwork } from '@/api/artwork'
 import { stepApi, type Step } from '@/api/steps'
+import Button from '@/components/Button.vue'
 
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Pagination } from 'swiper/modules'
@@ -567,9 +410,38 @@ const steps = ref<Step[]>([])
 
 const modules = [Autoplay, Pagination]
 
-// 2. 新增一個 computed，只取出前 8 筆資料
-const displayedArtworks = computed(() => {
-  return artworks.value.slice(0, 8)
+// 🌟 核心整合：將排行榜相關的 slice 邏輯打包進同一個 computed 物件中
+const rankings = computed(() => {
+  const list = enhancedArtworks.value
+  return {
+    first: list.slice(0, 1),
+    twoToThree: list.slice(1, 3),
+    topThree: list.slice(0, 3),
+    fourToSix: list.slice(3, 6),
+  }
+})
+
+// 🌟 透過單行簡寫對接你原本 Template 的所有變數，這樣你完全不用去改 HTML！
+const displayedArtworks1to8 = computed(() => artworks.value.slice(0, 8))
+const rankingArtworks1st = computed(() => rankings.value.first)
+const rankingArtworks2to3 = computed(() => rankings.value.twoToThree)
+const rankingArtworks1to3 = computed(() => rankings.value.topThree)
+const rankingArtworks4to6 = computed(() => rankings.value.fourToSix)
+
+// 🌟 新增這個：自動整合藝術家名字的計算屬性
+const enhancedArtworks = computed(() => {
+  return artworks.value.map(artwork => {
+    // 尋找對應的藝術家
+    const matchArtist = artists.value.find(a => a.id === artwork.artistId)
+
+    return {
+      ...artwork,
+      // 如果有找到，就把姓名組合好放進 artistName，找不到就預設顯示原本的 artistId
+      artistName: matchArtist
+        ? `${matchArtist.lastName} ${matchArtist.firstName}`
+        : artwork.artistId,
+    }
+  })
 })
 
 onMounted(async () => {

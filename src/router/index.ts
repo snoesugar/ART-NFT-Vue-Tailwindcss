@@ -29,7 +29,8 @@ const router = createRouter({
           component: () => import('../views/Filter.vue'),
         },
         {
-          path: '/artworkIntroduction',
+          path: '/artworkIntroduction/:id',
+          name: 'ArtworkIntroduction',
           component: () => import('../views/ArtworkIntroduction.vue'),
         },
       ],

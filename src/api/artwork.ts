@@ -8,6 +8,18 @@ export interface Artwork {
   description: string
   imgUrl: string
   categories: string[]
+  markets: Market
+}
+
+export interface Market {
+  marketCap: string
+  change24h: number
+  change7d: number
+  floorPrice: string
+  hasIcon: boolean
+  owners: string
+  totalSupply: string
+  isOpen: boolean // 用於手機版控制折疊狀態
 }
 
 // 未來如果需要擴充 Artwork CRUD 的寫法範例：
