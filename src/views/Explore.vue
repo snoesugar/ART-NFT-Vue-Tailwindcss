@@ -9,7 +9,7 @@
             <img
               :src="item.imgUrl"
               :alt="item.title"
-              class="w-full min-h-[139px] md:min-h-[254px] h-auto object-cover"
+              class="w-full min-h-34.75 md:min-h-63.5 h-auto object-cover"
             />
 
             <div
