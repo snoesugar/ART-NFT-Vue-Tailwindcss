@@ -14,7 +14,7 @@
             <!-- 💡 圖片路徑改吃 API 的動態網址 -->
             <img
               v-if="currentArtist.img"
-              :src="`${baseUrl}${currentArtist.img}`"
+              :src="getImageUrl(currentArtist.img)"
               :alt="currentArtist?.firstName"
               class="w-full h-full object-cover absolute inset-0"
             />
@@ -295,7 +295,7 @@
                 class="relative bg-white p-2 md:p-4 border border-gray-200 shadow-sm overflow-hidden"
               >
                 <img
-                  :src="`${baseUrl}${item.imgUrl}`"
+                  :src="getImageUrl(item.imgUrl)"
                   :alt="item.title"
                   class="w-full min-h-34.75 md:min-h-63.5 h-auto object-cover"
                 />
@@ -332,13 +332,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch } from 'vue' // 💡 記得引入 computed
 import { useRoute } from 'vue-router'
 import { artistApi, type Artist } from '@/api/artist'
 import { artworkApi, type Artwork } from '@/api/artwork'
 import Button from '@/components/Button.vue'
 
 const baseUrl = import.meta.env.VITE_BASE_URL || '/ART-NFT-Vue-Tailwindcss/'
+
+// 💡 新增一個安全拼接圖片網址的 function
+const getImageUrl = (imgName: string | undefined) => {
+  if (!imgName) return ''
+
+  // 移除 baseUrl 結尾的斜線，以及 imgName 開頭的斜線，再用單個斜線串接
+  const base = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl
+  const name = imgName.startsWith('/') ? imgName.slice(1) : imgName
+
+  return `${base}/${name}`
+}
 
 const route = useRoute()
 const activeTab = ref('art')
