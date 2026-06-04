@@ -8,7 +8,7 @@
           <!-- 💡 圖片改吃 API 動態網址 -->
           <img
             class="w-full h-72 md:h-136.5 object-cover"
-            :src="currentArtwork.imgUrl"
+            :src="getImageUrl(currentArtwork.imgUrl)"
             :alt="currentArtwork.title"
           />
         </div>
@@ -22,7 +22,7 @@
                   <!-- 💡 創作者大頭貼與名字動態化 -->
                   <img
                     class="w-8 h-8 object-cover rounded-full"
-                    :src="currentArtist.img"
+                    :src="getImageUrl(currentArtist.img)"
                     :alt="currentArtist.firstName"
                   />
                   <p>{{ currentArtist.firstName }}</p>
@@ -33,7 +33,7 @@
                 <div class="flex flex-row items-center gap-2">
                   <img
                     class="w-8 h-8 object-cover rounded-full"
-                    src="../../public/user01.jpg"
+                    :src="getImageUrl(currentArtist.img)"
                     alt=""
                   />
                   <i class="fa-solid fa-arrow-right"></i>
@@ -267,7 +267,7 @@
                 class="relative bg-white p-2 md:p-6 border border-gray-200 shadow-sm overflow-hidden"
               >
                 <img
-                  :src="item.imgUrl"
+                  :src="getImageUrl(item.imgUrl)"
                   :alt="item.title"
                   class="w-full h-41 md:h-81.75 object-cover"
                 />
@@ -284,7 +284,10 @@
                         {{ item.price }}
                       </div>
                     </div>
-                    <Button to="/artworkIntroduction" class="mt-auto ml-auto" />
+                    <Button
+                      :to="{ name: 'ArtworkIntroduction', params: { id: item.id } }"
+                      class="mt-auto ml-auto"
+                    />
                   </div>
                 </div>
               </div>
@@ -300,7 +303,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, watch } from 'vue' // ⭕ 補上 watch
+import { useRoute } from 'vue-router'
 import { artistApi, type Artist } from '@/api/artist'
 import { artworkApi, type Artwork } from '@/api/artwork'
 import Button from '@/components/Button.vue'
@@ -312,6 +316,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 
 const modules = [Autoplay, Pagination]
+const route = useRoute()
 
 // 折疊面板狀態
 const isOpenProperty = ref(true)
@@ -324,43 +329,70 @@ const currentArtwork = ref<Artwork | undefined>(undefined)
 const currentArtist = ref<Artist | undefined>(undefined)
 const otherArtworks = ref<Artwork[]>([])
 
-onMounted(async () => {
+// GitHub Pages 或是環境變數路徑
+const baseUrl = import.meta.env.VITE_BASE_URL || '/ART-NFT-Vue-Tailwindcss/'
+
+// 安全拼接圖片網址的 function
+const getImageUrl = (imgName: string | undefined) => {
+  if (!imgName) return ''
+  const base = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl
+  const name = imgName.startsWith('/') ? imgName.slice(1) : imgName
+  return `${base}/${name}`
+}
+
+// 💡 預設的作品 ID（如果網址沒傳，預設看第 1 件）
+const DEFAULT_ARTWORK_ID = '1'
+
+// 💡 核心邏輯：根據作品 ID 撈取所有關聯資料
+const loadPageData = async (artworkId: string) => {
   try {
-    // 1. 同步獲取所有作品資料
-    const artworksData = await artworkApi.getAll()
-    console.log('1. 後端回傳的所有作品清單:', artworksData)
+    // 1. 撈取全部作品資料
+    const allArtworks = await artworkApi.getAll()
 
-    // 💡 防呆調整：如果陣列有資料，就直接抓第一件作品當作當前主角
-    if (artworksData && artworksData.length > 0) {
-      currentArtwork.value = artworksData[0] // 拿資料庫第一件（例如："區塊戀-他的私生活"）
+    // 2. 找到目前點擊的這件作品
+    const foundArtwork = allArtworks.find(art => art.id === artworkId)
 
-      // 💡 剩下的作品（第 2 件到最後一件）全部塞給底下的「其餘作品」Swiper 輪播
-      otherArtworks.value = artworksData.slice(1)
+    if (foundArtwork) {
+      currentArtwork.value = foundArtwork
+
+      // 3. 根據這件作品的 artistId，撈出對應的藝術家資料
+      if (foundArtwork.artistId) {
+        currentArtist.value = await artistApi.getById(foundArtwork.artistId)
+
+        // 4. 同時找出「這位藝術家的其他作品」放在底下的 Swiper 輪播（排除掉當前畫面上這件）
+        otherArtworks.value = allArtworks.filter(
+          art => art.artistId === foundArtwork.artistId && art.id !== artworkId,
+        )
+      }
     } else {
-      console.warn('警告：資料庫中沒有任何藝術品資料！')
+      console.warn(`找不到 ID 為 ${artworkId} 的作品，嘗試載入防呆資料...`)
+      // 防呆：如果找不到該 ID，預設拿第一筆
+      if (allArtworks.length > 0) {
+        currentArtwork.value = allArtworks[0]
+        otherArtworks.value = allArtworks.slice(1)
+        if (allArtworks[0]?.artistId) {
+          currentArtist.value = await artistApi.getById(allArtworks[0].artistId)
+        }
+      }
     }
-
-    // 2. 同步獲取所有藝術家資料
-    const artistsData = await artistApi.getAll()
-    console.log('2. 後端回傳的所有藝術家清單:', artistsData)
-
-    // 💡 尋找創作者 Michael
-    const targetArtist = artistsData.find(a => a.firstName === 'Michael')
-    if (targetArtist) {
-      currentArtist.value = targetArtist
-    } else if (artistsData && artistsData.length > 0) {
-      // 備用防呆：如果找不到 Michael，就先抓第一個藝術家頂替，避免畫面卡死
-      currentArtist.value = artistsData[0]
-    }
-
-    // 3. 最終檢查確認狀態
-    console.log('3. 最終檢查狀態:', {
-      currentArtwork: currentArtwork.value,
-      currentArtist: currentArtist.value,
-      otherArtworksCount: otherArtworks.value.length,
-    })
   } catch (error) {
-    console.error('資料載入失敗，請檢查 JSON Server 是否啟動（Port 3003）：', error)
+    console.error('資料載入失敗:', error)
   }
-})
+}
+
+// 💡 監聽路由變化：當使用者在 Other 區點擊其他作品切換路由時，重新撈資料
+watch(
+  () => route.params.id,
+  newId => {
+    const targetId = (newId as string) || DEFAULT_ARTWORK_ID
+
+    // 清空舊狀態，觸發 Template 的優雅 Skeleton 讀取畫面
+    currentArtwork.value = undefined
+    currentArtist.value = undefined
+    otherArtworks.value = []
+
+    loadPageData(targetId)
+  },
+  { immediate: true }, // 這裡設定 true，元件掛載時（onMounted 階段）就會自動執行第一次
+)
 </script>

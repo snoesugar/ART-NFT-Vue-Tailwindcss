@@ -27,7 +27,10 @@
                   </div>
                 </div>
 
-                <Button class="mt-auto ml-auto" />
+                <Button
+                  :to="{ name: 'ArtworkIntroduction', params: { id: item.id } }"
+                  class="mt-auto ml-auto"
+                />
               </div>
             </div>
           </div>

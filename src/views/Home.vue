@@ -43,7 +43,10 @@
                 {{ artwork.description }}
               </p>
 
-              <Button to="/artworkIntroduction/${artwork.id}" class="self-end mt-auto"></Button>
+              <Button
+                :to="{ name: 'ArtworkIntroduction', params: { id: artwork.id } }"
+                class="self-end mt-auto"
+              ></Button>
             </div>
           </div>
         </div>
@@ -68,7 +71,10 @@
                   {{ artwork.description }}
                 </p>
               </div>
-              <Button class="self-end md:mt-auto"></Button>
+              <Button
+                :to="{ name: 'ArtworkIntroduction', params: { id: artwork.id } }"
+                class="self-end md:mt-auto"
+              ></Button>
             </div>
 
             <div class="w-full md:w-85 h-full shrink-0 border-t border-black md:border-t-0">
@@ -115,7 +121,10 @@
                   <div
                     class="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
                   >
-                    <Button class="ml-auto mt-auto"></Button>
+                    <Button
+                      :to="{ name: 'ArtworkIntroduction', params: { id: artwork.id } }"
+                      class="ml-auto mt-auto"
+                    ></Button>
                   </div>
                 </div>
 
@@ -158,14 +167,15 @@
                   class="w-full h-full object-cover"
                   :alt="artwork.title"
                 />
-                <div
+                <router-link
+                  :to="{ name: 'ArtworkIntroduction', params: { id: artwork.id } }"
                   class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
                 >
                   <span class="text-white text-lg font-black tracking-tighter">MORE</span>
                   <div
                     class="absolute bottom-0 right-0 h-0 w-0 border-8 border-l-transparent border-t-transparent border-b-primary border-r-primary group-hover:border-b-primary group-hover:border-r-primary transition-colors duration-300 ease-in-out"
                   ></div>
-                </div>
+                </router-link>
               </div>
               <div class="flex-1 flex flex-col divide-y divide-black h-full">
                 <div class="p-4 flex-1 flex items-center">
@@ -207,14 +217,15 @@
                   class="w-full h-full object-cover"
                   :alt="artwork.title"
                 />
-                <div
+                <router-link
+                  :to="{ name: 'ArtworkIntroduction', params: { id: artwork.id } }"
                   class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
                 >
                   <span class="text-white text-lg font-black tracking-tighter">MORE</span>
                   <div
                     class="absolute bottom-0 right-0 h-0 w-0 border-8 border-l-transparent border-t-transparent border-b-primary border-r-primary group-hover:border-b-primary group-hover:border-r-primary transition-colors duration-300 ease-in-out"
                   ></div>
-                </div>
+                </router-link>
               </div>
               <div class="flex-1 flex flex-col divide-y divide-black h-full">
                 <div class="p-4 flex-1 flex items-center">
@@ -350,7 +361,10 @@
                       </div>
                     </div>
 
-                    <Button class="mt-auto ml-auto" />
+                    <Button
+                      :to="{ name: 'ArtworkIntroduction', params: { id: item.id } }"
+                      class="mt-auto ml-auto"
+                    />
                   </div>
                 </div>
               </div>
