@@ -158,7 +158,15 @@
                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
-                  <Button :to="'/filter'"></Button>
+                  <Button
+                    :to="{
+                      path: '/filter',
+                      query: {
+                        seriesId: series.id,
+                        artistId: currentArtist?.id,
+                      },
+                    }"
+                  ></Button>
                 </div>
               </div>
 

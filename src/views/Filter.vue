@@ -311,16 +311,16 @@
           <div class="flex flex-row items-center mb-1">
             <img
               class="h-8 w-8 object-cover rounded-full"
-              src="../../public/artist01.jpg"
-              alt="artist01"
+              :src="`/${currentArtist?.img}`"
+              :alt="currentArtist?.name"
             />
-            <span class="ml-4">Michael</span>
+            <span class="ml-4">{{ currentArtist?.name }}</span>
           </div>
           <div class="flex flex-col md:flex-row gap-4 md:gap-6 mb-10">
             <div class="basis-3/5">
-              <h1 class="text-3xl font-bold mb-2">我家外面的鳥</h1>
+              <h1 class="text-3xl font-bold mb-2">{{ currentSeries?.name }}</h1>
               <p>
-                家門前每天都有不同的小鳥，大多數的小鳥都有特殊能力，特殊能力是什麼我就不說了，希望大家能從作品感受到小鳥的快樂。
+                {{ currentSeries?.description }}
               </p>
             </div>
             <div class="basis-2/5">
@@ -359,10 +359,10 @@
             </button>
           </div>
           <!-- 篩選最新上架 -->
-          <div v-if="birdArtworks.length > 0" class="pt-6 md:pt-10 pb-10 md:pb-20">
+          <div v-if="artworks.length > 0" class="pt-6 md:pt-10 pb-10 md:pb-20">
             <div class="columns-2 md:columns-3 gap-6">
               <div
-                v-for="item in birdArtworks"
+                v-for="item in artworks"
                 :key="item.id"
                 class="break-inside-avoid mb-6 cursor-pointer"
               >
@@ -745,19 +745,43 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
-import { nftApi, type Artwork } from '@/api/artist' // 💡 引入 Artist 型別
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import { nftApi, type Artwork } from '@/api/artist'
 import { useLoadingStore } from '@/store/loading'
 import Button from '@/components/Button.vue'
 
-const artworks = ref<Artwork[]>([])
+// 1. 擴充型別定義
+interface ArtistInfo {
+  id: string
+  name: string
+  img: string
+}
 
-// 控制各個風琴下拉選單的開關（按照設計圖：前四個預設打開，後三個預設關閉）
+interface SeriesInfo {
+  id: string
+  name: string
+  description: string
+}
+
+interface FilteredArtwork extends Artwork {
+  seriesId?: string
+  artistInfo?: ArtistInfo
+  seriesInfo?: SeriesInfo
+}
+
+const route = useRoute()
+const artworks = ref<FilteredArtwork[]>([])
+
+// 儲存當前篩選出來的藝術家與系列資訊（用來渲染畫面上方）
+const currentArtist = ref<ArtistInfo | null | undefined>(null)
+const currentSeries = ref<SeriesInfo | null | undefined>(null)
+
+// 控制各個風琴下拉選單的開關
 const isOpenInternet = ref(true)
 const isOpenState = ref(true)
 const isOpenPrice = ref(true)
 const isOpenBreed = ref(true)
-
 const isOpenBirdCount = ref(false)
 const isOpenHasPlants = ref(false)
 const isOpenBirdColor = ref(false)
@@ -766,7 +790,7 @@ const isOpenFilter = ref(false)
 // 資料綁定變數
 const selectedNetworks = ref<string[]>([])
 const selectedState = ref<string[]>([])
-const selectedBreeds = ref<string[]>(['虎皮鸚鵡']) // 依據設計圖，預設勾選虎皮鸚鵡
+const selectedBreeds = ref<string[]>(['虎皮鸚鵡'])
 const selectedBirdCounts = ref<string[]>([])
 const selectedHasPlants = ref<string[]>([])
 const selectedColors = ref<string[]>([])
@@ -777,26 +801,69 @@ const priceMax = ref<number | null>(null)
 
 const { show, hide } = useLoadingStore()
 
-// 建立一個計算屬性，專門用來抓取鳥類
-const birdArtworks = computed(() => {
-  // 假設藝術品物件裡的分類欄位叫做 categories '鳥類'
-  // (請根據你後端實際的 API 欄位名稱修改 'categories')
-  return artworks.value.filter(item => item.categories.includes('bird'))
-})
-
 onMounted(async () => {
   try {
     show()
-    // 🛠️ 1. 改為撈取所有藝術家資料（因為作品現在藏在藝術家物件裡）
+    // 1. 撈取全體藝術家大陣列
     const allArtists = await nftApi.getAllArtists()
 
-    // 🛠️ 2. 使用 flatMap 將每位藝術家底下的 artworks 陣列抽出來，結合成一隻大陣列
-    artworks.value = allArtists.flatMap(artist => {
+    // 2. 攤平資料，並同時「注入」藝術家與系列資訊
+    const allArtworks: FilteredArtwork[] = allArtists.flatMap(artist => {
       const seriesList = artist.artworks || []
-      return seriesList.flatMap(series => series.artworkIds || [])
+
+      // 組合藝術家姓名（firstName + lastName）
+      const artistName = `${artist.firstName} ${artist.lastName}`.trim()
+
+      return seriesList.flatMap(series => {
+        const artworkList = series.artworkIds || []
+        return artworkList.map(art => ({
+          ...art,
+          seriesId: series.id,
+          // 💡 注入藝術家資訊
+          artistInfo: {
+            id: artist.id,
+            name: artistName,
+            img: artist.img,
+          },
+          // 💡 注入系列資訊
+          seriesInfo: {
+            id: series.id,
+            name: series.name,
+            description: series.description,
+          },
+        }))
+      })
     })
+
+    // 3. 檢查網址有沒有帶 seriesId 參數
+    const targetSeriesId = route.query.seriesId as string
+    const targetArtistId = route.query.artistId as string // 💡 多接這個參數
+
+    if (targetSeriesId) {
+      // 🎯 雙重比對：不但系列 ID 要對，藝術家 ID 也要對！
+      const filtered = allArtworks.filter(art => {
+        // 如果網址有帶 artistId，就進行雙重比對；沒帶就只比對 seriesId (相容舊寫法)
+        if (targetArtistId) {
+          return art.seriesId === targetSeriesId && art.artistInfo?.id === targetArtistId
+        }
+        return art.seriesId === targetSeriesId
+      })
+
+      artworks.value = filtered
+
+      // 撈出精準的藝術家與系列資訊
+      if (filtered.length > 0) {
+        currentArtist.value = filtered[0]?.artistInfo || null
+        currentSeries.value = filtered[0]?.seriesInfo || null
+      }
+    } else {
+      // 預防機制
+      artworks.value = allArtworks
+      currentArtist.value = null
+      currentSeries.value = null
+    }
   } catch (error) {
-    console.error('首頁獲取藝術品失敗:', error)
+    console.error('Filter 頁面載入失敗:', error)
   } finally {
     hide()
   }
