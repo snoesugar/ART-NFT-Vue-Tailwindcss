@@ -248,7 +248,7 @@
       "price": 200,
       "description": "看著水裡游得自由自在的魚，\n才驚覺自己才是那個被生活困在魚缸裡的人。",
       "imgUrl": "art07.jpg",
-      "categories": ["animal", "all"],
+      "categories": ["animal", "fish", "all"],
       "markets": {
         "marketCap": "642.18",
         "change24h": 5.88,
@@ -267,7 +267,7 @@
       "price": 200,
       "description": "在主子踩上鍵盤之前，\n你永遠不知道它下一秒要刪掉你哪份報告。",
       "imgUrl": "art08.jpg",
-      "categories": ["animal", "all"],
+      "categories": ["animal", "cat", "all"],
       "markets": {
         "marketCap": "770.23",
         "change24h": 23.49,
@@ -495,7 +495,7 @@
       "price": 300,
       "description": "我們在同一個枝頭看著天空，\n心裡卻想著各自要飛往的遠方。",
       "imgUrl": "art20.jpg",
-      "categories": ["bird", "all"],
+      "categories": ["animal", "bird", "all"],
       "markets": {
         "marketCap": "1,180.25",
         "change24h": 2.14,
@@ -514,7 +514,7 @@
       "price": 300,
       "description": "禁果不是她摘的，\n但罪名往往留給最美的人。",
       "imgUrl": "art21.jpg",
-      "categories": ["bird", "all"],
+      "categories": ["animal", "bird", "all"],
       "markets": {
         "marketCap": "1,205.50",
         "change24h": 25.6,
@@ -533,7 +533,7 @@
       "price": 150,
       "description": "把憂鬱倒進杯子裡，\n今晚我們在泡沫裡滅頂。",
       "imgUrl": "art22.jpg",
-      "categories": ["bird", "all"],
+      "categories": ["animal", "bird", "all"],
       "markets": {
         "marketCap": "530.12",
         "change24h": -3.45,
@@ -552,7 +552,7 @@
       "price": 200,
       "description": "如果悲傷可以變現，\n我早已是這座城市最富有的人。",
       "imgUrl": "art23.jpg",
-      "categories": ["bird", "all"],
+      "categories": ["animal", "bird", "all"],
       "markets": {
         "marketCap": "980.66",
         "change24h": 11.52,
@@ -571,7 +571,7 @@
       "price": 200,
       "description": "這句話跟「下次約吃飯」一樣，\n都是當代最大的謊言。",
       "imgUrl": "art24.jpg",
-      "categories": ["bird", "all"],
+      "categories": ["animal", "bird", "all"],
       "markets": {
         "marketCap": "890.11",
         "change24h": -14.2,
@@ -590,7 +590,7 @@
       "price": 200,
       "description": "在被世界觀看之前，\n我早就對鏡子彩排了無數次。",
       "imgUrl": "art25.jpg",
-      "categories": ["bird", "all"],
+      "categories": ["animal", "bird", "all"],
       "markets": {
         "marketCap": "915.30",
         "change24h": 4.75,
@@ -609,7 +609,7 @@
       "price": 150,
       "description": "站在枝頭看著早上的陽光，\n心裡第一百次思考離職的可能。",
       "imgUrl": "art26.jpg",
-      "categories": ["bird", "all"],
+      "categories": ["animal", "bird", "all"],
       "markets": {
         "marketCap": "580.40",
         "change24h": -6.18,
@@ -628,7 +628,7 @@
       "price": 200,
       "description": "不是心碎的聲音，\n值到期待再次被摔碎的鈍痛。",
       "imgUrl": "art27.jpg",
-      "categories": ["bird", "all"],
+      "categories": ["animal", "bird", "all"],
       "markets": {
         "marketCap": "720.90",
         "change24h": 45.32,

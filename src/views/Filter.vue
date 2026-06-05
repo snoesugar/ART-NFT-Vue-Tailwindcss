@@ -362,7 +362,7 @@
           <div class="pt-6 md:pt-10 pb-10 md:pb-20">
             <div class="columns-2 md:columns-3 gap-6">
               <div
-                v-for="item in ArtworkBird"
+                v-for="item in birdArtworks"
                 :key="item.id"
                 class="break-inside-avoid mb-6 cursor-pointer"
               >
@@ -390,7 +390,10 @@
                         </div>
                       </div>
 
-                      <Button to="/artworkIntroduction" class="mt-auto ml-auto" />
+                      <Button
+                        :to="{ name: 'ArtworkIntroduction', params: { id: item.id } }"
+                        class="mt-auto ml-auto"
+                      />
                     </div>
                   </div>
                 </div>
@@ -742,11 +745,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { artworksBirdData } from '@/data/artworks'
+import { ref, onMounted, computed } from 'vue'
+import { artworkApi, type Artwork } from '@/api/artwork'
 import Button from '@/components/Button.vue'
 
-const ArtworkBird = ref(artworksBirdData)
+const artworks = ref<Artwork[]>([])
 
 // 控制各個風琴下拉選單的開關（按照設計圖：前四個預設打開，後三個預設關閉）
 const isOpenInternet = ref(true)
@@ -770,4 +773,20 @@ const selectedColors = ref<string[]>([])
 const priceCurrency = ref('ETH')
 const priceMin = ref<number | null>(null)
 const priceMax = ref<number | null>(null)
+
+// 建立一個計算屬性，專門用來抓取鳥類
+const birdArtworks = computed(() => {
+  // 假設藝術品物件裡的分類欄位叫做 categories '鳥類'
+  // (請根據你後端實際的 API 欄位名稱修改 'categories')
+  return artworks.value.filter(item => item.categories.includes('bird'))
+})
+
+onMounted(async () => {
+  try {
+    const data = await artworkApi.getAll()
+    artworks.value = data
+  } catch (error) {
+    console.error('首頁獲取藝術品失敗:', error)
+  }
+})
 </script>
