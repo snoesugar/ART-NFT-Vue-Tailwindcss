@@ -1,9 +1,12 @@
 <template>
   <div class="bg-primary-bg">
-    <div class="container text-center px-3 md:px-8 pt-6 md:pt-10 pb-10 md:pb-20">
+    <div
+      v-if="artists.length > 0"
+      class="container text-center px-3 md:px-8 pt-6 md:pt-10 pb-10 md:pb-20"
+    >
       <h1 class="text-3xl md:text-5xl font-bold mb-4 md:mb-6">市價排行榜</h1>
       <p class="font-display mb-8 md:mb-6">NFT系列藝術作品排行榜！全球注目指標</p>
-      <!-- 電腦版 -->
+
       <div class="hidden md:block">
         <table class="w-full border-collapse border-b border-black text-left">
           <thead>
@@ -31,7 +34,7 @@
               <td class="p-4">
                 <div class="flex items-center gap-4">
                   <img
-                    :src="item.imgUrl"
+                    :src="getImageUrl(item.imgUrl)"
                     class="w-12 h-12 rounded-full object-cover"
                     :alt="item.title"
                   />
@@ -96,7 +99,7 @@
 
             <div class="flex items-center gap-3 px-2 py-4 flex-1">
               <img
-                :src="item.imgUrl"
+                :src="getImageUrl(item.imgUrl)"
                 class="w-12 h-12 rounded-full object-cover"
                 :alt="item.title"
               />
@@ -119,7 +122,6 @@
             </div>
           </div>
 
-          <!-- 下拉式資訊 -->
           <div v-show="item.markets.isOpen" class="border-t bg-white p-4 transition-all">
             <div class="grid grid-cols-3 gap-2 text-center mb-4">
               <div>
@@ -168,9 +170,21 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { nftApi, type Artist, type Artwork } from '@/api/artist'
+import { useLoadingStore } from '@/store/loading'
+
+const baseUrl = import.meta.env.VITE_BASE_URL || '/ART-NFT-Vue-Tailwindcss/'
+
+// 💡 6. 加上安全拼接圖片網址的 function
+const getImageUrl = (imgName: string | undefined) => {
+  if (!imgName) return ''
+  const base = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl
+  const name = imgName.startsWith('/') ? imgName.slice(1) : imgName
+  return `${base}/${name}`
+}
 
 // 1. 原始資料：用來存放從 API 撈回來的藝術家大陣列
 const artists = ref<Artist[]>([])
+const { show, hide } = useLoadingStore()
 
 // 2. 第一層加工 computed：把巢狀資料攤平，並補上安全防禦機制與開關狀態
 const allArtworks = computed(() => {
@@ -178,7 +192,7 @@ const allArtworks = computed(() => {
     const artworkList = artist.artworks || []
     return artworkList.map((artwork: Artwork) => ({
       ...artwork,
-      // 🌟 強制建立 markets 物件結構，防禦 undefined，並注入手機版專用的 isOpen 狀態
+      // 強制建立 markets 物件結構，防禦 undefined，並注入手機版專用的 isOpen 狀態
       markets: {
         marketCap: artwork.markets?.marketCap ?? '0',
         change24h: artwork.markets?.change24h ?? 0,
@@ -187,27 +201,29 @@ const allArtworks = computed(() => {
         hasIcon: artwork.markets?.hasIcon ?? false,
         owners: artwork.markets?.owners ?? '0',
         totalSupply: artwork.markets?.totalSupply ?? '0',
-        isOpen: artwork.markets?.isOpen ?? false, // 預設關閉
+        isOpen: false, // 預設關閉
       },
     }))
   })
 })
 
-// 3. 第二層加工 computed：盯著攤平後的資料，只切出前 10 筆給畫面渲染 🌟
+// 3. 第二層加工 computed：只切出前 10 筆給畫面渲染
 const topTenArtworks = computed(() => {
   return allArtworks.value.slice(0, 10)
 })
 
 onMounted(async () => {
   try {
-    // 🛠️ 關鍵改動：改為撈取「所有藝術家」，因為作品現在藏在裡面
+    show() //3. 發送 API 前，開啟全螢幕 Loading
+    // 撈取「所有藝術家」，因為作品現在藏在裡面
     const data = await nftApi.getAllArtists()
     artists.value = data
 
-    // 除錯檢查用
     console.log('成功撈取藝術家並由 computed 自動攤平作品：', topTenArtworks.value)
   } catch (error) {
     console.error('排行榜獲取資料失敗:', error)
+  } finally {
+    hide() // 💡 4. 無論成功或失敗，結束時關閉 Loading
   }
 })
 </script>

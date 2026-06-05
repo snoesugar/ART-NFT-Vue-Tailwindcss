@@ -352,6 +352,7 @@
 import { ref, onMounted, computed } from 'vue'
 import { nftApi, type Artist, type Artwork } from '@/api/artist' // 💡 請根據你實際的檔案路徑微調
 import { stepApi, type Step } from '@/api/steps'
+import { useLoadingStore } from '@/store/loading'
 import Button from '@/components/Button.vue'
 
 import { Swiper, SwiperSlide } from 'swiper/vue'
@@ -368,6 +369,7 @@ interface ArtworkWithName extends Artwork {
 const artists = ref<Artist[]>([])
 const artworks = ref<ArtworkWithName[]>([]) // 💡 直接改用帶有名字的型別
 const steps = ref<Step[]>([])
+const { show, hide } = useLoadingStore()
 
 const modules = [Autoplay, Pagination]
 
@@ -391,6 +393,7 @@ const rankingArtworks4to6 = computed(() => rankings.value.fourToSix)
 
 onMounted(async () => {
   try {
+    show()
     // 1. 獲取所有藝術家資料
     const allArtists = await nftApi.getAllArtists()
     artists.value = allArtists
@@ -407,13 +410,14 @@ onMounted(async () => {
   } catch (error) {
     console.error('首頁獲取藝術家與作品失敗:', error)
   }
-
   // 3. 獲取步驟流程
   try {
     const data = await stepApi.getAll()
     steps.value = data
   } catch (error) {
     console.error('首頁獲取步驟失敗:', error)
+  } finally {
+    hide()
   }
 })
 </script>

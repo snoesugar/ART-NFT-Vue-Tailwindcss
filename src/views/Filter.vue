@@ -359,7 +359,7 @@
             </button>
           </div>
           <!-- 篩選最新上架 -->
-          <div class="pt-6 md:pt-10 pb-10 md:pb-20">
+          <div v-if="birdArtworks.length > 0" class="pt-6 md:pt-10 pb-10 md:pb-20">
             <div class="columns-2 md:columns-3 gap-6">
               <div
                 v-for="item in birdArtworks"
@@ -747,6 +747,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { nftApi, type Artwork } from '@/api/artist' // 💡 引入 Artist 型別
+import { useLoadingStore } from '@/store/loading'
 import Button from '@/components/Button.vue'
 
 const artworks = ref<Artwork[]>([])
@@ -774,6 +775,8 @@ const priceCurrency = ref('ETH')
 const priceMin = ref<number | null>(null)
 const priceMax = ref<number | null>(null)
 
+const { show, hide } = useLoadingStore()
+
 // 建立一個計算屬性，專門用來抓取鳥類
 const birdArtworks = computed(() => {
   // 假設藝術品物件裡的分類欄位叫做 categories '鳥類'
@@ -783,6 +786,7 @@ const birdArtworks = computed(() => {
 
 onMounted(async () => {
   try {
+    show()
     // 🛠️ 1. 改為撈取所有藝術家資料（因為作品現在藏在藝術家物件裡）
     const allArtists = await nftApi.getAllArtists()
 
@@ -792,6 +796,8 @@ onMounted(async () => {
     })
   } catch (error) {
     console.error('首頁獲取藝術品失敗:', error)
+  } finally {
+    hide()
   }
 })
 </script>

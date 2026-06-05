@@ -76,23 +76,6 @@
           </div>
         </div>
       </div>
-
-      <!-- 💡 資料載入中的骨架屏或提示（選填，體驗更好） -->
-      <div v-else class="flex flex-col items-center justify-center py-20 min-h-75">
-        <div class="relative flex items-center justify-center mb-6">
-          <div class="absolute w-12 h-12 bg-secondary rounded-full animate-ping"></div>
-          <div
-            class="relative w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-lg shadow-indigo-500/50"
-          >
-            <div class="w-3 h-3 bg-white rounded-full animate-pulse"></div>
-          </div>
-        </div>
-
-        <p class="text-sm tracking-widest text-border font-medium uppercase animate-pulse">
-          Connecting with Blockchain Artist
-        </p>
-        <p class="text-xs text-secondary mt-1 tracking-wider">正在與區塊鏈藝術家連線中...</p>
-      </div>
     </div>
 
     <!-- 藝術家作品 -->
@@ -350,6 +333,7 @@
 import { ref, watch } from 'vue' // ⭕ 拿掉沒用到的 onMounted
 import { useRoute } from 'vue-router'
 import { nftApi, type Artist, type Artwork } from '@/api/artist' // 💡 統一改從全新的 api/artist 引入
+import { useLoadingStore } from '@/store/loading'
 import Button from '@/components/Button.vue'
 
 const baseUrl = import.meta.env.VITE_BASE_URL || '/ART-NFT-Vue-Tailwindcss/'
@@ -367,6 +351,7 @@ const activeTab = ref('art')
 
 const currentArtist = ref<Artist | null>(null)
 const artworks = ref<Artwork[]>([])
+const { show, hide } = useLoadingStore()
 
 // 💡 預設的藝術家 ID（如果網址沒傳，預設看第一位）
 const DEFAULT_ARTIST_ID = 'qtwvbe'
@@ -374,6 +359,7 @@ const DEFAULT_ARTIST_ID = 'qtwvbe'
 // 🛠️ 核心邏輯：從新的巢狀結構中抓取對應藝術家與其作品
 const fetchArtistData = async (artistId: string) => {
   try {
+    show()
     // 1. 一口氣撈取所有藝術家大陣列
     const allArtists = await nftApi.getAllArtists()
 
@@ -395,6 +381,8 @@ const fetchArtistData = async (artistId: string) => {
     }
   } catch (error) {
     console.error('切換藝術家資料失敗:', error)
+  } finally {
+    hide() // 💡 4. 無論成功或失敗，結束時關閉 Loading
   }
 }
 
