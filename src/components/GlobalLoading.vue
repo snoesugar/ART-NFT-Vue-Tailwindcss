@@ -2,7 +2,7 @@
   <Transition name="fade">
     <div
       v-if="isLoading"
-      class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-primary-bg bg-opacity-95 backdrop-blur-sm select-none pointer-events-auto"
+      class="fixed inset-0 z-9999 flex flex-col items-center justify-center bg-primary-bg bg-opacity-95 backdrop-blur-sm select-none pointer-events-auto"
     >
       <div
         class="relative p-8 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col items-center max-w-xs w-full mx-4"
