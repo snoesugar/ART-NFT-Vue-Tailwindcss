@@ -808,152 +808,150 @@
             "isOpen": false
           }
         },
-        [
-          {
-            "id": "art-041",
-            "title": "人生好難，線條更亂",
-            "price": 180,
-            "description": "在生活裡拼命理清思緒，\n最後發現自己只是在原地加班。",
-            "imgUrl": "art41.jpg",
-            "categories": ["abstract", "all"],
-            "markets": {
-              "marketCap": "620.50",
-              "change24h": 2.15,
-              "change7d": -5.34,
-              "floorPrice": "1.65",
-              "hasIcon": true,
-              "owners": "14.2K",
-              "totalSupply": "1200",
-              "isOpen": true
-            }
-          },
-          {
-            "id": "art-042",
-            "title": "週一到週五的漸層崩潰",
-            "price": 160,
-            "description": "只要熬夜加班到理智模糊，\n就分不清流出來的是眼淚還是色彩。",
-            "imgUrl": "art42.jpg",
-            "categories": ["abstract", "all"],
-            "markets": {
-              "marketCap": "510.20",
-              "change24h": -1.45,
-              "change7d": -12.18,
-              "floorPrice": "1.20",
-              "hasIcon": true,
-              "owners": "11.8K",
-              "totalSupply": "1200",
-              "isOpen": false
-            }
-          },
-          {
-            "id": "art-043",
-            "title": "集體趕著打卡的我們",
-            "price": 150,
-            "description": "幾隻鳥在空中亂飛，\n像極了早上 8 點 59 分卡在電梯口、為了全勤獎金拼命的我們。",
-            "imgUrl": "art43.jpg",
-            "categories": ["bird", "all"],
-            "markets": {
-              "marketCap": "590.00",
-              "change24h": -3.22,
-              "change7d": -15.6,
-              "floorPrice": "1.35",
-              "hasIcon": true,
-              "owners": "13.1K",
-              "totalSupply": "1200",
-              "isOpen": false
-            }
-          },
-          {
-            "id": "art-044",
-            "title": "孤獨的考核期",
-            "price": 145,
-            "description": "一個人（鳥）默默待在枝頭。別問我在幹嘛，\n我只是在等主管下班，好讓我可以光明正大走人。",
-            "imgUrl": "art44.jpg",
-            "categories": ["bird", "all"],
-            "markets": {
-              "marketCap": "480.15",
-              "change24h": 0.88,
-              "change7d": -9.45,
-              "floorPrice": "1.10",
-              "hasIcon": true,
-              "owners": "9.5K",
-              "totalSupply": "1200",
-              "isOpen": true
-            }
-          },
-          {
-            "id": "art-045",
-            "title": "主管在背後看著你",
-            "price": 165,
-            "description": "遠遠的那隻鳥一直盯著這邊看。\n別裝了，趕快把分頁切換回 Excel，他走過來了。",
-            "imgUrl": "art45.jpg",
-            "categories": ["bird", "all"],
-            "markets": {
-              "marketCap": "610.80",
-              "change24h": -5.12,
-              "change7d": -19.3,
-              "floorPrice": "1.50",
-              "hasIcon": true,
-              "owners": "15.0K",
-              "totalSupply": "1200",
-              "isOpen": false
-            }
-          },
-          {
-            "id": "art-046",
-            "title": "職場小圈圈",
-            "price": 155,
-            "description": "三五成群聚在樹枝上。\n通常這個畫面出現時，不是在聊八卦，就是在團購下午茶。",
-            "imgUrl": "art46.jpg",
-            "categories": ["bird", "all"],
-            "markets": {
-              "marketCap": "560.30",
-              "change24h": 1.24,
-              "change7d": -7.85,
-              "floorPrice": "1.30",
-              "hasIcon": true,
-              "owners": "12.4K",
-              "totalSupply": "1200",
-              "isOpen": true
-            }
-          },
-          {
-            "id": "art-047",
-            "title": "被切割的特休假",
-            "price": 170,
-            "description": "密密麻麻的幾何圖形，\n就像我今年被拆成無數個半天、一小時來請的特休，拼都拼不完整。",
-            "imgUrl": "art47.jpg",
-            "categories": ["abstract", "all"],
-            "markets": {
-              "marketCap": "640.00",
-              "change24h": -2.8,
-              "change7d": -11.12,
-              "floorPrice": "1.70",
-              "hasIcon": true,
-              "owners": "16.2K",
-              "totalSupply": "1200",
-              "isOpen": false
-            }
-          },
-          {
-            "id": "art-048",
-            "title": "我的精神狀態",
-            "price": 175,
-            "description": "狂亂的彩色線條、毫无章法的塗鴉。\n不用懷疑，這就是星期五下午被客戶改了十次稿後的精神狀態。",
-            "imgUrl": "art48.jpg",
-            "categories": ["abstract", "all"],
-            "markets": {
-              "marketCap": "670.40",
-              "change24h": 4.56,
-              "change7d": 2.15,
-              "floorPrice": "1.85",
-              "hasIcon": true,
-              "owners": "17.5K",
-              "totalSupply": "1200",
-              "isOpen": true
-            }
+        {
+          "id": "art-041",
+          "title": "人生好難，線條更亂",
+          "price": 180,
+          "description": "在生活裡拼命理清思緒，\n最後發現自己只是在原地加班。",
+          "imgUrl": "art41.jpg",
+          "categories": ["abstract", "all"],
+          "markets": {
+            "marketCap": "620.50",
+            "change24h": 2.15,
+            "change7d": -5.34,
+            "floorPrice": "1.65",
+            "hasIcon": true,
+            "owners": "14.2K",
+            "totalSupply": "1200",
+            "isOpen": true
           }
-        ]
+        },
+        {
+          "id": "art-042",
+          "title": "週一到週五的漸層崩潰",
+          "price": 160,
+          "description": "只要熬夜加班到理智模糊，\n就分不清流出來的是眼淚還是色彩。",
+          "imgUrl": "art42.jpg",
+          "categories": ["abstract", "all"],
+          "markets": {
+            "marketCap": "510.20",
+            "change24h": -1.45,
+            "change7d": -12.18,
+            "floorPrice": "1.20",
+            "hasIcon": true,
+            "owners": "11.8K",
+            "totalSupply": "1200",
+            "isOpen": false
+          }
+        },
+        {
+          "id": "art-043",
+          "title": "集體趕著打卡的我們",
+          "price": 150,
+          "description": "幾隻鳥在空中亂飛，\n像極了早上 8 點 59 分卡在電梯口、為了全勤獎金拼命的我們。",
+          "imgUrl": "art43.jpg",
+          "categories": ["bird", "all"],
+          "markets": {
+            "marketCap": "590.00",
+            "change24h": -3.22,
+            "change7d": -15.6,
+            "floorPrice": "1.35",
+            "hasIcon": true,
+            "owners": "13.1K",
+            "totalSupply": "1200",
+            "isOpen": false
+          }
+        },
+        {
+          "id": "art-044",
+          "title": "孤獨的考核期",
+          "price": 145,
+          "description": "一個人（鳥）默默待在枝頭。別問我在幹嘛，\n我只是在等主管下班，好讓我可以光明正大走人。",
+          "imgUrl": "art44.jpg",
+          "categories": ["bird", "all"],
+          "markets": {
+            "marketCap": "480.15",
+            "change24h": 0.88,
+            "change7d": -9.45,
+            "floorPrice": "1.10",
+            "hasIcon": true,
+            "owners": "9.5K",
+            "totalSupply": "1200",
+            "isOpen": true
+          }
+        },
+        {
+          "id": "art-045",
+          "title": "主管在背後看著你",
+          "price": 165,
+          "description": "遠遠的那隻鳥一直盯著這邊看。\n別裝了，趕快把分頁切換回 Excel，他走過來了。",
+          "imgUrl": "art45.jpg",
+          "categories": ["bird", "all"],
+          "markets": {
+            "marketCap": "610.80",
+            "change24h": -5.12,
+            "change7d": -19.3,
+            "floorPrice": "1.50",
+            "hasIcon": true,
+            "owners": "15.0K",
+            "totalSupply": "1200",
+            "isOpen": false
+          }
+        },
+        {
+          "id": "art-046",
+          "title": "職場小圈圈",
+          "price": 155,
+          "description": "三五成群聚在樹枝上。\n通常這個畫面出現時，不是在聊八卦，就是在團購下午茶。",
+          "imgUrl": "art46.jpg",
+          "categories": ["bird", "all"],
+          "markets": {
+            "marketCap": "560.30",
+            "change24h": 1.24,
+            "change7d": -7.85,
+            "floorPrice": "1.30",
+            "hasIcon": true,
+            "owners": "12.4K",
+            "totalSupply": "1200",
+            "isOpen": true
+          }
+        },
+        {
+          "id": "art-047",
+          "title": "被切割的特休假",
+          "price": 170,
+          "description": "密密麻麻的幾何圖形，\n就像我今年被拆成無數個半天、一小時來請的特休，拼都拼不完整。",
+          "imgUrl": "art47.jpg",
+          "categories": ["abstract", "all"],
+          "markets": {
+            "marketCap": "640.00",
+            "change24h": -2.8,
+            "change7d": -11.12,
+            "floorPrice": "1.70",
+            "hasIcon": true,
+            "owners": "16.2K",
+            "totalSupply": "1200",
+            "isOpen": false
+          }
+        },
+        {
+          "id": "art-048",
+          "title": "我的精神狀態",
+          "price": 175,
+          "description": "狂亂的彩色線條、毫无章法的塗鴉。\n不用懷疑，這就是星期五下午被客戶改了十次稿後的精神狀態。",
+          "imgUrl": "art48.jpg",
+          "categories": ["abstract", "all"],
+          "markets": {
+            "marketCap": "670.40",
+            "change24h": 4.56,
+            "change7d": 2.15,
+            "floorPrice": "1.85",
+            "hasIcon": true,
+            "owners": "17.5K",
+            "totalSupply": "1200",
+            "isOpen": true
+          }
+        }
       ]
     }
   ],
