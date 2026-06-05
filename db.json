@@ -5,7 +5,7 @@
       "firstName": "Antony",
       "lastName": "Wu",
       "walletAddress": "0x1ab234...77cd",
-      "img": "artist01.jpg",
+      "img": "artist02.jpg",
       "desc": "深受東方寫意影響，擅長將山水宏觀景象轉化為當代的抽象線條。",
       "description": "Antony 自幼浸淫於傳統水墨與古典哲學之中，對東方美學中的「留白」與「氣韻」有著深刻體悟。他打破了傳統具象山水的框架，將巍峨的宏觀意象抽離、凝練成當代的抽象線條。在他的畫布上，運筆如同呼吸般自然流淌，不僅僅是描繪自然風景，更是試圖在喧囂的現代社會中，為觀者建構一處安頓心靈、靜謐深遠的精神山水。",
       "marketStats": {
@@ -17,7 +17,7 @@
       },
       "artworks": [
         {
-          "id": "vjzxlk",
+          "id": "art-001",
           "title": "瞳孔:流動的脈絡",
           "price": 300,
           "description": "眼睛，總是吸引著我們的注意力，\n看、被看，也許眼睛裡有著從另一個世界看我們的世界。",
@@ -35,97 +35,7 @@
           }
         },
         {
-          "id": "wpqmbs",
-          "title": "沉思者的星期一",
-          "price": 200,
-          "description": "外表看起來在探討存在的本質，\n內心其實只是在想午餐要吃什麼。",
-          "imgUrl": "art05.jpg",
-          "categories": ["classic", "all"],
-          "markets": {
-            "marketCap": "1,105.42",
-            "change24h": -4.15,
-            "change7d": 14.82,
-            "floorPrice": "2.10",
-            "hasIcon": false,
-            "owners": "24.2K",
-            "totalSupply": "1000",
-            "isOpen": true
-          }
-        },
-        {
-          "id": "lrygcn",
-          "title": "夏天的時候",
-          "price": 200,
-          "description": "明知道那陣風吹完就走，\n我還是把襯衫扣子多解開了兩顆。",
-          "imgUrl": "art06.jpg",
-          "categories": ["nature", "all"],
-          "markets": {
-            "marketCap": "1,524.89",
-            "change24h": 80.49,
-            "change7d": -2.43,
-            "floorPrice": "90.23",
-            "hasIcon": false,
-            "owners": "32.1K",
-            "totalSupply": "1000",
-            "isOpen": false
-          }
-        },
-        {
-          "id": "xtwzjd",
-          "title": "摸魚的最高境界",
-          "price": 200,
-          "description": "看著水裡游得自由自在的魚，\n才驚覺自己才是那個被生活困在魚缸裡的人。",
-          "imgUrl": "art07.jpg",
-          "categories": ["animal", "all"],
-          "markets": {
-            "marketCap": "642.18",
-            "change24h": 5.88,
-            "change7d": -8.11,
-            "floorPrice": "1.50",
-            "hasIcon": true,
-            "owners": "15.4K",
-            "totalSupply": "800",
-            "isOpen": false
-          }
-        },
-        {
-          "id": "hfvbks",
-          "title": "人生中的貓咪們",
-          "price": 200,
-          "description": "在主子踩上鍵盤之前，\n你永遠不知道它下一秒要刪掉你哪份報告。",
-          "imgUrl": "art08.jpg",
-          "categories": ["animal", "all"],
-          "markets": {
-            "marketCap": "770.23",
-            "change24h": 23.49,
-            "change7d": 30.23,
-            "floorPrice": "2.90",
-            "hasIcon": true,
-            "owners": "32.1K",
-            "totalSupply": "1000",
-            "isOpen": false
-          }
-        }
-      ]
-    },
-    {
-      "id": "mxpkzr",
-      "firstName": "Michael",
-      "lastName": "Chang",
-      "walletAddress": "0x3ya666...88ef",
-      "img": "artist02.jpg",
-      "desc": "捕捉日常窗前的飛鳥與光影，作品散發細細品味生活片刻的純粹與快樂。",
-      "description": "Michael自小在山林長大，能夠與花草樹木大自然進行靈體溝通，創作題材常見大山、大水、花草與樹木，從日常生活出發，擁有個⼈獨樹⼀格的創作風格，作品觸及靈魂深處、探索未知宇宙，透過與大自然的溝通，探討著存在的本質。​",
-      "marketStats": {
-        "status": "販售中",
-        "itemCount": 168,
-        "floorPrice": { "value": 0.6, "currency": "ETH" },
-        "volume7d": { "value": 8.8, "currency": "ETH" },
-        "volume30d": { "value": 23.1, "currency": "ETH" }
-      },
-      "artworks": [
-        {
-          "id": "kjuwqt",
+          "id": "art-002",
           "title": "海洋波度",
           "price": 300,
           "description": "海洋的奧秘向我們揭示了深不可測的一面，\n它的深度——反映了我們的恐懼、同時也吸引著我們。",
@@ -143,43 +53,7 @@
           }
         },
         {
-          "id": "pmzxlr",
-          "title": "十分鐘就到",
-          "price": 200,
-          "description": "這句話跟「下次約吃飯」一樣，\n都是當代最大的謊言。",
-          "imgUrl": "art03.jpg",
-          "categories": ["nature", "all"],
-          "markets": {
-            "marketCap": "1,224.88",
-            "change24h": -9.23,
-            "change7d": -20.43,
-            "floorPrice": "2.90",
-            "hasIcon": true,
-            "owners": "32.1K",
-            "totalSupply": "1000",
-            "isOpen": true
-          }
-        },
-        {
-          "id": "bnywsk",
-          "title": "我這樣有美嗎",
-          "price": 200,
-          "description": "在被世界觀看之前，\n我早就對鏡子彩排了無數次。",
-          "imgUrl": "art04.jpg",
-          "categories": ["classic", "all"],
-          "markets": {
-            "marketCap": "954.12",
-            "change24h": 12.34,
-            "change7d": 5.67,
-            "floorPrice": "1.80",
-            "hasIcon": true,
-            "owners": "18.5K",
-            "totalSupply": "1200",
-            "isOpen": false
-          }
-        },
-        {
-          "id": "qazwsx",
+          "id": "art-009",
           "title": "區塊戀-他的私生活",
           "price": 300,
           "description": "唯一想擁有的人，\n唯一不可以擁有的。",
@@ -197,7 +71,61 @@
           }
         },
         {
-          "id": "edcrfv",
+          "id": "art-016",
+          "title": "柔美的細胞小將",
+          "price": 200,
+          "description": "體內的理性細胞早就全數陣亡，\n現在掌管大腦的是「想太多」和「算了」。",
+          "imgUrl": "art16.jpg",
+          "categories": ["abstract", "all"],
+          "markets": {
+            "marketCap": "420.20",
+            "change24h": 54.49,
+            "change7d": -12.43,
+            "floorPrice": "2.90",
+            "hasIcon": true,
+            "owners": "32.1K",
+            "totalSupply": "1000",
+            "isOpen": false
+          }
+        },
+        {
+          "id": "art-005",
+          "title": "沉思者的星期一",
+          "price": 200,
+          "description": "外表看起來在探討存在的本質，\n內心其實只是在想午餐要吃什麼。",
+          "imgUrl": "art05.jpg",
+          "categories": ["classic", "all"],
+          "markets": {
+            "marketCap": "1,105.42",
+            "change24h": -4.15,
+            "change7d": 14.82,
+            "floorPrice": "2.10",
+            "hasIcon": false,
+            "owners": "24.2K",
+            "totalSupply": "1000",
+            "isOpen": true
+          }
+        },
+        {
+          "id": "art-004",
+          "title": "我這樣有美嗎",
+          "price": 200,
+          "description": "在被世界觀看之前，\n我早就對鏡子彩排了無數次。",
+          "imgUrl": "art04.jpg",
+          "categories": ["classic", "all"],
+          "markets": {
+            "marketCap": "954.12",
+            "change24h": 12.34,
+            "change7d": 5.67,
+            "floorPrice": "1.80",
+            "hasIcon": true,
+            "owners": "18.5K",
+            "totalSupply": "1200",
+            "isOpen": false
+          }
+        },
+        {
+          "id": "art-010",
           "title": "夏娃的醜聞",
           "price": 300,
           "description": "禁果不是她摘的，\n但罪名往往留給最美的人。",
@@ -215,7 +143,7 @@
           }
         },
         {
-          "id": "tgbyhn",
+          "id": "art-011",
           "title": "沒有人愛我",
           "price": 500,
           "description": "孤獨是神話，\n也是現代靈魂唯一的奢侈品。",
@@ -233,7 +161,7 @@
           }
         },
         {
-          "id": "ujmiko",
+          "id": "art-012",
           "title": "不哭不哭眼淚是珍珠",
           "price": 200,
           "description": "如果悲傷可以變現，\n我早已是這座城市最富有的人。",
@@ -249,14 +177,140 @@
             "totalSupply": "1000",
             "isOpen": false
           }
+        }
+      ]
+    },
+    {
+      "id": "mxpkzr",
+      "firstName": "Michael",
+      "lastName": "Chang",
+      "walletAddress": "0x3ya666...88ef",
+      "img": "artist01.jpg",
+      "desc": "捕捉日常窗前的飛鳥與光影，作品散發細細品味生活片刻的純粹與快樂。",
+      "description": "Michael自小在山林長大，能夠與花草樹木大自然進行靈體溝通，創作題材常見大山、大水、花草與樹木，從日常生活出發，擁有個⼈獨樹⼀格的創作風格，作品觸及靈魂深處、探索未知宇宙，透過與大自然的溝通，探討著存在的本質。​",
+      "marketStats": {
+        "status": "販售中",
+        "itemCount": 168,
+        "floorPrice": { "value": 0.6, "currency": "ETH" },
+        "volume7d": { "value": 8.8, "currency": "ETH" },
+        "volume30d": { "value": 23.1, "currency": "ETH" }
+      },
+      "artworks": [
+        {
+          "id": "art-003",
+          "title": "十分鐘就到",
+          "price": 200,
+          "description": "這句話跟「下次約吃飯」一樣，\n都是當代最大的謊言。",
+          "imgUrl": "art03.jpg",
+          "categories": ["nature", "all"],
+          "markets": {
+            "marketCap": "1,224.88",
+            "change24h": -9.23,
+            "change7d": -20.43,
+            "floorPrice": "2.90",
+            "hasIcon": true,
+            "owners": "32.1K",
+            "totalSupply": "1000",
+            "isOpen": true
+          }
         },
         {
-          "id": "olpmnb",
+          "id": "art-006",
+          "title": "夏天的時候",
+          "price": 200,
+          "description": "明知道那陣風吹完就走，\n我還是把襯衫扣子多解開了兩顆。",
+          "imgUrl": "art06.jpg",
+          "categories": ["nature", "all"],
+          "markets": {
+            "marketCap": "1,524.89",
+            "change24h": 80.49,
+            "change7d": -2.43,
+            "floorPrice": "90.23",
+            "hasIcon": false,
+            "owners": "32.1K",
+            "totalSupply": "1000",
+            "isOpen": false
+          }
+        },
+        {
+          "id": "art-019",
+          "title": "野小孩——叫你不要玩那個",
+          "price": 300,
+          "description": "聽話的小孩得到了乖巧，\n野小孩得到了整個世界。",
+          "imgUrl": "art19.jpg",
+          "categories": ["nature", "all"],
+          "markets": {
+            "marketCap": "1,340.80",
+            "change24h": -5.62,
+            "change7d": 31.4,
+            "floorPrice": "3.10",
+            "hasIcon": true,
+            "owners": "27.4K",
+            "totalSupply": "1000",
+            "isOpen": true
+          }
+        },
+        {
+          "id": "art-031",
+          "title": "剪不斷理還亂的待辦清單",
+          "price": 150,
+          "description": "生活就像這些密密麻麻的藤蔓，\n你以為理順了這條，回頭看發現後面早就打了死結。",
+          "imgUrl": "art31.jpg",
+          "categories": ["nature", "all"],
+          "markets": {
+            "marketCap": "695.40",
+            "change24h": 8.12,
+            "change7d": 15.34,
+            "floorPrice": "1.65",
+            "hasIcon": true,
+            "owners": "14.8K",
+            "totalSupply": "1000",
+            "isOpen": true
+          }
+        },
+        {
+          "id": "art-007",
+          "title": "摸魚的最高境界",
+          "price": 200,
+          "description": "看著水裡游得自由自在的魚，\n才驚覺自己才是那個被生活困在魚缸裡的人。",
+          "imgUrl": "art07.jpg",
+          "categories": ["animal", "fish", "all"],
+          "markets": {
+            "marketCap": "642.18",
+            "change24h": 5.88,
+            "change7d": -8.11,
+            "floorPrice": "1.50",
+            "hasIcon": true,
+            "owners": "15.4K",
+            "totalSupply": "800",
+            "isOpen": false
+          }
+        },
+        {
+          "id": "art-008",
+          "title": "人生中的貓咪們",
+          "price": 200,
+          "description": "在主子踩上鍵盤之前，\n你永遠不知道它下一秒要刪掉你哪份報告。",
+          "imgUrl": "art08.jpg",
+          "categories": ["animal", "cat", "all"],
+          "markets": {
+            "marketCap": "770.23",
+            "change24h": 23.49,
+            "change7d": 30.23,
+            "floorPrice": "2.90",
+            "hasIcon": true,
+            "owners": "32.1K",
+            "totalSupply": "1000",
+            "isOpen": false
+          }
+        },
+        {
+          "id": "art-027",
           "title": "我真的受傷了",
           "price": 200,
           "description": "不是心碎的聲音，\n值到期待再次被摔碎的鈍痛。",
           "imgUrl": "art27.jpg",
-          "categories": ["bird", "all"],
+          "categories": ["animal", "bird", "all"],
           "markets": {
             "marketCap": "720.90",
             "change24h": 45.32,
@@ -266,6 +320,24 @@
             "owners": "16.4K",
             "totalSupply": "1000",
             "isOpen": true
+          }
+        },
+        {
+          "id": "art-020",
+          "title": "比翼不雙飛",
+          "price": 300,
+          "description": "我們在同一個枝頭看著天空，\n心裡卻想著各自要飛往的遠方。",
+          "imgUrl": "art20.jpg",
+          "categories": ["animal", "bird", "all"],
+          "markets": {
+            "marketCap": "1,180.25",
+            "change24h": 2.14,
+            "change7d": -11.02,
+            "floorPrice": "2.95",
+            "hasIcon": true,
+            "owners": "23.1K",
+            "totalSupply": "1000",
+            "isOpen": false
           }
         }
       ]
@@ -287,7 +359,7 @@
       },
       "artworks": [
         {
-          "id": "vfrtgb",
+          "id": "art-013",
           "title": "昨夜盛開的失眠",
           "price": 200,
           "description": "在深夜裡悄悄綻放的焦慮，\n到了天亮，也不過是一場無人知曉的凋零。",
@@ -305,7 +377,7 @@
           }
         },
         {
-          "id": "nhymju",
+          "id": "art-014",
           "title": "破碎的菠蘿麵包",
           "price": 200,
           "description": "碎落一地的不是餅乾屑，\n慢著努力維持卻一碰就散的體面。",
@@ -323,7 +395,7 @@
           }
         },
         {
-          "id": "kiwopa",
+          "id": "art-015",
           "title": "心如止水——今天吃素",
           "price": 200,
           "description": "嘴上說著一切隨緣，\n心裡其實是誰也看不上眼。",
@@ -341,25 +413,7 @@
           }
         },
         {
-          "id": "lsdkfj",
-          "title": "柔美的細胞小將",
-          "price": 200,
-          "description": "體內的理性細胞早就全數陣亡，\n現在掌管大腦的是「想太多」和「算了」。",
-          "imgUrl": "art16.jpg",
-          "categories": ["abstract", "all"],
-          "markets": {
-            "marketCap": "420.20",
-            "change24h": 54.49,
-            "change7d": -12.43,
-            "floorPrice": "2.90",
-            "hasIcon": true,
-            "owners": "32.1K",
-            "totalSupply": "1000",
-            "isOpen": false
-          }
-        },
-        {
-          "id": "ghbnjm",
+          "id": "art-017",
           "title": "獨處的平行宇宙",
           "price": 200,
           "description": "戴上耳機的瞬間，\n這座城市的喧囂與複雜就再也與我無關。",
@@ -377,7 +431,7 @@
           }
         },
         {
-          "id": "qowieu",
+          "id": "art-032",
           "title": "明天開會時的我",
           "price": 150,
           "description": "外表看起來像一座意志堅定的完美雕像，\n其實靈魂早就抽離，在大氣層外靜靜飄蕩。",
@@ -392,6 +446,96 @@
             "owners": "16.2K",
             "totalSupply": "1000",
             "isOpen": false
+          }
+        },
+        {
+          "id": "art-033",
+          "title": "時空重疊的幾何交織",
+          "price": 250,
+          "description": "以深沉的灰黑為底，交錯著明亮的橘色、藍色幾何色塊與半透明的網格線條，展現出都市霓虹與時空交錯的現代抽象美感。",
+          "imgUrl": "art33.jpg",
+          "categories": ["colorful", "all"],
+          "markets": {
+            "marketCap": "840.22",
+            "change24h": -0.45,
+            "change7d": 12.89,
+            "floorPrice": "1.70",
+            "hasIcon": true,
+            "owners": "16.2K",
+            "totalSupply": "1000",
+            "isOpen": false
+          }
+        },
+        {
+          "id": "art-034",
+          "title": "斑斕盛宴的狂想曲",
+          "price": 280,
+          "description": "極具張力的油彩堆疊，以溫暖的桃紅、亮黃與冷色調的翠藍、深紫激烈碰撞，彷彿畫布上盛開的一場色彩交響樂章。",
+          "imgUrl": "art34.jpg",
+          "categories": ["colorful", "all"],
+          "markets": {
+            "marketCap": "952.40",
+            "change24h": 3.12,
+            "change7d": 15.45,
+            "floorPrice": "1.95",
+            "hasIcon": true,
+            "owners": "18.5K",
+            "totalSupply": "1200",
+            "isOpen": true
+          }
+        },
+        {
+          "id": "art-035",
+          "title": "深海焰火的沉思",
+          "price": 310,
+          "description": "在幽暗深邃的藍黑色調之中，激盪出如火焰般的耀眼橘紅與亮藍筆觸，營造出強烈的視覺對比與神祕的內在情感張力。",
+          "imgUrl": "art35.jpg",
+          "categories": ["colorful", "all"],
+          "markets": {
+            "marketCap": "710.15",
+            "change24h": -1.25,
+            "change7d": 8.33,
+            "floorPrice": "1.45",
+            "hasIcon": true,
+            "owners": "12.1K",
+            "totalSupply": "800",
+            "isOpen": false
+          }
+        },
+        {
+          "id": "art-036",
+          "title": "夢幻極光的溫柔呢喃",
+          "price": 340,
+          "description": "暈染細緻的渲染風格，柔和的青藍、水藍與溫暖的粉紅、紫羅蘭色交融，宛如夢境中的極光，散發療癒且純淨的視覺氛圍。",
+          "imgUrl": "art36.jpg",
+          "categories": ["colorful", "all"],
+          "markets": {
+            "marketCap": "1120.60",
+            "change24h": 5.74,
+            "change7d": 24.18,
+            "floorPrice": "2.20",
+            "hasIcon": true,
+            "owners": "22.4K",
+            "totalSupply": "1500",
+            "isOpen": true
+          }
+        },
+        {
+          "id": "art-037",
+          "title": "大地與烈日的韻律",
+          "price": 290,
+          "description": "明快奔放的暖黃與亮橘色線條橫向平行排列，搭配下方的黑色幾何波紋與純白區塊，呈現出具有強烈設計感的大地與日光律動。",
+          "imgUrl": "art37.jpg",
+          "categories": ["colorful", "all"],
+          "markets": {
+            "marketCap": "890.50",
+            "change24h": 0.85,
+            "change7d": 11.2,
+            "floorPrice": "1.80",
+            "hasIcon": true,
+            "owners": "14.8K",
+            "totalSupply": "1000",
+            "isOpen": true
           }
         }
       ]
@@ -413,7 +557,7 @@
       },
       "artworks": [
         {
-          "id": "zxcvbn",
+          "id": "art-018",
           "title": "法式古典的浪漫幻想",
           "price": 150,
           "description": "將盛開的時光凝結在瓶中，\n試圖在冰冷的畫布上留住最後一絲溫柔。",
@@ -431,43 +575,97 @@
           }
         },
         {
-          "id": "asdfgh",
-          "title": "野小孩——叫你不要玩那個",
-          "price": 300,
-          "description": "聽話的小孩得到了乖巧，\n野小孩得到了整個世界。",
-          "imgUrl": "art19.jpg",
-          "categories": ["nature", "all"],
+          "id": "art-029",
+          "title": "追求者送我的花",
+          "price": 150,
+          "description": "花開得再燦爛奪目，\n也掩蓋不了那張卡片上讓人尷尬的錯字。",
+          "imgUrl": "art29.jpg",
+          "categories": ["classic", "all"],
           "markets": {
-            "marketCap": "1,340.80",
-            "change24h": -5.62,
-            "change7d": 31.4,
-            "floorPrice": "3.10",
+            "marketCap": "1,774.19",
+            "change24h": 220.49,
+            "change7d": -2.43,
+            "floorPrice": "2.90",
             "hasIcon": true,
-            "owners": "27.4K",
-            "totalSupply": "1000",
-            "isOpen": true
-          }
-        },
-        {
-          "id": "qwerty",
-          "title": "比翼不雙飛",
-          "price": 300,
-          "description": "我們在同一個枝頭看著天空，\n心裡卻想著各自要飛往的遠方。",
-          "imgUrl": "art20.jpg",
-          "categories": ["bird", "all"],
-          "markets": {
-            "marketCap": "1,180.25",
-            "change24h": 2.14,
-            "change7d": -11.02,
-            "floorPrice": "2.95",
-            "hasIcon": true,
-            "owners": "23.1K",
+            "owners": "32.1K",
             "totalSupply": "1000",
             "isOpen": false
           }
         },
         {
-          "id": "uiorpe",
+          "id": "art-030",
+          "title": "最後留下來的期末作業",
+          "price": 150,
+          "description": "所有的熱情都在死線（Deadline）前燃燒殆盡，\n現在剩下的，只有這個放在角落的玻璃瓶。",
+          "imgUrl": "art30.jpg",
+          "categories": ["classic", "all"],
+          "markets": {
+            "marketCap": "610.15",
+            "change24h": -2.34,
+            "change7d": -9.81,
+            "floorPrice": "1.50",
+            "hasIcon": false,
+            "owners": "11.9K",
+            "totalSupply": "1000",
+            "isOpen": false
+          }
+        },
+        {
+          "id": "art-038",
+          "title": "天頂的詠嘆調",
+          "price": 150,
+          "description": "完美重現巴洛克時期的壯麗天頂壁畫。畫面中眾神於雲端交織，細膩的筆觸與充滿張力的光影對比，將古典神話的史詩感與宗教的莊嚴感展現得淋漓盡致。",
+          "imgUrl": "art38.jpg",
+          "categories": ["classic", "all"],
+          "markets": {
+            "marketCap": "354.5",
+            "change24h": -2.85,
+            "change7d": -10.81,
+            "floorPrice": "2.50",
+            "hasIcon": false,
+            "owners": "11.9K",
+            "totalSupply": "1000",
+            "isOpen": false
+          }
+        },
+        {
+          "id": "art-039",
+          "title": "盲女與雙彩虹",
+          "price": 150,
+          "description": "取材自前拉斐爾派大師米萊的經典之作。雖然雙眼無法看見天空中壯麗的雙彩虹，但少女憑藉著感官，正深刻感受著雨後大自然的靜謐，充滿溫柔的人文關懷。",
+          "imgUrl": "art39.jpg",
+          "categories": ["classic", "all"],
+          "markets": {
+            "marketCap": "610.15",
+            "change24h": -2.34,
+            "change7d": -9.81,
+            "floorPrice": "1.50",
+            "hasIcon": false,
+            "owners": "11.9K",
+            "totalSupply": "1000",
+            "isOpen": false
+          }
+        },
+        {
+          "id": "art-040",
+          "title": "仰望星空者",
+          "price": 150,
+          "description": "強烈的深紅背景，完美襯托出古典大理石雕塑的純粹與力量感。男子身軀線條充滿張力，微微仰頭的姿態帶著對未知的渴望與思索，展現出不屈的靈魂意志。",
+          "imgUrl": "art40.jpg",
+          "categories": ["classic", "all"],
+          "markets": {
+            "marketCap": "610.15",
+            "change24h": -2.34,
+            "change7d": -9.81,
+            "floorPrice": "1.50",
+            "hasIcon": false,
+            "owners": "11.9K",
+            "totalSupply": "1000",
+            "isOpen": false
+          }
+        },
+        {
+          "id": "art-021",
           "title": "兩情相悅",
           "price": 300,
           "description": "禁果不是她摘的，\n但罪名往往留給最美的人。",
@@ -485,7 +683,7 @@
           }
         },
         {
-          "id": "mklpow",
+          "id": "art-022",
           "title": "群聚的小鳥們",
           "price": 150,
           "description": "把憂鬱倒進杯子裡，\n今晚我們在泡沫裡滅頂。",
@@ -503,21 +701,57 @@
           }
         },
         {
-          "id": "fhajks",
-          "title": "剪不斷理還亂的待辦清單",
-          "price": 150,
-          "description": "生活就像這些密密麻麻的藤蔓，\n你以為理順了這條，回頭看發現後面早就打了死結。",
-          "imgUrl": "art31.jpg",
-          "categories": ["nature", "all"],
+          "id": "art-023",
+          "title": "與你分享的快樂勝過獨自擁有",
+          "price": 200,
+          "description": "如果悲傷可以變現，\n我早已是這座城市最富有的人。",
+          "imgUrl": "art23.jpg",
+          "categories": ["bird", "all"],
           "markets": {
-            "marketCap": "695.40",
-            "change24h": 8.12,
-            "change7d": 15.34,
-            "floorPrice": "1.65",
+            "marketCap": "980.66",
+            "change24h": 11.52,
+            "change7d": 42.18,
+            "floorPrice": "2.20",
             "hasIcon": true,
-            "owners": "14.8K",
+            "owners": "19.3K",
+            "totalSupply": "1000",
+            "isOpen": false
+          }
+        },
+        {
+          "id": "art-024",
+          "title": "會唱metal的鳥",
+          "price": 200,
+          "description": "這句話跟「下次約吃飯」一樣，\n都是當代最大的謊言。",
+          "imgUrl": "art24.jpg",
+          "categories": ["bird", "all"],
+          "markets": {
+            "marketCap": "890.11",
+            "change24h": -14.2,
+            "change7d": -5.32,
+            "floorPrice": "2.00",
+            "hasIcon": true,
+            "owners": "17.8K",
             "totalSupply": "1000",
             "isOpen": true
+          }
+        },
+        {
+          "id": "art-025",
+          "title": "一大一小兩個恰恰好",
+          "price": 200,
+          "description": "在被世界觀看之前，\n我早就對鏡子彩排了無數次。",
+          "imgUrl": "art25.jpg",
+          "categories": ["bird", "all"],
+          "markets": {
+            "marketCap": "915.30",
+            "change24h": 4.75,
+            "change7d": 12.6,
+            "floorPrice": "2.10",
+            "hasIcon": false,
+            "owners": "20.1K",
+            "totalSupply": "1000",
+            "isOpen": false
           }
         }
       ]
@@ -539,61 +773,7 @@
       },
       "artworks": [
         {
-          "id": "cnvbhd",
-          "title": "與你分享的快樂勝過獨自擁有",
-          "price": 200,
-          "description": "如果悲傷可以變現，\n我早已是這座城市最富有的人。",
-          "imgUrl": "art23.jpg",
-          "categories": ["bird", "all"],
-          "markets": {
-            "marketCap": "980.66",
-            "change24h": 11.52,
-            "change7d": 42.18,
-            "floorPrice": "2.20",
-            "hasIcon": true,
-            "owners": "19.3K",
-            "totalSupply": "1000",
-            "isOpen": false
-          }
-        },
-        {
-          "id": "ruieyt",
-          "title": "會唱metal的鳥",
-          "price": 200,
-          "description": "這句話跟「下次約吃飯」一樣，\n都是當代最大的謊言。",
-          "imgUrl": "art24.jpg",
-          "categories": ["bird", "all"],
-          "markets": {
-            "marketCap": "890.11",
-            "change24h": -14.2,
-            "change7d": -5.32,
-            "floorPrice": "2.00",
-            "hasIcon": true,
-            "owners": "17.8K",
-            "totalSupply": "1000",
-            "isOpen": true
-          }
-        },
-        {
-          "id": "optuwy",
-          "title": "一大一小兩個恰恰好",
-          "price": 200,
-          "description": "在被世界觀看之前，\n我早就對鏡子彩排了無數次。",
-          "imgUrl": "art25.jpg",
-          "categories": ["bird", "all"],
-          "markets": {
-            "marketCap": "915.30",
-            "change24h": 4.75,
-            "change7d": 12.6,
-            "floorPrice": "2.10",
-            "hasIcon": false,
-            "owners": "20.1K",
-            "totalSupply": "1000",
-            "isOpen": false
-          }
-        },
-        {
-          "id": "mxnbyv",
+          "id": "art-026",
           "title": "早安！今天又是被迫營業的一天",
           "price": 150,
           "description": "站在枝頭看著早上的陽光，\n心裡第一百次思考離職的可能。",
@@ -611,7 +791,7 @@
           }
         },
         {
-          "id": "ieuryt",
+          "id": "art-028",
           "title": "電音霓虹的派對狂歡",
           "price": 200,
           "description": "當液態的色彩在黑暗中交織流動，\n誰還記得清醒時那些理智的條條框框？",
@@ -628,42 +808,152 @@
             "isOpen": false
           }
         },
-        {
-          "id": "kgjhdg",
-          "title": "追求者送我的花",
-          "price": 150,
-          "description": "花開得再燦爛奪目，\n也掩蓋不了那張卡片上讓人尷尬的錯字。",
-          "imgUrl": "art29.jpg",
-          "categories": ["classic", "all"],
-          "markets": {
-            "marketCap": "1,774.19",
-            "change24h": 220.49,
-            "change7d": -2.43,
-            "floorPrice": "2.90",
-            "hasIcon": true,
-            "owners": "32.1K",
-            "totalSupply": "1000",
-            "isOpen": false
+        [
+          {
+            "id": "art-041",
+            "title": "人生好難，線條更亂",
+            "price": 180,
+            "description": "生活就像這些糾結的線條，試圖理清它，最後發現自己只是在原地打轉。",
+            "imgUrl": "art41.jpg",
+            "categories": ["abstract", "all"],
+            "markets": {
+              "marketCap": "620.50",
+              "change24h": 2.15,
+              "change7d": -5.34,
+              "floorPrice": "1.65",
+              "hasIcon": true,
+              "owners": "14.2K",
+              "totalSupply": "1200",
+              "isOpen": true
+            }
+          },
+          {
+            "id": "art-042",
+            "title": "週一到週五的漸層崩潰",
+            "price": 160,
+            "description": "從左邊的飽滿熱情，一路漸變到右邊的靈魂被抽乾。今天你走到哪一個顏色了？",
+            "imgUrl": "art42.jpg",
+            "categories": ["abstract", "all"],
+            "markets": {
+              "marketCap": "510.20",
+              "change24h": -1.45,
+              "change7d": -12.18,
+              "floorPrice": "1.20",
+              "hasIcon": true,
+              "owners": "11.8K",
+              "totalSupply": "1200",
+              "isOpen": false
+            }
+          },
+          {
+            "id": "art-043",
+            "title": "集體趕著打卡的我們",
+            "price": 150,
+            "description": "幾隻鳥在空中亂飛，像極了早上 8 點 59 分卡在電梯口、為了全勤獎金拼命的我們。",
+            "imgUrl": "art43.jpg",
+            "categories": ["bird", "all"],
+            "markets": {
+              "marketCap": "590.00",
+              "change24h": -3.22,
+              "change7d": -15.6,
+              "floorPrice": "1.35",
+              "hasIcon": true,
+              "owners": "13.1K",
+              "totalSupply": "1200",
+              "isOpen": false
+            }
+          },
+          {
+            "id": "art-044",
+            "title": "孤獨的考核期",
+            "price": 145,
+            "description": "一個人（鳥）默默待在枝頭。別問我在幹嘛，我只是在等主管下班，好讓我可以光明正大走人。",
+            "imgUrl": "art44.jpg",
+            "categories": ["bird", "all"],
+            "markets": {
+              "marketCap": "480.15",
+              "change24h": 0.88,
+              "change7d": -9.45,
+              "floorPrice": "1.10",
+              "hasIcon": true,
+              "owners": "9.5K",
+              "totalSupply": "1200",
+              "isOpen": true
+            }
+          },
+          {
+            "id": "art-045",
+            "title": "主管在背後看著你",
+            "price": 165,
+            "description": "遠遠的那隻鳥一直盯著這邊看。別裝了，趕快把分頁切換回 Excel，他走過來了。",
+            "imgUrl": "art45.jpg",
+            "categories": ["bird", "all"],
+            "markets": {
+              "marketCap": "610.80",
+              "change24h": -5.12,
+              "change7d": -19.3,
+              "floorPrice": "1.50",
+              "hasIcon": true,
+              "owners": "15.0K",
+              "totalSupply": "1200",
+              "isOpen": false
+            }
+          },
+          {
+            "id": "art-046",
+            "title": "職場小圈圈",
+            "price": 155,
+            "description": "三五成群聚在樹枝上。通常這個畫面出現時，不是在聊八卦，就是在團購下午茶。",
+            "imgUrl": "art46.jpg",
+            "categories": ["bird", "all"],
+            "markets": {
+              "marketCap": "560.30",
+              "change24h": 1.24,
+              "change7d": -7.85,
+              "floorPrice": "1.30",
+              "hasIcon": true,
+              "owners": "12.4K",
+              "totalSupply": "1200",
+              "isOpen": true
+            }
+          },
+          {
+            "id": "art-047",
+            "title": "被切割的特休假",
+            "price": 170,
+            "description": "密密麻麻的幾何圖形，就像我今年被拆成無數個半天、一小時來請的特休，拼都拼不完整。",
+            "imgUrl": "art47.jpg",
+            "categories": ["abstract", "all"],
+            "markets": {
+              "marketCap": "640.00",
+              "change24h": -2.8,
+              "change7d": -11.12,
+              "floorPrice": "1.70",
+              "hasIcon": true,
+              "owners": "16.2K",
+              "totalSupply": "1200",
+              "isOpen": false
+            }
+          },
+          {
+            "id": "art-048",
+            "title": "我的精神狀態",
+            "price": 175,
+            "description": "狂亂的彩色線條、毫无章法的塗鴉。不用懷疑，這就是星期五下午被客戶改了十次稿後的精神狀態。",
+            "imgUrl": "art48.jpg",
+            "categories": ["abstract", "all"],
+            "markets": {
+              "marketCap": "670.40",
+              "change24h": 4.56,
+              "change7d": 2.15,
+              "floorPrice": "1.85",
+              "hasIcon": true,
+              "owners": "17.5K",
+              "totalSupply": "1200",
+              "isOpen": true
+            }
           }
-        },
-        {
-          "id": "nvbmsa",
-          "title": "最後留下來的期末作業",
-          "price": 150,
-          "description": "所有的熱情都在死線（Deadline）前燃燒殆盡，\n現在剩下的，只有這個放在角落的玻璃瓶。",
-          "imgUrl": "art30.jpg",
-          "categories": ["classic", "all"],
-          "markets": {
-            "marketCap": "610.15",
-            "change24h": -2.34,
-            "change7d": -9.81,
-            "floorPrice": "1.50",
-            "hasIcon": false,
-            "owners": "11.9K",
-            "totalSupply": "1000",
-            "isOpen": false
-          }
-        }
+        ]
       ]
     }
   ],
