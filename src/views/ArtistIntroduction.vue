@@ -370,13 +370,13 @@ const fetchArtistData = async (artistId: string) => {
       currentArtist.value = foundArtist
 
       // 3. 直接從藝術家身上把作品陣列（artworks）拿給收藏品區（Collection）渲染
-      artworks.value = foundArtist.artworks || []
+      artworks.value = foundArtist.artworks.flatMap(series => series.artworkIds)
     } else {
       console.warn(`找不到 ID 為 ${artistId} 的藝術家，載入防呆首位藝術家...`)
       // 防呆：如果找不到該 ID，預設拿第一筆藝術家
       if (allArtists.length > 0) {
         currentArtist.value = allArtists[0] || null
-        artworks.value = allArtists[0]?.artworks || []
+        artworks.value = allArtists[0]?.artworks.flatMap(series => series.artworkIds) || []
       }
     }
   } catch (error) {

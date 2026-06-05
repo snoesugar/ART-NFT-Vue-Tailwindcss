@@ -792,7 +792,8 @@ onMounted(async () => {
 
     // 🛠️ 2. 使用 flatMap 將每位藝術家底下的 artworks 陣列抽出來，結合成一隻大陣列
     artworks.value = allArtists.flatMap(artist => {
-      return artist.artworks || []
+      const seriesList = artist.artworks || []
+      return seriesList.flatMap(series => series.artworkIds || [])
     })
   } catch (error) {
     console.error('首頁獲取藝術品失敗:', error)

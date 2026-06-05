@@ -398,14 +398,22 @@ onMounted(async () => {
     const allArtists = await nftApi.getAllArtists()
     artists.value = allArtists
 
-    // 2. 關鍵改動：在攤平的「當下」直接把名字組合好塞進去！
+    // 2. 關鍵改動：遍歷所有藝術家 -> 遍歷其所有系列 -> 提取所有藝術品並注入名字
     artworks.value = allArtists.flatMap(artist => {
-      const artworkList = artist.artworks || []
-      return artworkList.map(artwork => ({
-        ...artwork,
-        // 💡 直接在這裡把名字綁定好，Template 就能直接用 {{ artwork.artistName }} 了！
-        artistName: `${artist.firstName} ${artist.lastName}`,
-      }))
+      // 防呆：確保該藝術家有作品系列
+      const seriesList = artist.artworks || []
+
+      // 第一層 flatMap 用來攤平該藝術家的所有系列，把裡面的作品全抽出來
+      return seriesList.flatMap(series => {
+        const artworkList = series.artworkIds || []
+
+        // 第二層 map 用來將每件作品加上 artistName
+        return artworkList.map(artwork => ({
+          ...artwork,
+          // 💡 完美綁定名字，Template 就能直接用 {{ artwork.artistName }} 了！
+          artistName: `${artist.firstName} ${artist.lastName}`,
+        }))
+      })
     })
   } catch (error) {
     console.error('首頁獲取藝術家與作品失敗:', error)

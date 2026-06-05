@@ -347,47 +347,62 @@ const loadPageData = async (artworkId: string) => {
     // 1. 關鍵改動：改為撈取「所有藝術家」
     const allArtists = await nftApi.getAllArtists()
 
-    // 2. 在前端將所有藝術家的作品攤平，並順便把 artistId 帶在作品身上（如果原本作品內沒有的話）
-    const allArtworks: Artwork[] = allArtists.flatMap(artist => {
-      const list = artist.artworks || []
-      return list.map(art => ({
-        ...art,
-        artistId: art.artistId || artist.id, // 雙重防禦確保有關聯 ID
-      }))
+    // // 2. 在前端將所有藝術家的作品攤平，並順便把 artistId 帶在作品身上
+    // 💡 修正點一：定義一個包含 artistId 的暫時型別，讓 TypeScript 認得它
+    const allArtworks: (Artwork & { artistId: string })[] = allArtists.flatMap(artist => {
+      const seriesList = artist.artworks || []
+
+      // 第一層 flatMap 進到系列
+      return seriesList.flatMap(series => {
+        const artworkList = series.artworkIds || []
+
+        // 第二層 map 進到作品，並注入 artistId
+        return artworkList.map(art => ({
+          ...art,
+          artistId: artist.id, // 💡 完美注入 artistId
+        }))
+      })
     })
 
-    // 3. 尋找當前網址對應的作品
+    // // 3. 尋找當前網址對應的作品
     const foundArtwork = allArtworks.find(art => art.id === artworkId)
 
     if (foundArtwork) {
       currentArtwork.value = foundArtwork
 
-      // 4. 根據作品的 artistId，直接從剛剛撈回來的 allArtists 大陣列中 find 出該藝術家
+      // // 4. 根據作品的 artistId，直接從回傳的 allArtists 大陣列中 找出藝術家
       const foundArtist = allArtists.find(artist => artist.id === foundArtwork.artistId)
 
       if (foundArtist) {
         currentArtist.value = foundArtist
 
-        // 5. 篩選出「同一個藝術家的其他作品」（排除掉現在畫面顯示的這一件）
-        const artistWorks = foundArtist.artworks || []
+        // // 5. 篩選出「同一個藝術家的其他作品」（排除掉現在畫面顯示的這一件）
+        // 💡 修正點二：既然要拿同一位藝術家的所有作品，一樣要用 flatMap 打平
+        const artistWorks = foundArtist.artworks
+          ? foundArtist.artworks.flatMap(s => s.artworkIds)
+          : []
         otherArtworks.value = artistWorks.filter(art => art.id !== artworkId)
       }
     } else {
       console.warn(`找不到 ID 為 ${artworkId} 的作品，載入防呆首筆資料...`)
-      // 防呆機制：如果找不到該 ID，預設拿全部作品的第一筆
+      // // 防呆機制：如果找不到該 ID，預設拿全部作品的第一筆
       if (allArtworks.length > 0) {
         const firstArt = allArtworks[0]
 
-        // 🌟 加上 if (firstArt) 判斷，跟 TypeScript 保證它絕對不是 undefined！
+        // // 🌟 加上 if (firstArt) 判斷，跟 TypeScript 保證它絕對不是 undefined !
         if (firstArt) {
           currentArtwork.value = firstArt
 
-          // 使用 optional chaining (?.) 確保安全拿取 artistId
+          // // 使用 find 確保安全奪取 artistId 屬性相符的藝術家
           const firstArtist = allArtists.find(a => a.id === firstArt.artistId)
 
           if (firstArtist) {
             currentArtist.value = firstArtist
-            otherArtworks.value = (firstArtist.artworks || []).filter(art => art.id !== firstArt.id)
+            // 💡 修正點三：防呆區塊內部的其他作品篩選，同樣使用 flatMap 打平
+            const firstArtistWorks = firstArtist.artworks
+              ? firstArtist.artworks.flatMap(s => s.artworkIds)
+              : []
+            otherArtworks.value = firstArtistWorks.filter(art => art.id !== firstArt.id)
           }
         }
       }

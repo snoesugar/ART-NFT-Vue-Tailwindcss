@@ -169,7 +169,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed, reactive } from 'vue'
-import { nftApi, type Artist, type Artwork } from '@/api/artist'
+import { nftApi, type Artist } from '@/api/artist'
 import { useLoadingStore } from '@/store/loading'
 
 const baseUrl = import.meta.env.VITE_BASE_URL || '/ART-NFT-Vue-Tailwindcss/'
@@ -194,23 +194,31 @@ const toggleMobileMenu = (index: number) => {
   mobileMenuStates[index] = !mobileMenuStates[index]
 }
 
-// 2. 第一層加工 computed：把巢狀資料攤平，並補上安全防禦機制
+// // 2. 第一層加工 computed：把巢狀資料攤平，並補上安全防禦機制
 const allArtworks = computed(() => {
   return artists.value.flatMap(artist => {
-    const artworkList = artist.artworks || []
-    return artworkList.map((artwork: Artwork) => ({
-      ...artwork,
-      // 強制建立 markets 物件結構，防禦 undefined
-      markets: {
-        marketCap: artwork.markets?.marketCap ?? '0',
-        change24h: artwork.markets?.change24h ?? 0,
-        change7d: artwork.markets?.change7d ?? 0,
-        floorPrice: artwork.markets?.floorPrice ?? '0',
-        hasIcon: artwork.markets?.hasIcon ?? false,
-        owners: artwork.markets?.owners ?? '0',
-        totalSupply: artwork.markets?.totalSupply ?? '0',
-      },
-    }))
+    const seriesList = artist.artworks || []
+
+    // 第一層 flatMap 進到系列
+    return seriesList.flatMap(series => {
+      const artworkList = series.artworkIds || []
+
+      // 第二層 map 進到作品，並進行 markets 的結構防禦
+      return artworkList.map(artwork => ({
+        ...artwork,
+        // 💡 完美對齊原有的 markets 物件結構，防禦 undefined
+        markets: {
+          marketCap: artwork.markets?.marketCap ?? '0',
+          change24h: artwork.markets?.change24h ?? 0,
+          change7d: artwork.markets?.change7d ?? 0,
+          floorPrice: artwork.markets?.floorPrice ?? '0',
+          hasIcon: artwork.markets?.hasIcon ?? false,
+          owners: artwork.markets?.owners ?? '0',
+          totalSupply: artwork.markets?.totalSupply ?? '0',
+          isOpen: artwork.markets?.isOpen ?? false, // 補齊原本型別定義的欄位
+        },
+      }))
+    })
   })
 })
 
