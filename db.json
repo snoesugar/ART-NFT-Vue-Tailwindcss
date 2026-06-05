@@ -362,7 +362,7 @@
           "id": "art-013",
           "title": "昨夜盛開的失眠",
           "price": 200,
-          "description": "在深夜裡悄悄綻放的焦慮，\n到了天亮，也不過是一場無人知曉的凋零。",
+          "description": "跟「下次約吃飯」一樣，\n都是當代最大的謊言：『我今晚要早點睡』。",
           "imgUrl": "art13.jpg",
           "categories": ["classic", "all"],
           "markets": {
@@ -380,7 +380,7 @@
           "id": "art-014",
           "title": "破碎的菠蘿麵包",
           "price": 200,
-          "description": "碎落一地的不是餅乾屑，\n慢著努力維持卻一碰就散的體面。",
+          "description": "掉一地的不是麵包屑，\n是我被生活一碰就碎的成年人體面。",
           "imgUrl": "art14.jpg",
           "categories": ["classic", "all"],
           "markets": {
@@ -416,7 +416,7 @@
           "id": "art-017",
           "title": "獨處的平行宇宙",
           "price": 200,
-          "description": "戴上耳機的瞬間，\n這座城市的喧囂與複雜就再也與我無關。",
+          "description": "耳機一戴，誰也不愛。\n這世界的破事通通與我無關。",
           "imgUrl": "art17.jpg",
           "categories": ["classic", "all"],
           "markets": {
@@ -434,7 +434,7 @@
           "id": "art-032",
           "title": "明天開會時的我",
           "price": 150,
-          "description": "外表看起來像一座意志堅定的完美雕像，\n其實靈魂早就抽離，在大氣層外靜靜飄蕩。",
+          "description": "肉體在點頭開會，\n靈魂早就去大氣層外快樂飄蕩。",
           "imgUrl": "art32.jpg",
           "categories": ["classic", "all"],
           "markets": {
@@ -452,7 +452,7 @@
           "id": "art-033",
           "title": "時空重疊的幾何交織",
           "price": 250,
-          "description": "以深沉的灰黑為底，交錯著明亮的橘色、藍色幾何色塊與半透明的網格線條，展現出都市霓虹與時空交錯的現代抽象美感。",
+          "description": "橘藍線條錯綜複雜，\n像極了我那剪不斷、理還亂的下班打卡紀錄。",
           "imgUrl": "art33.jpg",
           "categories": ["colorful", "all"],
           "markets": {
@@ -470,7 +470,7 @@
           "id": "art-034",
           "title": "斑斕盛宴的狂想曲",
           "price": 280,
-          "description": "極具張力的油彩堆疊，以溫暖的桃紅、亮黃與冷色調的翠藍、深紫激烈碰撞，彷彿畫布上盛開的一場色彩交響樂章。",
+          "description": "桃紅與暴躁翠藍的激烈碰撞，\n完美重現我週一早上的精神狀態。",
           "imgUrl": "art34.jpg",
           "categories": ["colorful", "all"],
           "markets": {
@@ -488,7 +488,7 @@
           "id": "art-035",
           "title": "深海焰火的沉思",
           "price": 310,
-          "description": "在幽暗深邃的藍黑色調之中，激盪出如火焰般的耀眼橘紅與亮藍筆觸，營造出強烈的視覺對比與神祕的內在情感張力。",
+          "description": "在幽暗的藍黑中猛然噴出橘紅烈火\n——俗稱「表面沒事，內心暴怒」。",
           "imgUrl": "art35.jpg",
           "categories": ["colorful", "all"],
           "markets": {
@@ -506,7 +506,7 @@
           "id": "art-036",
           "title": "夢幻極光的溫柔呢喃",
           "price": 340,
-          "description": "暈染細緻的渲染風格，柔和的青藍、水藍與溫暖的粉紅、紫羅蘭色交融，宛如夢境中的極光，散發療癒且純淨的視覺氛圍。",
+          "description": "粉藍交織的療癒美夢，\n通常只存在於週五晚上到週六早上的這段時間。",
           "imgUrl": "art36.jpg",
           "categories": ["colorful", "all"],
           "markets": {
@@ -524,7 +524,7 @@
           "id": "art-037",
           "title": "大地與烈日的韻律",
           "price": 290,
-          "description": "明快奔放的暖黃與亮橘色線條橫向平行排列，搭配下方的黑色幾何波紋與純白區塊，呈現出具有強烈設計感的大地與日光律動。",
+          "description": "奔放的暖橘線條與黑色波紋，\n像極了特休被取消時內心燃起的熊熊烈火。",
           "imgUrl": "art37.jpg",
           "categories": ["colorful", "all"],
           "markets": {
@@ -596,7 +596,7 @@
           "id": "art-030",
           "title": "最後留下來的期末作業",
           "price": 150,
-          "description": "所有的熱情都在死線（Deadline）前燃燒殆盡，\n現在剩下的，只有這個放在角落的玻璃瓶。",
+          "description": "這不是藝術，\n這是我燃燒生命後留下的骨灰罈。",
           "imgUrl": "art30.jpg",
           "categories": ["classic", "all"],
           "markets": {
@@ -614,7 +614,7 @@
           "id": "art-038",
           "title": "天頂的詠嘆調",
           "price": 150,
-          "description": "完美重現巴洛克時期的壯麗天頂壁畫。畫面中眾神於雲端交織，細膩的筆觸與充滿張力的光影對比，將古典神話的史詩感與宗教的莊嚴感展現得淋漓盡致。",
+          "description": "眾神在雲端交織，\n而我在地上加班到升天。",
           "imgUrl": "art38.jpg",
           "categories": ["classic", "all"],
           "markets": {
@@ -632,7 +632,7 @@
           "id": "art-039",
           "title": "盲女與雙彩虹",
           "price": 150,
-          "description": "取材自前拉斐爾派大師米萊的經典之作。雖然雙眼無法看見天空中壯麗的雙彩虹，但少女憑藉著感官，正深刻感受著雨後大自然的靜謐，充滿溫柔的人文關懷。",
+          "description": "看不見雙彩虹沒關係，\n就像我也看不見戶頭的餘額。",
           "imgUrl": "art39.jpg",
           "categories": ["classic", "all"],
           "markets": {
@@ -650,7 +650,7 @@
           "id": "art-040",
           "title": "仰望星空者",
           "price": 150,
-          "description": "強烈的深紅背景，完美襯托出古典大理石雕塑的純粹與力量感。男子身軀線條充滿張力，微微仰頭的姿態帶著對未知的渴望與思索，展現出不屈的靈魂意志。",
+          "description": "他不是在思索未知，\n他只是抬頭忍住不讓眼淚掉下來。",
           "imgUrl": "art40.jpg",
           "categories": ["classic", "all"],
           "markets": {
@@ -794,7 +794,7 @@
           "id": "art-028",
           "title": "電音霓虹的派對狂歡",
           "price": 200,
-          "description": "當液態的色彩在黑暗中交織流動，\n誰還記得清醒時那些理智的條條框框？",
+          "description": "上班是滿腔熱血的漸層，\n下班只剩靈魂被抽乾的死白。",
           "imgUrl": "art28.jpg",
           "categories": ["abstract", "all"],
           "markets": {
@@ -813,7 +813,7 @@
             "id": "art-041",
             "title": "人生好難，線條更亂",
             "price": 180,
-            "description": "生活就像這些糾結的線條，試圖理清它，最後發現自己只是在原地打轉。",
+            "description": "在生活裡拼命理清思緒，\n最後發現自己只是在原地加班。",
             "imgUrl": "art41.jpg",
             "categories": ["abstract", "all"],
             "markets": {
@@ -831,7 +831,7 @@
             "id": "art-042",
             "title": "週一到週五的漸層崩潰",
             "price": 160,
-            "description": "從左邊的飽滿熱情，一路漸變到右邊的靈魂被抽乾。今天你走到哪一個顏色了？",
+            "description": "只要熬夜加班到理智模糊，\n就分不清流出來的是眼淚還是色彩。",
             "imgUrl": "art42.jpg",
             "categories": ["abstract", "all"],
             "markets": {
@@ -849,7 +849,7 @@
             "id": "art-043",
             "title": "集體趕著打卡的我們",
             "price": 150,
-            "description": "幾隻鳥在空中亂飛，像極了早上 8 點 59 分卡在電梯口、為了全勤獎金拼命的我們。",
+            "description": "幾隻鳥在空中亂飛，\n像極了早上 8 點 59 分卡在電梯口、為了全勤獎金拼命的我們。",
             "imgUrl": "art43.jpg",
             "categories": ["bird", "all"],
             "markets": {
@@ -867,7 +867,7 @@
             "id": "art-044",
             "title": "孤獨的考核期",
             "price": 145,
-            "description": "一個人（鳥）默默待在枝頭。別問我在幹嘛，我只是在等主管下班，好讓我可以光明正大走人。",
+            "description": "一個人（鳥）默默待在枝頭。別問我在幹嘛，\n我只是在等主管下班，好讓我可以光明正大走人。",
             "imgUrl": "art44.jpg",
             "categories": ["bird", "all"],
             "markets": {
@@ -885,7 +885,7 @@
             "id": "art-045",
             "title": "主管在背後看著你",
             "price": 165,
-            "description": "遠遠的那隻鳥一直盯著這邊看。別裝了，趕快把分頁切換回 Excel，他走過來了。",
+            "description": "遠遠的那隻鳥一直盯著這邊看。\n別裝了，趕快把分頁切換回 Excel，他走過來了。",
             "imgUrl": "art45.jpg",
             "categories": ["bird", "all"],
             "markets": {
@@ -903,7 +903,7 @@
             "id": "art-046",
             "title": "職場小圈圈",
             "price": 155,
-            "description": "三五成群聚在樹枝上。通常這個畫面出現時，不是在聊八卦，就是在團購下午茶。",
+            "description": "三五成群聚在樹枝上。\n通常這個畫面出現時，不是在聊八卦，就是在團購下午茶。",
             "imgUrl": "art46.jpg",
             "categories": ["bird", "all"],
             "markets": {
@@ -921,7 +921,7 @@
             "id": "art-047",
             "title": "被切割的特休假",
             "price": 170,
-            "description": "密密麻麻的幾何圖形，就像我今年被拆成無數個半天、一小時來請的特休，拼都拼不完整。",
+            "description": "密密麻麻的幾何圖形，\n就像我今年被拆成無數個半天、一小時來請的特休，拼都拼不完整。",
             "imgUrl": "art47.jpg",
             "categories": ["abstract", "all"],
             "markets": {
@@ -939,7 +939,7 @@
             "id": "art-048",
             "title": "我的精神狀態",
             "price": 175,
-            "description": "狂亂的彩色線條、毫无章法的塗鴉。不用懷疑，這就是星期五下午被客戶改了十次稿後的精神狀態。",
+            "description": "狂亂的彩色線條、毫无章法的塗鴉。\n不用懷疑，這就是星期五下午被客戶改了十次稿後的精神狀態。",
             "imgUrl": "art48.jpg",
             "categories": ["abstract", "all"],
             "markets": {
