@@ -347,22 +347,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue' // 💡 記得引入 computed
+import { ref, watch } from 'vue' // ⭕ 拿掉沒用到的 onMounted
 import { useRoute } from 'vue-router'
-import { artistApi, type Artist } from '@/api/artist'
-import { artworkApi, type Artwork } from '@/api/artwork'
+import { nftApi, type Artist, type Artwork } from '@/api/artist' // 💡 統一改從全新的 api/artist 引入
 import Button from '@/components/Button.vue'
 
 const baseUrl = import.meta.env.VITE_BASE_URL || '/ART-NFT-Vue-Tailwindcss/'
 
-// 💡 新增一個安全拼接圖片網址的 function
+// 安全拼接圖片網址的 function
 const getImageUrl = (imgName: string | undefined) => {
   if (!imgName) return ''
-
-  // 移除 baseUrl 結尾的斜線，以及 imgName 開頭的斜線，再用單個斜線串接
   const base = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl
   const name = imgName.startsWith('/') ? imgName.slice(1) : imgName
-
   return `${base}/${name}`
 }
 
@@ -372,37 +368,43 @@ const activeTab = ref('art')
 const currentArtist = ref<Artist | null>(null)
 const artworks = ref<Artwork[]>([])
 
-// 💡 定義一個預設的 ID（改用你新對應的英文字串，例如第一個藝術家 Antony）
+// 💡 預設的藝術家 ID（如果網址沒傳，預設看第一位）
 const DEFAULT_ARTIST_ID = 'qtwvbe'
 
+// 🛠️ 核心邏輯：從新的巢狀結構中抓取對應藝術家與其作品
 const fetchArtistData = async (artistId: string) => {
   try {
-    // 1. 撈取該藝術家資料
-    const artistData = await artistApi.getById(artistId)
-    currentArtist.value = artistData
+    // 1. 一口氣撈取所有藝術家大陣列
+    const allArtists = await nftApi.getAllArtists()
 
-    // 2. 撈取所有作品，並過濾出該藝術家的作品
-    const allArtworks = await artworkApi.getAll()
-    artworks.value = allArtworks.filter(art => art.artistId === artistId)
+    // 2. 找到目前網址對應的藝術家
+    const foundArtist = allArtists.find(artist => artist.id === artistId)
+
+    if (foundArtist) {
+      currentArtist.value = foundArtist
+
+      // 3. 直接從藝術家身上把作品陣列（artworks）拿給收藏品區（Collection）渲染
+      artworks.value = foundArtist.artworks || []
+    } else {
+      console.warn(`找不到 ID 為 ${artistId} 的藝術家，載入防呆首位藝術家...`)
+      // 防呆：如果找不到該 ID，預設拿第一筆藝術家
+      if (allArtists.length > 0) {
+        currentArtist.value = allArtists[0] || null
+        artworks.value = allArtists[0]?.artworks || []
+      }
+    }
   } catch (error) {
     console.error('切換藝術家資料失敗:', error)
   }
 }
 
-onMounted(() => {
-  // 💡 將原本的 '1' 改為新英文字串預設值
-  const id = (route.params.id as string) || DEFAULT_ARTIST_ID
-  fetchArtistData(id)
-})
-
-// 💡 監聽路由變化
+// 💡 監聽路由變化（有 immediate: true，所以元件掛載時會自動跑第一次，不需寫 onMounted）
 watch(
   () => route.params.id,
   newId => {
-    // 💡 將原本的 '1' 改為新英文字串預設值
-    const targetId = (newId as string) || (route.params.id as string) || DEFAULT_ARTIST_ID
+    const targetId = (newId as string) || DEFAULT_ARTIST_ID
 
-    // 每次路由改變或重新整理時，先將舊資料清空，避免畫面殘留前一個藝術家的圖片
+    // 每次路由改變時先清空，優雅觸發 Skeleton Loading 動畫
     currentArtist.value = null
     artworks.value = []
 

@@ -167,35 +167,47 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import { artworkApi, type Artwork } from '@/api/artwork'
+import { nftApi, type Artist, type Artwork } from '@/api/artist'
 
-const artworks = ref<Artwork[]>([])
+// 1. 原始資料：用來存放從 API 撈回來的藝術家大陣列
+const artists = ref<Artist[]>([])
 
-// 2. 新增一個 computed，只切出前 10 筆資料 🌟
+// 2. 第一層加工 computed：把巢狀資料攤平，並補上安全防禦機制與開關狀態
+const allArtworks = computed(() => {
+  return artists.value.flatMap(artist => {
+    const artworkList = artist.artworks || []
+    return artworkList.map((artwork: Artwork) => ({
+      ...artwork,
+      // 🌟 強制建立 markets 物件結構，防禦 undefined，並注入手機版專用的 isOpen 狀態
+      markets: {
+        marketCap: artwork.markets?.marketCap ?? '0',
+        change24h: artwork.markets?.change24h ?? 0,
+        change7d: artwork.markets?.change7d ?? 0,
+        floorPrice: artwork.markets?.floorPrice ?? '0',
+        hasIcon: artwork.markets?.hasIcon ?? false,
+        owners: artwork.markets?.owners ?? '0',
+        totalSupply: artwork.markets?.totalSupply ?? '0',
+        isOpen: artwork.markets?.isOpen ?? false, // 預設關閉
+      },
+    }))
+  })
+})
+
+// 3. 第二層加工 computed：盯著攤平後的資料，只切出前 10 筆給畫面渲染 🌟
 const topTenArtworks = computed(() => {
-  return artworks.value.slice(0, 10)
+  return allArtworks.value.slice(0, 10)
 })
 
 onMounted(async () => {
   try {
-    const data = await artworkApi.getAll()
+    // 🛠️ 關鍵改動：改為撈取「所有藝術家」，因為作品現在藏在裡面
+    const data = await nftApi.getAllArtists()
+    artists.value = data
 
-    // 在寫入前，幫每個項目做預設值防禦，確保 markets 絕對不是 undefined
-    artworks.value = data.map(item => ({
-      ...item,
-      markets: item.markets || {
-        marketCap: '0',
-        change24h: 0,
-        change7d: 0,
-        floorPrice: '0',
-        hasIcon: false,
-        owners: '0',
-        totalSupply: '0',
-        isOpen: false, // 預設關閉狀態
-      },
-    }))
+    // 除錯檢查用
+    console.log('成功撈取藝術家並由 computed 自動攤平作品：', topTenArtworks.value)
   } catch (error) {
-    console.error('首頁獲取藝術品失敗:', error)
+    console.error('排行榜獲取資料失敗:', error)
   }
 })
 </script>

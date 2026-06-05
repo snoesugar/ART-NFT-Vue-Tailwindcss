@@ -746,7 +746,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import { artworkApi, type Artwork } from '@/api/artwork'
+import { nftApi, type Artwork } from '@/api/artist' // 💡 引入 Artist 型別
 import Button from '@/components/Button.vue'
 
 const artworks = ref<Artwork[]>([])
@@ -783,8 +783,13 @@ const birdArtworks = computed(() => {
 
 onMounted(async () => {
   try {
-    const data = await artworkApi.getAll()
-    artworks.value = data
+    // 🛠️ 1. 改為撈取所有藝術家資料（因為作品現在藏在藝術家物件裡）
+    const allArtists = await nftApi.getAllArtists()
+
+    // 🛠️ 2. 使用 flatMap 將每位藝術家底下的 artworks 陣列抽出來，結合成一隻大陣列
+    artworks.value = allArtists.flatMap(artist => {
+      return artist.artworks || []
+    })
   } catch (error) {
     console.error('首頁獲取藝術品失敗:', error)
   }

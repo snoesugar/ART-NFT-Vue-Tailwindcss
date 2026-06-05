@@ -315,10 +315,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue' // ⭕ 補上 watch
+import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { artistApi, type Artist } from '@/api/artist'
-import { artworkApi, type Artwork } from '@/api/artwork'
+import { nftApi, type Artist, type Artwork } from '@/api/artist' // 💡 確保引入對的型別
 import Button from '@/components/Button.vue'
 
 import { Swiper, SwiperSlide } from 'swiper/vue'
@@ -352,59 +351,78 @@ const getImageUrl = (imgName: string | undefined) => {
   return `${base}/${name}`
 }
 
-// 💡 預設的作品 ID（如果網址沒傳，預設看第 1 件）
+// 預設的作品 ID
 const DEFAULT_ARTWORK_ID = '1'
 
-// 💡 核心邏輯：根據作品 ID 撈取所有關聯資料
+// 🛠️ 核心邏輯：從新的巢狀結構中撈取並比對資料
 const loadPageData = async (artworkId: string) => {
   try {
-    // 1. 撈取全部作品資料
-    const allArtworks = await artworkApi.getAll()
+    // 1. 關鍵改動：改為撈取「所有藝術家」
+    const allArtists = await nftApi.getAllArtists()
 
-    // 2. 找到目前點擊的這件作品
+    // 2. 在前端將所有藝術家的作品攤平，並順便把 artistId 帶在作品身上（如果原本作品內沒有的話）
+    const allArtworks: Artwork[] = allArtists.flatMap(artist => {
+      const list = artist.artworks || []
+      return list.map(art => ({
+        ...art,
+        artistId: art.artistId || artist.id, // 雙重防禦確保有關聯 ID
+      }))
+    })
+
+    // 3. 尋找當前網址對應的作品
     const foundArtwork = allArtworks.find(art => art.id === artworkId)
 
     if (foundArtwork) {
       currentArtwork.value = foundArtwork
 
-      // 3. 根據這件作品的 artistId，撈出對應的藝術家資料
-      if (foundArtwork.artistId) {
-        currentArtist.value = await artistApi.getById(foundArtwork.artistId)
+      // 4. 根據作品的 artistId，直接從剛剛撈回來的 allArtists 大陣列中 find 出該藝術家
+      const foundArtist = allArtists.find(artist => artist.id === foundArtwork.artistId)
 
-        // 4. 同時找出「這位藝術家的其他作品」放在底下的 Swiper 輪播（排除掉當前畫面上這件）
-        otherArtworks.value = allArtworks.filter(
-          art => art.artistId === foundArtwork.artistId && art.id !== artworkId,
-        )
+      if (foundArtist) {
+        currentArtist.value = foundArtist
+
+        // 5. 篩選出「同一個藝術家的其他作品」（排除掉現在畫面顯示的這一件）
+        const artistWorks = foundArtist.artworks || []
+        otherArtworks.value = artistWorks.filter(art => art.id !== artworkId)
       }
     } else {
-      console.warn(`找不到 ID 為 ${artworkId} 的作品，嘗試載入防呆資料...`)
-      // 防呆：如果找不到該 ID，預設拿第一筆
+      console.warn(`找不到 ID 為 ${artworkId} 的作品，載入防呆首筆資料...`)
+      // 防呆機制：如果找不到該 ID，預設拿全部作品的第一筆
       if (allArtworks.length > 0) {
-        currentArtwork.value = allArtworks[0]
-        otherArtworks.value = allArtworks.slice(1)
-        if (allArtworks[0]?.artistId) {
-          currentArtist.value = await artistApi.getById(allArtworks[0].artistId)
+        const firstArt = allArtworks[0]
+
+        // 🌟 加上 if (firstArt) 判斷，跟 TypeScript 保證它絕對不是 undefined！
+        if (firstArt) {
+          currentArtwork.value = firstArt
+
+          // 使用 optional chaining (?.) 確保安全拿取 artistId
+          const firstArtist = allArtists.find(a => a.id === firstArt.artistId)
+
+          if (firstArtist) {
+            currentArtist.value = firstArtist
+            otherArtworks.value = (firstArtist.artworks || []).filter(art => art.id !== firstArt.id)
+          }
         }
       }
     }
   } catch (error) {
-    console.error('資料載入失敗:', error)
+    console.error('詳細頁面資料載入失敗:', error)
   }
 }
 
-// 💡 監聽路由變化：當使用者在 Other 區點擊其他作品切換路由時，重新撈資料
+// 監聽路由變化：點擊下方 Swiper 切換作品時，自動清空並重新撈取
 watch(
   () => route.params.id,
   newId => {
     const targetId = (newId as string) || DEFAULT_ARTWORK_ID
 
-    // 清空舊狀態，觸發 Template 的優雅 Skeleton 讀取畫面
+    // 清空舊狀態，順利觸發 Template 的 Loading 動畫
     currentArtwork.value = undefined
     currentArtist.value = undefined
     otherArtworks.value = []
 
     loadPageData(targetId)
   },
-  { immediate: true }, // 這裡設定 true，元件掛載時（onMounted 階段）就會自動執行第一次
+  { immediate: true },
 )
 </script>

@@ -58,21 +58,29 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { artworkApi, type Artwork } from '@/api/artwork'
+import { nftApi, type Artwork } from '@/api/artist' // 💡 引入 Artist 型別
 import Button from '@/components/Button.vue'
 
-// 新增一個明確的載入狀態變數
+// 載入狀態變數
 const isLoading = ref(true)
 const artworks = ref<Artwork[]>([])
 
 onMounted(async () => {
   try {
-    const data = await artworkApi.getAll()
-    artworks.value = data
+    // 🛠️ 1. 改為撈取所有藝術家資料（因為作品現在藏在藝術家物件裡）
+    const allArtists = await nftApi.getAllArtists()
+
+    // 🛠️ 2. 使用 flatMap 將每位藝術家底下的 artworks 陣列抽出來，結合成一隻大陣列
+    artworks.value = allArtists.flatMap(artist => {
+      return artist.artworks || []
+    })
+
+    // 除錯檢查用，可以在瀏覽器 Console 看看作品有沒有順利攤平
+    console.log('探索頁面攤平後的作品：', artworks.value)
   } catch (error) {
-    console.error('首頁獲取藝術品失敗:', error)
+    console.error('探索頁面獲取藝術品失敗:', error)
   } finally {
-    // 無論成功或失敗，API 請求結束後關閉 Loading 狀態
+    // 無論成功或失敗，結束後關閉 Loading 狀態
     isLoading.value = false
   }
 })
