@@ -129,7 +129,11 @@
       <div v-if="activeTab === 'art'">
         <div class="pt-6 md:pt-10 pb-10 md:pb-20">
           <div class="flex flex-col gap-4 md:gap-10">
-            <div class="relative flex flex-col">
+            <div
+              v-for="(series, index) in currentArtist?.artworks || []"
+              :key="series.id || index"
+              class="relative flex flex-col"
+            >
               <div
                 class="relative bg-white border border-black px-4 md:px-28 pt-8 md:pt-12 pb-8 md:pb-58 z-10"
               >
@@ -140,9 +144,9 @@
                   class="flex flex-col md:flex-row justify-between items-center md:items-end gap-4 md:gap-6"
                 >
                   <div class="max-w-190">
-                    <h2 class="text-2xl font-bold mb-4">追求者送我的花</h2>
+                    <h2 class="text-2xl font-bold mb-4">{{ series.name }}</h2>
                     <p>
-                      我又沒有特別喜歡花，為什麼不給我現金就好，擺在那也不知道要幹嘛，只好畫起來看有沒有人要買，阿不然如果真的喜歡我，把這些都買回去八。
+                      {{ series.description }}
                     </p>
                   </div>
                   <div
@@ -154,120 +158,22 @@
                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
-                  <Button></Button>
+                  <Button :to="'/filter'"></Button>
                 </div>
               </div>
 
-              <div class="hidden md:grid grid-cols-4 gap-4 px-4 md:px-28 -mt-8 md:-mt-45 z-20">
-                <div
-                  class="border-10 bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
-                >
-                  <img
-                    src="../../public/the-new-york-public-library-vBejyCBXZBY-unsplash.jpg"
-                    alt="Flower 1"
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-
-                <div
-                  class="border-10 bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
-                >
-                  <img
-                    src="../../public/art30.jpg"
-                    alt="Flower 2"
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-
-                <div
-                  class="border-10 bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
-                >
-                  <img
-                    src="../../public/art14.jpg"
-                    alt="Flower 3"
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-
-                <div
-                  class="border-10 bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
-                >
-                  <img
-                    src="../../public/art29.jpg"
-                    alt="Flower 4"
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <!-- 第二個作品區 -->
-            <div class="relative flex flex-col">
               <div
-                class="relative bg-white border border-black px-4 md:px-28 pt-8 md:pt-12 pb-8 md:pb-58 z-10"
+                v-if="series.artworkIds && series.artworkIds.length > 0"
+                class="hidden md:grid grid-cols-4 gap-4 px-4 md:px-28 -mt-8 md:-mt-45 z-20"
               >
-                <div class="absolute top-0 left-0 w-6 h-6 bg-black clip-triangle-tl"></div>
-                <div class="absolute top-0 right-0 w-6 h-6 bg-black clip-triangle-tr"></div>
-
                 <div
-                  class="flex flex-col md:flex-row justify-between items-center md:items-end gap-4 md:gap-6"
-                >
-                  <div class="max-w-190">
-                    <h2 class="text-2xl font-bold mb-4">我家窗前的鳥</h2>
-                    <p>
-                      家門前每天都有不同的小鳥，大多數的小鳥都有特殊能力，特殊能力是什麼我就不說了，希望大家能從作品感受到小鳥的快樂。
-                    </p>
-                  </div>
-                  <div
-                    class="block md:hidden border-10 bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
-                  >
-                    <img
-                      src="../../public/art27.jpg"
-                      alt="Bird 1"
-                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  <Button to="/filter"></Button>
-                </div>
-              </div>
-
-              <div class="hidden md:grid grid-cols-4 gap-4 px-4 md:px-28 -mt-8 md:-mt-45 z-20">
-                <div
+                  v-for="art in series.artworkIds.slice(0, 4)"
+                  :key="art.id"
                   class="border-10 bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
                 >
                   <img
-                    src="../../public/art27.jpg"
-                    alt="Bird 1"
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-
-                <div
-                  class="border-10 bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
-                >
-                  <img
-                    src="../../public/art20.jpg"
-                    alt="Bird 2"
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-
-                <div
-                  class="border-10 bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
-                >
-                  <img
-                    src="../../public/art26.jpg"
-                    alt="Bird 3"
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-
-                <div
-                  class="border-10 bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
-                >
-                  <img
-                    src="../../public/art22.jpg"
-                    alt="Bird 4"
+                    :src="getImageUrl(art.imgUrl)"
+                    :alt="art.title"
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
