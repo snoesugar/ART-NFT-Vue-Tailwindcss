@@ -88,7 +88,7 @@
           class="border-t border-x border-black bg-white"
         >
           <div
-            @click="item.markets.isOpen = !item.markets.isOpen"
+            @click="toggleMobileMenu(index)"
             class="flex items-center relative cursor-pointer select-none min-h-20"
           >
             <div
@@ -112,17 +112,17 @@
 
             <div
               class="absolute bottom-0 right-0 w-8 h-8 flex items-end justify-end text-white transition-colors overflow-hidden"
-              :class="item.markets.isOpen ? 'bg-primary' : 'bg-black'"
+              :class="mobileMenuStates[index] ? 'bg-primary' : 'bg-black'"
               style="clip-path: polygon(100% 0, 0 100%, 100% 100%)"
             >
               <i
                 class="fa-solid text-[10px] absolute right-1 bottom-1"
-                :class="item.markets.isOpen ? 'fa-minus' : 'fa-plus'"
+                :class="mobileMenuStates[index] ? 'fa-minus' : 'fa-plus'"
               ></i>
             </div>
           </div>
 
-          <div v-show="item.markets.isOpen" class="border-t bg-white p-4 transition-all">
+          <div v-show="mobileMenuStates[index]" class="border-t bg-white p-4 transition-all">
             <div class="grid grid-cols-3 gap-2 text-center mb-4">
               <div>
                 <div class="font-display text-sm mb-2">24h%</div>
@@ -168,7 +168,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, reactive } from 'vue'
 import { nftApi, type Artist, type Artwork } from '@/api/artist'
 import { useLoadingStore } from '@/store/loading'
 
@@ -186,13 +186,21 @@ const getImageUrl = (imgName: string | undefined) => {
 const artists = ref<Artist[]>([])
 const { show, hide } = useLoadingStore()
 
-// 2. 第一層加工 computed：把巢狀資料攤平，並補上安全防禦機制與開關狀態
+// 🔧 新增：專門管理手機版下拉選單開關狀態的 reactive 物件 (Key 為作品 index)
+const mobileMenuStates = reactive<Record<number, boolean>>({})
+
+// 🔧 新增：切換選單開關的方法
+const toggleMobileMenu = (index: number) => {
+  mobileMenuStates[index] = !mobileMenuStates[index]
+}
+
+// 2. 第一層加工 computed：把巢狀資料攤平，並補上安全防禦機制
 const allArtworks = computed(() => {
   return artists.value.flatMap(artist => {
     const artworkList = artist.artworks || []
     return artworkList.map((artwork: Artwork) => ({
       ...artwork,
-      // 強制建立 markets 物件結構，防禦 undefined，並注入手機版專用的 isOpen 狀態
+      // 強制建立 markets 物件結構，防禦 undefined
       markets: {
         marketCap: artwork.markets?.marketCap ?? '0',
         change24h: artwork.markets?.change24h ?? 0,
@@ -201,7 +209,6 @@ const allArtworks = computed(() => {
         hasIcon: artwork.markets?.hasIcon ?? false,
         owners: artwork.markets?.owners ?? '0',
         totalSupply: artwork.markets?.totalSupply ?? '0',
-        isOpen: false, // 預設關閉
       },
     }))
   })
