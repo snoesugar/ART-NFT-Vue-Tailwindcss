@@ -308,7 +308,7 @@
         </div>
 
         <div class="basis-full md:basis-3/4">
-          <div class="flex flex-row items-center mb-1">
+          <div v-if="currentArtist" class="flex flex-row items-center mb-1">
             <img
               class="h-8 w-8 object-cover rounded-full"
               :src="`/${currentArtist?.img}`"
@@ -317,38 +317,41 @@
             <span class="ml-4">{{ currentArtist?.name }}</span>
           </div>
           <div class="flex flex-col md:flex-row gap-4 md:gap-6 mb-10">
-            <div class="basis-3/5">
+            <div class="basis-4/7">
               <h1 class="text-3xl font-bold mb-2">{{ currentSeries?.name }}</h1>
               <p>
                 {{ currentSeries?.description }}
               </p>
             </div>
-            <div class="basis-2/5">
+            <div v-if="artistStats" class="basis-3/7">
               <div class="flex bg-white border">
                 <div class="relative flex-1 py-4 px-2 border-r text-center">
                   <p>項目</p>
-                  <p class="text-2xl">6.4 k</p>
+                  <p class="text-2xl">{{ artistStats.items }} k</p>
                   <div
                     class="absolute bg-white px-1 py-6 top-1/2 right-0 -translate-y-1/2 translate-x-1/2"
                   ></div>
                 </div>
                 <div class="relative flex-1 py-4 px-2 border-r text-center">
                   <p>擁有者</p>
-                  <p class="text-2xl">2.5 k</p>
+                  <p class="text-2xl">{{ artistStats.owners }} k</p>
                   <div
                     class="absolute bg-white px-1 py-6 top-1/2 right-0 -translate-y-1/2 translate-x-1/2"
                   ></div>
                 </div>
                 <div class="relative flex-1 py-4 px-2 border-r text-center">
                   <p>底價</p>
-                  <p class="text-2xl"><i class="text-lg mr-1 fa-brands fa-ethereum"></i>1.38 k</p>
+                  <p class="text-2xl">
+                    <i class="text-lg mr-1 fa-brands fa-ethereum"></i
+                    >{{ artistStats.floor_price }} k
+                  </p>
                   <div
                     class="absolute bg-white px-1 py-6 top-1/2 right-0 -translate-y-1/2 translate-x-1/2"
                   ></div>
                 </div>
                 <div class="relative flex-1 py-4 px-2 text-center">
                   <p>總額</p>
-                  <p class="text-2xl">2.8 k</p>
+                  <p class="text-2xl">{{ artistStats.total_volume }} k</p>
                 </div>
               </div>
             </div>
@@ -747,7 +750,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { nftApi, type Artwork } from '@/api/artist'
+import { nftApi, type Artwork, type ArtistStats } from '@/api/artist' // 💡 引入 ArtistStats 型別
 import { useLoadingStore } from '@/store/loading'
 import Button from '@/components/Button.vue'
 
@@ -773,9 +776,10 @@ interface FilteredArtwork extends Artwork {
 const route = useRoute()
 const artworks = ref<FilteredArtwork[]>([])
 
-// 儲存當前篩選出來的藝術家與系列資訊（用來渲染畫面上方）
-const currentArtist = ref<ArtistInfo | null | undefined>(null)
-const currentSeries = ref<SeriesInfo | null | undefined>(null)
+// 儲存當前篩選出來的藝術家、系列與統計資訊
+const currentArtist = ref<ArtistInfo | null>(null)
+const currentSeries = ref<SeriesInfo | null>(null)
+const artistStats = ref<ArtistStats | null>(null) // 💡 新增：儲存看板數據的響應式變數
 
 // 控制各個風琴下拉選單的開關
 const isOpenInternet = ref(true)
@@ -810,8 +814,6 @@ onMounted(async () => {
     // 2. 攤平資料，並同時「注入」藝術家與系列資訊
     const allArtworks: FilteredArtwork[] = allArtists.flatMap(artist => {
       const seriesList = artist.artworks || []
-
-      // 組合藝術家姓名（firstName + lastName）
       const artistName = `${artist.firstName} ${artist.lastName}`.trim()
 
       return seriesList.flatMap(series => {
@@ -819,13 +821,11 @@ onMounted(async () => {
         return artworkList.map(art => ({
           ...art,
           seriesId: series.id,
-          // 💡 注入藝術家資訊
           artistInfo: {
             id: artist.id,
             name: artistName,
             img: artist.img,
           },
-          // 💡 注入系列資訊
           seriesInfo: {
             id: series.id,
             name: series.name,
@@ -837,12 +837,11 @@ onMounted(async () => {
 
     // 3. 檢查網址有沒有帶 seriesId 參數
     const targetSeriesId = route.query.seriesId as string
-    const targetArtistId = route.query.artistId as string // 💡 多接這個參數
+    const targetArtistId = route.query.artistId as string
 
     if (targetSeriesId) {
-      // 🎯 雙重比對：不但系列 ID 要對，藝術家 ID 也要對！
+      // 🎯 雙重比對
       const filtered = allArtworks.filter(art => {
-        // 如果網址有帶 artistId，就進行雙重比對；沒帶就只比對 seriesId (相容舊寫法)
         if (targetArtistId) {
           return art.seriesId === targetSeriesId && art.artistInfo?.id === targetArtistId
         }
@@ -856,11 +855,19 @@ onMounted(async () => {
         currentArtist.value = filtered[0]?.artistInfo || null
         currentSeries.value = filtered[0]?.seriesInfo || null
       }
+
+      // 💡 4. 關鍵修正：利用網址的 artistId 或是撈到的資料，去找出該藝術家的 stats
+      const currentArtistId = targetArtistId || currentArtist.value?.id
+      if (currentArtistId) {
+        const foundArtist = allArtists.find(a => a.id === currentArtistId)
+        artistStats.value = foundArtist ? foundArtist.stats : null
+      }
     } else {
       // 預防機制
       artworks.value = allArtworks
       currentArtist.value = null
       currentSeries.value = null
+      artistStats.value = null
     }
   } catch (error) {
     console.error('Filter 頁面載入失敗:', error)
