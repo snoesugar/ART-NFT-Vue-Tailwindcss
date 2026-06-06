@@ -194,46 +194,53 @@
       <!-- 收藏品區 (已改為動態循環) -->
       <div v-if="activeTab === 'collection'">
         <div class="pt-6 md:pt-10 pb-10 md:pb-20">
-          <div class="columns-2 md:columns-4 gap-6">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 items-start">
             <div
-              v-for="item in artworks"
-              :key="item.id"
-              class="break-inside-avoid mb-6 cursor-pointer"
+              v-for="(col, colIndex) in collectionColumns"
+              :key="colIndex"
+              class="flex flex-col gap-6"
             >
               <div
-                class="relative bg-white p-2 md:p-4 border border-gray-200 shadow-sm overflow-hidden"
+                v-for="item in col"
+                :key="item.id"
+                class="cursor-pointer fade-in-up"
+                :style="{ '--animation-order': item.globalIndex }"
               >
-                <img
-                  :src="getImageUrl(item.imgUrl)"
-                  :alt="item.title"
-                  class="w-full min-h-34.75 md:min-h-70 h-auto object-cover"
-                />
-
                 <div
-                  class="absolute inset-0 bg-black/70 opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-between p-4 m-4"
+                  class="relative bg-white p-2 md:p-4 border border-gray-200 shadow-sm overflow-hidden"
                 >
-                  <div class="border border-white p-4 h-full flex flex-col">
-                    <div class="text-white">
-                      <p class="mb-4 whitespace-pre-line">
-                        {{ item.description }}
-                      </p>
+                  <img
+                    :src="getImageUrl(item.imgUrl)"
+                    :alt="item.title"
+                    class="w-full h-auto min-h-34.75 md:min-h-70 object-cover"
+                  />
 
-                      <div class="flex gap-2">
-                        <i class="fa-brands fa-ethereum"></i>
-                        {{ item.price }}
+                  <div
+                    class="absolute inset-0 bg-black/70 opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-between p-4 m-4"
+                  >
+                    <div class="border border-white p-4 h-full flex flex-col">
+                      <div class="text-white">
+                        <p class="mb-4 whitespace-pre-line">
+                          {{ item.description }}
+                        </p>
+
+                        <div class="flex gap-2">
+                          <i class="fa-brands fa-ethereum"></i>
+                          {{ item.price }}
+                        </div>
                       </div>
-                    </div>
 
-                    <Button
-                      :to="{ name: 'ArtworkIntroduction', params: { id: item.id } }"
-                      class="mt-auto ml-auto"
-                    />
+                      <Button
+                        :to="{ name: 'ArtworkIntroduction', params: { id: item.id } }"
+                        class="mt-auto ml-auto"
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="mt-2 md:mt-4 md:border-b border-black md:font-bold pb-2 md:pb-4">
-                {{ item.title }}
+                <div class="mt-2 md:mt-4 md:border-b border-black md:font-bold pb-2 md:pb-4">
+                  {{ item.title }}
+                </div>
               </div>
             </div>
           </div>
@@ -244,7 +251,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue' // ⭕ 拿掉沒用到的 onMounted
+import { ref, watch, computed, onMounted, onUnmounted } from 'vue' // ⭕ 拿掉沒用到的 onMounted
 import { useRoute } from 'vue-router'
 import { nftApi, type Artist, type Artwork } from '@/api/artist' // 💡 統一改從全新的 api/artist 引入
 import { useLoadingStore } from '@/store/loading'
@@ -315,6 +322,49 @@ watch(
   },
   { immediate: true },
 )
+
+//  排列卡片
+interface AnimatedArtwork extends Artwork {
+  globalIndex: number
+}
+
+const isMobile = ref(false)
+
+const checkScreenSize = () => {
+  isMobile.value = window.innerWidth < 768
+}
+
+// 💡 核心邏輯：將 artworks 陣列依序輪流派發給 2 欄或 4 欄
+const collectionColumns = computed(() => {
+  const colCount = isMobile.value ? 2 : 4
+  const columns: AnimatedArtwork[][] = Array.from({ length: colCount }, () => [])
+
+  const list = artworks.value || []
+
+  list.forEach((item, index) => {
+    const colIndex = index % colCount
+    const animatedItem: AnimatedArtwork = {
+      ...item,
+      globalIndex: index, // 紀錄原始排序，做為動畫延遲的基底
+    }
+
+    // 確保 columns[colIndex] 存在，避免 TypeScript 噴紅線
+    const targetColumn = columns[colIndex] || []
+    targetColumn.push(animatedItem)
+  })
+
+  return columns
+})
+
+// 註冊與移除視窗監聽
+onMounted(() => {
+  checkScreenSize()
+  window.addEventListener('resize', checkScreenSize)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', checkScreenSize)
+})
 </script>
 
 <style scoped>

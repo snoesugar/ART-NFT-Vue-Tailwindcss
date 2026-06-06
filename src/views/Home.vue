@@ -283,40 +283,48 @@
             >MORE</Button
           >
         </div>
+
         <div class="pt-6 md:pt-12 pb-10 md:pb-20">
-          <div class="columns-2 md:columns-4 gap-6">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 items-start">
             <div
-              v-for="item in displayedArtworks1to8"
-              :key="item.id"
-              class="break-inside-avoid mb-6 cursor-pointer"
+              v-for="(col, colIndex) in artworkColumns"
+              :key="colIndex"
+              class="flex flex-col gap-6"
             >
               <div
-                class="relative bg-white p-2 md:p-4 border border-gray-200 shadow-sm overflow-hidden"
+                v-for="item in col"
+                :key="item.id"
+                class="cursor-pointer fade-in-up"
+                :style="{ '--animation-order': item.globalIndex }"
               >
-                <img
-                  :src="item.imgUrl"
-                  :alt="item.title"
-                  class="w-full min-h-34.75 md:min-h-70 h-auto object-cover"
-                />
                 <div
-                  class="absolute inset-0 bg-black/70 opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-between p-4 m-4"
+                  class="relative bg-white p-2 md:p-4 border border-gray-200 shadow-sm overflow-hidden"
                 >
-                  <div class="border border-white p-4 h-full flex flex-col">
-                    <div class="text-white">
-                      <p class="mb-4 whitespace-pre-line">{{ item.description }}</p>
-                      <div class="flex gap-2">
-                        <i class="fa-brands fa-ethereum"></i> {{ item.price }}
+                  <img
+                    :src="item.imgUrl"
+                    :alt="item.title"
+                    class="w-full min-h-34.75 md:min-h-70 h-auto object-cover"
+                  />
+                  <div
+                    class="absolute inset-0 bg-black/70 opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-between p-4 m-4"
+                  >
+                    <div class="border border-white p-4 h-full flex flex-col">
+                      <div class="text-white">
+                        <p class="mb-4 whitespace-pre-line">{{ item.description }}</p>
+                        <div class="flex gap-2">
+                          <i class="fa-brands fa-ethereum"></i> {{ item.price }}
+                        </div>
                       </div>
+                      <Button
+                        :to="{ name: 'ArtworkIntroduction', params: { id: item.id } }"
+                        class="mt-auto ml-auto"
+                      />
                     </div>
-                    <Button
-                      :to="{ name: 'ArtworkIntroduction', params: { id: item.id } }"
-                      class="mt-auto ml-auto"
-                    />
                   </div>
                 </div>
-              </div>
-              <div class="mt-2 md:mt-4 md:border-b border-black md:font-bold pb-2 md:pb-4">
-                {{ item.title }}
+                <div class="mt-2 md:mt-4 md:border-b border-black md:font-bold pb-2 md:pb-4">
+                  {{ item.title }}
+                </div>
               </div>
             </div>
           </div>
@@ -349,7 +357,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, onUnmounted } from 'vue'
 import { nftApi, type Artist, type Artwork } from '@/api/artist' // 💡 請根據你實際的檔案路徑微調
 import { stepApi, type Step } from '@/api/steps'
 import { useLoadingStore } from '@/store/loading'
@@ -427,6 +435,49 @@ onMounted(async () => {
   } finally {
     hide()
   }
+})
+
+// 排列藝術品
+// 擴充型別以支援全局動畫索引
+interface AnimatedArtwork extends Artwork {
+  globalIndex: number
+}
+
+const isMobile = ref(false)
+
+const checkScreenSize = () => {
+  isMobile.value = window.innerWidth < 768
+}
+
+// 💡 將 displayedArtworks1to8 的 8 張牌輪流發給各個直欄
+const artworkColumns = computed(() => {
+  const colCount = isMobile.value ? 2 : 4
+  const columns: AnimatedArtwork[][] = Array.from({ length: colCount }, () => [])
+
+  // 安全地確保 data 存在再執行行
+  const list = displayedArtworks1to8.value || []
+
+  list.forEach((item, index) => {
+    const colIndex = index % colCount
+    const animatedItem: AnimatedArtwork = {
+      ...item,
+      globalIndex: index, // 記錄 0 ~ 7 的順序給動畫用
+    }
+
+    // 使用驚嘆號或預設值確保 TypeScript 不會報 undefined 紅線
+    columns[colIndex]!.push(animatedItem)
+  })
+
+  return columns
+})
+
+onMounted(() => {
+  checkScreenSize()
+  window.addEventListener('resize', checkScreenSize)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', checkScreenSize)
 })
 </script>
 
