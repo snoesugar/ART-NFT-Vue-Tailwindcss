@@ -4,6 +4,14 @@ import request from './request'
 // 1. 型別與介面宣告 (Interfaces & Types)
 // ==========================================
 
+// 藝術家基礎統計（對應 JSON 中的 stats）
+export interface ArtistStats {
+  items: number
+  owners: number
+  floor_price: number
+  total_volume: number
+}
+
 export interface MarketPrice {
   value: number
   currency: string
@@ -56,6 +64,7 @@ export interface Artist {
   img: string
   desc: string
   description: string
+  stats: ArtistStats
   marketStats: MarketStats
   artworks: ArtworkSeries[] // 完美對齊新 JSON 結構
 }
