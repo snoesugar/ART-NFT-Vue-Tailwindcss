@@ -206,7 +206,7 @@
                 <img
                   :src="getImageUrl(item.imgUrl)"
                   :alt="item.title"
-                  class="w-full min-h-34.75 md:min-h-63.5 h-auto object-cover"
+                  class="w-full min-h-34.75 md:min-h-70 h-auto object-cover"
                 />
 
                 <div

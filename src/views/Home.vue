@@ -296,7 +296,7 @@
                 <img
                   :src="item.imgUrl"
                   :alt="item.title"
-                  class="w-full min-h-34.75 md:min-h-63.5 h-auto object-cover"
+                  class="w-full min-h-34.75 md:min-h-70 h-auto object-cover"
                 />
                 <div
                   class="absolute inset-0 bg-black/70 opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-between p-4 m-4"
