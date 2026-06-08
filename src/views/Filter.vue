@@ -32,7 +32,7 @@
                   <span class="group-hover:text-gray-600">BNB 智能鏈</span>
                   <input
                     type="checkbox"
-                    value="bsc"
+                    value="bnb"
                     v-model="selectedNetworks"
                     class="w-4 h-4 accent-black cursor-pointer"
                   />
@@ -60,7 +60,7 @@
                   <span class="group-hover:text-gray-600">僅展示</span>
                   <input
                     type="checkbox"
-                    value="showingOnly"
+                    value="display"
                     v-model="selectedState"
                     class="w-4 h-4 accent-black cursor-pointer"
                   />
@@ -109,7 +109,7 @@
                 <input
                   type="number"
                   placeholder="最小"
-                  v-model="priceMin"
+                  v-model.number="priceMin"
                   class="w-full h-full border border-secondary rounded-none px-2 text-center focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 />
 
@@ -118,7 +118,7 @@
                 <input
                   type="number"
                   placeholder="最大"
-                  v-model="priceMax"
+                  v-model.number="priceMax"
                   class="w-full h-full border border-secondary rounded-none px-2 text-center focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 />
               </div>
@@ -129,175 +129,33 @@
           <div class="flex flex-col select-none">
             <div class="font-bold text-secondary px-6 pt-5 pb-2">屬性</div>
 
-            <div>
+            <div
+              v-for="group in attributeGroups"
+              :key="group.traitType"
+              :class="{ 'pb-4': group === attributeGroups[attributeGroups.length - 1] }"
+            >
               <button
-                @click="isOpenBreed = !isOpenBreed"
-                class="flex w-full justify-between items-center font-bold px-6 pt-4 pb-2 focus:outline-none"
-              >
-                <span>品種</span>
-                <i
-                  class="fa-solid fa-angle-down transition-transform duration-300"
-                  :class="{ 'rotate-180': isOpenBreed }"
-                ></i>
-              </button>
-              <div v-show="isOpenBreed" class="px-6 pb-4">
-                <div class="flex flex-col gap-2">
-                  <label class="flex justify-between items-center cursor-pointer group">
-                    <span class="group-hover:text-gray-600">八哥</span>
-                    <input
-                      type="checkbox"
-                      value="八哥"
-                      v-model="selectedBreeds"
-                      class="w-4 h-4 accent-black cursor-pointer"
-                    />
-                  </label>
-                  <label class="flex justify-between items-center cursor-pointer group">
-                    <span class="group-hover:text-gray-600">虎皮鸚鵡</span>
-                    <input
-                      type="checkbox"
-                      value="虎皮鸚鵡"
-                      v-model="selectedBreeds"
-                      class="w-4 h-4 accent-black cursor-pointer"
-                    />
-                  </label>
-                  <label class="flex justify-between items-center cursor-pointer group">
-                    <span class="group-hover:text-gray-600">太平洋鳥</span>
-                    <input
-                      type="checkbox"
-                      value="太平洋鳥"
-                      v-model="selectedBreeds"
-                      class="w-4 h-4 accent-black cursor-pointer"
-                    />
-                  </label>
-                  <label class="flex justify-between items-center cursor-pointer group">
-                    <span class="group-hover:text-gray-600">畫眉鳥</span>
-                    <input
-                      type="checkbox"
-                      value="畫眉鳥"
-                      v-model="selectedBreeds"
-                      class="w-4 h-4 accent-black cursor-pointer"
-                    />
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <button
-                @click="isOpenBirdCount = !isOpenBirdCount"
+                @click="toggleAttributeGroup(group.traitType)"
                 class="flex w-full justify-between items-center font-bold px-6 py-3 focus:outline-none"
               >
-                <span>鳥的數量</span>
+                <span>{{ group.traitType }}</span>
                 <i
                   class="fa-solid fa-angle-down transition-transform duration-300"
-                  :class="{ 'rotate-180': isOpenBirdCount }"
+                  :class="{ 'rotate-180': isAttributeGroupOpen(group.traitType) }"
                 ></i>
               </button>
-              <div v-show="isOpenBirdCount" class="px-6 pb-4">
+              <div v-show="isAttributeGroupOpen(group.traitType)" class="px-6 pb-4">
                 <div class="flex flex-col gap-2">
-                  <label class="flex justify-between items-center cursor-pointer group">
-                    <span class="group-hover:text-gray-600">單隻</span>
+                  <label
+                    v-for="option in group.options"
+                    :key="option"
+                    class="flex justify-between items-center cursor-pointer group"
+                  >
+                    <span class="group-hover:text-gray-600">{{ option }}</span>
                     <input
                       type="checkbox"
-                      value="1"
-                      v-model="selectedBirdCounts"
-                      class="w-4 h-4 accent-black cursor-pointer"
-                    />
-                  </label>
-                  <label class="flex justify-between items-center cursor-pointer group">
-                    <span class="group-hover:text-gray-600">兩隻</span>
-                    <input
-                      type="checkbox"
-                      value="2"
-                      v-model="selectedBirdCounts"
-                      class="w-4 h-4 accent-black cursor-pointer"
-                    />
-                  </label>
-                  <label class="flex justify-between items-center cursor-pointer group">
-                    <span class="group-hover:text-gray-600">三隻以上</span>
-                    <input
-                      type="checkbox"
-                      value="3+"
-                      v-model="selectedBirdCounts"
-                      class="w-4 h-4 accent-black cursor-pointer"
-                    />
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <button
-                @click="isOpenHasPlants = !isOpenHasPlants"
-                class="flex w-full justify-between items-center font-bold px-6 py-3 focus:outline-none"
-              >
-                <span>是否有花草</span>
-                <i
-                  class="fa-solid fa-angle-down transition-transform duration-300"
-                  :class="{ 'rotate-180': isOpenHasPlants }"
-                ></i>
-              </button>
-              <div v-show="isOpenHasPlants" class="px-6 pb-4">
-                <div class="flex flex-col gap-2">
-                  <label class="flex justify-between items-center cursor-pointer group">
-                    <span class="group-hover:text-gray-600">有花草</span>
-                    <input
-                      type="checkbox"
-                      value="yes"
-                      v-model="selectedHasPlants"
-                      class="w-4 h-4 accent-black cursor-pointer"
-                    />
-                  </label>
-                  <label class="flex justify-between items-center cursor-pointer group">
-                    <span class="group-hover:text-gray-600">純鳥類無花草</span>
-                    <input
-                      type="checkbox"
-                      value="no"
-                      v-model="selectedHasPlants"
-                      class="w-4 h-4 accent-black cursor-pointer"
-                    />
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div class="pb-4">
-              <button
-                @click="isOpenBirdColor = !isOpenBirdColor"
-                class="flex w-full justify-between items-center font-bold px-6 py-3 focus:outline-none"
-              >
-                <span>鳥的顏色</span>
-                <i
-                  class="fa-solid fa-angle-down transition-transform duration-300"
-                  :class="{ 'rotate-180': isOpenBirdColor }"
-                ></i>
-              </button>
-              <div v-show="isOpenBirdColor" class="px-6 pb-4">
-                <div class="flex flex-col gap-2">
-                  <label class="flex justify-between items-center cursor-pointer group">
-                    <span class="group-hover:text-gray-600">彩色 / 斑斕</span>
-                    <input
-                      type="checkbox"
-                      value="colorful"
-                      v-model="selectedColors"
-                      class="w-4 h-4 accent-black cursor-pointer"
-                    />
-                  </label>
-                  <label class="flex justify-between items-center cursor-pointer group">
-                    <span class="group-hover:text-gray-600">單色 / 純白</span>
-                    <input
-                      type="checkbox"
-                      value="monochrome"
-                      v-model="selectedColors"
-                      class="w-4 h-4 accent-black cursor-pointer"
-                    />
-                  </label>
-                  <label class="flex justify-between items-center cursor-pointer group">
-                    <span class="group-hover:text-gray-600">藍綠色系</span>
-                    <input
-                      type="checkbox"
-                      value="blue-green"
-                      v-model="selectedColors"
+                      :checked="isAttributeSelected(group.traitType, option)"
+                      @change="toggleAttributeFilter(group.traitType, option)"
                       class="w-4 h-4 accent-black cursor-pointer"
                     />
                   </label>
@@ -362,7 +220,7 @@
             </button>
           </div>
           <!-- 篩選最新上架 -->
-          <div v-if="artworks.length > 0" class="pt-6 md:pt-10 pb-10 md:pb-20">
+          <div v-if="filteredArtworks.length > 0" class="pt-6 md:pt-10 pb-10 md:pb-20">
             <div class="grid grid-cols-2 md:grid-cols-3 gap-6 items-start">
               <div
                 v-for="(col, colIndex) in artwork3Columns"
@@ -414,6 +272,7 @@
               </div>
             </div>
           </div>
+          <div v-else class="py-16 text-center text-secondary">沒有符合條件的作品</div>
         </div>
       </div>
       <!-- 1. 觸發按鈕（畫面上固定的「篩選條件2」按鈕） -->
@@ -421,7 +280,11 @@
         @click="isOpenFilter = true"
         class="block md:hidden fixed bottom-4 right-1/2 translate-x-1/2 z-40"
       >
-        <div class="bg-black text-white px-12 py-2">篩選條件2</div>
+        <div class="bg-black text-white px-12 py-2">
+          篩選條件<span v-if="activeFilterCount > 0" class="ml-2">
+            {{ activeFilterCount }}
+          </span>
+        </div>
       </button>
       <!-- 3. 左側滑出的篩選選單（Drawer） -->
       <div
@@ -464,7 +327,7 @@
                     <span class="group-hover:text-gray-600">BNB 智能鏈</span>
                     <input
                       type="checkbox"
-                      value="bsc"
+                      value="bnb"
                       v-model="selectedNetworks"
                       class="w-4 h-4 accent-black cursor-pointer"
                     />
@@ -492,7 +355,7 @@
                     <span class="group-hover:text-gray-600">僅展示</span>
                     <input
                       type="checkbox"
-                      value="showingOnly"
+                      value="display"
                       v-model="selectedState"
                       class="w-4 h-4 accent-black cursor-pointer"
                     />
@@ -541,7 +404,7 @@
                   <input
                     type="number"
                     placeholder="最小"
-                    v-model="priceMin"
+                    v-model.number="priceMin"
                     class="w-full h-full border border-secondary rounded-none px-2 text-center focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                   />
 
@@ -550,7 +413,7 @@
                   <input
                     type="number"
                     placeholder="最大"
-                    v-model="priceMax"
+                    v-model.number="priceMax"
                     class="w-full h-full border border-secondary rounded-none px-2 text-center focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                   />
                 </div>
@@ -561,175 +424,33 @@
             <div class="flex flex-col select-none">
               <div class="font-bold text-secondary px-6 pt-5 pb-2">屬性</div>
 
-              <div>
+              <div
+                v-for="group in attributeGroups"
+                :key="group.traitType"
+                :class="{ 'pb-4': group === attributeGroups[attributeGroups.length - 1] }"
+              >
                 <button
-                  @click="isOpenBreed = !isOpenBreed"
-                  class="flex w-full justify-between items-center font-bold px-6 pt-4 pb-2 focus:outline-none"
-                >
-                  <span>品種</span>
-                  <i
-                    class="fa-solid fa-angle-down transition-transform duration-300"
-                    :class="{ 'rotate-180': isOpenBreed }"
-                  ></i>
-                </button>
-                <div v-show="isOpenBreed" class="px-6 pb-4">
-                  <div class="flex flex-col gap-2">
-                    <label class="flex justify-between items-center cursor-pointer group">
-                      <span class="group-hover:text-gray-600">八哥</span>
-                      <input
-                        type="checkbox"
-                        value="八哥"
-                        v-model="selectedBreeds"
-                        class="w-4 h-4 accent-black cursor-pointer"
-                      />
-                    </label>
-                    <label class="flex justify-between items-center cursor-pointer group">
-                      <span class="group-hover:text-gray-600">虎皮鸚鵡</span>
-                      <input
-                        type="checkbox"
-                        value="虎皮鸚鵡"
-                        v-model="selectedBreeds"
-                        class="w-4 h-4 accent-black cursor-pointer"
-                      />
-                    </label>
-                    <label class="flex justify-between items-center cursor-pointer group">
-                      <span class="group-hover:text-gray-600">太平洋鳥</span>
-                      <input
-                        type="checkbox"
-                        value="太平洋鳥"
-                        v-model="selectedBreeds"
-                        class="w-4 h-4 accent-black cursor-pointer"
-                      />
-                    </label>
-                    <label class="flex justify-between items-center cursor-pointer group">
-                      <span class="group-hover:text-gray-600">畫眉鳥</span>
-                      <input
-                        type="checkbox"
-                        value="畫眉鳥"
-                        v-model="selectedBreeds"
-                        class="w-4 h-4 accent-black cursor-pointer"
-                      />
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <button
-                  @click="isOpenBirdCount = !isOpenBirdCount"
+                  @click="toggleAttributeGroup(group.traitType)"
                   class="flex w-full justify-between items-center font-bold px-6 py-3 focus:outline-none"
                 >
-                  <span>鳥的數量</span>
+                  <span>{{ group.traitType }}</span>
                   <i
                     class="fa-solid fa-angle-down transition-transform duration-300"
-                    :class="{ 'rotate-180': isOpenBirdCount }"
+                    :class="{ 'rotate-180': isAttributeGroupOpen(group.traitType) }"
                   ></i>
                 </button>
-                <div v-show="isOpenBirdCount" class="px-6 pb-4">
+                <div v-show="isAttributeGroupOpen(group.traitType)" class="px-6 pb-4">
                   <div class="flex flex-col gap-2">
-                    <label class="flex justify-between items-center cursor-pointer group">
-                      <span class="group-hover:text-gray-600">單隻</span>
+                    <label
+                      v-for="option in group.options"
+                      :key="option"
+                      class="flex justify-between items-center cursor-pointer group"
+                    >
+                      <span class="group-hover:text-gray-600">{{ option }}</span>
                       <input
                         type="checkbox"
-                        value="1"
-                        v-model="selectedBirdCounts"
-                        class="w-4 h-4 accent-black cursor-pointer"
-                      />
-                    </label>
-                    <label class="flex justify-between items-center cursor-pointer group">
-                      <span class="group-hover:text-gray-600">兩隻</span>
-                      <input
-                        type="checkbox"
-                        value="2"
-                        v-model="selectedBirdCounts"
-                        class="w-4 h-4 accent-black cursor-pointer"
-                      />
-                    </label>
-                    <label class="flex justify-between items-center cursor-pointer group">
-                      <span class="group-hover:text-gray-600">三隻以上</span>
-                      <input
-                        type="checkbox"
-                        value="3+"
-                        v-model="selectedBirdCounts"
-                        class="w-4 h-4 accent-black cursor-pointer"
-                      />
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <button
-                  @click="isOpenHasPlants = !isOpenHasPlants"
-                  class="flex w-full justify-between items-center font-bold px-6 py-3 focus:outline-none"
-                >
-                  <span>是否有花草</span>
-                  <i
-                    class="fa-solid fa-angle-down transition-transform duration-300"
-                    :class="{ 'rotate-180': isOpenHasPlants }"
-                  ></i>
-                </button>
-                <div v-show="isOpenHasPlants" class="px-6 pb-4">
-                  <div class="flex flex-col gap-2">
-                    <label class="flex justify-between items-center cursor-pointer group">
-                      <span class="group-hover:text-gray-600">有花草</span>
-                      <input
-                        type="checkbox"
-                        value="yes"
-                        v-model="selectedHasPlants"
-                        class="w-4 h-4 accent-black cursor-pointer"
-                      />
-                    </label>
-                    <label class="flex justify-between items-center cursor-pointer group">
-                      <span class="group-hover:text-gray-600">純鳥類無花草</span>
-                      <input
-                        type="checkbox"
-                        value="no"
-                        v-model="selectedHasPlants"
-                        class="w-4 h-4 accent-black cursor-pointer"
-                      />
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="pb-4">
-                <button
-                  @click="isOpenBirdColor = !isOpenBirdColor"
-                  class="flex w-full justify-between items-center font-bold px-6 py-3 focus:outline-none"
-                >
-                  <span>鳥的顏色</span>
-                  <i
-                    class="fa-solid fa-angle-down transition-transform duration-300"
-                    :class="{ 'rotate-180': isOpenBirdColor }"
-                  ></i>
-                </button>
-                <div v-show="isOpenBirdColor" class="px-6 pb-4">
-                  <div class="flex flex-col gap-2">
-                    <label class="flex justify-between items-center cursor-pointer group">
-                      <span class="group-hover:text-gray-600">彩色 / 斑斕</span>
-                      <input
-                        type="checkbox"
-                        value="colorful"
-                        v-model="selectedColors"
-                        class="w-4 h-4 accent-black cursor-pointer"
-                      />
-                    </label>
-                    <label class="flex justify-between items-center cursor-pointer group">
-                      <span class="group-hover:text-gray-600">單色 / 純白</span>
-                      <input
-                        type="checkbox"
-                        value="monochrome"
-                        v-model="selectedColors"
-                        class="w-4 h-4 accent-black cursor-pointer"
-                      />
-                    </label>
-                    <label class="flex justify-between items-center cursor-pointer group">
-                      <span class="group-hover:text-gray-600">藍綠色系</span>
-                      <input
-                        type="checkbox"
-                        value="blue-green"
-                        v-model="selectedColors"
+                        :checked="isAttributeSelected(group.traitType, option)"
+                        @change="toggleAttributeFilter(group.traitType, option)"
                         class="w-4 h-4 accent-black cursor-pointer"
                       />
                     </label>
@@ -755,7 +476,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed, onUnmounted } from 'vue'
+import { ref, reactive, onMounted, computed, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { nftApi, type Artwork, type ArtistStats } from '@/api/artist' // 💡 引入 ArtistStats 型別
 import { useLoadingStore } from '@/store/loading'
@@ -780,6 +501,11 @@ interface FilteredArtwork extends Artwork {
   seriesInfo?: SeriesInfo
 }
 
+interface AttributeGroup {
+  traitType: string
+  options: string[]
+}
+
 const route = useRoute()
 const artworks = ref<FilteredArtwork[]>([])
 
@@ -792,25 +518,161 @@ const artistStats = ref<ArtistStats | null>(null) // 💡 新增：儲存看板�
 const isOpenInternet = ref(true)
 const isOpenState = ref(true)
 const isOpenPrice = ref(true)
-const isOpenBreed = ref(true)
-const isOpenBirdCount = ref(false)
-const isOpenHasPlants = ref(false)
-const isOpenBirdColor = ref(false)
 const isOpenFilter = ref(false)
 
 // 資料綁定變數
 const selectedNetworks = ref<string[]>([])
 const selectedState = ref<string[]>([])
-const selectedBreeds = ref<string[]>(['虎皮鸚鵡'])
-const selectedBirdCounts = ref<string[]>([])
-const selectedHasPlants = ref<string[]>([])
-const selectedColors = ref<string[]>([])
+const selectedAttributes = reactive<Record<string, string[]>>({})
+const openAttributeGroups = reactive<Record<string, boolean>>({})
 
 const priceCurrency = ref('ETH')
 const priceMin = ref<number | null>(null)
 const priceMax = ref<number | null>(null)
 
 const { show, hide } = useLoadingStore()
+
+const attributeGroups = computed<AttributeGroup[]>(() => {
+  const groups = new Map<string, Set<string>>()
+
+  artworks.value.forEach(artwork => {
+    const attributes = artwork.attributes || []
+
+    attributes.forEach(attribute => {
+      const traitType = String(attribute.trait_type)
+      const value = String(attribute.value)
+
+      if (!traitType || !value) return
+
+      if (!groups.has(traitType)) {
+        groups.set(traitType, new Set<string>())
+      }
+
+      groups.get(traitType)?.add(value)
+    })
+  })
+
+  return Array.from(groups, ([traitType, values]) => ({
+    traitType,
+    options: Array.from(values),
+  }))
+})
+
+const normalizeNetwork = (network?: string) => {
+  const normalized = network?.toLowerCase() || ''
+  if (['bnb', 'bsc', 'binance', 'binance smart chain'].includes(normalized)) return 'bnb'
+  if (['ethereum', 'eth'].includes(normalized)) return 'ethereum'
+  return normalized
+}
+
+const toPriceNumber = (value: number | string | null) => {
+  if (value === null || value === '') return null
+
+  const numberValue = Number(value)
+  return Number.isNaN(numberValue) ? null : numberValue
+}
+
+const isAttributeGroupOpen = (traitType: string) => {
+  return openAttributeGroups[traitType] ?? true
+}
+
+const toggleAttributeGroup = (traitType: string) => {
+  openAttributeGroups[traitType] = !isAttributeGroupOpen(traitType)
+}
+
+const isAttributeSelected = (traitType: string, value: string) => {
+  return selectedAttributes[traitType]?.includes(value) ?? false
+}
+
+const toggleAttributeFilter = (traitType: string, value: string) => {
+  const values = selectedAttributes[traitType] || []
+
+  if (values.includes(value)) {
+    selectedAttributes[traitType] = values.filter(selectedValue => selectedValue !== value)
+    return
+  }
+
+  selectedAttributes[traitType] = [...values, value]
+}
+
+watch(attributeGroups, groups => {
+  const validGroups = new Map(groups.map(group => [group.traitType, group.options]))
+
+  Object.keys(selectedAttributes).forEach(traitType => {
+    const options = validGroups.get(traitType)
+
+    if (!options) {
+      delete selectedAttributes[traitType]
+      return
+    }
+
+    selectedAttributes[traitType] = (selectedAttributes[traitType] || []).filter(value =>
+      options.includes(value),
+    )
+  })
+
+  groups.forEach(group => {
+    selectedAttributes[group.traitType] ||= []
+    openAttributeGroups[group.traitType] ??= true
+  })
+})
+
+const filteredArtworks = computed(() => {
+  const minPrice = toPriceNumber(priceMin.value)
+  const maxPrice = toPriceNumber(priceMax.value)
+
+  return artworks.value.filter(artwork => {
+    const matchesNetwork =
+      selectedNetworks.value.length === 0 ||
+      selectedNetworks.value.includes(normalizeNetwork(artwork.blockchain))
+
+    const matchesState =
+      selectedState.value.length === 0 || selectedState.value.includes(artwork.saleStatus || '')
+
+    const matchesMinPrice = minPrice === null || artwork.price >= minPrice
+    const matchesMaxPrice = maxPrice === null || artwork.price <= maxPrice
+
+    const matchesAttributes = Object.entries(selectedAttributes).every(
+      ([traitType, selectedValues]) => {
+        if (selectedValues.length === 0) return true
+
+        return (artwork.attributes || []).some(attribute => {
+          return (
+            String(attribute.trait_type) === traitType &&
+            selectedValues.includes(String(attribute.value))
+          )
+        })
+      },
+    )
+
+    return matchesNetwork && matchesState && matchesMinPrice && matchesMaxPrice && matchesAttributes
+  })
+})
+
+// 手機板篩選
+// 🌟 核心：即時計算目前到底選了幾個條件
+const activeFilterCount = computed(() => {
+  let count = 0
+
+  // 1. 計算網路勾選數
+  count += selectedNetworks.value.length
+
+  // 2. 計算狀態勾選數
+  count += selectedState.value.length
+
+  // 3. 計算價格是否有輸入 (有輸入算一個)
+  if (priceMin.value !== null) count++
+  if (priceMax.value !== null) count++
+
+  // 4. 計算動態屬性 (例如：主色調勾了2個、是否有花草勾了1個，共算 3 個)
+  Object.values(selectedAttributes).forEach(selectedValues => {
+    if (Array.isArray(selectedValues)) {
+      count += selectedValues.length
+    }
+  })
+
+  return count
+})
 
 onMounted(async () => {
   try {
@@ -884,7 +746,7 @@ onMounted(async () => {
 })
 
 // 排列卡片
-interface AnimatedArtwork extends Artwork {
+interface AnimatedArtwork extends FilteredArtwork {
   globalIndex: number
 }
 
@@ -899,7 +761,7 @@ const artwork3Columns = computed(() => {
   const colCount = isMobile.value ? 2 : 3 // 這裡配合你的 md:grid-cols-3 改為 3 欄
   const columns: AnimatedArtwork[][] = Array.from({ length: colCount }, () => [])
 
-  const list = artworks.value || []
+  const list = filteredArtworks.value || []
 
   list.forEach((item, index) => {
     const colIndex = index % colCount

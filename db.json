@@ -656,6 +656,12 @@
               "description": "橘藍線條錯綜複雜，\n像極了我那剪不斷、理還亂的下班打卡紀錄。",
               "imgUrl": "art33.jpg",
               "categories": ["colorful", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "主體色", "value": "黑色" },
+                { "trait_type": "流體類型", "value": "線條" }
+              ],
               "markets": {
                 "marketCap": "840.22",
                 "change24h": -0.45,
@@ -674,6 +680,12 @@
               "description": "桃紅與暴躁翠藍的激烈碰撞，\n完美重現我週一早上的精神狀態。",
               "imgUrl": "art34.jpg",
               "categories": ["colorful", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "display",
+              "attributes": [
+                { "trait_type": "主體色", "value": "彩色" },
+                { "trait_type": "流體類型", "value": "潑漆" }
+              ],
               "markets": {
                 "marketCap": "952.40",
                 "change24h": 3.12,
@@ -692,6 +704,12 @@
               "description": "在幽暗的藍黑中猛然噴出橘紅烈火\n——俗稱「表面沒事，內心暴怒」。",
               "imgUrl": "art35.jpg",
               "categories": ["colorful", "all"],
+              "blockchain": "BNB",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "主體色", "value": "藍色" },
+                { "trait_type": "流體類型", "value": "油畫" }
+              ],
               "markets": {
                 "marketCap": "710.15",
                 "change24h": -1.25,
@@ -710,6 +728,12 @@
               "description": "粉藍交織的療癒美夢，\n通常只存在於週五晚上到週六早上的這段時間。",
               "imgUrl": "art36.jpg",
               "categories": ["colorful", "all"],
+              "blockchain": "BNB",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "主體色", "value": "藍色" },
+                { "trait_type": "流體類型", "value": "暈染" }
+              ],
               "markets": {
                 "marketCap": "1120.60",
                 "change24h": 5.74,
@@ -728,6 +752,12 @@
               "description": "奔放的暖橘線條與黑色波紋，\n像極了特休被取消時內心燃起的熊熊烈火。",
               "imgUrl": "art37.jpg",
               "categories": ["colorful", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "display",
+              "attributes": [
+                { "trait_type": "主體色", "value": "黃色" },
+                { "trait_type": "流體類型", "value": "線條" }
+              ],
               "markets": {
                 "marketCap": "890.50",
                 "change24h": 0.85,

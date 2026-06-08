@@ -120,7 +120,8 @@
                       ><span class="text-secondary font-display">#{{ currentArtwork.id }}</span>
                     </div>
                     <div class="flex justify-between items-center">
-                      <span>合約地址</span><span class="text-secondary">青藍金剛鸚鵡</span>
+                      <span>合約地址</span
+                      ><span class="text-secondary">{{ currentArtist.contractAddress }}</span>
                     </div>
                   </div>
                 </div>

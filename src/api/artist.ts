@@ -48,6 +48,8 @@ export interface Artwork {
   description: string
   imgUrl: string
   categories: string[]
+  blockchain?: string
+  saleStatus?: string
   attributes?: Attribute[] // 💡 完美補上動態屬性的型別定義
   markets: Market
 }
