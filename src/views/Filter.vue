@@ -169,7 +169,7 @@
           <div v-if="currentArtist" class="flex flex-row items-center mb-1">
             <img
               class="h-8 w-8 object-cover rounded-full"
-              :src="`/${currentArtist?.img}`"
+              :src="getImageUrl(currentArtist?.img)"
               :alt="currentArtist?.name"
             />
             <span class="ml-4">{{ currentArtist?.name }}</span>
@@ -531,6 +531,16 @@ const priceMin = ref<number | null>(null)
 const priceMax = ref<number | null>(null)
 
 const { show, hide } = useLoadingStore()
+
+const baseUrl = import.meta.env.VITE_BASE_URL || '/ART-NFT-Vue-Tailwindcss/'
+
+// 安全拼接圖片網址的 function
+const getImageUrl = (imgName: string | undefined) => {
+  if (!imgName) return ''
+  const base = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl
+  const name = imgName.startsWith('/') ? imgName.slice(1) : imgName
+  return `${base}/${name}`
+}
 
 const attributeGroups = computed<AttributeGroup[]>(() => {
   const groups = new Map<string, Set<string>>()
