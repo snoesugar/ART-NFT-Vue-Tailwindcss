@@ -56,7 +56,10 @@
       <div class="pt-6">
         <div class="md:columns-2 gap-6 space-y-6 [column-fill:balance]">
           <!-- 屬性 -->
-          <div class="bg-white border break-inside-avoid inline-block w-full mb-6">
+          <div
+            v-if="currentArtwork.attributes && currentArtwork.attributes.length > 0"
+            class="bg-white border break-inside-avoid inline-block w-full mb-6"
+          >
             <button
               @click="isOpenProperty = !isOpenProperty"
               class="flex w-full justify-between items-center font-bold p-4 md:p-6 focus:outline-none"
@@ -75,21 +78,13 @@
                 <div class="px-4 md:px-6 py-6 border-t">
                   <div class="flex flex-col gap-2">
                     <!-- 💡 屬性分類動態讀取 (若 API 含有 categories 陣列則渲染，否則顯示預設) -->
-                    <div class="flex justify-between items-center pb-2 border-b border-primary-bg">
-                      <span>品種</span>
-                      <span class="text-secondary">{{
-                        currentArtwork.categories?.[0] || '青藍金剛鸚鵡'
-                      }}</span>
-                    </div>
-                    <div class="flex justify-between items-center pb-2 border-b border-primary-bg">
-                      <span>鳥的數量</span>
-                      <span class="text-secondary font-display">2隻</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                      <span>鳥的顏色</span>
-                      <span class="text-secondary">{{
-                        currentArtwork.categories?.[1] || '藍色'
-                      }}</span>
+                    <div
+                      v-for="(attr, index) in currentArtwork.attributes"
+                      :key="index"
+                      class="flex justify-between items-center pb-2 border-b border-primary-bg"
+                    >
+                      <span>{{ attr.trait_type }}</span>
+                      <span class="text-secondary">{{ attr.value }}</span>
                     </div>
                   </div>
                 </div>
@@ -117,7 +112,8 @@
                 <div class="px-4 md:px-6 py-6 border-t">
                   <div class="flex flex-col gap-2">
                     <div class="flex justify-between items-center pb-2 border-b border-primary-bg">
-                      <span>擁有者</span><span class="text-secondary">0xa543x…1283</span>
+                      <span>擁有者</span
+                      ><span class="text-secondary">{{ currentArtist.walletAddress }}</span>
                     </div>
                     <div class="flex justify-between items-center pb-2 border-b border-primary-bg">
                       <span>代幣ID</span

@@ -4,7 +4,11 @@ import request from './request'
 // 1. 型別與介面宣告 (Interfaces & Types)
 // ==========================================
 
-// 藝術家基礎統計（對應 JSON 中的 stats）
+export interface Attribute {
+  trait_type: string
+  value: string | number
+}
+
 export interface ArtistStats {
   items: number
   owners: number
@@ -44,6 +48,7 @@ export interface Artwork {
   description: string
   imgUrl: string
   categories: string[]
+  attributes?: Attribute[] // 💡 完美補上動態屬性的型別定義
   markets: Market
 }
 
@@ -61,6 +66,7 @@ export interface Artist {
   firstName: string
   lastName: string
   walletAddress: string
+  contractAddress: string
   img: string
   desc: string
   description: string
