@@ -34,6 +34,12 @@
               "description": "眼睛，總是吸引著我們的注意力，\n看、被看，也許眼睛裡有著從另一個世界看我們的世界。",
               "imgUrl": "art01.jpg",
               "categories": ["abstract", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "display",
+              "attributes": [
+                { "trait_type": "主色調", "value": "橘色" },
+                { "trait_type": "是否有人", "value": "有" }
+              ],
               "markets": {
                 "marketCap": "1,021.09",
                 "change24h": 83.49,
@@ -52,6 +58,12 @@
               "description": "海洋的奧秘向我們揭示了深不可測的一面，\n它的深度——反映了我們的恐懼、同時也吸引著我們。",
               "imgUrl": "art02.jpg",
               "categories": ["abstract", "all"],
+              "blockchain": "BNB",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "主色調", "value": "藍色" },
+                { "trait_type": "是否有人", "value": "無" }
+              ],
               "markets": {
                 "marketCap": "1,400.59",
                 "change24h": -3.92,
@@ -70,6 +82,12 @@
               "description": "唯一想擁有的人，\n唯一不可以擁有的。",
               "imgUrl": "art09.jpg",
               "categories": ["abstract", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "主色調", "value": "彩色" },
+                { "trait_type": "是否有人", "value": "無" }
+              ],
               "markets": {
                 "marketCap": "1,850.00",
                 "change24h": -12.45,
@@ -88,6 +106,12 @@
               "description": "體內的理性細胞早就全數陣亡，\n現在掌管大腦的是「想太多」和「算了」。",
               "imgUrl": "art16.jpg",
               "categories": ["abstract", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "主色調", "value": "藍色" },
+                { "trait_type": "是否有人", "value": "無" }
+              ],
               "markets": {
                 "marketCap": "420.20",
                 "change24h": 54.49,
@@ -113,6 +137,12 @@
               "description": "外表看起來在探討存在的本質，\n內心其實只是在想午餐要吃什麼。",
               "imgUrl": "art05.jpg",
               "categories": ["classic", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "display",
+              "attributes": [
+                { "trait_type": "主色調", "value": "灰色" },
+                { "trait_type": "是否有人", "value": "有" }
+              ],
               "markets": {
                 "marketCap": "1,105.42",
                 "change24h": -4.15,
@@ -131,6 +161,12 @@
               "description": "在被世界觀看之前，\n我早就對鏡子彩排了無數次。",
               "imgUrl": "art04.jpg",
               "categories": ["classic", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "主色調", "value": "藍色" },
+                { "trait_type": "是否有人", "value": "有" }
+              ],
               "markets": {
                 "marketCap": "954.12",
                 "change24h": 12.34,
@@ -149,6 +185,12 @@
               "description": "禁果不是她摘的，\n但罪名往往留給最美的人。",
               "imgUrl": "art10.jpg",
               "categories": ["classic", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "主色調", "value": "白色" },
+                { "trait_type": "是否有人", "value": "有" }
+              ],
               "markets": {
                 "marketCap": "1,299.99",
                 "change24h": 18.75,
@@ -167,6 +209,12 @@
               "description": "孤獨是神話，\n也是現代靈魂唯一的奢侈品。",
               "imgUrl": "art11.jpg",
               "categories": ["classic", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "主色調", "value": "黑色" },
+                { "trait_type": "是否有人", "value": "有" }
+              ],
               "markets": {
                 "marketCap": "2,450.33",
                 "change24h": 34.21,
@@ -185,6 +233,12 @@
               "description": "如果悲傷可以變現，\n我早已是這座城市最富有的人。",
               "imgUrl": "art12.jpg",
               "categories": ["classic", "all"],
+              "blockchain": "BNB",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "主色調", "value": "灰色" },
+                { "trait_type": "是否有人", "value": "有" }
+              ],
               "markets": {
                 "marketCap": "921.42",
                 "change24h": -9.43,
@@ -234,6 +288,13 @@
               "description": "這句話跟「下次約吃飯」一樣，\n都是當代最大的謊言。",
               "imgUrl": "art03.jpg",
               "categories": ["nature", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "display",
+              "attributes": [
+                { "trait_type": "是否為風景", "value": "是" },
+                { "trait_type": "風景是否有樹", "value": "否" },
+                { "trait_type": "是否有人", "value": "否" }
+              ],
               "markets": {
                 "marketCap": "1,224.88",
                 "change24h": -9.23,
@@ -252,6 +313,13 @@
               "description": "明知道那陣風吹完就走，\n我還是把襯衫扣子多解開了兩顆。",
               "imgUrl": "art06.jpg",
               "categories": ["nature", "all"],
+              "blockchain": "BNB",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "是否為風景", "value": "是" },
+                { "trait_type": "風景是否有樹", "value": "是" },
+                { "trait_type": "是否有人", "value": "否" }
+              ],
               "markets": {
                 "marketCap": "1,524.89",
                 "change24h": 80.49,
@@ -270,6 +338,13 @@
               "description": "聽話的小孩得到了乖巧，\n野小孩得到了整個世界。",
               "imgUrl": "art19.jpg",
               "categories": ["nature", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "display",
+              "attributes": [
+                { "trait_type": "是否為風景", "value": "是" },
+                { "trait_type": "風景是否有樹", "value": "是" },
+                { "trait_type": "是否有人", "value": "是" }
+              ],
               "markets": {
                 "marketCap": "1,340.80",
                 "change24h": -5.62,
@@ -288,6 +363,13 @@
               "description": "生活就像這些密密麻麻的藤蔓，\n你以為理順了這條，回頭看發現後面早就打了死結。",
               "imgUrl": "art31.jpg",
               "categories": ["nature", "all"],
+              "blockchain": "BNB",
+              "saleStatus": "display",
+              "attributes": [
+                { "trait_type": "是否為風景", "value": "否" },
+                { "trait_type": "風景是否有樹", "value": "否" },
+                { "trait_type": "是否有人", "value": "否" }
+              ],
               "markets": {
                 "marketCap": "695.40",
                 "change24h": 8.12,
@@ -313,6 +395,13 @@
               "description": "看著水裡游得自由自在的魚，\n才驚覺自己才是那個被生活困在魚缸裡的人。",
               "imgUrl": "art07.jpg",
               "categories": ["animal", "fish", "all"],
+              "blockchain": "BNB",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "動物種類", "value": "魚" },
+                { "trait_type": "動物種數", "value": "三隻以上" },
+                { "trait_type": "動物是否會飛", "value": "否" }
+              ],
               "markets": {
                 "marketCap": "642.18",
                 "change24h": 5.88,
@@ -331,6 +420,13 @@
               "description": "在主子踩上鍵盤之前，\n你永遠不知道它下一秒要刪掉你哪份報告。",
               "imgUrl": "art08.jpg",
               "categories": ["animal", "cat", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "display",
+              "attributes": [
+                { "trait_type": "動物種類", "value": "貓" },
+                { "trait_type": "動物種數", "value": "一隻" },
+                { "trait_type": "動物是否會飛", "value": "否" }
+              ],
               "markets": {
                 "marketCap": "770.23",
                 "change24h": 23.49,
@@ -349,6 +445,13 @@
               "description": "不是心碎的聲音，\n值到期待再次被摔碎的鈍痛。",
               "imgUrl": "art27.jpg",
               "categories": ["animal", "bird", "all"],
+              "blockchain": "BNB",
+              "saleStatus": "display",
+              "attributes": [
+                { "trait_type": "動物種類", "value": "鳥" },
+                { "trait_type": "動物種數", "value": "一隻" },
+                { "trait_type": "動物是否會飛", "value": "是" }
+              ],
               "markets": {
                 "marketCap": "720.90",
                 "change24h": 45.32,
@@ -367,6 +470,13 @@
               "description": "我們在同一個枝頭看著天空，\n心裡卻想著各自要飛往的遠方。",
               "imgUrl": "art20.jpg",
               "categories": ["animal", "bird", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "display",
+              "attributes": [
+                { "trait_type": "動物種類", "value": "鳥" },
+                { "trait_type": "動物種數", "value": "二隻" },
+                { "trait_type": "動物是否會飛", "value": "是" }
+              ],
               "markets": {
                 "marketCap": "1,180.25",
                 "change24h": 2.14,
@@ -416,6 +526,12 @@
               "description": "跟「下次約吃飯」一樣，\n都是當代最大的謊言：『我今晚要早點睡』。",
               "imgUrl": "art13.jpg",
               "categories": ["classic", "all"],
+              "blockchain": "BNB",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "是否有花", "value": "有" },
+                { "trait_type": "是否有人", "value": "否" }
+              ],
               "markets": {
                 "marketCap": "812.50",
                 "change24h": -1.25,
@@ -434,6 +550,12 @@
               "description": "掉一地的不是麵包屑，\n是我被生活一碰就碎的成年人體面。",
               "imgUrl": "art14.jpg",
               "categories": ["classic", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "是否有花", "value": "有" },
+                { "trait_type": "是否有人", "value": "否" }
+              ],
               "markets": {
                 "marketCap": "888.88",
                 "change24h": 20.49,
@@ -452,6 +574,12 @@
               "description": "嘴上說著一切隨緣，\n心裡其實是誰也看不上眼。",
               "imgUrl": "art15.jpg",
               "categories": ["classic", "all"],
+              "blockchain": "BNB",
+              "saleStatus": "display",
+              "attributes": [
+                { "trait_type": "是否有花", "value": "否" },
+                { "trait_type": "是否有人", "value": "是" }
+              ],
               "markets": {
                 "marketCap": "745.20",
                 "change24h": 0.52,
@@ -470,6 +598,12 @@
               "description": "耳機一戴，誰也不愛。\n這世界的破事通通與我無關。",
               "imgUrl": "art17.jpg",
               "categories": ["classic", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "是否有花", "value": "否" },
+                { "trait_type": "是否有人", "value": "是" }
+              ],
               "markets": {
                 "marketCap": "1,050.60",
                 "change24h": -8.12,
@@ -488,6 +622,12 @@
               "description": "肉體在點頭開會，\n靈魂早就去大氣層外快樂飄蕩。",
               "imgUrl": "art32.jpg",
               "categories": ["classic", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "是否有花", "value": "否" },
+                { "trait_type": "是否有人", "value": "是" }
+              ],
               "markets": {
                 "marketCap": "840.22",
                 "change24h": -0.45,
@@ -634,6 +774,12 @@
               "description": "將盛開的時光凝結在瓶中，\n試圖在冰冷的畫布上留住最後一絲溫柔。",
               "imgUrl": "art18.jpg",
               "categories": ["classic", "all"],
+              "blockchain": "BNB",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "是否有花", "value": "有" },
+                { "trait_type": "是否有人", "value": "否" }
+              ],
               "markets": {
                 "marketCap": "620.45",
                 "change24h": 14.28,
@@ -652,6 +798,12 @@
               "description": "花開得再燦爛奪目，\n也掩蓋不了那張卡片上讓人尷尬的錯字。",
               "imgUrl": "art29.jpg",
               "categories": ["classic", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "display",
+              "attributes": [
+                { "trait_type": "是否有花", "value": "有" },
+                { "trait_type": "是否有人", "value": "否" }
+              ],
               "markets": {
                 "marketCap": "1,774.19",
                 "change24h": 220.49,
@@ -670,6 +822,12 @@
               "description": "這不是藝術，\n這是我燃燒生命後留下的骨灰罈。",
               "imgUrl": "art30.jpg",
               "categories": ["classic", "all"],
+              "blockchain": "BNB",
+              "saleStatus": "display",
+              "attributes": [
+                { "trait_type": "是否有花", "value": "有" },
+                { "trait_type": "是否有人", "value": "否" }
+              ],
               "markets": {
                 "marketCap": "610.15",
                 "change24h": -2.34,
@@ -688,6 +846,12 @@
               "description": "眾神在雲端交織，\n而我在地上加班到升天。",
               "imgUrl": "art38.jpg",
               "categories": ["classic", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "是否有花", "value": "否" },
+                { "trait_type": "是否有人", "value": "有" }
+              ],
               "markets": {
                 "marketCap": "354.5",
                 "change24h": -2.85,
@@ -706,6 +870,12 @@
               "description": "看不見雙彩虹沒關係，\n就像我也看不見戶頭的餘額。",
               "imgUrl": "art39.jpg",
               "categories": ["classic", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "是否有花", "value": "否" },
+                { "trait_type": "是否有人", "value": "是" }
+              ],
               "markets": {
                 "marketCap": "610.15",
                 "change24h": -2.34,
@@ -724,6 +894,12 @@
               "description": "他不是在思索未知，\n他只是抬頭忍住不讓眼淚掉下來。",
               "imgUrl": "art40.jpg",
               "categories": ["classic", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "是否有花", "value": "否" },
+                { "trait_type": "是否有人", "value": "是" }
+              ],
               "markets": {
                 "marketCap": "610.15",
                 "change24h": -2.34,
@@ -749,6 +925,12 @@
               "description": "禁果不是她摘的，\n但罪名往往留給最美的人。",
               "imgUrl": "art21.jpg",
               "categories": ["bird", "all"],
+              "blockchain": "BNB",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "鳥的數量", "value": "二隻" },
+                { "trait_type": "是否有葉子", "value": "否" }
+              ],
               "markets": {
                 "marketCap": "1,205.50",
                 "change24h": 25.6,
@@ -767,6 +949,12 @@
               "description": "把憂鬱倒進杯子裡，\n今晚我們在泡沫裡滅頂。",
               "imgUrl": "art22.jpg",
               "categories": ["bird", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "display",
+              "attributes": [
+                { "trait_type": "鳥的數量", "value": "三隻以上" },
+                { "trait_type": "是否有葉子", "value": "是" }
+              ],
               "markets": {
                 "marketCap": "530.12",
                 "change24h": -3.45,
@@ -785,6 +973,12 @@
               "description": "如果悲傷可以變現，\n我早已是這座城市最富有的人。",
               "imgUrl": "art23.jpg",
               "categories": ["bird", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "鳥的數量", "value": "二隻" },
+                { "trait_type": "是否有葉子", "value": "是" }
+              ],
               "markets": {
                 "marketCap": "980.66",
                 "change24h": 11.52,
@@ -803,6 +997,12 @@
               "description": "這句話跟「下次約吃飯」一樣，\n都是當代最大的謊言。",
               "imgUrl": "art24.jpg",
               "categories": ["bird", "all"],
+              "blockchain": "BNB",
+              "saleStatus": "display",
+              "attributes": [
+                { "trait_type": "鳥的數量", "value": "一隻" },
+                { "trait_type": "是否有葉子", "value": "是" }
+              ],
               "markets": {
                 "marketCap": "890.11",
                 "change24h": -14.2,
@@ -821,6 +1021,12 @@
               "description": "在被世界觀看之前，\n我早就對鏡子彩排了無數次。",
               "imgUrl": "art25.jpg",
               "categories": ["bird", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "鳥的數量", "value": "二隻" },
+                { "trait_type": "是否有葉子", "value": "是" }
+              ],
               "markets": {
                 "marketCap": "915.30",
                 "change24h": 4.75,
@@ -870,6 +1076,12 @@
               "description": "上班是滿腔熱血的漸層，\n下班只剩靈魂被抽乾的死白。",
               "imgUrl": "art28.jpg",
               "categories": ["abstract", "all"],
+              "blockchain": "BNB",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "主體色", "value": "紫色" },
+                { "trait_type": "流體類型", "value": "水流" }
+              ],
               "markets": {
                 "marketCap": "502.31",
                 "change24h": 13.49,
@@ -888,6 +1100,12 @@
               "description": "在生活裡拼命理清思緒，\n最後發現自己只是在原地加班。",
               "imgUrl": "art41.jpg",
               "categories": ["abstract", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "主體色", "value": "白色" },
+                { "trait_type": "流體類型", "value": "圓圈" }
+              ],
               "markets": {
                 "marketCap": "620.50",
                 "change24h": 2.15,
@@ -906,6 +1124,12 @@
               "description": "只要熬夜加班到理智模糊，\n就分不清流出來的是眼淚還是色彩。",
               "imgUrl": "art42.jpg",
               "categories": ["abstract", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "主體色", "value": "橘色" },
+                { "trait_type": "流體類型", "value": "條狀" }
+              ],
               "markets": {
                 "marketCap": "510.20",
                 "change24h": -1.45,
@@ -924,6 +1148,12 @@
               "description": "密密麻麻的幾何圖形，\n就像我今年被拆成無數個半天、一小時來請的特休，拼都拼不完整。",
               "imgUrl": "art47.jpg",
               "categories": ["abstract", "all"],
+              "blockchain": "BNB",
+              "saleStatus": "display",
+              "attributes": [
+                { "trait_type": "主體色", "value": "灰色" },
+                { "trait_type": "流體類型", "value": "菱形" }
+              ],
               "markets": {
                 "marketCap": "640.00",
                 "change24h": -2.8,
@@ -942,6 +1172,12 @@
               "description": "狂亂的彩色線條、毫无章法的塗鴉。\n不用懷疑，這就是星期五下午被客戶改了十次稿後的精神狀態。",
               "imgUrl": "art48.jpg",
               "categories": ["abstract", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "主體色", "value": "白色" },
+                { "trait_type": "流體類型", "value": "潑漆" }
+              ],
               "markets": {
                 "marketCap": "670.40",
                 "change24h": 4.56,
@@ -967,6 +1203,12 @@
               "description": "站在枝頭看著早上的陽光，\n心裡第一百次思考離職的可能。",
               "imgUrl": "art26.jpg",
               "categories": ["bird", "all"],
+              "blockchain": "BNB",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "鳥的數量", "value": "三隻以上" },
+                { "trait_type": "是否有植物", "value": "是" }
+              ],
               "markets": {
                 "marketCap": "580.40",
                 "change24h": -6.18,
@@ -986,6 +1228,12 @@
               "description": "幾隻鳥在空中亂飛，\n像極了早上 8 點 59 分卡在電梯口、為了全勤獎金拼命的我們。",
               "imgUrl": "art43.jpg",
               "categories": ["bird", "all"],
+              "blockchain": "BNB",
+              "saleStatus": "display",
+              "attributes": [
+                { "trait_type": "鳥的數量", "value": "三隻以上" },
+                { "trait_type": "是否有植物", "value": "否" }
+              ],
               "markets": {
                 "marketCap": "590.00",
                 "change24h": -3.22,
@@ -1004,6 +1252,12 @@
               "description": "一個人（鳥）默默待在枝頭。別問我在幹嘛，\n我只是在等主管下班，好讓我可以光明正大走人。",
               "imgUrl": "art44.jpg",
               "categories": ["bird", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "display",
+              "attributes": [
+                { "trait_type": "鳥的數量", "value": "一隻" },
+                { "trait_type": "是否有植物", "value": "是" }
+              ],
               "markets": {
                 "marketCap": "480.15",
                 "change24h": 0.88,
@@ -1022,6 +1276,12 @@
               "description": "遠遠的那隻鳥一直盯著這邊看。\n別裝了，趕快把分頁切換回 Excel，他走過來了。",
               "imgUrl": "art45.jpg",
               "categories": ["bird", "all"],
+              "blockchain": "ethereum",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "鳥的數量", "value": "二隻" },
+                { "trait_type": "是否有植物", "value": "是" }
+              ],
               "markets": {
                 "marketCap": "610.80",
                 "change24h": -5.12,
@@ -1040,6 +1300,12 @@
               "description": "三五成群聚在樹枝上。\n通常這個畫面出現時，不是在聊八卦，就是在團購下午茶。",
               "imgUrl": "art46.jpg",
               "categories": ["bird", "all"],
+              "blockchain": "BNB",
+              "saleStatus": "auction",
+              "attributes": [
+                { "trait_type": "鳥的數量", "value": "三隻以上" },
+                { "trait_type": "是否有植物", "value": "是" }
+              ],
               "markets": {
                 "marketCap": "560.30",
                 "change24h": 1.24,
