@@ -17,29 +17,38 @@ ART NFT 是一個以「硬派黑邊線條感」與「新潮流美學」打造的
 
 ## 🛠️ 技術重點與解決方案
 
-本專案由我獨立負責前端架構開發，針對複雜視窗版型、動態瀑布流渲染以及跨組件動畫同步問題，提出了以下解決方案：
+本專案由我獨立負責前端架構開發，針對複雜視窗版型、動態瀑布流渲染、跨組件動畫同步以及異步資料流處理，提出了以下解決方案：
 
 ### 1. 進階響應式佈局與動態 Swiper 特效 (UI/UX Optimization)
 
 - **3D 置中焦點輪播**：使用 `Swiper.js` 實作熱門藝術家輪播。透過深度客製化 CSS 核心，在桌機端實現「非 Active 卡片自動縮小至 48% 並套用去色濾鏡 (`grayscale`)」的強烈視覺對比，並在 Active 時還原，完美聚焦當前藝術家。
 - **雙端獨立排行佈局**：針對市價排行榜 (Ranking)，在桌機端採用大圖懸浮遮罩、手機端則自動重組為高度為 `22.5 (90px)` 的精緻橫向列表，兼顧雙端操作體驗。
 
-### 2. 高效能不規則瀑布流渲染 (Performance & Layout)
+### 2. 資料解耦、異步 API 渲染與屬性篩選機制 (Data Flow & Filtering)
+
+- **非同步 API 資料渲染**：為模擬真實後端數據交互，將原本寫死在模板中的靜態資料完全抽離，改以 **API 非同步請求（Fetch/Axios Mock）** 方式驅動視圖渲染。這不僅實現了視覺（UI）與資料（Data）的徹底解耦，也大幅提升了後續對接真實後端 API 的擴充性。
+- **多維度作品屬性篩選器**：在藝術品探索頁面中，新增了**「作品屬性篩選」功能**。利用 Vue 的 `computed` 計算屬性對 API 回傳的原始資料進行高效能的響應式過濾，讓使用者能依據不同藝術風格、媒介或標籤，秒級篩選出目標作品，優化平台探索體驗。
+
+### 3. 全局狀態管理優化 (Global State Management)
+
+- **Loading 狀態 Store 化**：針對異步資料載入時的骨架屏（Skeleton）或加載動畫，將原本分散在各個組件內部的 `isLoading` 局部狀態，統一收納至 **Store 狀態管理資料夾** 中。透過集中式管理全局 Loading 狀態，確保跨頁面、跨組件在進行 API 請求時，加載體驗能達到完美同步與狀態可預測性。
+
+### 4. 高效能不規則瀑布流渲染 (Performance & Layout)
 
 - **CSS Masonry 實作**：最新藝術品 (Artwork) 區塊利用 Tailwind CSS 的多欄位佈局 (`columns-2 md:columns-4`)，解決傳統 Flexbox 無法完美包容不規則圖片高度的問題。
 - **動態遮罩優化**：針對瀑布流卡片，封裝獨立的絕對定位漸變遮罩，在滑鼠懸浮時順暢觸發詳情與以太幣 (ETH) 價格資訊，減少瀏覽器重繪 (Repaint) 的效能消耗。
 
-### 3. 強型別資料結構與模組化管理 (TypeScript Integration)
+### 5. 強型別資料結構與模組化管理 (TypeScript Integration)
 
-- **資料結構化定義**：全面導入 **TypeScript**，針對 `artists`（藝術家）、`artworks`（藝術品）及 `steps`（引導步驟）建立嚴格的 Interface 型別定義，確保資料流從資料來源到 UI 渲染的型別安全。
+- **資料結構化定義**：全面導入 **TypeScript**，針對 API 回傳的 `artists`（藝術家）、`artworks`（藝術品，含篩選屬性型別）及 `steps`（引導步驟）建立嚴格的 Interface 型別定義，確保資料流從 API 請求到 UI 渲染的型別安全。
 - **靜態資源優化**：利用 Vite 的 `new URL(..., import.meta.url).href` 語法動態解析本地圖片路徑，確保專案在打包 (Build) 部署後圖片資源路徑依然完全正確。
 
-### 4. 零散組件解耦與原子化樣式
+### 6. 零散組件解耦與原子化樣式
 
 - **組件化設計**：將全站的核心操作按鈕抽象化封裝為 `Button.vue` 組件，透過 `props` 控制背景色屬性（如 `:isPrimaryBg`）與邊框顯示（如 `:hasBorder`），達成高複用性。
 - **Tailwind 自訂擴充**：在組件中大量運用微調後的原子化 class（如 `h-93.5`、`gap-6.25`、`pb-40!`），確保設計稿的精細度能 100% 還原。
 
-### 5. 自動化整合與持續部署 (CI/CD Pipeline)
+### 7. 自動化整合與持續部署 (CI/CD Pipeline)
 
 - **GitHub Actions 自動化工作流**：撰寫 `deploy.yml` 配置持續整合與部署流程。每當代碼推送到遠端分支時，自動觸發基於 `ubuntu-latest` 環境的虛擬機流水線。
 - **無感構建與部署 (Build & Deploy)**：工作流中嚴格限定環境（Node.js 20、啟用 `npm ci` 快取加速），自動執行強型別檢查與生產環境打包 (`npm run build`)。編譯完成後，透過 `actions/upload-pages-artifact` 零時差將 `./dist` 靜態資源發布至 GitHub Pages，落實標準的敏捷開發流程。
@@ -49,6 +58,7 @@ ART NFT 是一個以「硬派黑邊線條感」與「新潮流美學」打造的
 ## 🚀 技術棧 (Tech Stack)
 
 - **Framework:** Vue 3 (Composition API / `<script setup>`)
+- **State Management:** Pinia / Store Pattern (Global Loading State)
 - **Build Tool:** Vite
 - **Programming Language:** TypeScript
 - **Styling:** Tailwind CSS, Custom CSS / Scoped CSS
