@@ -42,13 +42,13 @@
                 { "trait_type": "是否有人", "value": "有" }
               ],
               "markets": {
-                "marketCap": "1,021.09",
+                "marketCap": 1021.09,
                 "change24h": 83.49,
                 "change7d": -1.43,
-                "floorPrice": "2.90",
+                "floorPrice": 2.9,
                 "hasIcon": true,
-                "owners": "32.1K",
-                "totalSupply": "1000",
+                "owners": 32100,
+                "totalSupply": 1000,
                 "isOpen": false
               }
             },
@@ -66,13 +66,13 @@
                 { "trait_type": "是否有人", "value": "無" }
               ],
               "markets": {
-                "marketCap": "1,400.59",
+                "marketCap": 1400.59,
                 "change24h": -3.92,
                 "change7d": -13.43,
-                "floorPrice": "2.90",
+                "floorPrice": 2.9,
                 "hasIcon": true,
-                "owners": "32.1K",
-                "totalSupply": "1000",
+                "owners": 32100,
+                "totalSupply": 1000,
                 "isOpen": false
               }
             },
@@ -90,13 +90,13 @@
                 { "trait_type": "是否有人", "value": "無" }
               ],
               "markets": {
-                "marketCap": "1,850.00",
+                "marketCap": 1850.0,
                 "change24h": -12.45,
                 "change7d": 45.12,
-                "floorPrice": "3.50",
+                "floorPrice": 3.5,
                 "hasIcon": true,
-                "owners": "41.3K",
-                "totalSupply": "1500",
+                "owners": 41300,
+                "totalSupply": 1500,
                 "isOpen": true
               }
             },
@@ -114,13 +114,13 @@
                 { "trait_type": "是否有人", "value": "無" }
               ],
               "markets": {
-                "marketCap": "420.20",
+                "marketCap": 420.2,
                 "change24h": 54.49,
                 "change7d": -12.43,
-                "floorPrice": "2.90",
+                "floorPrice": 2.9,
                 "hasIcon": true,
-                "owners": "32.1K",
-                "totalSupply": "1000",
+                "owners": 32100,
+                "totalSupply": 1000,
                 "isOpen": false
               }
             }
@@ -145,13 +145,13 @@
                 { "trait_type": "是否有人", "value": "有" }
               ],
               "markets": {
-                "marketCap": "1,105.42",
+                "marketCap": 1105.42,
                 "change24h": -4.15,
                 "change7d": 14.82,
-                "floorPrice": "2.10",
+                "floorPrice": 2.1,
                 "hasIcon": false,
-                "owners": "24.2K",
-                "totalSupply": "1000",
+                "owners": 24200,
+                "totalSupply": 1000,
                 "isOpen": true
               }
             },
@@ -169,13 +169,13 @@
                 { "trait_type": "是否有人", "value": "有" }
               ],
               "markets": {
-                "marketCap": "954.12",
+                "marketCap": 954.12,
                 "change24h": 12.34,
                 "change7d": 5.67,
-                "floorPrice": "1.80",
+                "floorPrice": 1.8,
                 "hasIcon": true,
-                "owners": "18.5K",
-                "totalSupply": "1200",
+                "owners": 18500,
+                "totalSupply": 1200,
                 "isOpen": false
               }
             },
@@ -193,13 +193,13 @@
                 { "trait_type": "是否有人", "value": "有" }
               ],
               "markets": {
-                "marketCap": "1,299.99",
+                "marketCap": 1299.99,
                 "change24h": 18.75,
                 "change7d": -3.48,
-                "floorPrice": "2.80",
+                "floorPrice": 2.8,
                 "hasIcon": true,
-                "owners": "28.9K",
-                "totalSupply": "1000",
+                "owners": 28900,
+                "totalSupply": 1000,
                 "isOpen": false
               }
             },
@@ -217,13 +217,13 @@
                 { "trait_type": "是否有人", "value": "有" }
               ],
               "markets": {
-                "marketCap": "2,450.33",
+                "marketCap": 2450.33,
                 "change24h": 34.21,
                 "change7d": 112.05,
-                "floorPrice": "5.00",
+                "floorPrice": 5.0,
                 "hasIcon": true,
-                "owners": "52.4K",
-                "totalSupply": "500",
+                "owners": 52400,
+                "totalSupply": 500,
                 "isOpen": true
               }
             },
@@ -241,13 +241,13 @@
                 { "trait_type": "是否有人", "value": "有" }
               ],
               "markets": {
-                "marketCap": "921.42",
+                "marketCap": 921.42,
                 "change24h": -9.43,
                 "change7d": 183.49,
-                "floorPrice": "2.90",
+                "floorPrice": 2.9,
                 "hasIcon": true,
-                "owners": "32.1K",
-                "totalSupply": "1000",
+                "owners": 32100,
+                "totalSupply": 1000,
                 "isOpen": false
               }
             }
@@ -298,13 +298,13 @@
                 { "trait_type": "是否有人", "value": "否" }
               ],
               "markets": {
-                "marketCap": "1,224.88",
+                "marketCap": 1224.88,
                 "change24h": -9.23,
                 "change7d": -20.43,
-                "floorPrice": "2.90",
+                "floorPrice": 2.9,
                 "hasIcon": true,
-                "owners": "32.1K",
-                "totalSupply": "1000",
+                "owners": 32100,
+                "totalSupply": 1000,
                 "isOpen": true
               }
             },
@@ -323,13 +323,13 @@
                 { "trait_type": "是否有人", "value": "否" }
               ],
               "markets": {
-                "marketCap": "1,524.89",
+                "marketCap": 1524.89,
                 "change24h": 80.49,
                 "change7d": -2.43,
-                "floorPrice": "90.23",
+                "floorPrice": 90.23,
                 "hasIcon": false,
-                "owners": "32.1K",
-                "totalSupply": "1000",
+                "owners": 32100,
+                "totalSupply": 1000,
                 "isOpen": false
               }
             },
@@ -348,13 +348,13 @@
                 { "trait_type": "是否有人", "value": "是" }
               ],
               "markets": {
-                "marketCap": "1,340.80",
+                "marketCap": 1340.8,
                 "change24h": -5.62,
                 "change7d": 31.4,
-                "floorPrice": "3.10",
+                "floorPrice": 3.1,
                 "hasIcon": true,
-                "owners": "27.4K",
-                "totalSupply": "1000",
+                "owners": 27400,
+                "totalSupply": 1000,
                 "isOpen": true
               }
             },
@@ -373,13 +373,13 @@
                 { "trait_type": "是否有人", "value": "否" }
               ],
               "markets": {
-                "marketCap": "695.40",
+                "marketCap": 695.4,
                 "change24h": 8.12,
                 "change7d": 15.34,
-                "floorPrice": "1.65",
+                "floorPrice": 1.65,
                 "hasIcon": true,
-                "owners": "14.8K",
-                "totalSupply": "1000",
+                "owners": 14800,
+                "totalSupply": 1000,
                 "isOpen": true
               }
             }
@@ -405,13 +405,13 @@
                 { "trait_type": "動物是否會飛", "value": "否" }
               ],
               "markets": {
-                "marketCap": "642.18",
+                "marketCap": 642.18,
                 "change24h": 5.88,
                 "change7d": -8.11,
-                "floorPrice": "1.50",
+                "floorPrice": 1.5,
                 "hasIcon": true,
-                "owners": "15.4K",
-                "totalSupply": "800",
+                "owners": 15400,
+                "totalSupply": 800,
                 "isOpen": false
               }
             },
@@ -430,13 +430,13 @@
                 { "trait_type": "動物是否會飛", "value": "否" }
               ],
               "markets": {
-                "marketCap": "770.23",
+                "marketCap": 770.23,
                 "change24h": 23.49,
                 "change7d": 30.23,
-                "floorPrice": "2.90",
+                "floorPrice": 2.9,
                 "hasIcon": true,
-                "owners": "32.1K",
-                "totalSupply": "1000",
+                "owners": 32100,
+                "totalSupply": 1000,
                 "isOpen": false
               }
             },
@@ -455,13 +455,13 @@
                 { "trait_type": "動物是否會飛", "value": "是" }
               ],
               "markets": {
-                "marketCap": "720.90",
+                "marketCap": 720.9,
                 "change24h": 45.32,
                 "change7d": 88.15,
-                "floorPrice": "2.30",
+                "floorPrice": 2.3,
                 "hasIcon": true,
-                "owners": "16.4K",
-                "totalSupply": "1000",
+                "owners": 16400,
+                "totalSupply": 1000,
                 "isOpen": true
               }
             },
@@ -480,13 +480,13 @@
                 { "trait_type": "動物是否會飛", "value": "是" }
               ],
               "markets": {
-                "marketCap": "1,180.25",
+                "marketCap": 1180.25,
                 "change24h": 2.14,
                 "change7d": -11.02,
-                "floorPrice": "2.95",
+                "floorPrice": 2.95,
                 "hasIcon": true,
-                "owners": "23.1K",
-                "totalSupply": "1000",
+                "owners": 23100,
+                "totalSupply": 1000,
                 "isOpen": false
               }
             }
@@ -536,13 +536,13 @@
                 { "trait_type": "是否有人", "value": "否" }
               ],
               "markets": {
-                "marketCap": "812.50",
+                "marketCap": 812.5,
                 "change24h": -1.25,
                 "change7d": -15.33,
-                "floorPrice": "2.00",
+                "floorPrice": 2.0,
                 "hasIcon": false,
-                "owners": "19.8K",
-                "totalSupply": "1000",
+                "owners": 19800,
+                "totalSupply": 1000,
                 "isOpen": false
               }
             },
@@ -560,13 +560,13 @@
                 { "trait_type": "是否有人", "value": "否" }
               ],
               "markets": {
-                "marketCap": "888.88",
+                "marketCap": 888.88,
                 "change24h": 20.49,
                 "change7d": -0.43,
-                "floorPrice": "2.90",
+                "floorPrice": 2.9,
                 "hasIcon": true,
-                "owners": "32.1K",
-                "totalSupply": "1000",
+                "owners": 32100,
+                "totalSupply": 1000,
                 "isOpen": false
               }
             },
@@ -584,13 +584,13 @@
                 { "trait_type": "是否有人", "value": "是" }
               ],
               "markets": {
-                "marketCap": "745.20",
+                "marketCap": 745.2,
                 "change24h": 0.52,
                 "change7d": 4.19,
-                "floorPrice": "1.95",
+                "floorPrice": 1.95,
                 "hasIcon": true,
-                "owners": "14.2K",
-                "totalSupply": "1000",
+                "owners": 14200,
+                "totalSupply": 1000,
                 "isOpen": false
               }
             },
@@ -608,13 +608,13 @@
                 { "trait_type": "是否有人", "value": "是" }
               ],
               "markets": {
-                "marketCap": "1,050.60",
+                "marketCap": 1050.6,
                 "change24h": -8.12,
                 "change7d": 22.45,
-                "floorPrice": "2.40",
+                "floorPrice": 2.4,
                 "hasIcon": true,
-                "owners": "21.7K",
-                "totalSupply": "1000",
+                "owners": 21700,
+                "totalSupply": 1000,
                 "isOpen": true
               }
             },
@@ -632,13 +632,13 @@
                 { "trait_type": "是否有人", "value": "是" }
               ],
               "markets": {
-                "marketCap": "840.22",
+                "marketCap": 840.22,
                 "change24h": -0.45,
                 "change7d": 12.89,
-                "floorPrice": "1.70",
+                "floorPrice": 1.7,
                 "hasIcon": true,
-                "owners": "16.2K",
-                "totalSupply": "1000",
+                "owners": 16200,
+                "totalSupply": 1000,
                 "isOpen": false
               }
             }
@@ -663,13 +663,13 @@
                 { "trait_type": "流體類型", "value": "線條" }
               ],
               "markets": {
-                "marketCap": "840.22",
+                "marketCap": 840.22,
                 "change24h": -0.45,
                 "change7d": 12.89,
-                "floorPrice": "1.70",
+                "floorPrice": 1.7,
                 "hasIcon": true,
-                "owners": "16.2K",
-                "totalSupply": "1000",
+                "owners": 16200,
+                "totalSupply": 1000,
                 "isOpen": false
               }
             },
@@ -687,13 +687,13 @@
                 { "trait_type": "流體類型", "value": "潑漆" }
               ],
               "markets": {
-                "marketCap": "952.40",
+                "marketCap": 952.4,
                 "change24h": 3.12,
                 "change7d": 15.45,
-                "floorPrice": "1.95",
+                "floorPrice": 1.95,
                 "hasIcon": true,
-                "owners": "18.5K",
-                "totalSupply": "1200",
+                "owners": 18500,
+                "totalSupply": 1200,
                 "isOpen": true
               }
             },
@@ -711,13 +711,13 @@
                 { "trait_type": "流體類型", "value": "油畫" }
               ],
               "markets": {
-                "marketCap": "710.15",
+                "marketCap": 710.15,
                 "change24h": -1.25,
                 "change7d": 8.33,
-                "floorPrice": "1.45",
+                "floorPrice": 1.45,
                 "hasIcon": true,
-                "owners": "12.1K",
-                "totalSupply": "800",
+                "owners": 12100,
+                "totalSupply": 800,
                 "isOpen": false
               }
             },
@@ -735,13 +735,13 @@
                 { "trait_type": "流體類型", "value": "暈染" }
               ],
               "markets": {
-                "marketCap": "1120.60",
+                "marketCap": 1120.6,
                 "change24h": 5.74,
                 "change7d": 24.18,
-                "floorPrice": "2.20",
+                "floorPrice": 2.2,
                 "hasIcon": true,
-                "owners": "22.4K",
-                "totalSupply": "1500",
+                "owners": 22400,
+                "totalSupply": 1500,
                 "isOpen": true
               }
             },
@@ -759,13 +759,13 @@
                 { "trait_type": "流體類型", "value": "線條" }
               ],
               "markets": {
-                "marketCap": "890.50",
+                "marketCap": 890.5,
                 "change24h": 0.85,
                 "change7d": 11.2,
-                "floorPrice": "1.80",
+                "floorPrice": 1.8,
                 "hasIcon": true,
-                "owners": "14.8K",
-                "totalSupply": "1000",
+                "owners": 14800,
+                "totalSupply": 1000,
                 "isOpen": true
               }
             }
@@ -815,13 +815,13 @@
                 { "trait_type": "是否有人", "value": "否" }
               ],
               "markets": {
-                "marketCap": "620.45",
+                "marketCap": 620.45,
                 "change24h": 14.28,
                 "change7d": -2.15,
-                "floorPrice": "1.50",
+                "floorPrice": 1.5,
                 "hasIcon": false,
-                "owners": "12.6K",
-                "totalSupply": "2000",
+                "owners": 12600,
+                "totalSupply": 2000,
                 "isOpen": false
               }
             },
@@ -839,13 +839,13 @@
                 { "trait_type": "是否有人", "value": "否" }
               ],
               "markets": {
-                "marketCap": "1,774.19",
+                "marketCap": 1774.19,
                 "change24h": 220.49,
                 "change7d": -2.43,
-                "floorPrice": "2.90",
+                "floorPrice": 2.9,
                 "hasIcon": true,
-                "owners": "32.1K",
-                "totalSupply": "1000",
+                "owners": 32100,
+                "totalSupply": 1000,
                 "isOpen": false
               }
             },
@@ -863,13 +863,13 @@
                 { "trait_type": "是否有人", "value": "否" }
               ],
               "markets": {
-                "marketCap": "610.15",
+                "marketCap": 610.15,
                 "change24h": -2.34,
                 "change7d": -9.81,
-                "floorPrice": "1.50",
+                "floorPrice": 1.5,
                 "hasIcon": false,
-                "owners": "11.9K",
-                "totalSupply": "1000",
+                "owners": 11900,
+                "totalSupply": 1000,
                 "isOpen": false
               }
             },
@@ -887,13 +887,13 @@
                 { "trait_type": "是否有人", "value": "有" }
               ],
               "markets": {
-                "marketCap": "354.5",
+                "marketCap": 354.5,
                 "change24h": -2.85,
                 "change7d": -10.81,
-                "floorPrice": "2.50",
+                "floorPrice": 2.5,
                 "hasIcon": false,
-                "owners": "11.9K",
-                "totalSupply": "1000",
+                "owners": 11900,
+                "totalSupply": 1000,
                 "isOpen": false
               }
             },
@@ -911,13 +911,13 @@
                 { "trait_type": "是否有人", "value": "是" }
               ],
               "markets": {
-                "marketCap": "610.15",
+                "marketCap": 610.15,
                 "change24h": -2.34,
                 "change7d": -9.81,
-                "floorPrice": "1.50",
+                "floorPrice": 1.5,
                 "hasIcon": false,
-                "owners": "11.9K",
-                "totalSupply": "1000",
+                "owners": 11900,
+                "totalSupply": 1000,
                 "isOpen": false
               }
             },
@@ -935,13 +935,13 @@
                 { "trait_type": "是否有人", "value": "是" }
               ],
               "markets": {
-                "marketCap": "610.15",
+                "marketCap": 610.15,
                 "change24h": -2.34,
                 "change7d": -9.81,
-                "floorPrice": "1.50",
+                "floorPrice": 1.5,
                 "hasIcon": false,
-                "owners": "11.9K",
-                "totalSupply": "1000",
+                "owners": 11900,
+                "totalSupply": 1000,
                 "isOpen": false
               }
             }
@@ -966,13 +966,13 @@
                 { "trait_type": "是否有葉子", "value": "否" }
               ],
               "markets": {
-                "marketCap": "1,205.50",
+                "marketCap": 1205.5,
                 "change24h": 25.6,
                 "change7d": 18.9,
-                "floorPrice": "3.00",
+                "floorPrice": 3.0,
                 "hasIcon": true,
-                "owners": "25.6K",
-                "totalSupply": "1000",
+                "owners": 25600,
+                "totalSupply": 1000,
                 "isOpen": true
               }
             },
@@ -990,13 +990,13 @@
                 { "trait_type": "是否有葉子", "value": "是" }
               ],
               "markets": {
-                "marketCap": "530.12",
+                "marketCap": 530.12,
                 "change24h": -3.45,
                 "change7d": -7.89,
-                "floorPrice": "1.45",
+                "floorPrice": 1.45,
                 "hasIcon": false,
-                "owners": "11.2K",
-                "totalSupply": "1500",
+                "owners": 11200,
+                "totalSupply": 1500,
                 "isOpen": false
               }
             },
@@ -1014,13 +1014,13 @@
                 { "trait_type": "是否有葉子", "value": "是" }
               ],
               "markets": {
-                "marketCap": "980.66",
+                "marketCap": 980.66,
                 "change24h": 11.52,
                 "change7d": 42.18,
-                "floorPrice": "2.20",
+                "floorPrice": 2.2,
                 "hasIcon": true,
-                "owners": "19.3K",
-                "totalSupply": "1000",
+                "owners": 19300,
+                "totalSupply": 1000,
                 "isOpen": false
               }
             },
@@ -1038,13 +1038,13 @@
                 { "trait_type": "是否有葉子", "value": "是" }
               ],
               "markets": {
-                "marketCap": "890.11",
+                "marketCap": 890.11,
                 "change24h": -14.2,
                 "change7d": -5.32,
-                "floorPrice": "2.00",
+                "floorPrice": 2.0,
                 "hasIcon": true,
-                "owners": "17.8K",
-                "totalSupply": "1000",
+                "owners": 17800,
+                "totalSupply": 1000,
                 "isOpen": true
               }
             },
@@ -1062,13 +1062,13 @@
                 { "trait_type": "是否有葉子", "value": "是" }
               ],
               "markets": {
-                "marketCap": "915.30",
+                "marketCap": 915.3,
                 "change24h": 4.75,
                 "change7d": 12.6,
-                "floorPrice": "2.10",
+                "floorPrice": 2.1,
                 "hasIcon": false,
-                "owners": "20.1K",
-                "totalSupply": "1000",
+                "owners": 20100,
+                "totalSupply": 1000,
                 "isOpen": false
               }
             }
@@ -1118,13 +1118,13 @@
                 { "trait_type": "流體類型", "value": "水流" }
               ],
               "markets": {
-                "marketCap": "502.31",
+                "marketCap": 502.31,
                 "change24h": 13.49,
                 "change7d": 50.23,
-                "floorPrice": "2.90",
+                "floorPrice": 2.9,
                 "hasIcon": true,
-                "owners": "32.1K",
-                "totalSupply": "1000",
+                "owners": 32100,
+                "totalSupply": 1000,
                 "isOpen": false
               }
             },
@@ -1142,13 +1142,13 @@
                 { "trait_type": "流體類型", "value": "圓圈" }
               ],
               "markets": {
-                "marketCap": "620.50",
+                "marketCap": 620.5,
                 "change24h": 2.15,
                 "change7d": -5.34,
-                "floorPrice": "1.65",
+                "floorPrice": 1.65,
                 "hasIcon": true,
-                "owners": "14.2K",
-                "totalSupply": "1200",
+                "owners": 14200,
+                "totalSupply": 1200,
                 "isOpen": true
               }
             },
@@ -1166,13 +1166,13 @@
                 { "trait_type": "流體類型", "value": "條狀" }
               ],
               "markets": {
-                "marketCap": "510.20",
+                "marketCap": 510.2,
                 "change24h": -1.45,
                 "change7d": -12.18,
-                "floorPrice": "1.20",
+                "floorPrice": 1.2,
                 "hasIcon": true,
-                "owners": "11.8K",
-                "totalSupply": "1200",
+                "owners": 11800,
+                "totalSupply": 1200,
                 "isOpen": false
               }
             },
@@ -1190,13 +1190,13 @@
                 { "trait_type": "流體類型", "value": "菱形" }
               ],
               "markets": {
-                "marketCap": "640.00",
+                "marketCap": 640.0,
                 "change24h": -2.8,
                 "change7d": -11.12,
-                "floorPrice": "1.70",
+                "floorPrice": 1.7,
                 "hasIcon": true,
-                "owners": "16.2K",
-                "totalSupply": "1200",
+                "owners": 16200,
+                "totalSupply": 1200,
                 "isOpen": false
               }
             },
@@ -1214,13 +1214,13 @@
                 { "trait_type": "流體類型", "value": "潑漆" }
               ],
               "markets": {
-                "marketCap": "670.40",
+                "marketCap": 670.4,
                 "change24h": 4.56,
                 "change7d": 2.15,
-                "floorPrice": "1.85",
+                "floorPrice": 1.85,
                 "hasIcon": true,
-                "owners": "17.5K",
-                "totalSupply": "1200",
+                "owners": 17500,
+                "totalSupply": 1200,
                 "isOpen": true
               }
             }
@@ -1245,17 +1245,16 @@
                 { "trait_type": "是否有植物", "value": "是" }
               ],
               "markets": {
-                "marketCap": "580.40",
+                "marketCap": 580.04,
                 "change24h": -6.18,
                 "change7d": -18.42,
-                "floorPrice": "1.40",
+                "floorPrice": 1.4,
                 "hasIcon": true,
-                "owners": "13.5K",
-                "totalSupply": "1200",
+                "owners": 13500,
+                "totalSupply": 1200,
                 "isOpen": false
               }
             },
-
             {
               "id": "art-043",
               "title": "集體趕著打卡的我們",
@@ -1270,13 +1269,13 @@
                 { "trait_type": "是否有植物", "value": "否" }
               ],
               "markets": {
-                "marketCap": "590.00",
+                "marketCap": 590.0,
                 "change24h": -3.22,
                 "change7d": -15.6,
-                "floorPrice": "1.35",
+                "floorPrice": 1.35,
                 "hasIcon": true,
-                "owners": "13.1K",
-                "totalSupply": "1200",
+                "owners": 13100,
+                "totalSupply": 1200,
                 "isOpen": false
               }
             },
@@ -1294,13 +1293,13 @@
                 { "trait_type": "是否有植物", "value": "是" }
               ],
               "markets": {
-                "marketCap": "480.15",
+                "marketCap": 480.15,
                 "change24h": 0.88,
                 "change7d": -9.45,
-                "floorPrice": "1.10",
+                "floorPrice": 1.1,
                 "hasIcon": true,
-                "owners": "9.5K",
-                "totalSupply": "1200",
+                "owners": 9500,
+                "totalSupply": 1200,
                 "isOpen": true
               }
             },
@@ -1318,13 +1317,13 @@
                 { "trait_type": "是否有植物", "value": "是" }
               ],
               "markets": {
-                "marketCap": "610.80",
+                "marketCap": 610.8,
                 "change24h": -5.12,
                 "change7d": -19.3,
-                "floorPrice": "1.50",
+                "floorPrice": 1.5,
                 "hasIcon": true,
-                "owners": "15.0K",
-                "totalSupply": "1200",
+                "owners": 15000,
+                "totalSupply": 1200,
                 "isOpen": false
               }
             },
@@ -1342,13 +1341,13 @@
                 { "trait_type": "是否有植物", "value": "是" }
               ],
               "markets": {
-                "marketCap": "560.30",
+                "marketCap": 560.3,
                 "change24h": 1.24,
                 "change7d": -7.85,
-                "floorPrice": "1.30",
+                "floorPrice": 1.3,
                 "hasIcon": true,
-                "owners": "12.4K",
-                "totalSupply": "1200",
+                "owners": 12400,
+                "totalSupply": 1200,
                 "isOpen": true
               }
             }

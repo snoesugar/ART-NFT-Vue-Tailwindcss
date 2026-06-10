@@ -44,7 +44,8 @@
 
               <td class="py-4 px-4 text-right">
                 <span class="inline-flex items-center gap-1">
-                  <i class="fa-brands fa-ethereum mr-2"></i> {{ item.markets?.marketCap }}
+                  <i class="fa-brands fa-ethereum mr-2"></i>
+                  {{ formatMarketCap(item.markets?.marketCap) }}
                 </span>
               </td>
 
@@ -70,7 +71,7 @@
               </td>
 
               <td class="py-4 px-4 text-right">
-                {{ item.markets?.owners }}
+                {{ formatOwners(item.markets.owners) }}
               </td>
 
               <td class="py-4 px-6 text-right">
@@ -107,7 +108,8 @@
             </div>
 
             <div class="absolute right-4 top-1/2 -translate-y-1/2 text-xl text-right pr-2">
-              <i class="fa-brands fa-ethereum mr-2"></i> {{ item.markets?.marketCap }}
+              <i class="fa-brands fa-ethereum mr-2"></i>
+              {{ formatMarketCap(item.markets?.marketCap) }}
             </div>
 
             <div
@@ -153,7 +155,7 @@
             <div class="grid grid-cols-2 gap-2 text-center">
               <div>
                 <div class="font-display text-sm mb-2">擁有者</div>
-                <div class="text-xl">{{ item.markets?.owners }}</div>
+                <div class="text-xl">{{ formatOwners(item.markets.owners) }}</div>
               </div>
               <div>
                 <div class="font-display text-sm mb-2">作品數量</div>
@@ -194,6 +196,30 @@ const toggleMobileMenu = (index: number) => {
   mobileMenuStates[index] = !mobileMenuStates[index]
 }
 
+// 專門處理價值（marketCap）的千分位
+const formatMarketCap = (val: number): string => {
+  // 加上防呆，避免 undefined 或 null 傳入時炸掉（例如在資料還沒載入完成時）
+  if (val === undefined || val === null) return '0.00'
+
+  return val.toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })
+}
+
+// 專門處理擁有者人數（owners）的 K 縮寫
+const formatOwners = (val: number): string => {
+  if (val === undefined || val === null) return '0'
+
+  // 如果大於等於 1000，就除以 1000 並留一位小數，再加上 'K'
+  if (val >= 1000) {
+    return `${(val / 1000).toFixed(1)}K`
+  }
+
+  // 沒超過 1000 就直接用千分位顯示
+  return val.toLocaleString('en-US')
+}
+
 // // 2. 第一層加工 computed：把巢狀資料攤平，並補上安全防禦機制
 const allArtworks = computed(() => {
   return artists.value.flatMap(artist => {
@@ -224,7 +250,15 @@ const allArtworks = computed(() => {
 
 // 3. 第二層加工 computed：只切出前 10 筆給畫面渲染
 const topTenArtworks = computed(() => {
-  return allArtworks.value.slice(0, 10)
+  // 💡 先使用 slice() 複製一份新陣列，避免直接污染到原本的 allArtworks
+  return [...allArtworks.value]
+    .sort((a, b) => {
+      // 確保兩者都是數字，並用 b - a 實現從大到小的降冪排序
+      const volumeA = Number(a.markets?.marketCap ?? 0)
+      const volumeB = Number(b.markets?.marketCap ?? 0)
+      return volumeB - volumeA
+    })
+    .slice(0, 10) // 排序完後，再撈出前 10 名
 })
 
 onMounted(async () => {

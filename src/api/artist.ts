@@ -30,13 +30,13 @@ export interface MarketStats {
 }
 
 export interface Market {
-  marketCap: string
+  marketCap: number
   change24h: number
   change7d: number
-  floorPrice: string
+  floorPrice: number
   hasIcon: boolean
-  owners: string
-  totalSupply: string
+  owners: number
+  totalSupply: number
   isOpen: boolean // 用於手機版控制折疊狀態
 }
 
