@@ -3,7 +3,7 @@
     <div class="container md:px-8 mx-auto">
       <div class="flex flex-col md:pt-10 pb-10 md:pb-20">
         <div
-          v-for="artwork in rankingArtworks1st"
+          v-for="artwork in displayedArtworks1st"
           :key="artwork.id"
           class="flex flex-col md:flex-row border border-black bg-white"
         >
@@ -45,7 +45,7 @@
           class="flex flex-col md:flex-row border border-t-0 border-black w-full bg-white md:h-85"
         >
           <div
-            v-for="artwork in rankingArtworks2to3"
+            v-for="artwork in displayedArtworks2to3"
             :key="artwork.id"
             class="flex flex-col-reverse md:flex-row flex-1 border-b border-black md:border-b-0 md:border-r"
           >
@@ -382,22 +382,69 @@ const { show, hide } = useLoadingStore()
 const modules = [Autoplay, Pagination]
 
 // 🌟 排行榜與區塊切片邏輯（直接對 artworks 做切片，不用再透過 computed 轉一手）
-const rankings = computed(() => {
-  const list = artworks.value
-  return {
-    first: list.slice(0, 1),
-    twoToThree: list.slice(1, 3),
-    topThree: list.slice(0, 3),
-    fourToSix: list.slice(3, 6),
-  }
+
+// 💡 1. 唯一資料源加工：把巢狀資料攤平、注入藝術家名字、補上防禦，並直接由高到低排序！
+const RankingArtworks = computed(() => {
+  const flattened = artists.value.flatMap(artist => {
+    const seriesList = artist.artworks || []
+
+    return seriesList.flatMap(series => {
+      const artworkList = series.artworkIds || []
+
+      return artworkList.map(artwork => ({
+        ...artwork,
+        // 在這裡直接把藝術家名字塞進去！
+        artistName: `${artist.firstName} ${artist.lastName}`,
+        markets: {
+          marketCap: Number(artwork.markets?.marketCap ?? 0),
+          change24h: artwork.markets?.change24h ?? 0,
+          change7d: artwork.markets?.change7d ?? 0,
+          floorPrice: Number(artwork.markets?.floorPrice ?? 0),
+          hasIcon: artwork.markets?.hasIcon ?? false,
+          owners: Number(artwork.markets?.owners ?? 0),
+          totalSupply: Number(artwork.markets?.totalSupply ?? 0),
+          isOpen: artwork.markets?.isOpen ?? false,
+        },
+      }))
+    })
+  })
+
+  // 依照市場價值降冪排序（高 -> 低）
+  return flattened.sort((a, b) => b.markets.marketCap - a.markets.marketCap)
 })
 
-// 對接 Template 內部的所有區塊變數
-const displayedArtworks1to8 = computed(() => artworks.value.slice(0, 8))
-const rankingArtworks1st = computed(() => rankings.value.first)
-const rankingArtworks2to3 = computed(() => rankings.value.twoToThree)
-const rankingArtworks1to3 = computed(() => rankings.value.topThree)
-const rankingArtworks4to6 = computed(() => rankings.value.fourToSix)
+// 排行榜區塊切片
+const rankingArtworks1to3 = computed(() => RankingArtworks.value.slice(0, 3))
+const rankingArtworks4to6 = computed(() => RankingArtworks.value.slice(3, 6))
+
+// 按照順序
+const allOriginalArtworks = computed(() => {
+  return artists.value.flatMap(artist => {
+    const seriesList = artist.artworks || []
+    return seriesList.flatMap(series => {
+      const artworkList = series.artworkIds || []
+      return artworkList.map(artwork => ({
+        ...artwork,
+        artistName: `${artist.firstName} ${artist.lastName}`,
+        markets: {
+          marketCap: Number(artwork.markets?.marketCap ?? 0),
+          change24h: artwork.markets?.change24h ?? 0,
+          change7d: artwork.markets?.change7d ?? 0,
+          floorPrice: Number(artwork.markets?.floorPrice ?? 0),
+          hasIcon: artwork.markets?.hasIcon ?? false,
+          owners: Number(artwork.markets?.owners ?? 0),
+          totalSupply: Number(artwork.markets?.totalSupply ?? 0),
+          isOpen: artwork.markets?.isOpen ?? false,
+        },
+      }))
+    })
+  })
+})
+
+// 下方最新藝術品區塊（瀑布流卡片），吃無排序的原始順序
+const displayedArtworks1st = computed(() => allOriginalArtworks.value.slice(0, 1))
+const displayedArtworks2to3 = computed(() => allOriginalArtworks.value.slice(1, 3))
+const displayedArtworks1to8 = computed(() => allOriginalArtworks.value.slice(0, 8))
 
 onMounted(async () => {
   try {
