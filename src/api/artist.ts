@@ -45,13 +45,14 @@ export interface Artwork {
   id: string
   title: string
   price: number
+  isListed?: boolean
   description: string
   imgUrl: string
   categories: string[]
   blockchain?: string
   saleStatus?: string
-  attributes?: Attribute[] // 💡 完美補上動態屬性的型別定義
-  markets: Market
+  attributes?: Attribute[]
+  markets?: Market
 }
 
 // 藝術品系列型別 (對應 JSON 中的 artworks 陣列元素)
