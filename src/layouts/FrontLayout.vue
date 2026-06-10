@@ -1,13 +1,13 @@
 <template>
-  <Navbar />
+  <FrontNavbar />
   <RouterView />
-  <Footer />
+  <FrontFooter />
   <GlobalLoading />
 </template>
 
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import Navbar from '@/components/Navbar.vue'
-import Footer from '@/components/Footer.vue'
+import FrontNavbar from '@/components/FrontNavbar.vue'
+import FrontFooter from '@/components/FrontFooter.vue'
 import GlobalLoading from '@/components/GlobalLoading.vue'
 </script>

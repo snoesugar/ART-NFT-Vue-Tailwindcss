@@ -39,6 +39,15 @@
               <i class="fa-solid fa-wallet"></i>
             </button>
           </li>
+          <li class="flex items-stretch border-l border-black">
+            <router-link
+              to="/login"
+              class="text-black text-xl hover:text-primary transition px-8 h-full flex items-center focus:outline-none"
+              title="管理員登入"
+            >
+              <i class="fa-solid fa-user-gear"></i>
+            </router-link>
+          </li>
         </ul>
 
         <div class="md:hidden flex items-center">
@@ -97,6 +106,16 @@
         class="w-full py-6 text-black font-black hover:text-primary transition"
       >
         市值
+      </router-link>
+
+      <hr class="w-full border-black" />
+
+      <router-link
+        to="/login"
+        @click="isMenuOpen = false"
+        class="w-full py-6 text-black font-black hover:text-primary transition"
+      >
+        管理員登入
       </router-link>
 
       <div class="w-full border border-black">
