@@ -9,29 +9,29 @@ const router = createRouter({
       children: [
         {
           path: '',
-          component: () => import('../views/Home.vue'),
+          component: () => import('../views/Front/Home.vue'),
         },
         {
           path: '/explore',
-          component: () => import('../views/Explore.vue'),
+          component: () => import('../views/Front/Explore.vue'),
         },
         {
           path: '/capitalization',
-          component: () => import('../views/Capitalization.vue'),
+          component: () => import('../views/Front/Capitalization.vue'),
         },
         {
           path: '/artistIntroduction/:id',
           name: 'ArtistIntroduction',
-          component: () => import('@/views/ArtistIntroduction.vue'),
+          component: () => import('@/views/Front/ArtistIntroduction.vue'),
         },
         {
           path: '/filter',
-          component: () => import('../views/Filter.vue'),
+          component: () => import('../views/Front/Filter.vue'),
         },
         {
           path: '/artworkIntroduction/:id',
           name: 'ArtworkIntroduction',
-          component: () => import('../views/ArtworkIntroduction.vue'),
+          component: () => import('../views/Front/ArtworkIntroduction.vue'),
         },
       ],
     },
