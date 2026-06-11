@@ -171,7 +171,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed, reactive } from 'vue'
-import { nftApi, type Artist } from '@/api/artist'
+import { nftApi, type Artist, type Artwork } from '@/api/artist'
 import { useLoadingStore } from '@/store/loading'
 
 const baseUrl = import.meta.env.VITE_BASE_URL || '/ART-NFT-Vue-Tailwindcss/'
@@ -220,32 +220,40 @@ const formatOwners = (val: number): string => {
   return val.toLocaleString('en-US')
 }
 
-// // 2. 第一層加工 computed：把巢狀資料攤平，並補上安全防禦機制
+// // 2. 第一層加工 computed：把巢狀資料攤平，並補上安全防禦機制與上架過濾
 const allArtworks = computed(() => {
-  return artists.value.flatMap(artist => {
-    const seriesList = artist.artworks || []
+  // 透過深拷貝斷開舊參考，逼迫 Vue 深度監聽陣列內部的所有微小變動
+  const deepCopyArtists = JSON.parse(JSON.stringify(artists.value)) as Artist[]
 
-    // 第一層 flatMap 進到系列
-    return seriesList.flatMap(series => {
-      const artworkList = series.artworkIds || []
+  return (
+    deepCopyArtists
+      .flatMap(artist => {
+        const seriesList = artist.artworks || []
 
-      // 第二層 map 進到作品，並進行 markets 的結構防禦
-      return artworkList.map(artwork => ({
-        ...artwork,
-        // 💡 完美對齊原有的 markets 物件結構，防禦 undefined
-        markets: {
-          marketCap: Number(artwork.markets?.marketCap ?? 0), // 確保轉換成數字，預設給數字 0
-          change24h: artwork.markets?.change24h ?? 0,
-          change7d: artwork.markets?.change7d ?? 0,
-          floorPrice: artwork.markets?.floorPrice ?? 0, // 改為數字 0
-          hasIcon: artwork.markets?.hasIcon ?? false,
-          owners: Number(artwork.markets?.owners ?? 0), // 💡 改為數字 0，徹底解決紅字
-          totalSupply: artwork.markets?.totalSupply ?? 0, // 改為數字 0
-          isOpen: artwork.markets?.isOpen ?? false,
-        },
-      }))
-    })
-  })
+        // 第一層 flatMap 進到系列
+        return seriesList.flatMap(series => {
+          const artworkList = series.artworkIds || []
+
+          // 第二層 map 進到作品，並進行 markets 的結構防禦
+          return artworkList.map(artwork => ({
+            ...artwork,
+            // 💡 完美對齊原有的 markets 物件結構，防禦 undefined
+            markets: {
+              marketCap: Number(artwork.markets?.marketCap ?? 0), // 確保轉換成數字，預設給數字 0
+              change24h: artwork.markets?.change24h ?? 0,
+              change7d: artwork.markets?.change7d ?? 0,
+              floorPrice: artwork.markets?.floorPrice ?? 0, // 改為數字 0
+              hasIcon: artwork.markets?.hasIcon ?? false,
+              owners: Number(artwork.markets?.owners ?? 0), // 改為數字 0，徹底解決紅字
+              totalSupply: artwork.markets?.totalSupply ?? 0, // 改為數字 0
+              isOpen: artwork.markets?.isOpen ?? false,
+            },
+          }))
+        })
+      })
+      // 🟢 核心修正：在這裡加上跟探索頁一模一樣的邏輯，只有上架的才能進來排行榜！
+      .filter((item: Artwork) => item.isListed === true)
+  )
 })
 
 // 3. 第二層加工 computed：只切出前 10 筆給畫面渲染
@@ -267,7 +275,6 @@ onMounted(async () => {
     // 撈取「所有藝術家」，因為作品現在藏在裡面
     const data = await nftApi.getAllArtists()
     artists.value = data
-
     console.log('成功撈取藝術家並由 computed 自動攤平作品：', topTenArtworks.value)
   } catch (error) {
     console.error('排行榜獲取資料失敗:', error)
