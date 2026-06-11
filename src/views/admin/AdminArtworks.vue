@@ -81,11 +81,11 @@
                 {{ item.artwork.categories?.[0] || 'NFT' }}
               </span>
             </div>
-            <h3 class="font-black text-lg truncate mt-1" :title="item.artwork.title">
+            <h3 class="font-bold text-lg truncate mt-1" :title="item.artwork.title">
               {{ item.artwork.title }}
             </h3>
             <p class="text-xs text-gray-500 mt-0.5 truncate">
-              創作者：<span class="font-bold text-black">{{ item.artistName }}</span>
+              創作者：<span class="text-black">{{ item.artistName }}</span>
             </p>
           </div>
 

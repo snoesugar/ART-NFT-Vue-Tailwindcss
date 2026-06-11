@@ -66,9 +66,7 @@
               alt="avatar"
             />
             <div class="truncate text-sm">
-              <h3 class="font-black text-base truncate">
-                {{ artist.firstName }} {{ artist.lastName }}
-              </h3>
+              <h3 class="text-base truncate">{{ artist.firstName }} {{ artist.lastName }}</h3>
               <p class="text-gray-500 font-mono truncate mt-0.5">{{ artist.walletAddress }}</p>
             </div>
           </div>
