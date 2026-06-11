@@ -161,7 +161,7 @@
                         <div class="flex flex-row items-center gap-2">
                           <img
                             class="w-8 h-8 object-cover rounded-full"
-                            src="../../public/artist03.jpg"
+                            src="/artist03.jpg"
                             alt=""
                           />
                           <i class="fa-solid fa-arrow-right"></i>
@@ -214,7 +214,7 @@
                         >
                           <img
                             class="w-6 h-6 object-cover rounded-full"
-                            src="../../public/artist02.jpg"
+                            src="/artist02.jpg"
                             alt="artist02"
                           />
                           <span class="hidden md:block">Antony WU</span>

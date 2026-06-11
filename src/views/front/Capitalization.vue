@@ -71,7 +71,7 @@
               </td>
 
               <td class="py-4 px-4 text-right">
-                {{ formatOwners(item.markets.owners) }}
+                {{ formatOwners(item.markets?.owners) }}
               </td>
 
               <td class="py-4 px-6 text-right">
@@ -155,7 +155,7 @@
             <div class="grid grid-cols-2 gap-2 text-center">
               <div>
                 <div class="font-display text-sm mb-2">擁有者</div>
-                <div class="text-xl">{{ formatOwners(item.markets.owners) }}</div>
+                <div class="text-xl">{{ formatOwners(item.markets?.owners) }}</div>
               </div>
               <div>
                 <div class="font-display text-sm mb-2">作品數量</div>
@@ -234,14 +234,14 @@ const allArtworks = computed(() => {
         ...artwork,
         // 💡 完美對齊原有的 markets 物件結構，防禦 undefined
         markets: {
-          marketCap: artwork.markets?.marketCap ?? '0',
+          marketCap: Number(artwork.markets?.marketCap ?? 0), // 確保轉換成數字，預設給數字 0
           change24h: artwork.markets?.change24h ?? 0,
           change7d: artwork.markets?.change7d ?? 0,
-          floorPrice: artwork.markets?.floorPrice ?? '0',
+          floorPrice: artwork.markets?.floorPrice ?? 0, // 改為數字 0
           hasIcon: artwork.markets?.hasIcon ?? false,
-          owners: artwork.markets?.owners ?? '0',
-          totalSupply: artwork.markets?.totalSupply ?? '0',
-          isOpen: artwork.markets?.isOpen ?? false, // 補齊原本型別定義的欄位
+          owners: Number(artwork.markets?.owners ?? 0), // 💡 改為數字 0，徹底解決紅字
+          totalSupply: artwork.markets?.totalSupply ?? 0, // 改為數字 0
+          isOpen: artwork.markets?.isOpen ?? false,
         },
       }))
     })
