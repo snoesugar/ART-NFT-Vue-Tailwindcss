@@ -142,11 +142,13 @@ onMounted(async () => {
   try {
     show()
     const allArtists = await nftApi.getAllArtists()
-
-    allLoadedArtworks = allArtists.flatMap(artist => {
-      const seriesList = artist.artworks || []
-      return seriesList.flatMap(series => series.artworkIds || [])
-    })
+    //  修改後：加上 .filter() 排除未上架作品
+    allLoadedArtworks = allArtists
+      .flatMap(artist => {
+        const seriesList = artist.artworks || []
+        return seriesList.flatMap(series => series.artworkIds || [])
+      })
+      .filter((item: Artwork) => item.isListed === true) // 👈 只有上架的才能進來！
 
     loadMoreArtworks()
   } catch (error) {

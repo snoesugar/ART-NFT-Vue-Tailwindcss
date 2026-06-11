@@ -90,7 +90,7 @@
           <div class="hidden sm:flex items-center gap-2 text-sm font-medium">
             <span class="text-gray-500">後台系統</span>
             <i class="fa-solid fa-chevron-right text-xs text-gray-400"></i>
-            <span class="font-bold">當頁名稱</span>
+            <span class="font-black">{{ currentRouteName }}</span>
           </div>
         </div>
 
@@ -159,10 +159,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
+import { useRoute } from 'vue-router' // 💡 引入 Vue Router 的 Hooks
 
 const isSidebarOpen = ref(false)
 const isNotifyOpen = ref(false)
+
+const route = useRoute() // 💡 取得當前路由實例
+
+// 💡 動態計算當前頁面標題（若 meta.title 不存在，則回退顯示 '管理主頁'）
+const currentRouteName = computed<string>(() => {
+  return (route.meta.title as string) || '管理主頁'
+})
 
 // 監聽手機版側邊欄狀態，鎖定背景滾動
 watch(isSidebarOpen, isOpen => {

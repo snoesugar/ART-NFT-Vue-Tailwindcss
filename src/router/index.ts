@@ -42,23 +42,26 @@ const router = createRouter({
       component: () => import('../layouts/AdminLayout.vue'),
       children: [
         {
-          path: '', // 當網址是 /admin 時，重新導向到營運概況，或直接載入組件
+          path: '', // 當網址是 /admin 時，重新導向到營運概況
           redirect: '/admin/dashboard',
         },
         {
-          path: 'dashboard', // 網址：/admin/dashboard (修正：去掉開頭斜線)
+          path: 'dashboard', // 網址：/admin/dashboard
           name: 'AdminDashboard',
           component: () => import('../views/admin/AdminDashboard.vue'),
+          meta: { title: '營運概況' }, // 💡 注入當頁名稱
         },
         {
-          path: 'artworks', // 網址：/admin/artworks (修正：去掉開頭斜線)
+          path: 'artworks', // 網址：/admin/artworks
           name: 'AdminArtworks',
           component: () => import('../views/admin/AdminArtworks.vue'),
+          meta: { title: '作品管理' }, // 💡 注入當頁名稱
         },
         {
-          path: 'artists',
+          path: 'artists', // 網址：/admin/artists
           name: 'AdminArtists',
           component: () => import('../views/admin/AdminArtists.vue'),
+          meta: { title: '藝術家審核' }, // 💡 注入當頁名稱
         },
       ],
     },
@@ -66,7 +69,7 @@ const router = createRouter({
     {
       path: '/login',
       name: 'Login',
-      component: () => import('../views/Login.vue'), // 確認檔案路徑正確
+      component: () => import('../views/Login.vue'),
     },
     {
       path: '/:pathMatch(.*)*',

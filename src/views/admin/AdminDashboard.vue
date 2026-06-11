@@ -42,7 +42,9 @@
           <p class="text-3xl font-black mt-2 font-mono">
             {{ platformStats.totalArtists }} <span class="text-lg font-bold">位</span>
           </p>
-          <div class="text-xs text-gray-500 font-bold mt-2">包含目前已通過審核名單</div>
+          <div class="text-xs text-gray-500 font-bold mt-2 flex items-center gap-1">
+            <i class="fa-solid fa-circle-check text-emerald-600"></i> 已通過審核名單
+          </div>
         </div>
 
         <div class="bg-white border-2 border-black p-5 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
@@ -54,7 +56,8 @@
             {{ platformStats.totalArtworks }} <span class="text-lg font-bold">幅</span>
           </p>
           <div class="text-xs text-amber-600 font-bold mt-2 flex items-center gap-1">
-            ⚠️ 包含 {{ platformStats.pendingCount }} 件待審核隨附作品
+            <i class="fa-solid fa-triangle-exclamation"></i> 包含
+            {{ platformStats.pendingCount }} 件待審核創作者隨附作品
           </div>
         </div>
 
@@ -67,7 +70,7 @@
             {{ platformStats.totalOwners }} <span class="text-lg font-bold">個</span>
           </p>
           <div class="text-xs text-emerald-700 font-bold mt-2 flex items-center gap-1">
-            🟢 鏈上地址去重計算完成
+            <i class="fa-solid fa-link"></i> 🟢 鏈上地址去重計算完成
           </div>
         </div>
       </div>
@@ -99,33 +102,81 @@
           </div>
         </div>
 
-        <div
-          class="lg:col-span-5 bg-white border-2 border-black p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] space-y-4"
-        >
-          <h3 class="font-black text-lg border-b border-black pb-3 flex items-center gap-2">
-            <i class="fa-solid fa-bolt text-amber-500"></i> 頂級創作者交易大盤
-          </h3>
+        <div class="lg:col-span-5 space-y-6">
+          <div
+            class="bg-white border-2 border-black p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] space-y-4"
+          >
+            <h3 class="font-black text-lg border-b border-black pb-3 flex items-center gap-2">
+              <i class="fa-solid fa-bolt text-amber-500"></i> 頂級創作者交易大盤
+            </h3>
 
-          <div class="space-y-3 max-h-[310px] overflow-y-auto pr-1">
-            <div
-              v-for="artist in topArtistsRank"
-              :key="artist.id"
-              class="flex items-center justify-between p-2 border border-black bg-gray-50 text-xs"
-            >
-              <div class="flex items-center gap-2 overflow-hidden">
-                <img :src="artist.img" class="w-8 h-8 object-cover border border-black shrink-0" />
-                <div class="truncate">
-                  <p class="font-black truncate">{{ artist.firstName }} {{ artist.lastName }}</p>
-                  <p class="font-mono text-gray-400 text-[10px] truncate">
-                    {{ artist.walletAddress }}
+            <div class="space-y-3 max-h-48 overflow-y-auto pr-1">
+              <div
+                v-for="artist in topArtistsRank"
+                :key="artist.id"
+                class="flex items-center justify-between p-2 border border-black bg-gray-50 text-xs"
+              >
+                <div class="flex items-center gap-2 overflow-hidden">
+                  <img
+                    :src="artist.img"
+                    class="w-8 h-8 object-cover border border-black shrink-0"
+                  />
+                  <div class="truncate">
+                    <p class="font-black truncate">{{ artist.firstName }} {{ artist.lastName }}</p>
+                    <p class="font-mono text-gray-400 text-[10px] truncate">
+                      {{ artist.walletAddress }}
+                    </p>
+                  </div>
+                </div>
+                <div class="text-right shrink-0 font-mono pl-2">
+                  <p class="font-black text-primary">{{ artist.stats?.total_volume || 0 }} ETH</p>
+                  <p class="text-[10px] text-gray-400">
+                    地板價: {{ artist.stats?.floor_price || 0 }}
                   </p>
                 </div>
               </div>
-              <div class="text-right shrink-0 font-mono pl-2">
-                <p class="font-black text-primary">{{ artist.stats?.total_volume || 0 }} ETH</p>
-                <p class="text-[10px] text-gray-400">
-                  地板價: {{ artist.stats?.floor_price || 0 }}
-                </p>
+            </div>
+          </div>
+
+          <div
+            class="bg-white border-2 border-black p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] space-y-4"
+          >
+            <div class="flex justify-between items-center border-b border-black pb-3">
+              <h3 class="font-black text-lg flex items-center gap-2">
+                <i class="fa-solid fa-list-check text-primary"></i> 系統即時營運日誌
+              </h3>
+              <span
+                class="inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10 animate-pulse"
+              >
+                LIVE
+              </span>
+            </div>
+
+            <div class="space-y-3 max-h-56 overflow-y-auto pr-1">
+              <div
+                v-for="log in recentActivities"
+                :key="log.id"
+                class="p-2.5 border border-black bg-white space-y-1.5 text-xs relative"
+              >
+                <div class="flex justify-between items-center">
+                  <span
+                    class="px-1.5 py-0.5 border border-black font-mono text-[10px] font-bold shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]"
+                    :class="{
+                      'bg-amber-100 text-amber-900': log.type === 'artwork',
+                      'bg-sky-100 text-sky-900': log.type === 'artist',
+                      'bg-purple-100 text-purple-900': log.type === 'market',
+                    }"
+                  >
+                    {{ log.type.toUpperCase() }}
+                  </span>
+                  <span class="text-gray-400 font-mono text-[10px]">{{ log.timestamp }}</span>
+                </div>
+                <p class="text-gray-900 font-medium tracking-tight">{{ log.message }}</p>
+                <div
+                  class="text-[10px] text-gray-500 font-mono flex items-center gap-1 pt-0.5 border-t border-dashed border-gray-200"
+                >
+                  <i class="fa-solid fa-user-gear text-black"></i> 經手人: {{ log.operator }}
+                </div>
               </div>
             </div>
           </div>
@@ -137,14 +188,47 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-// 💡 直接複用你定義完美的 API 與 Artist 型別限制
 import { nftApi, type Artist } from '@/api/artist'
 
 const isLoading = ref<boolean>(false)
 const artistsList = ref<Artist[]>([])
 const updateTimestamp = ref<string>('')
 
-// 模擬月度營收（粗獷主義圖表專用數據）
+// 營運日誌介面宣告
+interface SystemLog {
+  id: string
+  timestamp: string
+  type: 'artwork' | 'artist' | 'market'
+  message: string
+  operator: string
+}
+
+// 實時模擬日誌（粗獷式小時間軸）
+const recentActivities = ref<SystemLog[]>([
+  {
+    id: 'log-1',
+    timestamp: '2026-06-11 09:30',
+    type: 'artwork',
+    message: '檢測到新上架作品《Cyber Dreams #04》已自動同步至前台瀑布流。',
+    operator: '系統自動網閘',
+  },
+  {
+    id: 'log-2',
+    timestamp: '2026-06-11 08:15',
+    type: 'market',
+    message: '手動將未達標作品切換為下架狀態 (isListed: false)，前台已同步攔截。',
+    operator: '管理員 (煜琳)',
+  },
+  {
+    id: 'log-3',
+    timestamp: '2026-06-10 17:45',
+    type: 'artist',
+    message: '審核通過新入駐認證藝術家，已成功核發鏈上電子元數據合約。',
+    operator: '管理員 (煜琳)',
+  },
+])
+
+// 模擬月度營收
 interface RevenueData {
   month: string
   revenue: number
@@ -158,7 +242,6 @@ const mockMonthlyRevenue = ref<RevenueData[]>([
   { month: '2026-06 (本月)', revenue: 12.4 },
 ])
 
-// 💡 核心計算：利用你的 API 資料結構進行大盤運算（帶有嚴格的 TS 型別回傳限制）
 interface CalculatedStats {
   totalVolume: number
   totalArtists: number
@@ -175,20 +258,17 @@ const platformStats = computed<CalculatedStats>(() => {
   let pending = 0
 
   artistsList.value.forEach((artist: Artist) => {
-    // 判斷是否為 pending 狀態（根據你前兩個頁面的判定邏輯）
     const isPending = artist.stats?.items === 0 && artist.stats?.total_volume === 0
 
     if (isPending) {
       pending++
     } else {
-      artistCount++ // 只有審核通過的才算正式認證藝術家
+      artistCount++
     }
 
-    // 累加各項數據
     volumeSum += artist.stats?.total_volume || 0
     ownerSum += artist.stats?.owners || 0
 
-    // 深入計算該創作者旗下的作品總數
     if (artist.artworks) {
       artist.artworks.forEach(series => {
         if (series.artworkIds) {
@@ -207,21 +287,18 @@ const platformStats = computed<CalculatedStats>(() => {
   }
 })
 
-// 篩選出交易量最高的前幾名創作者，用於右側快報
 const topArtistsRank = computed<Artist[]>(() => {
   return [...artistsList.value]
     .filter(a => (a.stats?.total_volume || 0) > 0)
     .sort((a, b) => (b.stats?.total_volume || 0) - (a.stats?.total_volume || 0))
 })
 
-// 撈取原始大盤基礎資料
 const fetchDashboardData = async (): Promise<void> => {
   isLoading.value = true
   try {
     const data: Artist[] = await nftApi.getAllArtists()
     artistsList.value = data
 
-    // 設置當前更新時間戳
     const now = new Date()
     updateTimestamp.value = now.toISOString().replace('T', ' ').substring(0, 19)
   } catch (error) {
@@ -237,7 +314,6 @@ onMounted((): void => {
 </script>
 
 <style scoped>
-/* 隱藏右側滾動條，讓排版更乾淨 */
 div::-webkit-scrollbar {
   width: 4px;
 }
@@ -245,6 +321,7 @@ div::-webkit-scrollbar-track {
   background: transparent;
 }
 div::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
 }
 </style>
