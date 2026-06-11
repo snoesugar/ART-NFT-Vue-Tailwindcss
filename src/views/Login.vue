@@ -72,7 +72,7 @@
         <button
           type="submit"
           :disabled="isLoading"
-          class="w-full py-3 bg-primary hover:bg-opacity-95 text-white font-black border-2 border-black transition tracking-wider shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] disabled:opacity-50"
+          class="w-full py-3 bg-primary hover:bg-opacity-95 text-white font-black border-2 border-black transition tracking-wider shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-px hover:translate-y-px hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] disabled:opacity-50"
         >
           <span v-if="isLoading">
             <i class="fa-solid fa-spinner animate-spin mr-2"></i>驗證密鑰中...

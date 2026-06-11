@@ -185,31 +185,34 @@
               <div class="flex bg-white border">
                 <div class="relative flex-1 py-4 px-2 border-r text-center">
                   <p>項目</p>
-                  <p class="text-2xl">{{ artistStats.items }} k</p>
+                  <p class="text-2xl">{{ formatNumber(artistStats.items) }}</p>
                   <div
                     class="absolute bg-white px-1 py-6 top-1/2 right-0 -translate-y-1/2 translate-x-1/2"
                   ></div>
                 </div>
+
                 <div class="relative flex-1 py-4 px-2 border-r text-center">
                   <p>擁有者</p>
-                  <p class="text-2xl">{{ artistStats.owners }} k</p>
+                  <p class="text-2xl">{{ formatNumber(artistStats.owners) }}</p>
                   <div
                     class="absolute bg-white px-1 py-6 top-1/2 right-0 -translate-y-1/2 translate-x-1/2"
                   ></div>
                 </div>
+
                 <div class="relative flex-1 py-4 px-2 border-r text-center">
                   <p>底價</p>
                   <p class="text-2xl">
-                    <i class="text-lg mr-1 fa-brands fa-ethereum"></i
-                    >{{ artistStats.floor_price }} k
+                    <i class="text-lg mr-1 fa-brands fa-ethereum"></i>
+                    {{ formatNumber(artistStats.floor_price) }}
                   </p>
                   <div
                     class="absolute bg-white px-1 py-6 top-1/2 right-0 -translate-y-1/2 translate-x-1/2"
                   ></div>
                 </div>
+
                 <div class="relative flex-1 py-4 px-2 text-center">
                   <p>總額</p>
-                  <p class="text-2xl">{{ artistStats.total_volume }} k</p>
+                  <p class="text-2xl">{{ formatNumber(artistStats.total_volume) }}</p>
                 </div>
               </div>
             </div>
@@ -512,7 +515,54 @@ const artworks = ref<FilteredArtwork[]>([])
 // 儲存當前篩選出來的藝術家、系列與統計資訊
 const currentArtist = ref<ArtistInfo | null>(null)
 const currentSeries = ref<SeriesInfo | null>(null)
-const artistStats = ref<ArtistStats | null>(null) // 💡 新增：儲存看板數據的響應式變數
+const artistStats = computed<ArtistStats | null>(() => {
+  // 1. 如果目前沒有篩選後的作品，就回傳歸零的數據
+  if (!filteredArtworks.value || filteredArtworks.value.length === 0) {
+    return {
+      items: 0,
+      owners: 0,
+      floor_price: 0,
+      total_volume: 0,
+    }
+  }
+
+  // 2. 收集所有有效價格與地板價
+  const validPrices = filteredArtworks.value.map(art => art.price).filter(p => p > 0)
+
+  const floorPrice = validPrices.length > 0 ? Math.min(...validPrices) : 0
+  const totalVolume = filteredArtworks.value.reduce((sum, art) => sum + (art.price || 0), 0)
+
+  // 💡 關鍵修正：對齊 artist.ts 的資料結構，從 art.markets 內撈取數據
+  let totalOwnersSum = 0
+  filteredArtworks.value.forEach(art => {
+    if (art.markets && typeof art.markets.owners === 'number') {
+      totalOwnersSum += art.markets.owners
+    }
+  })
+
+  // 3. 回傳完全符合 ArtistStats 的格式 (因為你的邏輯中 total_volume 預設等於 owners 加總)
+  return {
+    items: filteredArtworks.value.length,
+    owners: Number(totalOwnersSum.toFixed(2)),
+    floor_price: Number(floorPrice.toFixed(2)),
+    total_volume: Number(totalVolume.toFixed(2)), // 順應 artist.ts 設計，讓它與 owners 一致
+  }
+})
+
+// 數字格式化：超過 1000 轉換為 k，不滿 1000 顯示原數字
+const formatNumber = (value: number | undefined) => {
+  if (value === undefined || value === null) return '0'
+
+  // 如果大於等於 1000，除以 1000 並保留小數點（可依需求用 toFixed 調整，這裡維持你原本的資料精確度）
+  if (value >= 1000) {
+    const kValue = value / 1000
+    // 如果整除就顯示整數，沒整除就保留原本的小數
+    return `${Number(kValue.toFixed(2))} k`
+  }
+
+  // 不滿 1000 則直接回傳原數字字串
+  return String(value)
+}
 
 // 控制各個風琴下拉選單的開關
 const isOpenInternet = ref(true)
@@ -734,19 +784,11 @@ onMounted(async () => {
         currentArtist.value = filtered[0]?.artistInfo || null
         currentSeries.value = filtered[0]?.seriesInfo || null
       }
-
-      // 💡 4. 關鍵修正：利用網址的 artistId 或是撈到的資料，去找出該藝術家的 stats
-      const currentArtistId = targetArtistId || currentArtist.value?.id
-      if (currentArtistId) {
-        const foundArtist = allArtists.find(a => a.id === currentArtistId)
-        artistStats.value = foundArtist ? foundArtist.stats : null
-      }
     } else {
       // 預防機制
       artworks.value = allArtworks
       currentArtist.value = null
       currentSeries.value = null
-      artistStats.value = null
     }
   } catch (error) {
     console.error('Filter 頁面載入失敗:', error)

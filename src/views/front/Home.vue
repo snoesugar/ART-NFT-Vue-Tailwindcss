@@ -410,9 +410,7 @@ const RankingArtworks = computed(() => {
   })
 
   // 依照市場價值降冪排序（高 -> 低）
-  return flattened
-    .filter(artwork => artwork.isListed === true)
-    .sort((a, b) => b.markets.marketCap - a.markets.marketCap)
+  return flattened.sort((a, b) => b.markets.marketCap - a.markets.marketCap)
 })
 
 // 排行榜區塊切片
@@ -421,7 +419,7 @@ const rankingArtworks4to6 = computed(() => RankingArtworks.value.slice(3, 6))
 
 // 按照順序
 const allOriginalArtworks = computed(() => {
-  const flattened = artists.value.flatMap(artist => {
+  return artists.value.flatMap(artist => {
     const seriesList = artist.artworks || []
     return seriesList.flatMap(series => {
       const artworkList = series.artworkIds || []
@@ -441,9 +439,6 @@ const allOriginalArtworks = computed(() => {
       }))
     })
   })
-
-  // 💡 修改這裡：加上過濾網，只放行已上架作品
-  return flattened.filter(artwork => artwork.isListed === true)
 })
 
 // 下方最新藝術品區塊（瀑布流卡片），吃無排序的原始順序
