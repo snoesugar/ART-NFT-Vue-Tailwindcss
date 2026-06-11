@@ -544,12 +544,8 @@ const allFlattenedArtworks = computed<FlattenedArtworkItem[]>(() => {
 // 從後台獲取最原始的 Artist 列表
 const fetchArtworksFromArtists = async (): Promise<void> => {
   isLoading.value = true
-
   try {
     const data: Artist[] = await nftApi.getAllArtists()
-
-    console.log('API原始資料', data)
-
     rawArtistsList.value = data
   } catch (error) {
     console.error('後台扁平化撈取作品失敗:', error)
