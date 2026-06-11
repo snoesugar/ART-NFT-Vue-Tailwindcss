@@ -153,7 +153,7 @@
                     class="block md:hidden border-10 bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
                   >
                     <img
-                      src="../../public/the-new-york-public-library-vBejyCBXZBY-unsplash.jpg"
+                      src="/the-new-york-public-library-vBejyCBXZBY-unsplash.jpg"
                       alt="Flower 1"
                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
