@@ -1,12 +1,12 @@
 <template>
-  <nav class="border-b border-black bg-primary-bg sticky top-0 z-50 h-16 md:h-24">
+  <nav class="border-b border-black bg-primary-bg sticky top-0 z-50 h-16 lg:h-24">
     <div class="container mx-auto flex justify-between items-stretch h-full">
       <template v-if="!isSearchOpen">
-        <router-link to="/" class="flex items-center border-black py-4 md:py-8">
-          <img src="/logo.svg" class="px-3 md:px-8 h-4.5 md:h-8 w-auto object-contain" alt="logo" />
+        <router-link to="/" class="flex items-center border-black py-4 lg:py-8">
+          <img src="/logo.svg" class="px-3 lg:px-8 h-4.5 lg:h-8 w-auto object-contain" alt="logo" />
         </router-link>
 
-        <ul class="hidden md:flex flex-1 justify-end items-stretch">
+        <ul class="hidden lg:flex flex-1 justify-end items-stretch">
           <li class="flex items-stretch border-l border-black">
             <div class="flex items-center h-full">
               <input
@@ -50,7 +50,7 @@
           </li>
         </ul>
 
-        <div class="md:hidden flex items-center">
+        <div class="lg:hidden flex items-center">
           <button @click="openSearch" class="focus:outline-none">
             <i class="text-lg px-4 fa-solid fa-magnifying-glass text-black"></i>
           </button>
@@ -64,7 +64,7 @@
       </template>
 
       <template v-else>
-        <div class="md:hidden flex flex-1 items-center px-3 bg-primary-bg w-full animate-fade-in">
+        <div class="lg:hidden flex flex-1 items-center px-3 bg-primary-bg w-full animate-fade-in">
           <button @click="isSearchOpen = false" class="focus:outline-none px-4">
             <i class="text-lg fa-solid fa-chevron-left text-black"></i>
           </button>
@@ -84,7 +84,7 @@
   </nav>
 
   <div
-    class="md:hidden w-full bg-white border-b border-black transition-all duration-300 ease-in-out fixed top-16 left-0 z-40 shadow-lg"
+    class="lg:hidden w-full bg-white border-b border-black transition-all duration-300 ease-in-out fixed top-16 left-0 z-40 shadow-lg"
     :class="
       isMenuOpen && !isSearchOpen
         ? 'translate-y-0 opacity-100'
@@ -132,31 +132,31 @@
   <div
     v-if="isMenuOpen && !isSearchOpen"
     @click="isMenuOpen = false"
-    class="md:hidden fixed inset-0 bg-black/65 z-30 transition-opacity"
+    class="lg:hidden fixed inset-0 bg-black/65 z-30 transition-opacity"
   ></div>
 
   <!-- 錢包 modal -->
   <Teleport to="body">
     <div
       v-if="isModalOpen"
-      class="fixed inset-0 z-100 flex items-center justify-center bg-black/65 md:p-4 animate-fade-in"
+      class="fixed inset-0 z-100 flex items-center justify-center bg-black/65 lg:p-4 animate-fade-in"
       @click.self="isModalOpen = false"
     >
       <div
-        class="w-full h-full md:h-auto md:max-w-125 bg-white md:border border-black text-center overflow-y-auto"
+        class="w-full h-full lg:h-auto lg:max-w-125 bg-white lg:border border-black text-center overflow-y-auto"
       >
         <div class="border-b border-black py-4 relative">
           <h3 class="text-xl text-black">連結你的錢包</h3>
           <button
             @click="isModalOpen = false"
-            class="block md:hidden absolute right-4 top-1/2 -translate-y-1/2 text-xl text-black hover:text-gray-600 focus:outline-none"
+            class="block lg:hidden absolute right-4 top-1/2 -translate-y-1/2 text-xl text-black hover:text-gray-600 focus:outline-none"
           >
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
 
-        <div class="py-6 md:py-6 px-3 md:px-4">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+        <div class="py-6 lg:py-6 px-3 lg:px-4">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
             <button
               v-for="wallet in wallets"
               :key="wallet.id"
@@ -174,7 +174,7 @@
         </div>
         <button
           @click="handleConnect"
-          class="px-12 py-2 md:mb-6 bg-primary hover:bg-opacity-90 text-white w-full md:w-auto border border-black transition tracking-wider"
+          class="px-12 py-2 lg:mb-6 bg-primary hover:bg-opacity-90 text-white w-full lg:w-auto border border-black transition tracking-wider"
         >
           連結錢包
         </button>

@@ -1,11 +1,11 @@
 <template>
   <div class="min-h-screen bg-gray-50 flex text-black">
     <aside
-      class="fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-black flex flex-col transition-transform duration-300 ease-in-out md:translate-x-0"
+      class="fixed inset-y-0 left-0 z-50 w-70 bg-white border-r border-black flex flex-col transition-transform duration-300 ease-in-out lg:translate-x-0"
       :class="isSidebarOpen ? 'translate-x-0' : '-translate-x-full'"
     >
       <div
-        class="h-16 md:h-20 border-b border-black flex items-center justify-between px-6 bg-primary-bg"
+        class="h-16 lg:h-20 border-b border-black flex items-center justify-between px-6 bg-primary-bg"
       >
         <router-link to="/admin" class="flex items-center">
           <img src="/logo.svg" class="h-6 w-auto object-contain" alt="logo" />
@@ -14,7 +14,7 @@
             >後台管理</span
           >
         </router-link>
-        <button @click="isSidebarOpen = false" class="md:hidden text-xl focus:outline-none">
+        <button @click="isSidebarOpen = false" class="lg:hidden text-xl focus:outline-none">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
@@ -75,14 +75,14 @@
       </div>
     </aside>
 
-    <div class="flex-1 flex flex-col md:pl-64 min-w-0">
+    <div class="flex-1 flex flex-col lg:pl-64 min-w-0">
       <header
-        class="h-16 md:h-20 bg-primary-bg border-b border-black sticky top-0 z-40 flex items-center justify-between px-4 md:px-8"
+        class="h-16 lg:h-20 bg-primary-bg border-b border-black sticky top-0 z-40 flex items-center justify-between px-4 lg:px-8"
       >
         <div class="flex items-center gap-4">
           <button
             @click="isSidebarOpen = true"
-            class="md:hidden text-xl p-2 border border-black bg-white focus:outline-none"
+            class="lg:hidden text-xl p-2 border border-black bg-white rounded-md focus:outline-none"
           >
             <i class="fa-solid fa-bars"></i>
           </button>
@@ -141,7 +141,7 @@
         </div>
       </header>
 
-      <main class="flex-1 p-4 md:p-8">
+      <main class="flex-1 p-4 lg:p-8">
         <router-view v-slot="{ Component }">
           <transition name="fade" mode="out-in">
             <component :is="Component" />
@@ -153,7 +153,7 @@
     <div
       v-if="isSidebarOpen"
       @click="isSidebarOpen = false"
-      class="md:hidden fixed inset-0 bg-black/50 z-40 transition-opacity"
+      class="lg:hidden fixed inset-0 bg-black/50 z-40 transition-opacity"
     ></div>
   </div>
 </template>

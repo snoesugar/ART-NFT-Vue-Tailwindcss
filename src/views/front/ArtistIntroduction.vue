@@ -1,16 +1,16 @@
 <template>
   <div class="bg-primary-bg min-h-screen text-black">
     <!-- 藝術家介紹 -->
-    <div class="container mx-auto px-3 md:px-8 pt-6 md:pt-10 pb-10 md:pb-20">
+    <div class="container mx-auto px-3 lg:px-8 pt-6 lg:pt-10 pb-10 lg:pb-20">
       <!-- 💡 加上 v-if 確保 API 資料撈回來了才渲染，避免噴 undefined 錯誤 -->
       <div
         v-if="currentArtist"
-        class="flex flex-col md:flex-row gap-4 md:gap-6 mx-auto items-stretch"
+        class="flex flex-col lg:flex-row gap-4 lg:gap-6 mx-auto items-stretch"
       >
         <div
           class="flex-1 flex flex-col sm:flex-row border border-black bg-white overflow-hidden shadow-sm"
         >
-          <div class="w-full sm:w-[42%] min-h-60 md:min-h-full relative">
+          <div class="w-full sm:w-[42%] min-h-60 lg:min-h-full relative">
             <!-- 💡 圖片路徑改吃 API 的動態網址 -->
             <img
               v-if="currentArtist.img"
@@ -20,12 +20,12 @@
             />
           </div>
 
-          <div class="p-4 md:p-6 flex-1 flex flex-col justify-between">
+          <div class="p-4 lg:p-6 flex-1 flex flex-col justify-between">
             <div>
-              <div class="flex justify-between items-center mb-2 md:mb-4">
+              <div class="flex justify-between items-center mb-2 lg:mb-4">
                 <!-- 💡 名字改吃動態資料 -->
-                <h2 class="text-3xl md:text-5xl">{{ currentArtist.firstName }}</h2>
-                <div class="flex gap-2 md:text-lg">
+                <h2 class="text-3xl lg:text-5xl">{{ currentArtist.firstName }}</h2>
+                <div class="flex gap-2 lg:text-lg">
                   <i class="fab fa-discord cursor-pointer hover:opacity-70"></i>
                   <i class="fab fa-facebook cursor-pointer hover:opacity-70"></i>
                   <i class="fas fa-globe cursor-pointer hover:opacity-70"></i>
@@ -44,7 +44,7 @@
         </div>
 
         <div
-          class="w-full md:w-76.5 flex flex-col justify-between bg-white border border-black divide-y divide-black"
+          class="w-full lg:w-76.5 flex flex-col justify-between bg-white border border-black divide-y divide-black"
         >
           <div class="flex justify-between items-center py-4 px-6">
             <span class="font-bold">{{ currentArtist.marketStats.status }}</span>
@@ -79,12 +79,12 @@
     </div>
 
     <!-- 藝術家作品 -->
-    <div class="container mx-auto px-3 md:px-8">
+    <div class="container mx-auto px-3 lg:px-8">
       <!-- 按鈕 -->
       <div class="relative flex items-end border-b border-black">
         <button
           @click="activeTab = 'art'"
-          class="flex items-baseline px-4 md:px-12 py-4 focus:outline-none"
+          class="flex items-baseline px-4 lg:px-12 py-4 focus:outline-none"
           :class="[
             activeTab === 'art'
               ? 'bg-primary-bg border-x border-t border-black relative -mb-px rounded-t'
@@ -92,12 +92,12 @@
           ]"
         >
           <span
-            class="text-3xl md:text-5xl"
+            class="text-3xl lg:text-5xl"
             :class="activeTab === 'art' ? 'text-black' : 'text-secondary'"
             >Art Works</span
           >
           <span
-            class="ml-3 font-bold text-xl hidden md:block"
+            class="ml-3 font-bold text-xl hidden lg:block"
             :class="activeTab === 'art' ? 'text-black' : 'text-secondary'"
             >系列作品</span
           >
@@ -105,7 +105,7 @@
 
         <button
           @click="activeTab = 'collection'"
-          class="flex items-baseline px-4 md:px-12 py-4 focus:outline-none"
+          class="flex items-baseline px-4 lg:px-12 py-4 focus:outline-none"
           :class="[
             activeTab === 'collection'
               ? 'bg-primary-bg border-x border-t border-black relative -mb-px rounded-t'
@@ -113,12 +113,12 @@
           ]"
         >
           <span
-            class="text-3xl md:text-5xl"
+            class="text-3xl lg:text-5xl"
             :class="activeTab === 'collection' ? 'text-black' : 'text-secondary'"
             >Collection</span
           >
           <span
-            class="ml-3 font-bold text-xl hidden md:block"
+            class="ml-3 font-bold text-xl hidden lg:block"
             :class="activeTab === 'collection' ? 'text-black' : 'text-secondary'"
             >收藏品</span
           >
@@ -127,21 +127,21 @@
 
       <!-- 藝術家原生系列作品區 (保持原樣) -->
       <div v-if="activeTab === 'art'">
-        <div class="pt-6 md:pt-10 pb-10 md:pb-20">
-          <div class="flex flex-col gap-4 md:gap-10">
+        <div class="pt-6 lg:pt-10 pb-10 lg:pb-20">
+          <div class="flex flex-col gap-4 lg:gap-10">
             <div
               v-for="(series, index) in currentArtist?.artworks || []"
               :key="series.id || index"
               class="relative flex flex-col"
             >
               <div
-                class="relative bg-white border border-black px-4 md:px-28 pt-8 md:pt-12 pb-8 md:pb-58 z-10"
+                class="relative bg-white border border-black px-4 lg:px-28 pt-8 lg:pt-12 pb-8 lg:pb-58 z-10"
               >
                 <div class="absolute top-0 left-0 w-6 h-6 bg-black clip-triangle-tl"></div>
                 <div class="absolute top-0 right-0 w-6 h-6 bg-black clip-triangle-tr"></div>
 
                 <div
-                  class="flex flex-col md:flex-row justify-between items-center md:items-end gap-4 md:gap-6"
+                  class="flex flex-col lg:flex-row justify-between items-center lg:items-end gap-4 lg:gap-6"
                 >
                   <div class="max-w-190">
                     <h2 class="text-2xl font-bold mb-4">{{ series.name }}</h2>
@@ -150,11 +150,13 @@
                     </p>
                   </div>
                   <div
-                    class="block md:hidden border-10 bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
+                    v-for="art in series.artworkIds.slice(0, 1)"
+                    :key="art.id"
+                    class="block lg:hidden border-10 bg-white aspect-square overflow-hidden shadow-lg group cursor-pointer"
                   >
                     <img
-                      src="/the-new-york-public-library-vBejyCBXZBY-unsplash.jpg"
-                      alt="Flower 1"
+                      :src="getImageUrl(art.imgUrl)"
+                      :alt="art.title"
                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
@@ -172,12 +174,12 @@
 
               <div
                 v-if="series.artworkIds && series.artworkIds.length > 0"
-                class="hidden md:grid grid-cols-4 gap-4 px-4 md:px-28 -mt-8 md:-mt-45 z-20"
+                class="hidden lg:grid grid-cols-4 gap-4 px-4 lg:px-28 -mt-8 lg:-mt-45 z-20"
               >
                 <div
                   v-for="art in series.artworkIds.slice(0, 4)"
                   :key="art.id"
-                  class="border-10 bg-white aspect-square overflow-hidden shadow-md group cursor-pointer"
+                  class="border-10 bg-white aspect-square overflow-hidden shadow-lg group cursor-pointer"
                 >
                   <img
                     :src="getImageUrl(art.imgUrl)"
@@ -193,8 +195,8 @@
 
       <!-- 收藏品區 (已改為動態循環) -->
       <div v-if="activeTab === 'collection'">
-        <div class="pt-6 md:pt-10 pb-10 md:pb-20">
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 items-start">
+        <div class="pt-6 lg:pt-10 pb-10 lg:pb-20">
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 items-start">
             <div
               v-for="(col, colIndex) in collectionColumns"
               :key="colIndex"
@@ -207,12 +209,12 @@
                 :style="{ '--animation-order': item.globalIndex }"
               >
                 <div
-                  class="relative bg-white p-2 md:p-4 border border-gray-200 shadow-sm overflow-hidden"
+                  class="relative bg-white p-2 lg:p-4 border border-gray-200 shadow-sm overflow-hidden"
                 >
                   <img
                     :src="getImageUrl(item.imgUrl)"
                     :alt="item.title"
-                    class="w-full h-auto min-h-34.75 md:min-h-70 object-cover"
+                    class="w-full h-auto min-h-34.75 lg:min-h-70 object-cover"
                   />
 
                   <div
@@ -238,7 +240,7 @@
                   </div>
                 </div>
 
-                <div class="mt-2 md:mt-4 md:border-b border-black md:font-bold pb-2 md:pb-4">
+                <div class="mt-2 lg:mt-4 lg:border-b border-black lg:font-bold pb-2 lg:pb-4">
                   {{ item.title }}
                 </div>
               </div>

@@ -1,15 +1,15 @@
 <template>
   <div class="bg-primary-bg">
-    <div class="container md:px-8 mx-auto">
-      <div class="flex flex-col md:pt-10 pb-10 md:pb-20">
+    <div class="container lg:px-8 mx-auto">
+      <div class="flex flex-col lg:pt-10 pb-10 lg:pb-20">
         <div
           v-for="artwork in displayedArtworks1st"
           :key="artwork.id"
-          class="flex flex-col md:flex-row border border-black bg-white"
+          class="flex flex-col lg:flex-row border border-black bg-white"
         >
-          <div class="flex basis-1/2 md:basis-2/3">
+          <div class="flex basis-1/2 lg:basis-2/3">
             <div
-              class="w-24 bg-black text-white hidden md:flex flex-col gap-4 items-center p-6 justify-start shrink-0"
+              class="w-24 bg-black text-white hidden lg:flex flex-col gap-4 items-center p-6 justify-start shrink-0"
             >
               <span class="text-5xl rotate-[-270deg] origin-center my-20 whitespace-nowrap">
                 Recommend
@@ -26,13 +26,13 @@
             </div>
           </div>
 
-          <div class="basis-1/2 md:basis-1/3 px-3 py-8 md:p-6">
+          <div class="basis-1/2 lg:basis-1/3 px-3 py-8 lg:p-6">
             <div class="flex flex-col justify-center h-full">
-              <span class="text-lg mb-2 md:mt-14">
+              <span class="text-lg mb-2 lg:mt-14">
                 {{ artwork.artistName }}
               </span>
-              <p class="text-2xl md:text-5xl font-bold mb-6">{{ artwork.title }}</p>
-              <p class="mb-6 md:mb-0">{{ artwork.description }}</p>
+              <p class="text-2xl lg:text-5xl font-bold mb-6">{{ artwork.title }}</p>
+              <p class="mb-6 lg:mb-0">{{ artwork.description }}</p>
               <Button
                 :to="{ name: 'ArtworkIntroduction', params: { id: artwork.id } }"
                 class="self-end mt-auto"
@@ -42,48 +42,48 @@
         </div>
 
         <div
-          class="flex flex-col md:flex-row border border-t-0 border-black w-full bg-white md:h-85"
+          class="flex flex-col lg:flex-row border border-t-0 border-black w-full bg-white lg:h-85"
         >
           <div
             v-for="artwork in displayedArtworks2to3"
             :key="artwork.id"
-            class="flex flex-col-reverse md:flex-row flex-1 border-b border-black md:border-b-0 md:border-r"
+            class="flex flex-col-reverse lg:flex-row flex-1 border-b border-black lg:border-b-0 lg:border-r"
           >
-            <div class="flex-1 px-3 py-8 md:p-6 flex flex-col justify-between h-full md:min-h-0">
-              <div class="mt-0 md:mt-4">
+            <div class="flex-1 px-3 py-8 lg:p-6 flex flex-col justify-between h-full lg:min-h-0">
+              <div class="mt-0 lg:mt-4">
                 <span class="text-lg font-medium block mb-2">{{ artwork.artistName }}</span>
                 <p class="text-3xl font-bold mb-6">{{ artwork.title }}</p>
-                <p class="mb-6 md:mb-0">{{ artwork.description }}</p>
+                <p class="mb-6 lg:mb-0">{{ artwork.description }}</p>
               </div>
               <Button
                 :to="{ name: 'ArtworkIntroduction', params: { id: artwork.id } }"
-                class="self-end md:mt-auto"
+                class="self-end lg:mt-auto"
               ></Button>
             </div>
 
-            <div class="w-full md:w-85 h-full shrink-0 border-t border-black md:border-t-0">
+            <div class="w-full lg:w-85 h-full shrink-0 border-t border-black lg:border-t-0">
               <img :src="artwork.imgUrl" class="w-full h-full object-cover" :alt="artwork.title" />
             </div>
           </div>
         </div>
       </div>
 
-      <div class="px-3 md:px-0">
-        <div class="flex flex-row items-end border-b border-black pb-2 md:pb-4">
-          <h2 class="text-3xl md:text-5xl font-black mr-4 leading-none">Ranking</h2>
-          <span class="text-xl font-bold leading-none hidden md:block">市價排行榜</span>
+      <div class="px-3 lg:px-0">
+        <div class="flex flex-row items-end border-b border-black pb-2 lg:pb-4">
+          <h2 class="text-3xl lg:text-5xl font-black mr-4 leading-none">Ranking</h2>
+          <span class="text-xl font-bold leading-none hidden lg:block">市價排行榜</span>
           <Button
             to="/capitalization"
-            class="ml-auto -mb-2 md:-mb-4"
+            class="ml-auto -mb-2 lg:-mb-4"
             :isPrimaryBg="true"
             :hasBorder="false"
           >
             MORE
           </Button>
         </div>
-        <div class="pt-6 md:pt-10 pb-10 md:pb-22">
-          <div class="hidden md:block">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6.25 items-start">
+        <div class="pt-6 lg:pt-10 pb-10 lg:pb-22">
+          <div class="hidden lg:block">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6.25 items-start">
               <div
                 v-for="(artwork, index) in rankingArtworks1to3"
                 :key="artwork.id"
@@ -126,14 +126,14 @@
             </div>
           </div>
 
-          <div class="flex flex-col gap-6.25 md:hidden">
+          <div class="flex flex-col gap-6.25 lg:hidden">
             <div
               v-for="(artwork, index) in rankingArtworks1to3"
               :key="artwork.id"
               class="border border-black bg-white flex flex-row h-22.5 relative"
             >
               <div
-                class="bg-white border-r border-black h-full w-9.5 flex items-center justify-center px-2 md:px-4 py-6 text-2xl font-paytone"
+                class="bg-white border-r border-black h-full w-9.5 flex items-center justify-center px-2 lg:px-4 py-6 text-2xl font-paytone"
               >
                 {{ index + 1 }}
               </div>
@@ -169,14 +169,14 @@
             </div>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6.25 items-start mt-6.25">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6.25 items-start mt-6.25">
             <div
               v-for="(artwork, index) in rankingArtworks4to6"
               :key="artwork.id"
               class="border border-black bg-white flex flex-row h-22.5 relative"
             >
               <div
-                class="bg-white w-9.5 border-r border-black h-full flex items-center justify-center px-2 md:px-4 py-6 text-2xl font-paytone"
+                class="bg-white w-9.5 border-r border-black h-full flex items-center justify-center px-2 lg:px-4 py-6 text-2xl font-paytone"
               >
                 {{ index + 4 }}
               </div>
@@ -216,23 +216,23 @@
     </div>
 
     <div class="container">
-      <div class="px-3 md:px-8">
-        <div class="flex flex-row items-end border-b border-black pb-2 md:pb-4">
-          <h2 class="text-3xl md:text-5xl mr-4 leading-none">Artist</h2>
-          <span class="text-xl font-bold leading-none hidden md:block">熱門藝術家</span>
-          <Button class="ml-auto -mb-2 md:-mb-4" :isPrimaryBg="true" :hasBorder="false"
+      <div class="px-3 lg:px-8">
+        <div class="flex flex-row items-end border-b border-black pb-2 lg:pb-4">
+          <h2 class="text-3xl lg:text-5xl mr-4 leading-none">Artist</h2>
+          <span class="text-xl font-bold leading-none hidden lg:block">熱門藝術家</span>
+          <Button class="ml-auto -mb-2 lg:-mb-4" :isPrimaryBg="true" :hasBorder="false"
             >MORE</Button
           >
         </div>
       </div>
-      <div class="px-3 md:px-0">
-        <div class="pt-6 md:pt-12 pb-10 md:pb-20 w-full">
+      <div class="px-3 lg:px-0">
+        <div class="pt-6 lg:pt-12 pb-10 lg:pb-20 w-full">
           <swiper
             v-if="artists.length"
             :modules="modules"
             :breakpoints="{
               0: { slidesPerView: 1 },
-              768: { slidesPerView: 3 },
+              1024: { slidesPerView: 3 },
             }"
             :space-between="24"
             :centered-slides="true"
@@ -240,7 +240,7 @@
             :loop="true"
             :autoplay="{ delay: 4000, disableOnInteraction: false }"
             :pagination="{ clickable: true }"
-            class="artist-swiper pb-40! md:pb-14!"
+            class="artist-swiper pb-40! lg:pb-14!"
           >
             <swiper-slide v-for="item in artists" :key="item.id" class="artist-slide">
               <div class="card-wrapper relative w-full h-109.75 bg-white">
@@ -253,18 +253,18 @@
                 </div>
                 <div class="card-info absolute inset-0 p-6 flex flex-col justify-between z-10">
                   <h2
-                    class="text-white text-2xl md:text-7xl font-paytone tracking-wide drop-shadow-md"
+                    class="text-white text-2xl lg:text-7xl font-paytone tracking-wide drop-shadow-lg"
                   >
                     {{ item.firstName }}<br />{{ item.lastName }}
                   </h2>
-                  <div class="flex flex-col md:flex-row justify-between items-end gap-4 mt-auto">
-                    <p class="hidden md:block bg-white/85 p-6 max-w-xs font-medium">
+                  <div class="flex flex-col lg:flex-row justify-between items-end gap-4 mt-auto">
+                    <p class="hidden lg:block bg-white/85 p-6 max-w-xs font-medium">
                       {{ item.desc }}
                     </p>
                     <Button :to="`/artistIntroduction/${item.id}`" class="ml-auto mt-auto"></Button>
                   </div>
                 </div>
-                <div class="block md:hidden">
+                <div class="block lg:hidden">
                   <p class="bg-white/85 p-6 mt-4">{{ item.desc }}</p>
                 </div>
               </div>
@@ -274,18 +274,18 @@
       </div>
     </div>
 
-    <div class="container md:px-8 mx-auto">
-      <div class="px-3 md:px-0">
-        <div class="flex flex-row items-end border-b border-black pb-2 md:pb-4">
-          <h2 class="text-3xl md:text-5xl mr-4 leading-none">Artwork</h2>
-          <span class="text-xl font-bold leading-none hidden md:block">最新藝術品</span>
-          <Button class="ml-auto -mb-2 md:-mb-4" :isPrimaryBg="true" :hasBorder="false"
+    <div class="container lg:px-8 mx-auto">
+      <div class="px-3 lg:px-0">
+        <div class="flex flex-row items-end border-b border-black pb-2 lg:pb-4">
+          <h2 class="text-3xl lg:text-5xl mr-4 leading-none">Artwork</h2>
+          <span class="text-xl font-bold leading-none hidden lg:block">最新藝術品</span>
+          <Button class="ml-auto -mb-2 lg:-mb-4" :isPrimaryBg="true" :hasBorder="false"
             >MORE</Button
           >
         </div>
 
-        <div class="pt-6 md:pt-12 pb-10 md:pb-20">
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 items-start">
+        <div class="pt-6 lg:pt-12 pb-10 lg:pb-20">
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 items-start">
             <div
               v-for="(col, colIndex) in artworkColumns"
               :key="colIndex"
@@ -298,12 +298,12 @@
                 :style="{ '--animation-order': item.globalIndex }"
               >
                 <div
-                  class="relative bg-white p-2 md:p-4 border border-gray-200 shadow-sm overflow-hidden"
+                  class="relative bg-white p-2 lg:p-4 border border-gray-200 shadow-sm overflow-hidden"
                 >
                   <img
                     :src="item.imgUrl"
                     :alt="item.title"
-                    class="w-full min-h-34.75 md:min-h-70 h-auto object-cover"
+                    class="w-full min-h-34.75 lg:min-h-70 h-auto object-cover"
                   />
                   <div
                     class="absolute inset-0 bg-black/70 opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-between p-4 m-4"
@@ -322,7 +322,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="mt-2 md:mt-4 md:border-b border-black md:font-bold pb-2 md:pb-4">
+                <div class="mt-2 lg:mt-4 lg:border-b border-black lg:font-bold pb-2 lg:pb-4">
                   {{ item.title }}
                 </div>
               </div>
@@ -333,13 +333,13 @@
     </div>
 
     <div class="border-b pb-2">
-      <div class="flex flex-col items-center text-center pb-8 md:pb-10 border-b-4">
-        <h2 class="text-3xl md:text-5xl mb-4">Join Us</h2>
-        <p class="text-xl font-bold md:mb-6">創建並出售你的藝術品</p>
+      <div class="flex flex-col items-center text-center pb-8 lg:pb-10 border-b-4">
+        <h2 class="text-3xl lg:text-5xl mb-4">Join Us</h2>
+        <p class="text-xl font-bold lg:mb-6">創建並出售你的藝術品</p>
       </div>
     </div>
-    <div class="py-12 md:py-20 md:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-y-12 md:gap-x-6 max-w-7xl mx-auto">
+    <div class="py-12 lg:py-20 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-y-12 lg:gap-x-6 max-w-7xl mx-auto">
         <div v-for="step in steps" :key="step.id" class="flex flex-col items-center text-center">
           <div class="text-primary text-5xl mb-4">
             <i :class="step.icon"></i>
@@ -381,9 +381,7 @@ const { show, hide } = useLoadingStore()
 
 const modules = [Autoplay, Pagination]
 
-// 🌟 排行榜與區塊切片邏輯（直接對 artworks 做切片，不用再透過 computed 轉一手）
-
-// 💡 1. 唯一資料源加工：把巢狀資料攤平、注入藝術家名字、補上防禦，並直接由高到低排序！
+// 🌟 排行榜與區塊切片邏輯，把巢狀資料攤平、注入藝術家名字、補上防禦，並直接由高到低排序！
 const RankingArtworks = computed(() => {
   const flattened = artists.value.flatMap(artist => {
     const seriesList = artist.artworks || []
@@ -396,13 +394,13 @@ const RankingArtworks = computed(() => {
         // 在這裡直接把藝術家名字塞進去！
         artistName: `${artist.firstName} ${artist.lastName}`,
         markets: {
-          marketCap: Number(artwork.markets?.marketCap ?? 0),
+          marketCap: artwork.markets?.marketCap ?? 0,
           change24h: artwork.markets?.change24h ?? 0,
           change7d: artwork.markets?.change7d ?? 0,
-          floorPrice: Number(artwork.markets?.floorPrice ?? 0),
+          floorPrice: artwork.markets?.floorPrice ?? 0,
           hasIcon: artwork.markets?.hasIcon ?? false,
-          owners: Number(artwork.markets?.owners ?? 0),
-          totalSupply: Number(artwork.markets?.totalSupply ?? 0),
+          owners: artwork.markets?.owners ?? 0,
+          totalSupply: artwork.markets?.totalSupply ?? 0,
           isOpen: artwork.markets?.isOpen ?? false,
         },
       }))
@@ -427,13 +425,13 @@ const allOriginalArtworks = computed(() => {
         ...artwork,
         artistName: `${artist.firstName} ${artist.lastName}`,
         markets: {
-          marketCap: Number(artwork.markets?.marketCap ?? 0),
+          marketCap: artwork.markets?.marketCap ?? 0,
           change24h: artwork.markets?.change24h ?? 0,
           change7d: artwork.markets?.change7d ?? 0,
-          floorPrice: Number(artwork.markets?.floorPrice ?? 0),
+          floorPrice: artwork.markets?.floorPrice ?? 0,
           hasIcon: artwork.markets?.hasIcon ?? false,
-          owners: Number(artwork.markets?.owners ?? 0),
-          totalSupply: Number(artwork.markets?.totalSupply ?? 0),
+          owners: artwork.markets?.owners ?? 0,
+          totalSupply: artwork.markets?.totalSupply ?? 0,
           isOpen: artwork.markets?.isOpen ?? false,
         },
       }))

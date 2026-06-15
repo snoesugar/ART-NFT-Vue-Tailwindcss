@@ -2,12 +2,12 @@
   <div class="bg-primary-bg">
     <div
       v-if="artists.length > 0"
-      class="container text-center px-3 md:px-8 pt-6 md:pt-10 pb-10 md:pb-20"
+      class="container text-center px-3 lg:px-8 pt-6 lg:pt-10 pb-10 lg:pb-20"
     >
-      <h1 class="text-3xl md:text-5xl font-bold mb-4 md:mb-6">市價排行榜</h1>
-      <p class="font-display mb-8 md:mb-6">NFT系列藝術作品排行榜！全球注目指標</p>
+      <h1 class="text-3xl lg:text-5xl font-bold mb-4 lg:mb-6">市價排行榜</h1>
+      <p class="font-display mb-8 lg:mb-6">NFT系列藝術作品排行榜！全球注目指標</p>
 
-      <div class="hidden md:block">
+      <div class="hidden lg:block">
         <table class="w-full border-collapse border-b border-black text-left">
           <thead>
             <tr class="font-display">
@@ -82,7 +82,7 @@
         </table>
       </div>
       <!-- 手機板 -->
-      <div class="block md:hidden border-b border-black">
+      <div class="block lg:hidden border-b border-black">
         <div
           v-for="(item, index) in topTenArtworks"
           :key="'mobile-' + index"

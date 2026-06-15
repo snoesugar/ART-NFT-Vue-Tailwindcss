@@ -1,7 +1,7 @@
 <template>
   <div v-if="!isInitialLoading" class="bg-primary-bg">
-    <div class="container px-3 md:px-8 pt-6 md:pt-12 pb-10 md:pb-20">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 items-start">
+    <div class="container px-3 lg:px-8 pt-6 lg:pt-12 pb-10 lg:pb-20">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 items-start">
         <div v-for="(col, colIndex) in currentColumns" :key="colIndex" class="flex flex-col gap-6">
           <div
             v-for="item in col"
@@ -10,12 +10,12 @@
             :style="{ '--animation-order': item.globalIndex }"
           >
             <div
-              class="relative bg-white p-2 md:p-4 border border-gray-200 shadow-sm overflow-hidden"
+              class="relative bg-white p-2 lg:p-4 border border-gray-200 shadow-sm overflow-hidden"
             >
               <img
                 :src="item.imgUrl"
                 :alt="item.title"
-                class="w-full min-h-34.75 md:min-h-70 h-auto object-cover"
+                class="w-full min-h-34.75 lg:min-h-70 h-auto object-cover"
               />
 
               <div
@@ -37,7 +37,7 @@
               </div>
             </div>
 
-            <div class="mt-2 md:mt-4 md:border-b border-black md:font-bold pb-2 md:pb-4">
+            <div class="mt-2 lg:mt-4 lg:border-b border-black lg:font-bold pb-2 lg:pb-4">
               {{ item.title }}
             </div>
           </div>

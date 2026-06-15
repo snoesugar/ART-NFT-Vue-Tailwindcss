@@ -1,23 +1,23 @@
 <template>
   <div class="bg-primary-bg">
     <!-- 💡 加上 v-if 確保作品與藝術家資料都從 API 載入完成才渲染 -->
-    <div v-if="currentArtwork && currentArtist" class="container px-3 md:px-8 pt-6 md:pt-10 pb-4">
+    <div v-if="currentArtwork && currentArtist" class="container px-3 lg:px-8 pt-6 lg:pt-10 pb-4">
       <!-- 藝術品介紹 -->
-      <div class="flex flex-col md:flex-row gap-6">
+      <div class="flex flex-col lg:flex-row gap-6">
         <div class="basis-1/2">
           <!-- 💡 圖片改吃 API 動態網址 -->
           <img
-            class="w-full h-72 md:h-136.5 object-cover"
+            class="w-full h-72 lg:h-136.5 object-cover"
             :src="getImageUrl(currentArtwork.imgUrl)"
             :alt="currentArtwork.title"
           />
         </div>
         <div class="basis-1/2">
           <div class="bg-white h-full">
-            <div class="p-4 md:p-10 border-b">
-              <div class="flex flex-col-reverse md:flex-row justify-between gap-2 md:gap-6 mb-4">
+            <div class="p-4 lg:p-10 border-b">
+              <div class="flex flex-col-reverse lg:flex-row justify-between gap-2 lg:gap-6 mb-4">
                 <!-- 💡 標題改吃動態資料 -->
-                <h1 class="text-3xl md:text-5xl font-bold">{{ currentArtwork.title }}</h1>
+                <h1 class="text-3xl lg:text-5xl font-bold">{{ currentArtwork.title }}</h1>
                 <div class="flex flex-row items-center gap-2">
                   <!-- 💡 創作者大頭貼與名字動態化 -->
                   <img
@@ -44,7 +44,7 @@
             </div>
             <!-- 💡 敘述改吃動態資料，並用 whitespace-pre-line 處理換行 -->
             <div
-              class="font-display p-4 md:p-10 space-y-4 whitespace-pre-line text-base leading-relaxed"
+              class="font-display p-4 lg:p-10 space-y-4 whitespace-pre-line text-base leading-relaxed"
             >
               {{ currentArtwork.description }}
             </div>
@@ -54,7 +54,7 @@
 
       <!-- 藝術品資料 -->
       <div class="pt-6">
-        <div class="md:columns-2 gap-6 space-y-6 [column-fill:balance]">
+        <div class="lg:columns-2 gap-6 space-y-6 [column-fill:balance]">
           <!-- 屬性 -->
           <div
             v-if="currentArtwork.attributes && currentArtwork.attributes.length > 0"
@@ -62,7 +62,7 @@
           >
             <button
               @click="isOpenProperty = !isOpenProperty"
-              class="flex w-full justify-between items-center font-bold p-4 md:p-6 focus:outline-none"
+              class="flex w-full justify-between items-center font-bold p-4 lg:p-6 focus:outline-none"
             >
               <span>屬性</span>
               <i
@@ -75,7 +75,7 @@
               :class="isOpenProperty ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'"
             >
               <div class="overflow-hidden min-h-0">
-                <div class="px-4 md:px-6 py-6 border-t">
+                <div class="px-4 lg:px-6 py-6 border-t">
                   <div class="flex flex-col gap-2">
                     <!-- 💡 屬性分類動態讀取 (若 API 含有 categories 陣列則渲染，否則顯示預設) -->
                     <div
@@ -96,7 +96,7 @@
           <div class="bg-white border break-inside-avoid inline-block w-full mb-6">
             <button
               @click="isOpenData = !isOpenData"
-              class="flex w-full justify-between items-center font-bold p-4 md:p-6 focus:outline-none"
+              class="flex w-full justify-between items-center font-bold p-4 lg:p-6 focus:outline-none"
             >
               <span>基本資訊</span>
               <i
@@ -109,7 +109,7 @@
               :class="isOpenData ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'"
             >
               <div class="overflow-hidden min-h-0">
-                <div class="px-4 md:px-6 py-6 border-t">
+                <div class="px-4 lg:px-6 py-6 border-t">
                   <div class="flex flex-col gap-2">
                     <div class="flex justify-between items-center pb-2 border-b border-primary-bg">
                       <span>擁有者</span
@@ -133,7 +133,7 @@
           <div class="bg-white border break-inside-avoid inline-block w-full mb-6">
             <button
               @click="isOpenPrice = !isOpenPrice"
-              class="flex w-full justify-between items-center font-bold p-4 md:p-6 focus:outline-none"
+              class="flex w-full justify-between items-center font-bold p-4 lg:p-6 focus:outline-none"
             >
               <span>出價</span>
               <i
@@ -146,10 +146,10 @@
               :class="isOpenPrice ? 'grid-rows-[1fr] border-t' : 'grid-rows-[0fr]'"
             >
               <div class="overflow-hidden min-h-0">
-                <div class="px-4 md:px-6 py-6">
+                <div class="px-4 lg:px-6 py-6">
                   <div class="flex flex-col gap-2">
                     <div
-                      class="flex flex-row items-center bg-primary-bg text-center md:text-start text-sm px-4 py-2 gap-4"
+                      class="flex flex-row items-center bg-primary-bg text-center lg:text-start text-sm px-4 py-2 gap-4"
                     >
                       <p class="basis-1/2">價格</p>
                       <p class="basis-1/2">期限</p>
@@ -168,7 +168,7 @@
                           <span>0.044Eth</span>
                         </div>
                       </div>
-                      <p class="basis-1/2 text-secondary font-display text-end md:text-start">
+                      <p class="basis-1/2 text-secondary font-display text-end lg:text-start">
                         3個月後
                       </p>
                     </div>
@@ -182,7 +182,7 @@
           <div class="bg-white border break-inside-avoid inline-block w-full mb-6">
             <button
               @click="isOpenTrade = !isOpenTrade"
-              class="flex w-full justify-between items-center font-bold p-4 md:p-6 focus:outline-none"
+              class="flex w-full justify-between items-center font-bold p-4 lg:p-6 focus:outline-none"
             >
               <span>交易歷史</span>
               <i
@@ -195,32 +195,32 @@
               :class="isOpenTrade ? 'grid-rows-[1fr] border-t' : 'grid-rows-[0fr]'"
             >
               <div class="overflow-hidden min-h-0">
-                <div class="px-4 md:px-6 py-6">
-                  <div class="flex flex-col gap-2 text-center md:text-start">
+                <div class="px-4 lg:px-6 py-6">
+                  <div class="flex flex-col gap-2 text-center lg:text-start">
                     <div class="flex flex-row items-center bg-primary-bg px-4 py-2 gap-4">
-                      <p class="basis-1/5 md:basis-1/7">事件</p>
-                      <p class="basis-1/5 md:basis-1/7">價格</p>
-                      <p class="basis-1/5 md:basis-3/7">從</p>
-                      <p class="basis-2/5 md:basis-2/7">時間</p>
+                      <p class="basis-1/5 lg:basis-1/7">事件</p>
+                      <p class="basis-1/5 lg:basis-1/7">價格</p>
+                      <p class="basis-1/5 lg:basis-3/7">從</p>
+                      <p class="basis-2/5 lg:basis-2/7">時間</p>
                     </div>
                     <div
                       class="flex flex-row items-center px-4 pb-2 gap-4 border-b border-primary-bg"
                     >
-                      <p class="basis-1/5 md:basis-1/7">上架</p>
-                      <p class="basis-1/5 md:basis-1/7 font-display">2nb</p>
-                      <div class="basis-1/5 md:basis-3/7">
+                      <p class="basis-1/5 lg:basis-1/7">上架</p>
+                      <p class="basis-1/5 lg:basis-1/7 font-display">2nb</p>
+                      <div class="basis-1/5 lg:basis-3/7">
                         <div
-                          class="flex flex-row justify-center md:justify-start items-center gap-2"
+                          class="flex flex-row justify-center lg:justify-start items-center gap-2"
                         >
                           <img
                             class="w-6 h-6 object-cover rounded-full"
                             src="/artist02.jpg"
                             alt="artist02"
                           />
-                          <span class="hidden md:block">Antony WU</span>
+                          <span class="hidden lg:block">Antony WU</span>
                         </div>
                       </div>
-                      <p class="basis-2/5 md:basis-2/7 text-secondary font-display">14小時前</p>
+                      <p class="basis-2/5 lg:basis-2/7 text-secondary font-display">14小時前</p>
                     </div>
                   </div>
                 </div>
@@ -232,13 +232,13 @@
     </div>
 
     <!-- other 其餘作品區 -->
-    <div class="container px-4 md:px-8">
-      <div class="flex flex-row items-end border-b border-black pb-2 md:pb-4">
-        <h2 class="text-3xl md:text-5xl mr-4 leading-none">Other</h2>
-        <span class="text-xl font-bold leading-none hidden md:block">其餘作品</span>
-        <Button class="ml-auto -mb-2 md:-mb-4" :isPrimaryBg="true" :hasBorder="false">MORE</Button>
+    <div class="container px-4 lg:px-8">
+      <div class="flex flex-row items-end border-b border-black pb-2 lg:pb-4">
+        <h2 class="text-3xl lg:text-5xl mr-4 leading-none">Other</h2>
+        <span class="text-xl font-bold leading-none hidden lg:block">其餘作品</span>
+        <Button class="ml-auto -mb-2 lg:-mb-4" :isPrimaryBg="true" :hasBorder="false">MORE</Button>
       </div>
-      <div class="pt-6 md:pt-10 pb-10 md:pb-20">
+      <div class="pt-6 lg:pt-10 pb-10 lg:pb-20">
         <!-- 💡 輪播資料改吃動態篩選後的 otherArtworks -->
         <swiper
           v-if="otherArtworks.length"
@@ -251,17 +251,17 @@
           :loop="otherArtworks.length >= 4"
           :autoplay="{ delay: 4000, disableOnInteraction: false }"
           :pagination="{ clickable: true }"
-          class="artist-swiper pb-4! md:pb-14!"
+          class="artist-swiper pb-4! lg:pb-14!"
         >
           <swiper-slide v-for="item in otherArtworks" :key="item.id">
             <div class="mb-6 cursor-pointer">
               <div
-                class="relative bg-white p-2 md:p-6 border border-gray-200 shadow-sm overflow-hidden"
+                class="relative bg-white p-2 lg:p-6 border border-gray-200 shadow-sm overflow-hidden"
               >
                 <img
                   :src="getImageUrl(item.imgUrl)"
                   :alt="item.title"
-                  class="w-full h-41 md:h-81.75 object-cover"
+                  class="w-full h-41 lg:h-81.75 object-cover"
                 />
                 <div
                   class="absolute inset-0 bg-black/70 opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-between p-4 m-4"
@@ -283,7 +283,7 @@
                   </div>
                 </div>
               </div>
-              <div class="mt-2 md:mt-4 md:border-b border-black md:font-bold pb-2 md:pb-4">
+              <div class="mt-2 lg:mt-4 lg:border-b border-black lg:font-bold pb-2 lg:pb-4">
                 {{ item.title }}
               </div>
             </div>

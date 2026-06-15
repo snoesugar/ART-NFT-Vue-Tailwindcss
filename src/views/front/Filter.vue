@@ -1,9 +1,9 @@
 <template>
   <div class="bg-primary-bg min-h-screen text-black">
-    <div class="relative container mx-auto px-3 md:px-8 pt-6 md:pt-10">
+    <div class="relative container mx-auto px-3 lg:px-8 pt-6 lg:pt-10">
       <div class="flex flex-row gap-6 items-start">
         <div
-          class="basis-1/4 bg-white font-display border border-black hidden md:flex flex-col select-none"
+          class="basis-1/4 bg-white font-display border border-black hidden lg:flex flex-col select-none"
         >
           <!-- 網路 -->
           <div class="border-b border-secondary">
@@ -165,7 +165,7 @@
           </div>
         </div>
 
-        <div class="basis-full md:basis-3/4">
+        <div class="basis-full lg:basis-3/4">
           <div v-if="currentArtist" class="flex flex-row items-center mb-1">
             <img
               class="h-8 w-8 object-cover rounded-full"
@@ -174,7 +174,7 @@
             />
             <span class="ml-4">{{ currentArtist?.name }}</span>
           </div>
-          <div class="flex flex-col md:flex-row gap-4 md:gap-6 mb-10">
+          <div class="flex flex-col lg:flex-row gap-4 lg:gap-6 mb-10">
             <div class="basis-4/7">
               <h1 class="text-3xl font-bold mb-2">{{ currentSeries?.name }}</h1>
               <p>
@@ -223,8 +223,8 @@
             </button>
           </div>
           <!-- 篩選最新上架 -->
-          <div v-if="filteredArtworks.length > 0" class="pt-6 md:pt-10 pb-10 md:pb-20">
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 items-start">
+          <div v-if="filteredArtworks.length > 0" class="pt-6 lg:pt-10 pb-10 lg:pb-20">
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-6 items-start">
               <div
                 v-for="(col, colIndex) in artwork3Columns"
                 :key="colIndex"
@@ -237,12 +237,12 @@
                   :style="{ '--animation-order': item.globalIndex }"
                 >
                   <div
-                    class="relative bg-white p-2 md:p-6 border border-gray-200 shadow-sm overflow-hidden"
+                    class="relative bg-white p-2 lg:p-6 border border-gray-200 shadow-sm overflow-hidden"
                   >
                     <img
                       :src="item.imgUrl"
                       :alt="item.title"
-                      class="w-full h-auto min-h-34.75 md:min-h-70 object-cover"
+                      class="w-full h-auto min-h-34.75 lg:min-h-70 object-cover"
                     />
 
                     <div
@@ -268,7 +268,7 @@
                     </div>
                   </div>
 
-                  <div class="mt-2 md:mt-4 md:border-b border-black md:font-bold pb-2 md:pb-4">
+                  <div class="mt-2 lg:mt-4 lg:border-b border-black lg:font-bold pb-2 lg:pb-4">
                     {{ item.title }}
                   </div>
                 </div>
@@ -281,7 +281,7 @@
       <!-- 1. 觸發按鈕（畫面上固定的「篩選條件2」按鈕） -->
       <button
         @click="isOpenFilter = true"
-        class="block md:hidden fixed bottom-4 right-1/2 translate-x-1/2 z-40"
+        class="block lg:hidden fixed bottom-4 right-1/2 translate-x-1/2 z-40"
       >
         <div class="bg-black text-white px-12 py-2">
           篩選條件<span v-if="activeFilterCount > 0" class="ml-2">
@@ -291,7 +291,7 @@
       </button>
       <!-- 3. 左側滑出的篩選選單（Drawer） -->
       <div
-        class="fixed top-0 right-0 h-full w-full bg-white shadow-xl z-50 transform transition-transform duration-300 ease-in-out md:hidden flex flex-col"
+        class="fixed top-0 right-0 h-full w-full bg-white shadow-xl z-50 transform transition-transform duration-300 ease-in-out lg:hidden flex flex-col"
         :class="isOpenFilter ? 'translate-x-0' : 'translate-x-full'"
       >
         <!-- 標題與關閉按鈕 -->
@@ -810,7 +810,7 @@ const checkScreenSize = () => {
 
 // 💡 核心邏輯：將 artworks 陣列依序輪流派發給 2 欄(手機) 或 3 欄(電腦)
 const artwork3Columns = computed(() => {
-  const colCount = isMobile.value ? 2 : 3 // 這裡配合你的 md:grid-cols-3 改為 3 欄
+  const colCount = isMobile.value ? 2 : 3 // 這裡配合你的 lg:grid-cols-3 改為 3 欄
   const columns: AnimatedArtwork[][] = Array.from({ length: colCount }, () => [])
 
   const list = filteredArtworks.value || []
