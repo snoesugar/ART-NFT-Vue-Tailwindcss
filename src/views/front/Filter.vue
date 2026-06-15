@@ -263,7 +263,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="blcok lg:hidden">
+                    <div class="block lg:hidden">
                       <router-link
                         :to="{ name: 'ArtworkIntroduction', params: { id: item.id } }"
                         class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"

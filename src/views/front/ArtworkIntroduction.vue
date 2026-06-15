@@ -236,6 +236,11 @@
       </div>
     </div>
 
+    <div v-else-if="isNotFound" class="container text-center py-20">
+      <h2 class="text-2xl">找不到此藝術品</h2>
+      <router-link to="/" class="text-primary underline">返回首頁</router-link>
+    </div>
+
     <!-- other 其餘作品區 -->
     <div class="container px-4 lg:px-8">
       <div class="flex flex-row items-end border-b border-black pb-2 lg:pb-4">
@@ -286,7 +291,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="blcok lg:hidden">
+                <div class="block lg:hidden">
                   <router-link
                     :to="{ name: 'ArtworkIntroduction', params: { id: item.id } }"
                     class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
@@ -312,7 +317,8 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { nftApi, type Artist, type Artwork } from '@/api/artist' // 💡 確保引入對的型別
+import { useArtistStore } from '@/store/artistStore'
+import { type Artist, type Artwork } from '@/api/artist'
 import { useLoadingStore } from '@/store/loading'
 import Button from '@/components/Button.vue'
 
@@ -324,6 +330,8 @@ import 'swiper/css/pagination'
 
 const modules = [Autoplay, Pagination]
 const route = useRoute()
+const artistStore = useArtistStore()
+const { show, hide } = useLoadingStore()
 
 // 折疊面板狀態
 const isOpenProperty = ref(true)
@@ -336,8 +344,6 @@ const isExpanded = ref(false) // 預設為縮合狀態
 const currentArtwork = ref<Artwork | undefined>(undefined)
 const currentArtist = ref<Artist | undefined>(undefined)
 const otherArtworks = ref<Artwork[]>([])
-
-const { show, hide } = useLoadingStore()
 
 // GitHub Pages 或是環境變數路徑
 const baseUrl = import.meta.env.VITE_BASE_URL || '/ART-NFT-Vue-Tailwindcss/'
@@ -352,76 +358,36 @@ const getImageUrl = (imgName: string | undefined) => {
 
 // 預設的作品 ID
 const DEFAULT_ARTWORK_ID = '1'
+const isNotFound = ref(false)
 
 // 🛠️ 核心邏輯：從新的巢狀結構中撈取並比對資料
-const loadPageData = async (artworkId: string) => {
+const loadPageData = async (id: string) => {
+  show()
+  isNotFound.value = false // 重置狀態
   try {
-    show()
-    // 1. 關鍵改動：改為撈取「所有藝術家」
-    const allArtists = await nftApi.getAllArtists()
+    // 1. 確保資料已在 Store 中
+    if (artistStore.artists.length === 0) {
+      await artistStore.fetchAll()
+    }
 
-    // // 2. 在前端將所有藝術家的作品攤平，並順便把 artistId 帶在作品身上
-    // 💡 修正點一：定義一個包含 artistId 的暫時型別，讓 TypeScript 認得它
-    const allArtworks: (Artwork & { artistId: string })[] = allArtists.flatMap(artist => {
-      const seriesList = artist.artworks || []
+    // 2. 透過 Getter 查找
+    const data = artistStore.getArtworkDetail(id)
 
-      // 第一層 flatMap 進到系列
-      return seriesList.flatMap(series => {
-        const artworkList = series.artworkIds || []
+    if (data && data.artwork && data.artist) {
+      currentArtwork.value = data.artwork
+      currentArtist.value = data.artist
 
-        // 第二層 map 進到作品，並注入 artistId
-        return artworkList.map(art => ({
-          ...art,
-          artistId: artist.id, // 💡 完美注入 artistId
-        }))
-      })
-    })
-
-    // // 3. 尋找當前網址對應的作品
-    const foundArtwork = allArtworks.find(art => art.id === artworkId)
-
-    if (foundArtwork) {
-      currentArtwork.value = foundArtwork
-
-      // // 4. 根據作品的 artistId，直接從回傳的 allArtists 大陣列中 找出藝術家
-      const foundArtist = allArtists.find(artist => artist.id === foundArtwork.artistId)
-
-      if (foundArtist) {
-        currentArtist.value = foundArtist
-
-        // // 5. 篩選出「同一個藝術家的其他作品」（排除掉現在畫面顯示的這一件）
-        // 💡 修正點二：既然要拿同一位藝術家的所有作品，一樣要用 flatMap 打平
-        const artistWorks = foundArtist.artworks
-          ? foundArtist.artworks.flatMap(s => s.artworkIds)
-          : []
-        otherArtworks.value = artistWorks.filter(art => art.id !== artworkId)
-      }
+      // 3. 篩選其他作品，明確轉型以符合型別
+      otherArtworks.value = data.artist.artworks
+        .flatMap(s => s.artworkIds)
+        .filter(art => art.id !== id)
     } else {
-      console.warn(`找不到 ID 為 ${artworkId} 的作品，載入防呆首筆資料...`)
-      // // 防呆機制：如果找不到該 ID，預設拿全部作品的第一筆
-      if (allArtworks.length > 0) {
-        const firstArt = allArtworks[0]
-
-        // // 🌟 加上 if (firstArt) 判斷，跟 TypeScript 保證它絕對不是 undefined !
-        if (firstArt) {
-          currentArtwork.value = firstArt
-
-          // // 使用 find 確保安全奪取 artistId 屬性相符的藝術家
-          const firstArtist = allArtists.find(a => a.id === firstArt.artistId)
-
-          if (firstArtist) {
-            currentArtist.value = firstArtist
-            // 💡 修正點三：防呆區塊內部的其他作品篩選，同樣使用 flatMap 打平
-            const firstArtistWorks = firstArtist.artworks
-              ? firstArtist.artworks.flatMap(s => s.artworkIds)
-              : []
-            otherArtworks.value = firstArtistWorks.filter(art => art.id !== firstArt.id)
-          }
-        }
-      }
+      isNotFound.value = true // 設定為失敗
+      console.error(`找不到作品 ID: ${id}`)
+      // 若找不到，建議跳轉回首頁或顯示錯誤訊息
     }
   } catch (error) {
-    console.error('詳細頁面資料載入失敗:', error)
+    console.error('載入失敗:', error)
   } finally {
     hide()
   }

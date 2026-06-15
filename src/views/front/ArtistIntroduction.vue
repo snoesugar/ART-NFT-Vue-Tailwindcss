@@ -235,7 +235,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="blcok lg:hidden">
+                  <div class="block lg:hidden">
                     <router-link
                       :to="{ name: 'ArtworkIntroduction', params: { id: item.id } }"
                       class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
@@ -261,15 +261,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed, onMounted, onUnmounted } from 'vue' // ⭕ 拿掉沒用到的 onMounted
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { nftApi, type Artist, type Artwork } from '@/api/artist' // 💡 統一改從全新的 api/artist 引入
+import { storeToRefs } from 'pinia'
+import { useArtistStore } from '@/store/artistStore'
 import { useLoadingStore } from '@/store/loading'
 import Button from '@/components/Button.vue'
+import type { Artwork } from '@/api/artist'
 
+const route = useRoute()
+const artistStore = useArtistStore()
+const { show, hide } = useLoadingStore()
+// 從 store 中取出 currentArtist，並確保其響應性
+const { currentArtist } = storeToRefs(artistStore)
+
+const activeTab = ref('art')
 const baseUrl = import.meta.env.VITE_BASE_URL || '/ART-NFT-Vue-Tailwindcss/'
 
-// 安全拼接圖片網址的 function
 const getImageUrl = (imgName: string | undefined) => {
   if (!imgName) return ''
   const base = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl
@@ -277,103 +285,59 @@ const getImageUrl = (imgName: string | undefined) => {
   return `${base}/${name}`
 }
 
-const route = useRoute()
-const activeTab = ref('art')
-
-const currentArtist = ref<Artist | null>(null)
-const artworks = ref<Artwork[]>([])
-const { show, hide } = useLoadingStore()
-
-// 💡 預設的藝術家 ID（如果網址沒傳，預設看第一位）
-const DEFAULT_ARTIST_ID = 'qtwvbe'
-
-// 🛠️ 核心邏輯：從新的巢狀結構中抓取對應藝術家與其作品
-const fetchArtistData = async (artistId: string) => {
-  try {
-    show()
-    // 1. 一口氣撈取所有藝術家大陣列
-    const allArtists = await nftApi.getAllArtists()
-
-    // 2. 找到目前網址對應的藝術家
-    const foundArtist = allArtists.find(artist => artist.id === artistId)
-
-    if (foundArtist) {
-      currentArtist.value = foundArtist
-
-      // 3. 直接從藝術家身上把作品陣列（artworks）拿給收藏品區（Collection）渲染
-      artworks.value = foundArtist.artworks.flatMap(series => series.artworkIds)
-    } else {
-      console.warn(`找不到 ID 為 ${artistId} 的藝術家，載入防呆首位藝術家...`)
-      // 防呆：如果找不到該 ID，預設拿第一筆藝術家
-      if (allArtists.length > 0) {
-        currentArtist.value = allArtists[0] || null
-        artworks.value = allArtists[0]?.artworks.flatMap(series => series.artworkIds) || []
-      }
-    }
-  } catch (error) {
-    console.error('切換藝術家資料失敗:', error)
-  } finally {
-    hide() // 💡 4. 無論成功或失敗，結束時關閉 Loading
-  }
-}
-
-// 💡 監聽路由變化（有 immediate: true，所以元件掛載時會自動跑第一次，不需寫 onMounted）
+// 監聽路由變化，驅動 Store 同步
 watch(
   () => route.params.id,
-  newId => {
-    const targetId = (newId as string) || DEFAULT_ARTIST_ID
-
-    // 每次路由改變時先清空，優雅觸發 Skeleton Loading 動畫
-    currentArtist.value = null
-    artworks.value = []
-
-    // 重新撈取新藝術家的完整資料
-    fetchArtistData(targetId)
+  async newId => {
+    show()
+    try {
+      // 1. 確保所有資料已載入
+      await artistStore.fetchAll()
+      // 2. 更新 Store 內的 ID，Getter 會自動更新 currentArtist
+      artistStore.currentArtistId = (newId as string) || 'qtwvbe'
+    } catch (error) {
+      console.error('資料載入失敗:', error)
+    } finally {
+      hide()
+    }
   },
   { immediate: true },
 )
 
-//  排列卡片
-interface AnimatedArtwork extends Artwork {
-  globalIndex: number
-}
-
+// --- 排列卡片邏輯 ---
 const isMobile = ref(false)
+const checkScreenSize = () => (isMobile.value = window.innerWidth < 768)
 
-const checkScreenSize = () => {
-  isMobile.value = window.innerWidth < 768
-}
-
-// 💡 核心邏輯：將 artworks 陣列依序輪流派發給 2 欄或 4 欄
-const collectionColumns = computed(() => {
-  const colCount = isMobile.value ? 2 : 4
-  const columns: AnimatedArtwork[][] = Array.from({ length: colCount }, () => [])
-
-  const list = artworks.value || []
-
-  list.forEach((item, index) => {
-    const colIndex = index % colCount
-    const animatedItem: AnimatedArtwork = {
-      ...item,
-      globalIndex: index, // 紀錄原始排序，做為動畫延遲的基底
-    }
-
-    // 確保 columns[colIndex] 存在，避免 TypeScript 噴紅線
-    const targetColumn = columns[colIndex] || []
-    targetColumn.push(animatedItem)
-  })
-
-  return columns
-})
-
-// 註冊與移除視窗監聽
 onMounted(() => {
   checkScreenSize()
   window.addEventListener('resize', checkScreenSize)
 })
+onUnmounted(() => window.removeEventListener('resize', checkScreenSize))
 
-onUnmounted(() => {
-  window.removeEventListener('resize', checkScreenSize)
+// 定義帶有動畫索引的型別
+interface AnimatedArtwork extends Artwork {
+  globalIndex: number
+}
+
+// 使用 computed 從 store 的當前藝術家衍生出作品列表
+const collectionColumns = computed(() => {
+  const colCount = isMobile.value ? 2 : 4
+  const columns: AnimatedArtwork[][] = Array.from({ length: colCount }, () => [])
+
+  // 透過 currentArtist 取得作品
+  const list = currentArtist.value?.artworks.flatMap(s => s.artworkIds) || []
+
+  list.forEach((item, index) => {
+    const colIndex = index % colCount
+    const animatedItem = {
+      ...item,
+      globalIndex: index,
+    } as AnimatedArtwork
+
+    // 使用驚嘆號或預設值確保 TypeScript 不會報 undefined 紅線
+    columns[colIndex]?.push(animatedItem)
+  })
+  return columns
 })
 </script>
 
