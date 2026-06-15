@@ -22,3 +22,11 @@ body * {
   background: var(--color-primary); /* 橘紅色橘點 */
   opacity: 1;
 }
+
+.truncate-text {
+  white-space: nowrap; /* 強制文字不換行 */
+  overflow: hidden; /* 超過容器的部分隱藏 */
+  text-overflow: ellipsis; /* 顯示「...」 */
+  cursor: pointer; /* 滑鼠游標變成指標，提示可點擊 */
+  max-width: 150px; /* 根據你的排版需求調整寬度，或用 calc() */
+}

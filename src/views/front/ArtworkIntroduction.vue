@@ -120,8 +120,13 @@
                       ><span class="text-secondary font-display">#{{ currentArtwork.id }}</span>
                     </div>
                     <div class="flex justify-between items-center">
-                      <span>合約地址</span
-                      ><span class="text-secondary">{{ currentArtist.contractAddress }}</span>
+                      <span>合約地址</span>
+                      <span
+                        :class="{ 'truncate-text': !isExpanded }"
+                        @click="isExpanded = !isExpanded"
+                      >
+                        {{ currentArtist.contractAddress }}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -315,6 +320,7 @@ const isOpenProperty = ref(true)
 const isOpenPrice = ref(true)
 const isOpenData = ref(true)
 const isOpenTrade = ref(true)
+const isExpanded = ref(false) // 預設為縮合狀態
 
 // 響應式資料狀態
 const currentArtwork = ref<Artwork | undefined>(undefined)
