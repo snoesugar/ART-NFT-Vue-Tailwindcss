@@ -228,7 +228,7 @@
       <div class="px-3 lg:px-0">
         <div class="pt-6 lg:pt-12 pb-10 lg:pb-20 w-full">
           <swiper
-            v-if="artists.length"
+            v-if="artistStore.artists && artistStore.artists.length > 0"
             :modules="modules"
             :breakpoints="{
               0: { slidesPerView: 1 },
@@ -242,7 +242,7 @@
             :pagination="{ clickable: true }"
             class="artist-swiper pb-40! lg:pb-14!"
           >
-            <swiper-slide v-for="item in artists" :key="item.id" class="artist-slide">
+            <swiper-slide v-for="item in artistStore.artists" :key="item.id" class="artist-slide">
               <div class="card-wrapper relative w-full h-109.75 bg-white">
                 <div class="overflow-hidden w-full h-full">
                   <img
@@ -353,7 +353,11 @@
     </div>
     <div class="py-12 lg:py-20 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-4 gap-y-12 lg:gap-x-6 max-w-7xl mx-auto">
-        <div v-for="step in steps" :key="step.id" class="flex flex-col items-center text-center">
+        <div
+          v-for="step in stepStore.steps"
+          :key="step.id"
+          class="flex flex-col items-center text-center"
+        >
           <div class="text-primary text-5xl mb-4">
             <i :class="step.icon"></i>
           </div>
@@ -371,8 +375,9 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed, onUnmounted } from 'vue'
-import { nftApi, type Artist, type Artwork } from '@/api/artist' // 💡 請根據你實際的檔案路徑微調
-import { stepApi, type Step } from '@/api/steps'
+import { type Artwork } from '@/api/artist'
+import { useArtistStore } from '@/store/artistStore'
+import { useStepStore } from '@/store/stepStore'
 import { useLoadingStore } from '@/store/loading'
 import Button from '@/components/Button.vue'
 
@@ -382,132 +387,29 @@ import { Autoplay, Pagination } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
 
-// 擴充型別定義，讓作品物件直接自帶藝術家名字
-interface ArtworkWithName extends Artwork {
-  artistName: string
-}
-
-const artists = ref<Artist[]>([])
-const artworks = ref<ArtworkWithName[]>([]) // 💡 直接改用帶有名字的型別
-const steps = ref<Step[]>([])
+const artistStore = useArtistStore()
+const stepStore = useStepStore()
 const { show, hide } = useLoadingStore()
 
 const modules = [Autoplay, Pagination]
 
-// 🌟 排行榜與區塊切片邏輯，把巢狀資料攤平、注入藝術家名字、補上防禦，並直接由高到低排序！
-const RankingArtworks = computed(() => {
-  const flattened = artists.value.flatMap(artist => {
-    const seriesList = artist.artworks || []
+// 排行榜區塊切片 - 確保 store 資料為空時也給予預設陣列
+const rankingArtworks1to3 = computed(() => (artistStore.rankedArtworks || []).slice(0, 3))
+const rankingArtworks4to6 = computed(() => (artistStore.rankedArtworks || []).slice(3, 6))
 
-    return seriesList.flatMap(series => {
-      const artworkList = series.artworkIds || []
+// 下方最新藝術品區塊
+const displayedArtworks1st = computed(() => (artistStore.allArtworksWithArtist || []).slice(0, 1))
+const displayedArtworks2to3 = computed(() => (artistStore.allArtworksWithArtist || []).slice(1, 3))
+const displayedArtworks1to8 = computed(() => (artistStore.allArtworksWithArtist || []).slice(0, 8))
 
-      return artworkList.map(artwork => ({
-        ...artwork,
-        // 在這裡直接把藝術家名字塞進去！
-        artistName: `${artist.firstName} ${artist.lastName}`,
-        markets: {
-          marketCap: artwork.markets?.marketCap ?? 0,
-          change24h: artwork.markets?.change24h ?? 0,
-          change7d: artwork.markets?.change7d ?? 0,
-          floorPrice: artwork.markets?.floorPrice ?? 0,
-          hasIcon: artwork.markets?.hasIcon ?? false,
-          owners: artwork.markets?.owners ?? 0,
-          totalSupply: artwork.markets?.totalSupply ?? 0,
-          isOpen: artwork.markets?.isOpen ?? false,
-        },
-      }))
-    })
-  })
+// 處理瀑布流
+const isMobile = ref(false)
+const checkScreenSize = () => (isMobile.value = window.innerWidth < 768)
 
-  // 依照市場價值降冪排序（高 -> 低）
-  return flattened.sort((a, b) => b.markets.marketCap - a.markets.marketCap)
-})
-
-// 排行榜區塊切片
-const rankingArtworks1to3 = computed(() => RankingArtworks.value.slice(0, 3))
-const rankingArtworks4to6 = computed(() => RankingArtworks.value.slice(3, 6))
-
-// 按照順序
-const allOriginalArtworks = computed(() => {
-  return artists.value.flatMap(artist => {
-    const seriesList = artist.artworks || []
-    return seriesList.flatMap(series => {
-      const artworkList = series.artworkIds || []
-      return artworkList.map(artwork => ({
-        ...artwork,
-        artistName: `${artist.firstName} ${artist.lastName}`,
-        markets: {
-          marketCap: artwork.markets?.marketCap ?? 0,
-          change24h: artwork.markets?.change24h ?? 0,
-          change7d: artwork.markets?.change7d ?? 0,
-          floorPrice: artwork.markets?.floorPrice ?? 0,
-          hasIcon: artwork.markets?.hasIcon ?? false,
-          owners: artwork.markets?.owners ?? 0,
-          totalSupply: artwork.markets?.totalSupply ?? 0,
-          isOpen: artwork.markets?.isOpen ?? false,
-        },
-      }))
-    })
-  })
-})
-
-// 下方最新藝術品區塊（瀑布流卡片），吃無排序的原始順序
-const displayedArtworks1st = computed(() => allOriginalArtworks.value.slice(0, 1))
-const displayedArtworks2to3 = computed(() => allOriginalArtworks.value.slice(1, 3))
-const displayedArtworks1to8 = computed(() => allOriginalArtworks.value.slice(0, 8))
-
-onMounted(async () => {
-  try {
-    show()
-    // 1. 獲取所有藝術家資料
-    const allArtists = await nftApi.getAllArtists()
-    artists.value = allArtists
-
-    // 2. 關鍵改動：遍歷所有藝術家 -> 遍歷其所有系列 -> 提取所有藝術品並注入名字
-    artworks.value = allArtists.flatMap(artist => {
-      // 防呆：確保該藝術家有作品系列
-      const seriesList = artist.artworks || []
-
-      // 第一層 flatMap 用來攤平該藝術家的所有系列，把裡面的作品全抽出來
-      return seriesList.flatMap(series => {
-        const artworkList = series.artworkIds || []
-
-        // 第二層 map 用來將每件作品加上 artistName
-        return artworkList.map(artwork => ({
-          ...artwork,
-          // 💡 完美綁定名字，Template 就能直接用 {{ artwork.artistName }} 了！
-          artistName: `${artist.firstName} ${artist.lastName}`,
-        }))
-      })
-    })
-  } catch (error) {
-    console.error('首頁獲取藝術家與作品失敗:', error)
-  }
-  // 3. 獲取步驟流程
-  try {
-    const data = await stepApi.getAll()
-    steps.value = data
-  } catch (error) {
-    console.error('首頁獲取步驟失敗:', error)
-  } finally {
-    hide()
-  }
-})
-
-// 排列藝術品
-// 擴充型別以支援全局動畫索引
+// 定義帶有動畫索引的型別
 interface AnimatedArtwork extends Artwork {
   globalIndex: number
 }
-
-const isMobile = ref(false)
-
-const checkScreenSize = () => {
-  isMobile.value = window.innerWidth < 768
-}
-
-// 💡 將 displayedArtworks1to8 的 8 張牌輪流發給各個直欄
 const artworkColumns = computed(() => {
   const colCount = isMobile.value ? 2 : 4
   const columns: AnimatedArtwork[][] = Array.from({ length: colCount }, () => [])
@@ -517,26 +419,33 @@ const artworkColumns = computed(() => {
 
   list.forEach((item, index) => {
     const colIndex = index % colCount
-    const animatedItem: AnimatedArtwork = {
+    const animatedItem = {
       ...item,
-      globalIndex: index, // 記錄 0 ~ 7 的順序給動畫用
-    }
+      globalIndex: index,
+    } as AnimatedArtwork
 
     // 使用驚嘆號或預設值確保 TypeScript 不會報 undefined 紅線
-    columns[colIndex]!.push(animatedItem)
+    columns[colIndex]?.push(animatedItem)
   })
-
   return columns
 })
 
-onMounted(() => {
+onMounted(async () => {
+  show()
+  try {
+    // 統一由 Store 處理資料獲取
+    await Promise.all([artistStore.fetchAll(), stepStore.fetchSteps()])
+  } catch (error) {
+    console.error('資料獲取失敗:', error)
+  } finally {
+    hide()
+  }
+
   checkScreenSize()
   window.addEventListener('resize', checkScreenSize)
 })
 
-onUnmounted(() => {
-  window.removeEventListener('resize', checkScreenSize)
-})
+onUnmounted(() => window.removeEventListener('resize', checkScreenSize))
 </script>
 
 <style scoped>
