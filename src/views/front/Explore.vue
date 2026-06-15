@@ -18,22 +18,34 @@
                 class="w-full min-h-34.75 lg:min-h-70 h-auto object-cover"
               />
 
-              <div
-                class="absolute inset-0 bg-black/70 opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-between p-4 m-4"
-              >
-                <div class="border border-white p-4 h-full flex flex-col">
-                  <div class="text-white">
-                    <p class="mb-4 whitespace-pre-line">{{ item.description }}</p>
-                    <div class="flex items-center gap-2">
-                      <i class="fa-brands fa-ethereum"></i>
-                      {{ item.price }}
+              <div class="hidden lg:block">
+                <div
+                  class="absolute inset-0 bg-black/70 opacity-0 hover:opacity-100 transition duration-300 flex flex-col justify-between p-4 m-4"
+                >
+                  <div class="border border-white p-4 h-full flex flex-col">
+                    <div class="text-white">
+                      <p class="mb-4 whitespace-pre-line">{{ item.description }}</p>
+                      <div class="flex gap-2">
+                        <i class="fa-brands fa-ethereum"></i> {{ item.price }}
+                      </div>
                     </div>
+                    <Button
+                      :to="{ name: 'ArtworkIntroduction', params: { id: item.id } }"
+                      class="mt-auto ml-auto"
+                    />
                   </div>
-                  <Button
-                    :to="{ name: 'ArtworkIntroduction', params: { id: item.id } }"
-                    class="mt-auto ml-auto"
-                  />
                 </div>
+              </div>
+              <div class="blcok lg:hidden">
+                <router-link
+                  :to="{ name: 'ArtworkIntroduction', params: { id: item.id } }"
+                  class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+                >
+                  <span class="text-white text-lg font-black tracking-tighter">MORE</span>
+                  <div
+                    class="absolute bottom-0 right-0 h-0 w-0 border-8 border-l-transparent border-t-transparent border-b-primary border-r-primary group-hover:border-b-primary group-hover:border-r-primary transition-colors duration-300 ease-in-out"
+                  ></div>
+                </router-link>
               </div>
             </div>
 
