@@ -24,9 +24,9 @@
                 >
                   <div class="border border-white p-4 h-full flex flex-col">
                     <div class="text-white">
-                      <p class="mb-4 whitespace-pre-line">{{ item.description }}</p>
+                      <p class="mb-4 whitespace-pre-line">{{ item.description || '無詳細描述' }}</p>
                       <div class="flex gap-2">
-                        <i class="fa-brands fa-ethereum"></i> {{ item.price }}
+                        <i class="fa-brands fa-ethereum"></i> {{ item.price ?? 0 }}
                       </div>
                     </div>
                     <Button
@@ -68,7 +68,8 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { nftApi, type Artwork } from '@/api/artist'
+import { type Artwork } from '@/api/artist'
+import { useArtistStore } from '@/store/artistStore'
 import { useLoadingStore } from '@/store/loading'
 import Button from '@/components/Button.vue'
 import Loading from '@/components/Loading.vue'
@@ -78,18 +79,44 @@ interface AnimatedArtwork extends Artwork {
   globalIndex: number
 }
 
+const artistStore = useArtistStore()
+const { show, hide } = useLoadingStore()
+
 // 狀態控制
 const isInitialLoading = ref(true)
 const isMoreLoading = ref(false)
 
-const artworks = ref<Artwork[]>([])
-let allLoadedArtworks: Artwork[] = []
+const artworks = ref<AnimatedArtwork[]>([])
 
 // 分頁控制
 const itemsPerPage = 12
 let currentPage = 1
 
-const { show, hide } = useLoadingStore()
+const loadMoreArtworks = () => {
+  // 1. 如果資料已經載入完畢，直接跳出
+  if (artworks.value.length >= artistStore.getTotalArtworkCount()) return
+
+  // 2. 顯示 Loading
+  isMoreLoading.value = true
+
+  // 3. 執行載入邏輯
+  setTimeout(() => {
+    const nextBatch = artistStore.getArtworksByPage(currentPage, itemsPerPage)
+
+    if (nextBatch.length > 0) {
+      const animatedBatch = nextBatch.map((item, idx) => ({
+        ...item,
+        globalIndex: (currentPage - 1) * itemsPerPage + idx,
+      }))
+      artworks.value = [...artworks.value, ...animatedBatch]
+      currentPage++
+    }
+
+    // 4. 結束 Loading
+    isMoreLoading.value = false
+  }, 500)
+}
+
 const isMobile = ref(false)
 
 const checkScreenSize = () => {
@@ -117,24 +144,6 @@ const currentColumns = computed(() => {
   return columns
 })
 
-// 載入下一頁資料
-const loadMoreArtworks = () => {
-  if (artworks.value.length >= allLoadedArtworks.length || isMoreLoading.value) return
-
-  isMoreLoading.value = true
-
-  setTimeout(() => {
-    const start = (currentPage - 1) * itemsPerPage
-    const end = start + itemsPerPage
-
-    const nextBatch = allLoadedArtworks.slice(start, end)
-    artworks.value = [...artworks.value, ...nextBatch]
-
-    currentPage++
-    isMoreLoading.value = false
-  }, 500)
-}
-
 // 監聽滾動
 const handleScroll = () => {
   const scrollHeight = document.documentElement.scrollHeight
@@ -152,15 +161,14 @@ onMounted(async () => {
   window.addEventListener('scroll', handleScroll)
 
   try {
+    // 確保這裡強制設為 true
+    isInitialLoading.value = true
     show()
-    const allArtists = await nftApi.getAllArtists()
-    //  修改後：加上 .filter() 排除未上架作品
-    allLoadedArtworks = allArtists
-      .flatMap(artist => {
-        const seriesList = artist.artworks || []
-        return seriesList.flatMap(series => series.artworkIds || [])
-      })
-      .filter((item: Artwork) => item.isListed === true) // 👈 只有上架的才能進來！
+
+    await artistStore.fetchAll()
+
+    // 強制延遲 500ms，讓使用者有感官上的「載入」過程
+    await new Promise(resolve => setTimeout(resolve, 500))
 
     loadMoreArtworks()
   } catch (error) {

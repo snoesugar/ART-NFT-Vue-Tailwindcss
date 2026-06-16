@@ -5,6 +5,7 @@ export const useArtistStore = defineStore('artist', {
   state: () => ({
     artists: [] as Artist[],
     currentArtistId: 'qtwvbe' as string, // 必須定義這個狀態
+    cachedAllArtworks: [] as Artwork[],
   }),
   getters: {
     // 攤平所有作品，並注入藝術家名字，供首頁直接使用
@@ -39,40 +40,76 @@ export const useArtistStore = defineStore('artist', {
       return { artwork, artist }
     },
     // 根據 currentArtistId 自動計算當前藝術家
-    currentArtist: state => {
+    currentArtist(state): Artist | null {
       return state.artists.find(a => a.id === state.currentArtistId) || state.artists[0] || null
     },
     // 統一所有的作品攤平邏輯，並加上狀態 filter
-    allListedArtworks: state => {
-      // 檢查 artists 是否有資料
-      if (!state.artists || state.artists.length === 0) return []
-
+    allListedArtworks(state): Artwork[] {
       return state.artists
-        .flatMap(artist => (artist.artworks || []).flatMap(series => series.artworkIds || []))
-        .filter(art => art && art.isListed === true)
+        .flatMap(artist =>
+          (artist.artworks || []).flatMap(series =>
+            (series.artworkIds || []).map(art => ({
+              ...art,
+              markets: {
+                marketCap: Number(art.markets?.marketCap ?? 0),
+                change24h: art.markets?.change24h ?? 0,
+                change7d: art.markets?.change7d ?? 0,
+                floorPrice: art.markets?.floorPrice ?? 0,
+                hasIcon: art.markets?.hasIcon ?? false,
+                owners: Number(art.markets?.owners ?? 0),
+                totalSupply: art.markets?.totalSupply ?? 0,
+                isOpen: art.markets?.isOpen ?? false,
+              },
+            })),
+          ),
+        )
+        .filter(art => art.isListed === true)
     },
-    // 用於排行榜的 Top 10
+
+    // 這裡使用 this 存取上面的 getter，完全不需要 any
     topTenArtworks(): Artwork[] {
       return [...this.allListedArtworks]
-        .sort((a, b) => {
-          const capA = a.markets?.marketCap ?? 0
-          const capB = b.markets?.marketCap ?? 0
-          return capB - capA
-        })
+        .sort((a, b) => b.markets!.marketCap - a.markets!.marketCap)
         .slice(0, 10)
     },
   },
   actions: {
     async fetchAll() {
-      if (this.artists.length > 0) return // 已有資料則跳過
+      if (this.artists.length > 0) return
+
       this.artists = await nftApi.getAllArtists()
+
+      // 統一將處理邏輯放在這裡，之後 getAllListedArtworks 就能直接用 cachedAllArtworks
+      this.cachedAllArtworks = this.artists
+        .flatMap(artist =>
+          (artist.artworks || []).flatMap(series =>
+            (series.artworkIds || []).map(art => ({
+              ...art,
+              markets: {
+                marketCap: Number(art.markets?.marketCap ?? 0),
+                change24h: art.markets?.change24h ?? 0,
+                change7d: art.markets?.change7d ?? 0,
+                floorPrice: art.markets?.floorPrice ?? 0,
+                hasIcon: art.markets?.hasIcon ?? false,
+                owners: Number(art.markets?.owners ?? 0),
+                totalSupply: art.markets?.totalSupply ?? 0,
+                isOpen: art.markets?.isOpen ?? false,
+              },
+            })),
+          ),
+        )
+        .filter(art => art.isListed === true)
     },
-    getArtworkDetail(id: string) {
-      const artist = this.artists.find(a =>
-        a.artworks.some(s => s.artworkIds.some(art => art.id === id)),
-      )
-      const artwork = artist?.artworks.flatMap(s => s.artworkIds).find(a => a.id === id)
-      return { artist, artwork }
+
+    // 取得分頁資料的 Action
+    getArtworksByPage(page: number, limit: number): Artwork[] {
+      const start = (page - 1) * limit
+      return this.cachedAllArtworks.slice(start, start + limit)
+    },
+
+    // 取得總數，方便組件判斷是否載入完畢
+    getTotalArtworkCount(): number {
+      return this.cachedAllArtworks.length
     },
   },
 })

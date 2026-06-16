@@ -51,16 +51,16 @@
 
               <td
                 class="py-4 px-4 text-right"
-                :class="item.markets?.change24h >= 0 ? 'text-[#53C139]' : 'text-[#E6553B]'"
+                :class="(item.markets?.change24h ?? 0) >= 0 ? 'text-[#53C139]' : 'text-[#E6553B]'"
               >
-                {{ item.markets?.change24h >= 0 ? '+' : '' }}{{ item.markets?.change24h }}%
+                {{ (item.markets?.change24h ?? 0) >= 0 ? '+' : '' }}{{ item.markets?.change24h }}%
               </td>
 
               <td
                 class="py-4 px-4 text-right"
-                :class="item.markets?.change7d >= 0 ? 'text-[#53C139]' : 'text-[#E6553B]'"
+                :class="(item.markets?.change7d ?? 0) >= 0 ? 'text-[#53C139]' : 'text-[#E6553B]'"
               >
-                {{ item.markets?.change7d >= 0 ? '+' : '' }}{{ item.markets?.change7d }}%
+                {{ (item.markets?.change7d ?? 0) >= 0 ? '+' : '' }}{{ item.markets?.change7d }}%
               </td>
 
               <td class="py-4 px-4 text-right">
@@ -130,24 +130,24 @@
                 <div class="font-display text-sm mb-2">24h%</div>
                 <div
                   class="text-xl"
-                  :class="item.markets?.change24h >= 0 ? 'text-[#53C139]' : 'text-[#E6553B]'"
+                  :class="(item.markets?.change24h ?? 0) >= 0 ? 'text-[#53C139]' : 'text-[#E6553B]'"
                 >
-                  {{ item.markets?.change24h >= 0 ? '+' : '' }}{{ item.markets?.change24h }}%
+                  {{ (item.markets?.change24h ?? 0) >= 0 ? '+' : '' }}{{ item.markets?.change24h }}%
                 </div>
               </div>
               <div>
                 <div class="font-display text-sm mb-2">7d%</div>
                 <div
                   class="text-xl"
-                  :class="item.markets?.change7d >= 0 ? 'text-[#53C139]' : 'text-[#E6553B]'"
+                  :class="(item.markets?.change7d ?? 0) >= 0 ? 'text-[#53C139]' : 'text-[#E6553B]'"
                 >
-                  {{ item.markets?.change7d >= 0 ? '+' : '' }}{{ item.markets?.change7d }}%
+                  {{ (item.markets?.change7d ?? 0) >= 0 ? '+' : '' }}{{ item.markets?.change7d }}%
                 </div>
               </div>
               <div>
                 <div class="font-display text-sm mb-2">地板價</div>
                 <div class="text-xl">
-                  <i class="fa-brands fa-ethereum mr-2"></i> {{ item.markets?.floorPrice }}
+                  <i class="fa-brands fa-ethereum mr-2"></i> {{ item.markets?.floorPrice ?? 0 }}
                 </div>
               </div>
             </div>
@@ -170,9 +170,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed, reactive } from 'vue'
-import { nftApi, type Artist, type Artwork } from '@/api/artist'
+import { onMounted, reactive } from 'vue'
+import { useArtistStore } from '@/store/artistStore'
 import { useLoadingStore } from '@/store/loading'
+import { storeToRefs } from 'pinia'
+
+const artistStore = useArtistStore()
+const { topTenArtworks, artists } = storeToRefs(artistStore)
 
 const baseUrl = import.meta.env.VITE_BASE_URL || '/ART-NFT-Vue-Tailwindcss/'
 
@@ -184,8 +188,6 @@ const getImageUrl = (imgName: string | undefined) => {
   return `${base}/${name}`
 }
 
-// 1. 原始資料：用來存放從 API 撈回來的藝術家大陣列
-const artists = ref<Artist[]>([])
 const { show, hide } = useLoadingStore()
 
 // 🔧 新增：專門管理手機版下拉選單開關狀態的 reactive 物件 (Key 為作品 index)
@@ -197,10 +199,8 @@ const toggleMobileMenu = (index: number) => {
 }
 
 // 專門處理價值（marketCap）的千分位
-const formatMarketCap = (val: number): string => {
-  // 加上防呆，避免 undefined 或 null 傳入時炸掉（例如在資料還沒載入完成時）
+const formatMarketCap = (val: number | undefined): string => {
   if (val === undefined || val === null) return '0.00'
-
   return val.toLocaleString('en-US', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
@@ -208,74 +208,20 @@ const formatMarketCap = (val: number): string => {
 }
 
 // 專門處理擁有者人數（owners）的 K 縮寫
-const formatOwners = (val: number): string => {
-  if (val === undefined || val === null) return '0'
-
-  // 如果大於等於 1000，就除以 1000 並留一位小數，再加上 'K'
-  if (val >= 1000) {
-    return `${(val / 1000).toFixed(1)}K`
+const formatOwners = (val: number | undefined): string => {
+  const num = val ?? 0
+  if (num >= 1000) {
+    return `${(num / 1000).toFixed(1)}K`
   }
-
-  // 沒超過 1000 就直接用千分位顯示
-  return val.toLocaleString('en-US')
+  return num.toLocaleString('en-US')
 }
-
-// // 2. 第一層加工 computed：把巢狀資料攤平，並補上安全防禦機制與上架過濾
-const allArtworks = computed(() => {
-  // 透過深拷貝斷開舊參考，逼迫 Vue 深度監聽陣列內部的所有微小變動
-  const deepCopyArtists = JSON.parse(JSON.stringify(artists.value)) as Artist[]
-
-  return (
-    deepCopyArtists
-      .flatMap(artist => {
-        const seriesList = artist.artworks || []
-
-        // 第一層 flatMap 進到系列
-        return seriesList.flatMap(series => {
-          const artworkList = series.artworkIds || []
-
-          // 第二層 map 進到作品，並進行 markets 的結構防禦
-          return artworkList.map(artwork => ({
-            ...artwork,
-            // 💡 完美對齊原有的 markets 物件結構，防禦 undefined
-            markets: {
-              marketCap: Number(artwork.markets?.marketCap ?? 0), // 確保轉換成數字，預設給數字 0
-              change24h: artwork.markets?.change24h ?? 0,
-              change7d: artwork.markets?.change7d ?? 0,
-              floorPrice: artwork.markets?.floorPrice ?? 0, // 改為數字 0
-              hasIcon: artwork.markets?.hasIcon ?? false,
-              owners: Number(artwork.markets?.owners ?? 0), // 改為數字 0，徹底解決紅字
-              totalSupply: artwork.markets?.totalSupply ?? 0, // 改為數字 0
-              isOpen: artwork.markets?.isOpen ?? false,
-            },
-          }))
-        })
-      })
-      // 🟢 核心修正：在這裡加上跟探索頁一模一樣的邏輯，只有上架的才能進來排行榜！
-      .filter((item: Artwork) => item.isListed === true)
-  )
-})
-
-// 3. 第二層加工 computed：只切出前 10 筆給畫面渲染
-const topTenArtworks = computed(() => {
-  // 💡 先使用 slice() 複製一份新陣列，避免直接污染到原本的 allArtworks
-  return [...allArtworks.value]
-    .sort((a, b) => {
-      // 確保兩者都是數字，並用 b - a 實現從大到小的降冪排序
-      const volumeA = Number(a.markets?.marketCap ?? 0)
-      const volumeB = Number(b.markets?.marketCap ?? 0)
-      return volumeB - volumeA
-    })
-    .slice(0, 10) // 排序完後，再撈出前 10 名
-})
 
 onMounted(async () => {
   try {
     show() //3. 發送 API 前，開啟全螢幕 Loading
     // 撈取「所有藝術家」，因為作品現在藏在裡面
-    const data = await nftApi.getAllArtists()
-    artists.value = data
-    console.log('成功撈取藝術家並由 computed 自動攤平作品：', topTenArtworks.value)
+    show()
+    await artistStore.fetchAll()
   } catch (error) {
     console.error('排行榜獲取資料失敗:', error)
   } finally {
