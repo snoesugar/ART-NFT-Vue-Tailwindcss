@@ -306,7 +306,7 @@ watch(
 
 // --- 排列卡片邏輯 ---
 const isMobile = ref(false)
-const checkScreenSize = () => (isMobile.value = window.innerWidth < 768)
+const checkScreenSize = () => (isMobile.value = window.innerWidth < 1024)
 
 onMounted(() => {
   checkScreenSize()

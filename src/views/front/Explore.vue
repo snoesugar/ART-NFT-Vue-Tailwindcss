@@ -120,7 +120,7 @@ const loadMoreArtworks = () => {
 const isMobile = ref(false)
 
 const checkScreenSize = () => {
-  isMobile.value = window.innerWidth < 768
+  isMobile.value = window.innerWidth < 1024
 }
 
 // 💡 關鍵修改 2：在分發直欄時，順便附帶 globalIndex 算出全網頁卡片的相對順序

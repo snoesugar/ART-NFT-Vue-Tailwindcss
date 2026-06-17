@@ -813,7 +813,7 @@ interface AnimatedArtwork extends FilteredArtwork {
 const isMobile = ref(false)
 
 const checkScreenSize = () => {
-  isMobile.value = window.innerWidth < 768
+  isMobile.value = window.innerWidth < 1024
 }
 
 // 💡 核心邏輯：將 artworks 陣列依序輪流派發給 2 欄(手機) 或 3 欄(電腦)

@@ -455,12 +455,12 @@ onUnmounted(() => window.removeEventListener('resize', checkScreenSize))
   filter: grayscale(100%);
   transition: all 0.5s ease-in-out;
 }
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   .artist-slide .card-wrapper {
     height: 232px;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .artist-slide .card-wrapper {
     transform: scale(0.48);
   }
@@ -489,7 +489,7 @@ onUnmounted(() => window.removeEventListener('resize', checkScreenSize))
 :deep(.artist-swiper .swiper-slide .card-wrapper) {
   width: 100%;
 }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   :deep(.artist-swiper .swiper-slide-active .card-wrapper) {
     position: absolute;
     left: 50%;
