@@ -537,7 +537,6 @@ const allFlattenedArtworks = computed<FlattenedArtworkItem[]>(() => {
       })
     }
   })
-  console.log(list)
   return list
 })
 
