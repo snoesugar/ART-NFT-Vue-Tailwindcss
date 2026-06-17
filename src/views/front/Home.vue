@@ -404,7 +404,7 @@ const displayedArtworks1to8 = computed(() => (artistStore.allArtworksWithArtist 
 
 // 處理瀑布流
 const isMobile = ref(false)
-const checkScreenSize = () => (isMobile.value = window.innerWidth < 768)
+const checkScreenSize = () => (isMobile.value = window.innerWidth < 1024)
 
 // 定義帶有動畫索引的型別
 interface AnimatedArtwork extends Artwork {
