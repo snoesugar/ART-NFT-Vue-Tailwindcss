@@ -489,22 +489,15 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted, computed, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { nftApi, type Artwork, type ArtistStats } from '@/api/artist' // 💡 引入 ArtistStats 型別
+import {
+  nftApi,
+  type Artwork,
+  type ArtistStats,
+  type ArtistInfo,
+  type SeriesInfo,
+} from '@/api/artist' // 💡 引入 ArtistStats 型別
 import { useLoadingStore } from '@/store/loading'
 import Button from '@/components/Button.vue'
-
-// 1. 擴充型別定義
-interface ArtistInfo {
-  id: string
-  name: string
-  img: string
-}
-
-interface SeriesInfo {
-  id: string
-  name: string
-  description: string
-}
 
 interface FilteredArtwork extends Artwork {
   seriesId?: string

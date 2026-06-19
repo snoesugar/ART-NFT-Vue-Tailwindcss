@@ -78,6 +78,20 @@ export interface Artist {
   artworks: ArtworkSeries[] // 完美對齊新 JSON 結構
 }
 
+// filter
+
+export interface ArtistInfo {
+  id: string
+  name: string
+  img: string
+}
+
+export interface SeriesInfo {
+  id: string
+  name: string
+  description: string
+}
+
 // 宣告「新增時專用」的型別，利用 Omit 排除掉自動生成的 id
 export type CreateArtistInput = Omit<Artist, 'id'>
 export type CreateArtworkSeriesInput = Omit<ArtworkSeries, 'id'>
